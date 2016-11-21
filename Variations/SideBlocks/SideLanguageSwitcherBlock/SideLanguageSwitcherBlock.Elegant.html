@@ -1,0 +1,33 @@
+/*
+*		Renders a block that contains language switcher.
+*
+*/
+
+<div class="block languageswitcher Elegant">
+	<div class="title">
+		<h6> [_Choose your language] </h6>
+	</div>
+	<div class="block-content">
+		<select id="storeview" onclick="IncraWindow.setLocation('[Website.GetUrl,Storeview,[StoreView.Id]]');">
+			[Website.StoreViews=
+				<option>[StoreView.Name]</option>
+			]
+		</select>
+		<!-- <ul class="inline-list" id="links_rounded_icon">
+		[Website.StoreViews=
+			<li>
+				<a href="[Website.GetUrl,Storeview,[StoreView.Id]]" alt="[StoreView.name]" id="storeview_[StoreView.Id]">
+					<img src="[File:/images/sampleimages/storeview/[StoreView.Id].png]" title="[StoreView.Name]">
+				</a>
+			</li>
+		]
+		</ul> -->
+	</div>
+	
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery('languageswitcher.Elegant select#storeview').val([Website.CurrentStoreView=[StoreView.Id]]);
+		});
+	</script>
+</div>
+

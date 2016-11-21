@@ -1,0 +1,38 @@
+/*
+*		renders the footer type information.
+*
+*/
+<div layout-block-name="footer_block_container" class="footer eCommerce">
+	<div class="footer-info">
+		<div class="footer-up">
+			<div class="row">
+				<div class="block-grid footer-categories">
+					[?DesignLayout.CheckFooter,[Url.Model],FooterCategoriesBlock|Yes=[:FooterCategoriesBlock]][:FooterCategoriesBlock]
+				</div>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<ul class="block-grid large-block-grid-4">
+				<li>
+					<div class="footer-payment">[?DesignLayout.CheckFooter,[Url.Model],FooterPaymentsImagesBlock|Yes=[:FooterPaymentsImagesBlock]]</div>
+				</li>
+				<li class="border-left">
+					<div class="footer-newsletter-wrapper">[?DesignLayout.CheckFooter,[Url.Model],FooterNewsletterSubscriberBlock|Yes=[:FooterNewsletterSubscriberBlock]]</div>
+				</li>
+				<li class="border-left">
+					<div class="footer-address a-left"><p>[_Please feel free to visit us or contact us at]</p>
+					[Configuration.StoreInfoAddress] <br> [Configuration.StoreInfoTelNumber] <br>[Configuration.StoreInfoMainEMail] </div>
+				</li>
+				<li class="border-left">
+					<div class="footer-social-media">[?DesignLayout.CheckFooter,[Url.Model],FooterSocialMediaBlock|Yes=[:FooterSocialMediaBlock]][:FooterSocialMediaBlock]</div>
+				</li>
+			</div>
+		</div>
+		
+		<div class="footer-copyright">
+			<div class="row a-center">
+				[?DesignLayout.CheckFooter,[Url.Model],FooterCopyrightsBlock|Yes=[:FooterCopyrightsBlock]] [:FooterCopyrightsBlock]
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,23 @@
+/*
+*	Renders a block containing list of best sellers products.
+*/
+
+[?Website.LoopProductsCount,Bestsellers|0=|=
+	<div layout-block-name="home_block_container" class="home-block bestsellers-products-block Flat ">
+		<div class="home-block-style-Default">
+			<div class="block-title"><h5 class="subheader">[_BEST-SELLING PRODUCTS]</h5></div>
+			<div class="block-content">
+				<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-4" data-equalizer>
+				[Website.LoopProducts,Bestsellers,8,,'Name'=
+					<li layout-block-name="mini_list_container" class="small-text-center" data-equalizer-watch>
+						[:ProductMiniListItem]
+					</li>
+				]
+				</ul>
+			</div>
+		</div>
+	</div>
+]
+
+
+

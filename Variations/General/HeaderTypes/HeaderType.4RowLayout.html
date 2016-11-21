@@ -1,0 +1,45 @@
+/*
+*		Renders the store currency switcher.
+* logo is centered but with different layout
+*/
+
+<div layout-block-name="header_block" class="header-container FourRowLayout">
+	<div class="large-12 header">
+		<div class="dark-ribbon">
+			<div class="row opac a-center">[?DesignLayout.CheckHeader,[Url.Model],HeaderLogoBlock|Yes=[:HeaderLogoBlock]]</div>
+		</div>
+		<div class="orange-ribbon">
+			<div class="row opac">
+				<div class="large-6 columns">[:HeaderTopNavigationLinksBlock]</div>
+				<div class="large-4 large-offset-2 columns a-right">
+
+					[:HeaderMiniSearchBlock]
+					
+				</div>
+			</div>
+		</div>
+		<div class="header-bottom">
+			<div class="white-ribbon row opac">
+				<div class="large-3 columns">[:HeaderWelcomeMessageBlock]</div>
+				<div class="large-6 large-offset-3 columns a-right">
+					<div class="large-6 columns ">[:headercurrencyswitcherblock]</div>
+					<div class="large-6 columns a-right">[:headerlanguageswitcherblock]</div>
+				</div>
+			</div>
+		</div>
+		<div class="gray-ribbon">
+			
+				[:HeaderMainMenuBlock]
+			
+		</div>
+	</div>
+</div>
+
+[:SubmitAsPostVar]
+
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery(".cart-container.PopUpIncraTheme.incra-dropdown-menu,.cart-container.PopUpHighContrast.incra-dropdown-menu").css("right","initial");
+	})
+</script>
+

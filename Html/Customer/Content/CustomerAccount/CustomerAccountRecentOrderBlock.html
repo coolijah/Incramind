@@ -1,0 +1,59 @@
+/*
+*		Renders an information of Customer recent orders.
+*							
+*/
+
+[?Customer.OrdersAvailable|yes=
+<div class="box-head">
+	<h2>[_Recent Orders]</h2>
+	<a href="[Website.GetUrl,Customer,History]">[_View All]</a>
+</div>
+<table id="my-orders-table" class="data-table orders">
+	<colgroup>
+	    <col width="1"></col>
+	    <col width="1"></col>
+	    <col></col>
+	    <col width="1"></col>
+	    <col width="1"></col>
+	    <col width="1"></col>
+    </colgroup>
+    <thead>
+		<tr class="first last">
+		    <th class="number">[_Order #]</th>
+		    <th class="date">[_Date]</th>
+		    <th class="ship">[_Ship To]</th>
+		    <th class="total"><span class="nobr">[_Total]</span></th>
+		    <th class="status">[_Status]</th>
+		    <th class="a-center view"></th>
+		</tr>
+    </thead>
+    <tbody>
+	<!-- start loop here -->
+		[Customer.Orders,3=
+			<tr>
+				<td class="number">[Order.OrderNumber]</td>
+				<td class="date"><span class="nobr">[Order.LastDate]</span></td>
+				<td class="ship">
+					[Order.LatestDeliveryAddress=
+						[OrderAddress.FirstName] [OrderAddress.MiddleName] [OrderAddress.LastName]<br>
+					]
+				</td>
+				<td class="total"><span class="price">[Order.TotalPrice]</span></td>
+				<td class="status"><em>[Order.LastStatus,Front]</em></td>
+				<td class="a-center view last">
+					<span class="nobr">
+						<a href="[Website.GetUrl,Customer,OrderView/[Order.Id]]">[_View Order]</a><!-- check if reorder is true --><a class="link-reorder" href="[Website.GetUrl,Cart]">[_Reorder]</a> 
+						[?Order.CanReturn|Yes=<a href="[Website.GetUrl,Customer,ReturnOrder/[Order.Id]]" class="link-return">[_Create Return]</a>]
+					</span>
+				</td>
+			</tr>
+		]
+	<!-- end loop here -->
+    </tbody>
+</table>
+|no=
+<!-- if no orders yet -->
+    <p>[_You have placed no orders.]</p>
+<!-- if no orders yet -->
+]
+

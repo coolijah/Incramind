@@ -1,0 +1,26 @@
+/*
+*	Renders a block containing promoheader slider.
+*/
+
+[?PromoHeaderSlider.Enabled|Yes=
+		[?PromoHeaderBlock.HasImage|Yes=
+			<img src="[File:/images/promoheader/fashion-slide2.jpg]"/>
+		]
+		<div class="orbit-caption">
+			<!-- check if there is slider desc */-->
+			<div class="slide-text [PromoHeaderSlider.TextPosition]">
+				<span class="textslide">
+					[_Welcome to Vouge!]
+				</span>
+			</div>	
+			<!-- end check 
+			[?PromoHeaderBlock.HasButtonText
+				|Yes=
+					<div class="dynamic-button-text [PromoHeaderSlider.ButtonPosition]">
+						<a href="" class="button tiny [PromoHeaderSlider.ButtonPosition]">[PromoHeaderSlider.ButtonText]</a>
+					</div>
+			]-->
+		</div>
+]
+
+

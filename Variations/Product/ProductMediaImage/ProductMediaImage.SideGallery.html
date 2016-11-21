@@ -1,0 +1,79 @@
+/*
+*	Renders the default ProductMediaImage controls with default zoom slider.
+*
+*/
+<div class="product-img-box side-gallery clearfix" style="">
+	<div class="large-12 clearfix">
+		<div class="large-2 columns">
+			<div class="product-gallery">
+				<div class="image-thumbnail">
+					<ul>[Product.Images,4=
+						<li>
+							<a onclick="setMainImage(this); return false;" class="gallery-button" href="#" onclick=""  title="[ProductImage.Label]" data-image="/[ProductImage.ImageUrl]">
+								<img class="" src="/[ProductImage.ImageUrl,100,125]" title="[ProductImage.Label]" class="" />
+							</a>
+						</li>
+						]
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="large-10 columns no-padding">
+			<p class="product-image product-image-zoom">
+				<a href="#" onclick="return false;" title="[Product.Name]" >
+			   		<img id="image" src="/[Product.BaseImage=[ProductImage.ImageUrl]]" width="100%" alt="" title="" />
+			   	</a>
+			</p>
+			
+			<div class="large-12 columns zoom-button  clearfix">
+				<div class="large-12 columns text-center">
+					<a href="/[Product.BaseImage=[ProductImage.ImageUrl]]"  class="fancybox" data-fancybox-group="gallery">[_Zoom] <i class="fa fa-search fa-lg"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function setMainImage(obj){
+		var img = jQuery(obj).attr("data-image");
+		var label = jQuery(obj).attr("title");
+		jQuery("#image").attr("src",img);
+		jQuery(".zoom-button a.fancybox").attr('href',img);
+		jQuery(".zoom-button .image-label").html('');
+		jQuery(".zoom-button .image-label").html(label);
+		
+		jQuery(".image-thumbnail ul li").removeClass("active");
+		jQuery(obj).parent().addClass("active");
+		return false;
+	}
+	
+	jQuery(document).ready(function ($)  {
+		/*
+		 *  Simple image gallery. Uses default settings
+		 */
+
+		$('.fancybox').fancybox();
+
+		/*
+		 *  Different effects
+		 */
+
+		// Change title type, overlay closing speed
+		$(".fancybox-effects-a").fancybox({
+			helpers: {
+				title : {
+					type : 'outside'
+				},
+				overlay : {
+					speedOut : 0
+				}
+			}
+		});
+	});
+</script>
+<style type="text/css">
+	.fancybox-custom .fancybox-skin {
+		box-shadow: 0 0 50px #222;
+	}
+</style>

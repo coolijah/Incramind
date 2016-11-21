@@ -1,0 +1,45 @@
+/*
+*		renders the footer information of shopping cart table.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              CartFooterButtonsBlock
+Location:          /Html/Cart/Content/CartTableBlock/CartFooterButtonsBlock.html
+Created By:        Leslie Canete
+Created At:        07-Okt-2014 16:54 (move to and rename ShoppingCartBlocks to Cart)
+Last modified By:  Seth Malaki
+Last modified At:  21-Okt-2014 17:09 (myupdates on addingComments)
+Called from:       CartTableBlock 	
+--------------------------------------------------------------------**/
+
+<tr class="first last">
+	<td class="a-right cart-footer-actions last" colspan="50">
+		<div class="cart-actions">
+			<button type="button" title="[_Clear Cart]" class="button2 f-left" onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,ClearCart]',IncraWindow.formatUrl('[Url.FullUrl]'),'true');">
+				<span>
+					<span> [_EMPTY CART]</span>
+				</span>
+			</button>
+			<button type="button" title="[_Continue Shopping]" class="cjbutton" onclick="window.location='[Website.GetUrl,Home]'">
+				<span>
+					<span class="">[_Continue Shopping]</span>
+				</span>
+			</button>
+			<span class="or">[_or]</span>
+			<button type="submit" title="[_Update Shopping Cart]" class="cjbutton">
+				<span>
+					<span class="update-right">[_Update Shopping Cart]</span>
+				</span>
+			</button>
+			
+			<script type="text/javascript">
+				jQuery("#cart-form").validate({
+					submitHandler: function(form){
+						IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,UpdateCart]',IncraWindow.formatUrl('[Url.FullUrl]'),'true',jQuery('#cart-form').serialize(),'POST');
+					}	
+				});
+			</script>
+		</div>
+	</td>
+</tr>
+

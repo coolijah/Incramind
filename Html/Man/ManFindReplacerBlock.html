@@ -1,0 +1,129 @@
+<div class="large-6 columns search-box">
+	<div class="left" style="width:70%">
+		<form>
+			<input type="radio" name="searchmode" value="Find" checked onclick="ClearTextSearch();"><label for="">[_Starts with]</label></input>
+			<input type="radio" name="searchmode" value="FindExact" onclick="ClearTextSearch();"><label for="">[_Exact]</label></input>
+			<input type="radio" name="searchmode" value="FindContains" onclick="ClearTextSearch();"><label for="">[_Contains]</label></input>
+			<div class="search-container">
+				<input type="text" id="findreplacer" value="find replacer..." class="default-value" autocomplete="off" />
+				<input type="button" id="button-search" />
+				<div id="livesearch"></div>
+			</div>
+		</form>
+	</div>
+	<div class="language-selection right" style="width:20%">
+		<span>[_Language]</span>
+		<select name="locale" id="interface_locale" class="" title="Interface Language" style="width:100px" onchange="setLanguage(jQuery('#interface_locale option:selected').data('url'));">
+			[Main.Languages=
+			<option value="[Language.Id]" data-url="[Website.GetUrl,Man,SetLanguage]/[Language.Id]/">[Language.Name]</value>
+				]
+		</select>
+	</div>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery('#interface_locale').val("[Session.ManLanguageId]");
+		})
+		
+		function setLanguage(value){
+			window.location.href=value+IncraWindow.formatUrl('[Url.FullUrl]');
+		}
+		function searchMan(obj){
+			var href = jQuery(obj).attr('data');
+			jQuery.ajax({
+				url : href+'/ajax',
+				success : function(response){
+					jQuery(".man-content-container").html(response);
+					jQuery("#findreplacer").val('');
+					jQuery("#findreplacer").trigger('keyup')
+				}
+			})
+		}
+
+
+		/*********/
+		  $(document).ready(function(){
+		 var default_value = 'find replacer...';
+	      	$('.default-value').each(function() {
+		   
+		    $(this).focus(function() {
+			if(this.value == default_value) {
+			    this.value = '';
+			}
+		    });
+		    $(this).blur(function() {
+			if(this.value == '') {
+			    this.value = default_value;
+			}
+		    });
+		});
+		
+		
+		$(window).keydown(function(event){
+		    if(event.keyCode == 13) {
+		      event.preventDefault();
+		      return false;
+		    }
+		  });
+		
+		$("#findreplacer").keypress(function(event) {
+		    if ( event.which == 13 ) {
+			 var value = $('#findreplacer').val();
+			if (value==''){
+				return false;
+			}else{
+			 	$("#button-search").click();
+			}	
+		   }	 
+		});
+		$("#button-search").click(function() {
+			
+			 var value = $('#findreplacer').val();
+			var searchmode= $("input:radio:checked").val();
+			if (value==default_value){
+				return false;
+			}
+			
+			//window.location="[Website.GetUrl,Man]/"+searchmode+"/"+value;
+		});
+		$("#findreplacer").keyup(function(){
+			var str = $('#findreplacer').val();
+			var searchmode= $("input:radio:checked").val();
+			if (str.length==0)
+			  { 
+			  document.getElementById("livesearch").innerHTML="";
+			  document.getElementById("livesearch").style.display="none";
+			  return;
+			  }
+			if (window.XMLHttpRequest)
+			  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+			  }
+			else
+			  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			xmlhttp.onreadystatechange=function()
+			  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+	
+				document.getElementById("livesearch").innerHTML=xmlhttp.responseText;
+				document.getElementById("livesearch").style.display="block";
+			    }
+			  }
+		
+			xmlhttp.open("GET","[Website.GetUrl,Man]/"+searchmode+"AjaxSearch/"+str,true);
+			xmlhttp.send();
+		});
+		
+     });
+
+	function ClearTextSearch(){
+		
+		  document.getElementById("findreplacer").value="find replacer...";
+		  document.getElementById("livesearch").innerHTML="";
+		  document.getElementById("livesearch").style.display="none";
+	}
+
+	</script>
+</div>

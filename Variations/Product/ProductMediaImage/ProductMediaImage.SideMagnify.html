@@ -1,0 +1,122 @@
+/*
+*	Renders the default ProductMediaImage controls with default zoom slider.
+*
+*/
+
+<div class="product-img-box side-magnify clearfix" style="">
+		<div class="more-views small-2 columns">
+			<div class="product-gallery">
+				<div class="image-thumbnail">
+					<ul>[Product.Images,4=
+						<li>
+							<a  data-image="/[ProductImage.ImageUrl]" 
+								rel="{
+										gallery: 'gal1', 
+										smallimage: '/[ProductImage.ImageUrl,205,220]',
+										largeimage: '/[ProductImage.ImageUrl]'
+									}"
+							>
+								<img class="" src="/[ProductImage.ImageUrl,100,125]" title="[ProductImage.Label]" class="" />
+							</a>
+						</li>]
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="product-image product-image-zoom small-10 columns">
+			<div class="product-image-gallery">
+				<a rel="gal1" href="/[Product.BaseImage=[ProductImage.ImageUrl]]" class="image-magnify gallery-button" href="#" onclick=""  title="[ProductImage.Label]" onclick="return false;" title="[Product.Name]" >
+			   		<img id="image" src="/[Product.BaseImage=[ProductImage.ImageUrl]]" alt="" title="" width="100%"/>
+			   	</a>
+			</div>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					/*jQuery("#image").ScaleRatio({
+						'parentContainer'	: 	'product-image-zoom'
+					});
+					[?DesignLayout.Layout
+						|2ColumnsRight=
+							var w = 200;
+							var h = 270;
+						|2ColumnsLeft=
+							var w = 200;
+							var h = 270;
+						|3Columns=
+							var w = 200;
+							var h = 270;
+						|1Column = 
+							var w = 200;
+							var h = 270;
+					]*/
+					var options = {  
+				            zoomType: 'standard',  
+				            lens:true,  
+				            preloadImages: true,  
+				            alwaysOn:false,  
+				            zoomWidth: 300,  
+				            zoomHeight: 300,  
+				            xOffset:15,  
+				            yOffset:0,  
+				            position:'right'  
+				            
+				    };  
+				    jQuery('.image-magnify').jqzoom(options);
+				    jQuery("#image").css("width",jQuery(".product-image.product-image-zoom").width());
+				});
+			</script>
+			<!--
+			<div class="large-12 zoom-button  clearfix">
+				<div class="large-8 columns image-label text-left">
+
+				</div>
+				<div class="large-4 columns text-right">
+					<a href="/[Product.BaseImage=[ProductImage.ImageUrl]]"  class="fancybox" data-fancybox-group="gallery">Zoom <i class="fa fa-search fa-lg"></i></a>
+				</div>
+			</div>
+			-->
+		</div>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		/*jQuery(".gallery-button").click(function(){
+			var img = jQuery(this).attr("data-image");
+			var label = jQuery(this).attr("title");
+			jQuery("#image").attr("src",img);
+			jQuery(".zoom-button a.fancybox").attr('href',img);
+			jQuery(".zoom-button .image-label").html('');
+			jQuery(".zoom-button .image-label").html(label);
+			
+			jQuery(".image-thumbnail ul li").removeClass("active");
+			jQuery(this).parent().addClass("active");
+			return false;
+		})*/
+	});
+	jQuery(document).ready(function ($)  {
+		/*
+		 *  Simple image gallery. Uses default settings
+		 */
+
+		$('.fancybox').fancybox();
+
+		/*
+		 *  Different effects
+		 */
+
+		// Change title type, overlay closing speed
+		$(".fancybox-effects-a").fancybox({
+			helpers: {
+				title : {
+					type : 'outside'
+				},
+				overlay : {
+					speedOut : 0
+				}
+			}
+		});
+	});
+</script>
+<style type="text/css">
+	.fancybox-custom .fancybox-skin {
+		box-shadow: 0 0 50px #222;
+	}
+</style>

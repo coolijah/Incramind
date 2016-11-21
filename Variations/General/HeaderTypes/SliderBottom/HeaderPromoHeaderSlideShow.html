@@ -1,0 +1,40 @@
+<ul class="header-promo-slider" >
+	[PromoHeaderBlock.Sliders=
+		<li class="slideshow">
+			[?PromoHeaderSlider.Enabled|Yes=
+			<div class="slide-image">
+				[?PromoHeaderBlock.HasImage|Yes=<img src="/[PromoHeaderSlider.Image]" width="100%"/>]
+			</div>
+			]
+		</li>
+	]
+</ul>
+<div class="pagination" id="promopagination">
+
+</div>
+<script type="text/javascript">
+	width = jQuery(".categorypromoheader").width();
+	jQuery(function() {
+		jQuery('.header-promo-slider').carouFredSel({
+			responsive:true,
+			width: width,
+    		height: 430, 
+			auto: {
+				pauseOnEvent: 'resume'
+			},
+			scroll: {
+				fx: 'crossfade',
+				duration: 3000,
+				timeoutDuration: 3000,
+				pauseOnHover: 'immediate'
+			},
+			pagination: {
+				container: '#promopagination',
+				items: 1,
+				duration: 0.5,
+				queue: 'last'
+			}
+		});
+	 	jQuery(".categorypromoheader .Layout1 .slideshow .dynamic-button-text.RightBottom, .categorypromoheader .Layout1 .slideshow .dynamic-button-text.LeftBottom").css("bottom","25px");
+	});
+</script>

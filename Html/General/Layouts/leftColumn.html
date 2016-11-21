@@ -1,0 +1,48 @@
+/*
+*		Renders the default blocks that is placed in the left column.  This can be enherited on per model basis.
+* by default we follow the sequence of blocks set in the design layout
+*/
+	
+<div class="side-block-wrapper [Design.DesignSelectionName,SideBlockStyle]">
+	
+	[?DesignLayout.LeftColumnUseGeneral
+		|Yes=
+			[:SideCategoryNavigationBlock]
+			[DesignLayout.LeftColumn,General=
+				[?DesignSelection.Name|SideCategoryNavigationBlock=
+				|=
+					/*[:[DesignSelection.Name]]*/
+					[:SideCategoryNavigationBlock]
+				]
+			]
+		|No=
+			[DesignLayout.LeftColumn,[Url.Model]=
+				/*[:[DesignSelection.Name]]*/
+					[:SideCategoryNavigationBlock]
+			]
+	]
+	/*[:SideSearchCloudBlock]
+	[:SideTagCloudBlock]
+	[:SideMostViewedProductsBlock]
+	[:SideBestSellersBlock]
+	[:SideRecentlyViewedProductsBlock]
+	[:SideNewProductsBlock]
+	[:SideNewsletterBlock]
+	[:SideFeaturedProductsBlock]
+	[:SidePopularProductsBlock]
+	[:SideSaleProductsBlock]
+	
+	[:SideCurrencySwitcherBlock]
+	[:SideComparedProductsBlock]
+	[:SideAccountBlock]
+	[:SideSearchCloudBlock]
+	[:SideLanguageSwitcherBlock]
+	[:SidePollBlock]
+	[:SideTagCloudBlock]
+
+	[:SideRecentOrderBlock]
+	[:SideCustomerAccountNavigationBlock]
+	[:SideSliderBlock]
+	[:SideUspsBlock]
+	[:SidePollBlock]*/
+</div>

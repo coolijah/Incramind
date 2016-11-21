@@ -1,0 +1,39 @@
+<div class="step-title">
+	<ul class="inline-list">
+		<li class="step-number">2</li> 
+		<li>[_Shipping Method]</li>
+	</ul>
+</div>
+<div class="loading-progress text-center" style="display:none">
+	<i class="fa fa-spinner fa-lg fa-spin"></i>
+</div>
+<div class="content large-12 column">
+	<form action="" id="co-payment-form">
+		<ul class="shipping-method-list large-11 right">
+			[ShoppingCart.AvailableShippingMethods=
+			<li>
+				<label class="in-block shipping-method-item" for="s_method_[ShippingMethod.Code]">
+					<input class="shipping-method-item" name="method" type="radio" value="[ShippingMethod.Id]" id="s_method_[ShippingMethod.Code]" class="radio in-block" onclick="expressCheckout.saveShippingMethod()">
+				[ShippingMethod.Name] <span>[ShippingMethod.FixedCosts]</span>
+				</label>
+				<div class="shipping-additional-info hide" id="[ShippingMethod.Code]-extra-info">
+					<ul>
+					[ShippingMethod.ExtraFields=
+						[?CheckOutExtraDataField.Type
+							|TextField=
+								<li>
+									<span>[CheckOutExtraDataField.Caption]</span><br/>
+									<input type="text" name="" value=""/>
+								</li>
+							|
+							|CheckBox=
+							|
+						]
+					]
+					</ul>
+				</div>
+			</li>
+			]
+		</ul>
+	</form>
+</div>

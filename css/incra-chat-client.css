@@ -1,0 +1,150 @@
+.incra-panel {
+  padding-top: 0.625em;
+  padding-bottom: 0.625em; }
+
+.client-chat-window {
+  width: 300px;
+  background: #EEE;
+  position: fixed;
+  bottom: 10px;
+  right: 5px;
+  height: 320px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #BBB;
+  overflow: hidden; }
+  .client-chat-window.minimize {
+    height: 42px; }
+    .client-chat-window.minimize .chat-header:after {
+      font-family: "FontAwesome";
+      content: "\f077"; }
+  .client-chat-window .chat-header {
+    cursor: pointer; }
+    .client-chat-window .chat-header h6 {
+      margin-top: 0px; }
+    .client-chat-window .chat-header:after {
+      font-family: "FontAwesome";
+      content: "\f078";
+      position: absolute;
+      right: 10px;
+      top: 10px; }
+  .client-chat-window .input-panel input {
+    margin-bottom: 5px; }
+  .client-chat-window .conversation-window {
+    height: 60%;
+    border: 1px solid #E0E0E0;
+    background: white;
+    overflow-y: auto; }
+    .client-chat-window .conversation-window .message-balloon {
+      background: #F9F9F9;
+      padding: 10px;
+      width: 95%;
+      border-radius: 3px;
+      line-height: 22px; }
+    .client-chat-window .conversation-window .receivers-view .message-balloon {
+      float: right;
+      background: #E8DEBC; }
+    .client-chat-window .conversation-window .receivers-view .message-author {
+      text-align: right; }
+      .client-chat-window .conversation-window .receivers-view .message-author .avatar-panel {
+        float: right;
+        margin-left: 5px; }
+    .client-chat-window .conversation-window .receivers-view .time-since {
+      font-size: 10px;
+      font-style: italic;
+      color: #888; }
+    .client-chat-window .conversation-window .senders-view .message-balloon {
+      background: #DBEDC6; }
+    .client-chat-window .conversation-window .senders-view .avatar-panel {
+      float: left;
+      margin-right: 5px; }
+    .client-chat-window .conversation-window .senders-view .time-since {
+      font-size: 10px;
+      font-style: italic;
+      color: #888; }
+  .client-chat-window .send-button {
+    padding: 8px 15px;
+    background: #A8C090;
+    /*border: 1px solid #86A765;*/
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border-bottom: 2px solid #86A765;
+    margin-bottom: 5px;
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease; }
+    .client-chat-window .send-button:hover {
+      background: #97b47a; }
+    .client-chat-window .send-button.disable {
+      opacity: .5; }
+  .client-chat-window .avatar-panel {
+    width: 20px;
+    height: 20px;
+    border-radius: 30px;
+    overflow: hidden;
+    text-align: center; }
+
+/*
+*	INCRA CHAT EMOTICONS 
+*/
+.chat-emoticons {
+  background: url("../images/incra-chat/smileys-small.png") no-repeat;
+  padding: 11px;
+  margin: 2px;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: -2px;
+  margin-bottom: 4px; }
+  .chat-emoticons.smile {
+    background-position: -21px 0px; }
+  .chat-emoticons.wink {
+    background-position: -44px 0px; }
+  .chat-emoticons.sad {
+    background-position: -66px 0px; }
+  .chat-emoticons.surprised {
+    background-position: -89px 0px; }
+  .chat-emoticons.huh {
+    background-position: -156px 0px; }
+  .chat-emoticons.happy {
+    background-position: -179px 0px; }
+  .chat-emoticons.snap {
+    background-position: -134px 0px; }
+  .chat-emoticons.cool {
+    background-position: -156px 0px; }
+  .chat-emoticons.tongue-out {
+    background-position: -22px -23px; }
+  .chat-emoticons.cry {
+    background-position: -67px -22px; }
+  .chat-emoticons.thumbs-up {
+    background-position: -144px -45px; }
+  .chat-emoticons.angry {
+    background-position: 0px -22px; }
+  .chat-emoticons.bye {
+    background-position: -169px -45px; }
+
+.emoticons-container {
+  position: relative; }
+  .emoticons-container .emoticons-button img {
+    opacity: .8; }
+  .emoticons-container .emoticons-button:hover img {
+    opacity: .9; }
+  .emoticons-container .emoticon-list {
+    text-align: left;
+    padding: 10px;
+    width: 200px;
+    position: absolute;
+    right: -105px;
+    background: white;
+    border: 1px solid #CCC;
+    box-shadow: 0px 2px 5px #CCC;
+    top: -80px;
+    border-radius: 3px;
+    display: none; }
+    .emoticons-container .emoticon-list.active {
+      display: block; }
+    .emoticons-container .emoticon-list smiley {
+      cursor: pointer;
+      opacity: .8; }
+      .emoticons-container .emoticon-list smiley:hover {
+        /* background-color: #DBEDC6;*/
+        opacity: 1; }

@@ -1,0 +1,34 @@
+/*
+*	Renders a block containing list of best sellers products.
+*/
+
+[?Website.LoopProductsCount,Bestsellers|0=|=
+	<div class="home-block bestseller row">
+		<div class="block-title"><h3>[_BEST-SELLING PRODUCTS]</div>
+		<div class="block-content">
+			<ul class="products-grid inline-list">
+				[Website.LoopProducts,Bestsellers,8,,'Name'=
+				<li class="item large-3 columns">
+					<div class="mini-list-item-wrapper-stylen">
+						<div class="product-image">
+							<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]"><img width="140" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,140,150]]"/></a>
+						</div>
+						<div class="product-details">
+							<a href="[Website.GetUrl,Product,[Product.Id]]"><h4 class="product-title">[Product.Name]</h4></a>
+							<div class="price-box">[:ProductPriceBlock]</div>
+						</div>	
+						<div class="see-all-link">
+							<span class="links">
+								<a href="[Website.GetUrlForUrlKey,Category]/[product.categories=[Category.UrlKey]]">[_see all] [product.categories=[Category.Name]]</a>
+							</span>
+						</div>
+					</div>
+				</li>
+				]
+			</ul>
+		</div>
+	</div>
+]
+
+
+

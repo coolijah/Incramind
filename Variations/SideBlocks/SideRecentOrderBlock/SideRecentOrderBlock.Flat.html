@@ -1,0 +1,15 @@
+[?Customer.OrdersAvailable|yes=
+<div class="block recent-order Flat">
+	<div class="title">
+		<h6>[_RECENT ORDERS]</h6>
+	</div>
+	<div class="block-content">
+		<ul class="order-links">
+		[Customer.Orders,3=
+			<li><i class="fa fa-angle-right"></i> &nbsp;<a href="[Website.GetUrl,Customer,OrderView/[Order.Id]]">[Order.OrderNumber]&nbsp;<span>[Order.LastDate]</span> </a></li>
+		]
+		</ul>
+		<p class="a-right no-margin"><a href="[Website.GetUrl,Customer,History]">[_View All]</a></p>
+	</div>
+</div>
+]

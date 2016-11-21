@@ -1,0 +1,27 @@
+/*
+*	Renders the variation list of Product attributes.
+*
+*/
+<div class="large-12 product-attributes Classic clearfix">
+	[Product.ConfigurableAttributes=
+		<div class="large-6 columns attribute-container">
+	  		<div class="title">[Attribute.Title]</div>
+  			<select name="[Attribute.AttributeCode]" id="attribute[Attribute.Id][Product.Id]"  onchange="attrib.selectAttribute()" class="attributes required large-12px" >
+				<option value="">[_Please select]</option>
+				[Product.ConfigurableChildProducts,[Attribute.AdminTitle]=
+				<option [?Attribute.AttributeCode|Color=data-title="[AttributeOption.Color]"] value="[AttributeOption.Id]" admin="[AttributeOption.Admin]"  [?UserInput.ConfigurableAttributeValueValid,[Attribute.AdminTitle],[AttributeOption.Admin]|yes=selected="selected"]>[AttributeOption.Admin]</option>
+				 ]
+			</select>
+		</div>
+	]
+</div>
+<script type="text/javascript">
+	var attrib = jQuery(".attributes").initProductAttributes({
+								'product_url' 		: '[Website.GetUrl,Product,[Product.Id]]',
+								'ajax_url'	  		: '[Website.GetUrl,Ajax,Update]',
+								'attribute_class'  	: 'attributes' 
+							});
+</script>
+
+
+

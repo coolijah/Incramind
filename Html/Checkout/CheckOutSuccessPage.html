@@ -1,0 +1,50 @@
+/*
+*	Renders CheckoutSuccessPage.
+*/
+/** -------------------------------------------------------------------
+Name:              CheckOutSuccessPage
+Location:          /Html/Checkout/CheckOutSuccessPage.html
+Created By:        Leslie Canete
+Created At:        06-Okt-2014 17:06 (relocation)
+Last modified By:  Aris Catan
+Last modified At:  27-Okt-2014 13:01 (updates on adding comments)
+--------------------------------------------------------------------**/
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>[Website.Name] | [_Check Out]</title>
+	[:head]
+</head>
+<body>
+	<div class="page">
+		[:header]
+		<div class="two-columns-left">		
+			<div class="row">					
+				<div layout-block-name="left_column" class="left-content large-3 medium-3 small-12 columns grid-col2-sidebar no-gutter">
+					[:leftColumn]
+				</div>
+				<div layout-block-name="main_column" class="main-content large-9 medium-9 small-12 columns grid-col2-main no-gutter">					
+					<div class="main checkout">
+						<div class="large-centered success-order">
+							<div class="page-title"><h2>[_Your order has been received]</h2></div>
+							<div class="theme-block">
+								<p><strong>[_Thank you for your purchase!]</strong></p>
+								<p>
+								   	[_Your order # is: %1., [Order.OrderNumber]]<br>
+							   	 	[_You will receive an order confirmation email with details of your order and a link to track its progress.]<br>
+								</p>
+							</div>
+							<div class="button-set">
+							    <button type="button" class="form-button" onclick="window.location='[Website.GetUrl,Home,]'"><span>[_Continue Shopping]</span></button>
+							</div>
+						</div>
+					</div>
+					[:Footer]
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

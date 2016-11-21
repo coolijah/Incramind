@@ -1,0 +1,19 @@
+/*
+*	Renders a block containing add to wishlist and add to compare links.
+*
+*/
+
+<ul class="add-to-links icons inline-list">
+	[?WebsiteFeatures.WishList|Yes=
+	<li>
+		<a  href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST'); " class="icon-link-wishlist">
+			<i class="fa fa-heart "> <span>[_Wishlist]</span></i>
+		</a>
+	</li>
+	]
+	<li>
+		<a href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST');" class="icon-link-compare">
+			<i class="fa fa-check-square-o "> <span>[_Compare]</span></i>
+		</a>
+	</li>
+</ul>

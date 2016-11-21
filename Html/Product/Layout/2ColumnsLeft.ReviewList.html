@@ -1,0 +1,36 @@
+/*
+*	Renders a custom layout for ReviewListPage.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              2ColumnsLeft.ReviewList
+Location:          /Html/Product/Layout/2ColumnsLeft.ReviewList.html
+Created By:        Seth Malaki
+Created At:        06-Okt-2014 18:25 (applying standard file structure...)
+Last modified By:  Seth Malaki
+Last modified At:  24-Okt-2014 11:58 (updates on adding comments)
+Called from:       ReviewListPage 	
+Possible call:    FeaturedPage 	
+Calling blocks:    Breadcrumb 	Footer 	Header 	leftColumn 	mainContent.ProductReviewList 	Notification 	
+--------------------------------------------------------------------**/
+
+
+<div class="page">
+	[:Header]
+	<div class="two-columns-left">
+		<div class="row">
+			[:Breadcrumb]
+			<div class="main-container">
+				<div layout-block-name="left_column" class="left-content large-3 medium-3 small-12 columns grid-col2-sidebar no-gutter">
+					[:leftColumn]
+				</div>
+				<div layout-block-name="main_column" class="main-content large-9 medium-9 small-12 columns grid-col2-main no-gutter">
+					[:Notification]
+					[:mainContent.ProductReviewList]
+				</div>
+			</div>
+			<br style="clear:both;"/>
+		</div>
+	</div>
+	[:Footer]
+</div>

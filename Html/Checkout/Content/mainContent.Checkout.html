@@ -1,0 +1,164 @@
+/*[:CheckoutType]*/
+
+<div class="main-container checkout-onepage Default">
+	<div class="page-title">
+		<h2><img src="/Test/designs/Sample6/icons/checkout.png">[_  Checkout]</h2>
+	</div>
+	<div class="container">
+		<div class="main">
+			<div class="row">
+				<div class="small-12 medium-9 columns">
+					<div class="theme-block">
+						<div id="checkoutSteps" class="opc accordion checkout-steps">
+							[?Customer.LoggedIn|Guest=
+								[:CheckoutOnepageMethodBlock,1]
+								[:BillingInformationBlock,2]
+								[:ShippingInformationBlock,3]
+								[:ShippingMethodBlock,4]
+								[:PaymentMethodBlock,5]
+								[:OrderReviewBlock,6]
+							|LoggedIn=
+								[:BillingInformationBlock,1]
+								[:ShippingInformationBlock,2]
+								[:ShippingMethodBlock,3]
+								[:PaymentMethodBlock,4]
+								[:OrderReviewBlock,5]
+							]
+						</div>
+					</div>
+				</div>
+				<div class="small-12 medium-3 columns">
+					<div class="checkout-onepage-page-progress">
+						<div class="block-title">
+							<strong><span>[_YOUR CHECKOUT PROGRESS]</span></strong>
+						</div>
+						<div class="block-content">
+						<div class="progress-block billing">
+							<div class="progress-step-title">
+								<span>[_Billing Address] </span> [?ShoppingCart.BillingAddressComplete|Yes=<a class="default-orange change-link" href="#" onclick="checkout.gotoSection('billing');">[_Change]</a>]
+							</div>
+							[?ShoppingCart.BillingAddressComplete|Yes=
+								<div class="progress-block-content">
+									<dt class="complete">
+										[_Billing Address]
+									</dt>
+									<div>
+										[ShoppingCart.InvoiceAddress=
+											<address> [Address.FirstName] [Address.LastName]<br>
+											[Address.StreetName]   [Address.HouseNumber]<br>
+											[Address.City], [Address.PostalCode] <br>
+											T:[Address.TelNumber]<br>
+											</address>
+										]
+									</div>
+								</div>
+							]
+						</div>
+						<div class="progress-block shipping">
+							<div class="progress-step-title">
+								<span class="bold">[_Shipping Address]</span> [?ShoppingCart.ShippingAddressComplete|Yes=<a class="default-orange change-link" href="#" onclick="checkout.gotoSection('shipping');">[_Change]</a>]
+							</div>
+							[?ShoppingCart.ShippingAddressComplete|Yes=
+								<div class="progress-block-content">
+									<dt class="complete">
+										[_Shipping Address]
+									</dt>
+									<div>
+										[ShoppingCart.ShippingAddress=
+											<address> [Address.FirstName] [Address.LastName]
+											<br>
+											[Address.StreetName]   [Address.HouseNumber]  <br>
+												[Address.City], [Address.PostalCode] <br>
+												T:[Address.TelNumber]<br>
+											</address>	
+										]
+									</div>
+								</div>
+							]	
+						</div>
+						<div class="progress-block shipping_method">
+							<div class="progress-step-title">
+								<span class="bold">[_Shipping Method]</span> [?ShoppingCart.ShippingMethodComplete|Yes=<a class="default-orange change-link" href="#" onclick="checkout.gotoSection('shipping_method');">[_Change]</a>]
+							</div>
+							[?ShoppingCart.ShippingMethodComplete|Yes=
+								<div class="progress-block-content">
+									<strong>[ShoppingCart.SelectedShippingMethod=[ShippingMethod.Name]]</strong>
+									[?ShoppingCart.StoreLocationId|0=
+									|=
+									<strong>[_Store :]</strong>
+									<address>[ShoppingCart.StoreLocation=[StoreLocation.Name]
+											<br>[StoreLocation.AddressSummary]
+										]</address>
+									]
+									
+									[?ShoppingCart.ExtraDetailsAvailableForShipping|Yes=
+
+									
+									<dl class="extra-fields">
+										[ShoppingCart.ExtraDetails= 
+											[?ShoppingCartExtraDetails.Type|ShippingMethod=
+											<dt>[ShoppingCartExtraDetails.Title]  </dt> <dd>[ShoppingCartExtraDetails.printableValue] </dd>
+											|ShippingProcessor=
+											<dt>[ShoppingCartExtraDetails.Title]  </dt> <dd>[ShoppingCartExtraDetails.printableValue] </dd>
+											]
+										]
+									</dl>
+									]
+								</div>
+							]
+						</div>
+						<div class="progress-block payment">
+							<div class="progress-step-title">
+								<span class="bold">[_Payment Method]</span> [?ShoppingCart.PaymentMethodComplete|Yes=<a class="default-orange change-link" href="#" onclick="checkout.gotoSection('payment');">[_Change]</a>]
+							</div>
+							[?ShoppingCart.PaymentMethodComplete|Yes=
+								<div class="progress-block-content">
+									<strong>[ShoppingCart.SelectedPaymentMethod=[PaymentMethod.Name]]</strong>
+									[?ShoppingCart.ExtraDetailsAvailableForPayment|Yes=
+									
+									<dl class="extra-fields">
+									[ShoppingCart.ExtraDetails= 
+										[?ShoppingCartExtraDetails.Type|PaymentMethod=
+										<dt>[ShoppingCartExtraDetails.Title]  </dt> <dd>[ShoppingCartExtraDetails.printableValue] </dd>
+										|PaymentProcessor=
+										<dt>[ShoppingCartExtraDetails.Title]  </dt> <dd>[ShoppingCartExtraDetails.printableValue] </dd>
+										]
+									]
+									</dl>
+									]
+								</div>
+							]
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var checkout = new OnePageCheckOut();
+	checkout.method_url = '[Website.GetUrl,CheckOut,saveMethod]';
+	checkout.country_config_url = "[Website.GetUrl,ajax,block/CustomerAddressCountryConfiguration/country/]";
+	/*jQuery(document).on({
+			click : function(){
+						checkout.gotoSection(jQuery(this).attr('step'));
+			}},".checkout-block.allow .title");*/
+
+	[?Customer.LoggedIn|LoggedIn=checkout.gotoSection("billing");]
+
+	function openCheckoutStep(obj){
+		if(jQuery(obj).hasClass("allow")){
+			checkout.gotoSection(jQuery(obj).attr("step"));	
+		}
+	}
+
+	function updateRegion(country_id,element_id){
+		var region = INCRACOUNTRYCONFIG.getRegion(country_id);
+		var obj = jQuery("#"+element_id);
+		if(region){
+			region.forEach(function(el){
+				obj.append("<option>"+el.state_name+"</option>");
+			});
+		}
+	}
+</script>

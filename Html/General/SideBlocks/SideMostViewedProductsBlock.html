@@ -1,0 +1,36 @@
+/*
+*		Renders a block that cotains a best sellers product.
+*
+*/
+
+/*[Website.MostViewed,1,2,'Name',Ascending]
+[?Filter.Empty|no=
+<div class="block products-block mostviewed Default">
+	<div class="title">
+		<h2>[_MOST VIEWED]</h2>
+	</div>
+	<div class="block-content">
+		[Filter.Products=
+			[:ProductThumbnailListItem]
+		]
+	
+	</div>
+</div>
+]
+*/
+
+[?Website.LoopProductsCount,MostViewed|0=|=
+<div class="block products-block newproducts Default">
+	<div class="title">
+		<h2>[_MOST VIEWED]</h2>
+	</div>
+	<div class="block-content">
+		[Website.LoopProducts,MostViewed,1,,'Name'=
+			[:ProductThumbnailListItem]
+		]
+	
+	</div>
+	<hr>
+</div>
+]
+

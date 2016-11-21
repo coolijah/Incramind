@@ -1,0 +1,20 @@
+/*
+*	Renders a block containing list of upsell products.
+*
+*/
+
+[?Product.HasUpSellProducts|yes=
+	<div class="block-upsell large-12 columns">
+		<div class="block-title">
+			<h6>[_You might also be interested in the following products]</h6>
+		</div>
+		<ul class="products-grid large-block-grid-4" id="block-upsell-list">
+			[Product.UpSells,4= 
+			<li class="item ">
+				[:ProductMiniListItem,No,No]
+			</li>
+			]
+		</ul>
+	</div>
+]
+

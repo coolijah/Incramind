@@ -1,0 +1,202 @@
+/*
+*		Renders the listings of products of the current category.  
+*		Can be list as Grid type or List type.
+*
+*/
+
+[?UserInput.CatalogMode|List=
+		<li class="product-item flat-ecommerce-list" onmouseover="over(this)" onmouseout="out(this)">
+				<div class="item-wrapper clearfix"  id="prd[Product.Id]">
+					[?Product.Sale|sale=<div class="product-ribbon sale"></div>]
+					<div class="product-image  large-3 columns clearfix">
+					   <a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+					   		<img id="image-[Product.Id]" width="100%" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,205,220]]" alt="[Product.Name]"/>
+					   	</a>
+					</div>
+					<div class="product-details text-left large-9 columns">
+					 	<div class="large-8 columns">
+							<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]" alt="[Product.Name]">
+								<h3 class="product-name">[Product.Name]</h3>
+							</a>
+						</div>
+					   	<div class="ratings large-4 columns text-right">
+					   		[:ProductRating]
+							<!-- <div class="rating-box">
+								<div class="rating" style="width:[Product.Ranking]%" title="[Product.Ranking]%"></div>
+							</div> -->
+							<!-- 
+								<span class="rating-links">
+									<a href="[Website.GetUrl,Product,0,Review/List/[Product.Id]/ListReview]">[_%1 Reviews, [Product.NumberOfReviews]]</a>
+								</span> 
+							-->
+						</div>
+						<div class="large-8 columns">
+							<p>[Product.Description]</p>
+						</div>
+						<div class="price-block large-4 columns text-right">
+							[?Product.ProductType|Simple=
+								[?Product.Sale|sale=
+										<span class="price special"><s>[Product.Price] </s>[Product.SpecialPrice]</span>
+									|=
+										<span class="price">
+											[Product.Price]
+										</span>
+									]
+								|Configurable=
+									[?SimpleProduct.Sale|sale=
+										<span class="price special"><s>[SimpleProduct.Price] </s>[SimpleProduct.SpecialPrice]</span>
+									|=
+										<span class="price">
+											[SimpleProduct.Price]
+										</span>
+									]
+							]
+						</div>
+						<div class="large-12 columns">[:ProductListItemAttributeColor]</div>
+					</div>
+					<div class="popup-wrapper"></div>
+					<div class="ecommerce-popup clearfix">
+						<div class="popup-container">
+							<div class="large-3 columns text-center large-centered action-button">
+								
+								[?WebsiteFeatures.Checkout|Yes=
+									[?Product.ProductType|Configurable=
+										<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+											<span><span>[_Configure]</span></span>
+										</button>
+									|=
+										[?Product.HasRequiredOptions|Yes=
+											<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+												<span><span>[_Configure]</span></span>
+											</button>
+										|=
+											<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+												<span><span><i class="fa fa-search"></i> [_View]</span></span>
+											</button>
+										  	<button  class="button btn[Design.DesignSelectionName,ButtonStyle]"  onclick="IncraShoppingCart.ajaxAddToCart({submit_url : '[Website.GetUrl,IncraShop,AddToCart]',second_url : '[UserInput.DefaultUrlPart]',flag:true,id :'[Product.Id]',post_data: 'qty=[Product.MinInShoppingCart]'}); return false;" class="button btn-cart" title="[_Add to Cart]" type="button">
+												<span><span>[_Add to Cart]</span></span>
+											</button>
+										]
+									]
+								]
+							</div>
+							<div class="large-10 columns text-center add-to-links large-centered clearfix">
+								[?WebsiteFeatures.WishList|Yes=
+									<div class="large-12 columns text-center">
+										<a  href="#" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to wishlist]" alt="[_Add to wishlist]" class="link-wishlist">
+											<i class="fa fa-heart"></i> Wishlist
+										</a>
+									</div>
+								]
+								<div class="large-12 columns text-center">
+									<a href="#" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to compare]" alt="[_Add to compare]" class="link-compare">
+										<i class="fa fa-check-square-o"></i> Compare
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<script type="text/javascript">
+					jQuery(window).load(function(){
+						var width = jQuery("#prd[Product.Id]").width();
+						var height = jQuery("#prd[Product.Id]").outerHeight();
+						jQuery("#prd[Product.Id]").find(".popup-wrapper").css({ "width": width+"px","height":height+"px"});
+						jQuery("#prd[Product.Id]").find(".ecommerce-popup").css({ "width": width+"px","height":height+"px"});
+					});
+				</script>
+		</li>
+	|Grid=
+		<li class="product-item flat-ecommerce-list" onmouseover="over(this)" onmouseout="out(this)">
+			<div class=" item-wrapper "  id="prd[Product.Id]">
+				[?Product.Sale|sale=<div class="product-ribbon sale"></div>]
+				<div class="product-image clearfix">
+				   <a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+				   		<img id="image-[Product.Id]" width="100%" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,205,220]]" alt="[Product.Name]"/>
+				   	</a>
+				</div>
+				 <div class="product-details text-center">
+					<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]" alt="[Product.Name]">
+						<h3 class="product-name">[Product.Name]</h3>
+					</a>
+				   	<div class="ratings text-center">
+						<div class="rating-box">
+							<div class="rating" style="width:[Product.Ranking]%" title="[Product.Ranking]%"></div>
+						</div>
+						<!-- 
+							<span class="rating-links">
+								<a href="[Website.GetUrl,Product,0,Review/List/[Product.Id]/ListReview]">[_%1 Reviews, [Product.NumberOfReviews]]</a>
+							</span> 
+						-->
+					</div>
+					<div class="price-block text-center">
+						[?Product.ProductType|Simple=
+							[?Product.Sale|sale=
+									<span class="price special"><s>[Product.Price] </s>[Product.SpecialPrice]</span>
+								|=
+									<span class="price">
+										[Product.Price]
+									</span>
+								]
+							|Configurable=
+								[?SimpleProduct.Sale|sale=
+									<span class="price special"><s>[SimpleProduct.Price] </s>[SimpleProduct.SpecialPrice]</span>
+								|=
+									<span class="price">
+										[SimpleProduct.Price]
+									</span>
+								]
+						]
+					</div>
+				</div>
+				<div class="popup-wrapper"></div>
+				<div class="ecommerce-popup clearfix">
+					<div class="popup-container">
+						<div class="large-10 columns text-center large-centered action-button">
+							[?WebsiteFeatures.Checkout|Yes=
+								[?Product.ProductType|Configurable=
+									<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+										<span><span>[_Configure]</span></span>
+									</button>
+								|=
+									[?Product.HasRequiredOptions|Yes=
+										<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+											<span><span>[_Configure]</span></span>
+										</button>
+									|=
+									  	<button  class="button btn[Design.DesignSelectionName,ButtonStyle]"  onclick="IncraShoppingCart.ajaxAddToCart({submit_url : '[Website.GetUrl,IncraShop,AddToCart]',second_url : '[UserInput.DefaultUrlPart]',flag:true,id :'[Product.Id]',post_data: 'qty=[Product.MinInShoppingCart]'}); return false;" class="button btn-cart" title="[_Add to Cart]" type="button">
+											<span><span>[_Add to Cart]</span></span>
+										</button>
+									]
+								]
+							]
+						</div>
+						<div class="large-10 columns text-center add-to-links large-centered clearfix">
+							[?WebsiteFeatures.WishList|Yes=
+								<div class="large-12 columns text-center">
+									<a  href="#" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to wishlist]" alt="[_Add to wishlist]" class="link-wishlist">
+										<i class="fa fa-heart"></i>Wishlist
+									</a>
+								</div>
+							]
+							<div class="large-12 columns text-center">
+								<a href="#" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to compare]" alt="[_Add to compare]" class="link-compare">
+									<i class="fa fa-check-square-o"></i>Compare
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+				jQuery(window).load(function(){
+					var width = jQuery("#prd[Product.Id]").width();
+					var height = jQuery("#prd[Product.Id]").outerHeight();
+					jQuery("#prd[Product.Id]").parent().find(".popup-wrapper").css({ "width": width+"px","height":height+"px"});
+					jQuery("#prd[Product.Id]").parent().find(".ecommerce-popup").css({ "width": width+"px","height":height+"px"});
+				});
+			</script>
+		</li>
+]
+
+

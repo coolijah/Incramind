@@ -1,0 +1,21 @@
+/*
+*	Renders a textfield or textarea for accepting inputs from the customer to filled up the product options.
+*
+*/
+
+<dt><label for="options_[ProductOption.Id]_text" class="[?ProductOption.Required|yes=required]">[?ProductOption.Required|yes=<em>*</em>] [ProductOption.Label]</label>
+ [ProductOption.Price]
+</dt>
+<dd>
+    <div class="input-box">
+	[?ProductOption.Type
+	|Field=
+        <input type="text" onchange="IncraOption.reloadPrice({update_url:'[Website.GetUrl,Ajax,Diff]',page_url:'[Website.GetUrl,Product,[Product.Id]]',update_with_params: '[Website.GetUrl,Product,0,OptionsUpdate/[Product.Id]]',post_data: jQuery('#product_addtocart_form').serialize()});" id="options_[ProductOption.Id]_text" class="input-text validate-length maximum-length-[ProductOption.MaxCharacters] product-custom-option [?ProductOption.Required|Yes=required]" name="options\\[[ProductOption.Id]\\]" value="[UserInput.OptionValue]" />
+	|Area=
+        <textarea id="options_[ProductOption.Id]_text" onchange="IncraOption.reloadPrice({update_url:'[Website.GetUrl,Ajax,Diff]',page_url:'[Website.GetUrl,Product,[Product.Id]]',update_with_params: '[Website.GetUrl,Product,0,OptionsUpdate/[Product.Id]]',post_data: jQuery('#product_addtocart_form').serialize()});" class="validate-length maximum-length-[ProductOption.MaxCharacters] product-custom-option [?ProductOption.Required|Yes=required]" name="options\\[[ProductOption.Id]\\]" rows="5" cols="25">[UserInput.OptionValue]</textarea>
+	]
+
+	[?ProductOption.MaxCharactersSet|yes=<p class="note">[_Maximum number of characters: <strong>%1</strong>, [ProductOption.MaxCharacters]]</p>]
+	</div>
+</dd>
+

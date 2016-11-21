@@ -1,0 +1,23 @@
+<div class="thumbnail-list-item-wrapper row product-thumbnail-list-Layout1">
+	<div class="small-12 columns">
+		<a title="[Product.Name]" class="product-name f-left" href="[Website.GetUrl,Product,[Product.Id]]">
+			<h6>[Product.Name]</h6>
+		</a>
+	</div>
+	<div class="product-image-container small-4 columns">
+		<a title="[Product.Name]" href="[Website.GetUrl,Product,[Product.Id]]">
+			<img class="" width="120px"  src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,205,220]]" alt="">
+		</a>
+	</div>
+	<div class="product-details small-8 columns">
+		<div class="product_price-container f-right large-12 columns">
+			<div class="price-box">[:PriceBlock?Product.Sale]</div>
+		</div>
+		<div class="action-button small-12 columns">
+			<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="actionCart('','[Website.GetUrl,IncraShop,AddToCart]','[UserInput.DefaultUrlPart]/',true,'[Product.Id]','[Website.GetUrl,Cart]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]')" class="button btn-cart" title="[_Add to Cart]" type="button">
+				<span><span>[_Add to Cart]</span></span>
+			</button>
+		</div>
+	</div>
+</div>
+

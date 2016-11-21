@@ -1,0 +1,30 @@
+/*
+*		Renders the store currency switcher.
+*
+*/
+<div class="currency-switcher-block">
+	<div class="form-currency">
+		<span class='select-wrapper'>
+			<select id="currency_switcher" title="[_Your Currency]" class="custom-select" onchange="changeCurrency(this.value)">
+				<option></option>
+			[Website.CurrenciesUsed=
+			    <option value="[CurrencyUsed.Id]">[CurrencyUsed.Unit]</option>
+			]
+			</select>
+			<span class='holder'></span><span class='fa fa-angle-down'></span>
+		</span>
+	</div>
+	<script type="text/javascript">
+	changeCurrency = function(value){
+		window.location ='[Website.GetUrl,Currency,'+value+']';
+	}
+	jQuery(document).ready(function(){
+		jQuery("#currency_switcher option\[value=[CurrentCurrencyUsed.Id]\]").attr("selected","selected");
+		var selectedOption = jQuery('#currency_switcher').find(":selected").text();
+	    jQuery('#currency_switcher').next(".holder").text(selectedOption);
+	});
+	</script>
+</div>
+
+
+

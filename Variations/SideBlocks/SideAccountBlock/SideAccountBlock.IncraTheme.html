@@ -1,0 +1,48 @@
+/*
+*		Renders the header mini log in block. This displays a typical link of the login page.
+*
+*/
+
+[?Customer.LoggedIn|LoggedIn=
+	<div class="block logout IncraTheme">
+		<div class="block-content">
+			<div class="logout-link clearfix">
+				<span class="welcome">
+					[_Welcome] <span class="name">[Customer.FirstName]</span>!
+				</span>
+				<a class="link f-right" href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,Logout]',IncraWindow.formatUrl('[Url.FullUrl]'),'true');">[_Logout]</a>
+			</div>
+		</div>
+	</div>
+	|=
+	<div class="block login IncraTheme">
+		<div class="title"><h2>[_Log In To Your Account]</h2></div>
+		<div class="block-content">
+			<form id="login-form" method="post">
+				<div class="input-box">
+					<input type="text" value="" placeholder="[_Username or Email Address]" name="username" id="email" size="29" class="required" />
+
+				</div>
+				<div class="input-box">
+					<input type="password" placeholder="[_Password]" value="" name="password" id="password" size="29" class="required password" />
+
+				</div>
+
+				<div class="action clearfix">
+					<button class="button btn[Design.DesignSelectionName,ButtonStyle] f-left " type="submit"><span><span>[_Log In]</span></span></button>
+					<p class="helplink f-right a-right">
+					[_Forgot your password?] <br><a href="[Website.GetUrl,Login,ForgotPassword]">[_CLICK HERE]</a>
+					</p>	
+				</div>
+			</form>
+			
+			<script type="text/javascript">
+			jQuery("#login-form").validate({
+				submitHandler: function(form) {
+					IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,Login]',IncraWindow.formatUrl('[Url.FullUrl]'),'true',jQuery('#login-form').serialize(),'POST');
+				 }	
+			});
+			</script>
+		</div>
+	</div>
+]

@@ -1,0 +1,40 @@
+/**
+[Design.DesignSelectionName,ProductRelatedBlock] - this returns the variation of the ProductRelatedBlock (style, could be Elegant, Corporate, Classic , etc - this would only affect the skin and typography of the title and content)
+**/
+<div class="product-related-block-type [Design.DesignSelectionName,ProductRelatedBlock] SlideShow large-12 columns">
+	[?Product.HasRelatedProducts|yes=
+	<div class="block-related">
+		<div class="block-title">
+			<h6>[_Related Products]</h6>
+		</div>
+			<p class="block-subtitle">[_Check items to add to the cart or]&nbsp;<a href="#" onclick="selectAllRelated(this);return false;">[_Select all]</a>
+		</p>
+		<ul id="block_related_list" class="list-inline-block">
+			[Product.RelatedProducts= 
+			<li>
+				<div class="add-related-products-checkbox">		
+					<label for="related-checkbox[Product.Id]">
+					<input style="margin: 0px;" type="checkbox" class="checkbox related-checkbox" id="related-checkbox[Product.Id]" name="related_products[]" value="108"> [_Add to cart]</label>
+				</div>
+				[:ProductMiniListItem,No,No]
+			</li>
+			]
+		</ul>
+	</div>
+	<script type="text/javascript">
+		var container_width=jQuery('#block_related_list').parents('.block-related').width();
+		jQuery(function() {
+			var related_slideshow = new ProductCarousel({
+				carousel_id : '#block_related_list',
+				items:4,
+				fx:'scroll',
+				width:'100%',
+				height:250
+			});
+			jQuery('#block_related_list li').width((container_width-100)/4);
+			related_slideshow.slideshow();
+		});
+		</script>
+	]
+
+</div>

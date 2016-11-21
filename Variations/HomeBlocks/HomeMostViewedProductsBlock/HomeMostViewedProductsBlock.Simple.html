@@ -1,0 +1,27 @@
+/*
+*	Renders a block containing list of featured products.
+*/
+[?Website.LoopProductsCount,MostViewed|0=|=
+	<div class="most-viewed-block home-block two-items-slider large-6 columns">
+		<div class="block-title"><h3>[_Most Viewed Products] </h3></div>
+		<ul class="products-grid inline-list" id="mostviewed_twoitems_carousel">
+			[Website.LoopProducts,MostViewed,8,,'Name'=
+				<li class="item">
+					[:ProductMiniListItem]
+				</li>
+			]
+		</ul>
+		<script type="text/javascript">
+		jQuery(function() {
+			var mti = new ProductCarousel({
+				carousel_id : '#mostviewed_twoitems_carousel',
+				effect	: 'crossfade',
+				items: 2,
+				width:'100%',
+				
+			});
+			mti.slideshow();
+		});
+		</script>
+	</div>
+]

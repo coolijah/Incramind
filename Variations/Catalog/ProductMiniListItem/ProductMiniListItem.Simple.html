@@ -1,0 +1,16 @@
+<div class="mini-list-item-wrapper Simple">
+	<div class="item-content">
+		<a title="[Product.Name]" class="product-name" href="[Website.GetUrl,Product,[Product.Id]]">
+			<h4>[Product.Name]</h4>
+		</a>
+		<div class="product-image">
+			<a title="[Product.Name]" href="[Website.GetUrl,Product,[Product.Id]]"  class="th">
+				<img class="" data-src="holder.js/300x200" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,140,150]]" alt="">
+			</a>
+		</div>
+		<div class="price-box">[:PriceBlock?Product.Sale]</div>
+		<div class="action">
+			<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="IncraShoppingCart.ajaxAddToCart({submit_url : '[Website.GetUrl,IncraShop,AddToCart]',second_url : '[UserInput.DefaultUrlPart]',flag:true,id :'[Product.Id]',post_data: 'qty=[Product.MinInShoppingCart]'}); return false;" class="button btn-cart" title="[_Add to Cart]" type="button"><span><span>[_Add to Cart]</span></span></button>
+		</div>
+	</div>
+</div>

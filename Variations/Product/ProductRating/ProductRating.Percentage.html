@@ -1,0 +1,13 @@
+/*
+*	Renders a block product rating and a  link to add new product review.
+*
+*/
+
+<div class="product-rating Percentage">
+	<span class="rating-percentage" title="[Product.Ranking]%">[Product.Ranking]%</span>
+	<div class="rating-links">
+		<a href="[Website.GetUrl,Product,0,Review/List/[Product.Id]/ListReview/#read_review]"> [_%1 Review(s), [Product.NumberOfReviews]]</a>
+		<span class="separator">|</span>
+		<a href="[Website.GetUrl,Product,0,Review/List/[Product.Id]/AddReview/#write_review]">[_Add Review]</a>
+	</div>
+</div>

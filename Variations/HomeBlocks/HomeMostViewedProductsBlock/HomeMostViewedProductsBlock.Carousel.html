@@ -1,0 +1,35 @@
+/*
+*	Renders a block containing list of featured products.
+*/
+[?Website.LoopProductsCount,MostViewed|0=|=
+	<div layout-block-name="home_block_container" class="most-viewed-block home-block Carousel">
+		<div class="home-block-style [Design.DesignSelectionName, HomeBlocksStyle]">
+			<div class="block-title"><h3 class="subheader">[_Most Viewed Products] </h3></div>
+			<ul class="products-grid inline-list" id="mostviewed_simpleslider_carousel">
+				[Website.LoopProducts,MostViewed,8,,'Name'=
+					<li class="item">
+						[:ProductMiniListItem]
+					</li>
+				]
+			</ul>
+			<div class="navigation">
+				<a class="prev" id="mostviewed_simpleslider_prev" href="#"><span class="fa fa-angle-left"></span></a>
+				<a class="next" id="mostviewed_simpleslider_next" href="#"><span class="fa fa-angle-right"></span></a>
+			</div>
+			<script type="text/javascript">
+				var container_width=jQuery('#mostviewed_simpleslider_carousel').parents('.home-block-style').width();
+				jQuery(function() {
+					var msc = new ProductCarousel({
+						carousel_id : '#mostviewed_simpleslider_carousel',
+						prevbtn: '#mostviewed_simpleslider_prev',
+						nextbtn:'#mostviewed_simpleslider_next',
+						width:'100%',
+						items:4
+					});
+					msc.carousel();
+					jQuery('#mostviewed_simpleslider_carousel li').width((container_width-100)/4);
+				});
+			</script>
+		</div>
+	</div>
+]

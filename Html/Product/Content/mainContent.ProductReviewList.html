@@ -1,0 +1,35 @@
+/*
+*	Renders the main content of the ReviewListPage.
+*
+*/
+
+/*
+	<div class="product-page">
+		<div class="product-essential">
+			<form id="product_addtocart_form">
+			[:ProductMediaBlock] <!-- contains design variation lightbox - to be changed to image plugin -->
+			[:ProductPage?Product.ProductType]
+					</form>
+		</div>
+		<div class="product-info">
+
+			<div class="product-reviews">
+				[:ProductReviewsAndRatingsBlock]
+			</div>
+
+		</div>
+	</div>
+*/
+
+[:ProductPage?Product.ProductType]
+
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery('#read').click(function(){
+		    var jump = jQuery(this).attr('href');
+		    var new_position = jQuery('#'+jump).offset();
+		    window.scrollTo(new_position.left,new_position.top);
+		    return false;
+		});
+	});
+</script>

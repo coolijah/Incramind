@@ -1,0 +1,47 @@
+/*
+*		Renders the header mini log in block. This displays a typical link of the login page.
+*
+*/
+
+[?Customer.LoggedIn|LoggedIn=
+	<div class="block login clearfix darkbg Corporate">
+		<div class="large-12 columns">
+			<div class="title a-center">
+				<div class="welcome"><span class="greetings">[_Hello] [Customer.FirstName]! </span></div>
+			</div>
+			<div class="action">
+				<button class="button" type="button" onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,Logout]',IncraWindow.formatUrl('[Url.FullUrl]'),'true');"><span><span>[_Log Out]</span></span></button>
+			</div>
+		</div>
+	</div>
+	|=
+	<div class="block login darkbg Corporate">
+		<div class="title"><h2>[_Account Login]</h2></div>
+		<div class="block-content">
+			<form id="login-form" method="post">
+				<div class="input-box">
+					<input type="text" value="" name="username" id="email" size="29" class="required" placeholder="[_Email Address]"/>
+					<input type="password" value="" name="password" id="password" size="29" class="required password" placeholder="[_Password]"/>
+				</div>
+				<div class="action a-center">
+					<button class="button" type="submit"><span><span>[_Log In]</span></span></button>
+				</div>
+				<div class="helplink">
+					<ul>
+						<li><a href="[Website.GetUrl,Login,ForgotPassword]"><span>[_Forgot your password?]</span><span class="fa fa-arrow-circle-o-right f-right"></span></a></li>
+						<li><a href="[Website.GetUrl,SignUp]"><span>[_Create an account]</span><span class="fa fa-arrow-circle-o-right f-right"></span></a></li>
+					</ul>
+
+				</div>
+				
+			</form>
+			<script type="text/javascript">
+			jQuery("#login-form").validate({
+				submitHandler: function(form) {
+					IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,Login]',IncraWindow.formatUrl('[Url.FullUrl]'),'true',jQuery('#login-form').serialize(),'POST');
+				 }	
+			});
+			</script>
+		</div>
+	</div>
+]

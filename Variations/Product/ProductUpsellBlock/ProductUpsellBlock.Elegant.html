@@ -1,0 +1,30 @@
+/*
+*	Renders a variation block containing list of upsell products.
+*
+*/
+
+[?Product.HasUpSellProducts|yes=
+<div class="block-upsell Elegant large-12 columns">
+	<div class="title">
+		<h6>[_You might also be interested in the following products]</h6>
+	</div>
+	<div id="upsell" class="product-list-stylec tinyCarousel carousel-items-2 carousel-items-3">
+		<div class="">
+			<ul class="large-block-grid-4" id="slider">
+				[Product.UpSells,4=
+					<li class="item">
+						[:ProductMiniListItem.Elegant]
+					</li>			
+				]
+			</ul>
+		</div>
+	</div>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			/*jQuery('#upsell').tinycarousel({start:1});*/
+			jQuery(".block-upsell.Elegant .product-name h4").substring({max_char:15});
+		});
+	</script>
+</div>
+|no=]
+

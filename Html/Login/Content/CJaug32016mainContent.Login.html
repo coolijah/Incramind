@@ -1,0 +1,111 @@
+<!-- /*
+*	Renders the main content of LoginPage.  This displays login form, sign up link and a forgot password.
+*	
+*/
+[:mainContent.ReturnItems]
+<div class="account-login-container">
+	<div class="page-title">
+		<h2>[_Log In or Create a New Account]</h2>
+	</div>
+	<!-- Message block 
+	[:notification]
+	
+	<div class="login-page">
+	  	<div class="form">
+	    	<form class="register-form">
+		      	<input type="text" placeholder="Name"/>
+		      	<input type="password" placeholder="Password"/>
+		      	<input type="text" placeholder="Email Address"/>
+		      	<button>create</button>
+		      	<p class="message">Already registered? <a href="#">Sign In</a></p>
+	    	</form>
+		    <form class="login-form">
+		      	<input type="text" placeholder="Username"/>
+		      	<input type="password" placeholder="Password"/>
+		      	<button>login</button>
+		      	<p class="message">Not registered? <a href="#">Create an account</a></p>
+		    </form>
+	  	</div>
+	</div>
+	<script type="text/javascript">
+	        $('.message a').click(function(){
+	   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+	});
+	</script>
+
+</div> July 19, 2016 -->
+<!--
+<div class="main-container">
+<div class="container">
+<div class="row">
+	<div class="col-md-12" style="margin: 20px 0px 20px 0px;
+	  padding: 20px 10px 10px 29px; background: -webkit-gradient(linear, left top, left bottom, from(#ff8d71), to(#ff7e67));">
+		<center><h2 style="margin-top: 0; font-family: 'Sawasdee'; font-size: 36px; line-height: 10px; color: rgb(241, 85, 104); font-weight: bolder; text-transform: uppercase;">[_LOGIN OR CREATE AN ACCOUNT]</h2></center>
+	</div>
+</div>
+<div class="row">
+	<div class="medium-6 columns" style="padding-left: 0px;">
+		<div class="cjloginbox">
+			<div class="register">
+				<div class="content">
+					<div class="content-title">
+						<h4>[_NEW COSTUMERS]</h4>
+					</div>
+					
+						<p class="create-intro">[_By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more].</p>
+						<br>
+							<div class="buttons-set">
+							 	<button type="button" title="[_Create an Account]" id="cjbtn" class="[Design.DesignSelectionName,ButtonStyle]" onclick="IncraWindow.setLocation('[Website.GetUrl,Customer,AccountCreate]')"><span><span>[_Create an Account]</span></span></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="medium-6 columns" style="padding-right: 0px;">
+		<div class="cjloginbox">
+			<form id="form-login" method="post">
+				<div class="login-2">
+					<div class="content">
+
+
+						<div class="content-title">
+							<h4>[_REGISTERED COSTUMERS]</h4>
+
+						</div>
+						<p style="padding-top: 8px; font-size: 12px; line-height: 18px; color: #bcbcbc;">[_If you have an account with us, please log in].</p>
+						<div class="form-group">
+							<label>[_Email Address] <span style="color: #ff7f66;">*</span></label>
+							<div class="input-group">
+								<input type="text" class="input-text required span4 form-control" id="customer_username" name="username" alt="username">
+							</div>
+						</div>
+						<div class="clear"></div>
+						<div class="form-group">
+							<label style="display: inline-block;">[_Password] <span style="color: #ff7f66;">*</span></label>
+							<div class="clear"></div>
+							<div class="input-group">
+								<input type="password" class="input-text required password span4 form-control" id="customer_password" name="password" alt="password">
+							</div>
+						</div>
+						<p class="required">* [_Required Fields]</p>
+						<a href="[Website.GetUrl,Login,ForgotPassword]" class="btn-link forgot-password pull-left" style="font-size: 12px; line-height: 18px; color: #bcbcbc;">[_Forgot your password]?</a>
+						<div class="button-links">
+							<button class="cjbtn pull-right" type="submit" name="send" id="send2" >[_LOGIN]</button>
+						</div>
+					</div>
+				</div>
+			</form>
+
+	</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+	jQuery("#form-login").validate({
+		submitHandler: function(form) {
+			IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,Login]',IncraWindow.formatUrl('[Url.FullUrl]'),'true',jQuery('#form-login').serialize(),'POST','[Website.GetUrl,Customer,Account]');
+		}	
+	});
+</script> -->

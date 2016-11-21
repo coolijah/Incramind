@@ -1,0 +1,100 @@
+/*
+*	Renders a block containing list of related products.
+*
+*/
+
+[?Product.HasRelatedProducts|yes=
+<div class="home-blocks block-related Flat large-12 columns">
+	<div class="block-title">
+		<h6>[_RELATED PRODUCTS]</h6>
+	</div>
+	<p class="block-subtitle">[_Check items to add to the cart or]&nbsp;<a href="javascript:selectAllRelated(this);">[_Select all]</a></p>
+	<ul class="products-grid large-block-grid-4" id="block-related">
+		[Product.RelatedProducts,4= 
+			<li class="item">
+				<div class="related-checkbox">
+					[?Product.ProductType
+						|Configurable=
+						|=
+							[?Product.HasRequiredOptions|No=
+								<label class="checkbox" for="related-checkbox[Product.Id]"></label>
+								<input type="checkbox" class="" id="related-checkbox[Product.Id]" name="related_products\[\]" value="[Product.Id]">
+							]
+					]
+				</div>
+				<div class="item-wrapper">
+					<a href="[Website.GetUrl,Product,[Product.Id]]">
+						<h6 class="product-name">[Product.Name]</h6>
+						<div class="product-image">
+						   <img src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,140,150]]" alt="[Product.Name]"/>
+						</div>
+					</a>
+					<div class="product-details">
+						<div class="price-box-related">
+							[:ProductPriceBlock?Product.Sale]
+						</div>
+						<div class="ratings">
+							[:ProductRating]
+						</div>
+					</div>
+				</div>
+			</li>
+		]
+	</ul>
+</div>
+<script type="text/javascript">
+	
+	jQuery('.related-checkbox').change(function(){
+		addRelatedToProduct();
+	});
+
+	var relatedProductsCheckFlag = false;
+	function selectAllRelated(txt){
+		if (relatedProductsCheckFlag == false) {
+			jQuery('.related-checkbox').each(function(){
+				jQuery(this).attr('checked','checked');
+			});
+			relatedProductsCheckFlag = true;
+			jQuery(txt).html("unselect all");
+		} else {
+			jQuery('.related-checkbox').each(function(){
+				jQuery(this).removeAttr('checked');
+			});
+			relatedProductsCheckFlag = false;
+			jQuery(txt).html("select all");
+		}
+		addRelatedToProduct();
+	}
+	function addRelatedToProduct(){
+		if (jQuery('#related-products-field').length==0){
+			jQuery('#product_addtocart_form').append('<input type="hidden" name="related_product" id="related-products-field">');
+		}
+		var checkboxes = jQuery('.related-checkbox');
+		var values = \[\];
+		if (jQuery('#related-products-field').length==0){
+			jQuery('#product_addtocart_form').append('<input type="hidden" name="related_product" id="related-products-field">');
+		}
+		for(var i=0;i<checkboxes.length;i++){
+			var custom_check=jQuery(checkboxes\[i\]).siblings('label.checkbox');
+			if (jQuery(checkboxes\[i\]).prop('checked')) {
+				values.push(jQuery(checkboxes\[i\]).val()); 
+				if (!custom_check.hasClass('active')){
+					custom_check.addClass('active');
+				}
+			}else{
+				if (custom_check.hasClass('active')){
+					custom_check.removeClass('active');
+				}
+			}
+		}
+		if(jQuery('#related-products-field')){
+			jQuery('#related-products-field').val(values.join(','));
+		}
+		
+	}
+	jQuery(document).ready(function(){
+		jQuery(".block-related.Flat .products-grid .item .product-name").substring({max_char : 16});
+		jQuery(".block-related.Flat .products-grid .item .product-details .ratings .rating-box").removeClass("f-right").css("margin","auto");
+	});
+</script>
+]

@@ -1,0 +1,87 @@
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<title>Incra Test Page for Tags, Compare, WishList</title>
+		<script src="[File:/Js/jquery-1.11.3.js]"></script>
+		<script src="[File:/Js/jQuery/jquery.class.js]"></script>
+		<script type="text/javascript" src="[File:/Js/IncraTestApi.js]"></script>
+
+		<script src="[File:/Js/angular.min.js]"></script>
+		<link href="[File:/css/styles.css]" rel="stylesheet" type="text/css"/>
+
+		<link href="[File:/css/foundation5/css/foundation.css]" rel="stylesheet" type="text/css"/>
+		<style>
+			body{ font-family :arial; }
+			ul { margin-bottom: 10px;}
+			ul li { list-style: none; }
+			tr.error{
+				background: red !important
+			}
+			table tr td { padding : 5px; font-size:12px; !important; word-wrap: break-word }
+			table {border-collapse:collapse; table-layout:fixed; width:310px;}
+			table td {border:solid 1px #fab; width:100px; word-wrap:break-word;}
+		</style>
+	</head>
+	<body>
+	<ul>
+		<li>Create New Account, Checkout</li>
+		<li>Tag, Wishlist, Review, Rating, Poll</li>
+		<li>Reservation</li>
+		<li>Forum</li>
+		<li>Checkout Logged In</li>
+	</ul>
+		[:DisplayResultsBlock]
+
+		<script>
+	
+			//jQuery(document).ready(function(){
+				var api_test= new IncraTestApi({});
+				
+				
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/AddTag/3/leslie","json");
+					
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/RemoveTag/"+api_test.applicable_id,"json");
+				
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/ClearCompare","json");
+					
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/AddToCompare/3");
+					
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/RemoveFromCompare/"+api_test.applicable_id);
+					
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/AddToWishList/3/3");
+
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/UpdateItemInWishList/"+api_test.applicable_id+"/4/char");
+
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/AddToWishList/4/3");
+
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/ClearWishList");
+
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/AddToWishList/5/3");
+
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/WishListToCart");
+
+
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/AddProductReview/3/blessie/happiness/this skirt is happiness!");
+
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/UpdateProductReview/"+api_test.applicable_id+"/bliss/this skirt is a bliss!");
+
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/RemoveProductReview/"+api_test.applicable_id);
+
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/AddRating/4/3/20/"+api_test.applicable_id);
+
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/RemoveRating/"+api_test.applicable_id);
+				
+					api_test.processUrl("[Website.GetUrl,RestApi]/call/VoteInPoll/2/121");
+
+					var data=api_test.temp_array;
+					
+					var myApp = angular.module("myApp", []);
+
+					myApp.controller("myController", function($scope){
+					   $scope.logs = data; 
+					});
+			
+			//});
+		</script>
+	</body>
+</html>

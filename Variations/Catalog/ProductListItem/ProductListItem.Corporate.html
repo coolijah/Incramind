@@ -1,0 +1,146 @@
+
+/*
+*		Renders the listings of products of the current category.
+*		Can be list as Grid type or List type.
+*/
+
+[?UserInput.CatalogMode|List=
+<li layout-block-name="list_item_container" class="product-item Corporate">
+	 <div class="item-wrapper column" id="prd[Product.Id]">
+	 	<div layout-block-name="list_item_block_primary" class="column">
+			<div class="large-4 columns">
+				<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+					<div class="product-image">
+						<img alt="[Product.Name]" width="100%" src="/[Product.SmallImage=[ProductImage.ImageUrl,205,220]]">
+					</div>
+				</a>
+			</div>
+			<div layout-block-name="list_item_block_secondary"  class="product-details large-8 columns">
+				<div class="row">
+					<div class="large-12 columns">
+						<div class="large-7 columns">
+							<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+								<h3 class="product-name">[Product.Name]</h3>
+							</a>
+						</div>
+						<div class="large-5 columns ratings a-right">
+							[:ProductRating,CategoryList]
+						</div>
+						<div class="large-12 columns">
+							<h5 class="subheader">[_OVERVIEW]</h5>
+							<div class="description">
+								[Product.Description] <a href="" class="more">[_Learn more]</a>
+							</div>
+						</div>
+					</div>
+					<div class="large-12 columns">
+						<div class="large-12 columns">
+							[:ProductAddTo,CategoryList]
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="attributes-con large-9 columns">
+						[:ProductListItemAttributeColor]
+					</div>
+				</div>
+			</div>
+			<div class="price-add-to-cart-wrapper large-12 columns">
+				<div class="darkbg large-12 columns">
+					<div class="price-block large-8 columns">
+						[:PriceBlock,CategoryList]
+					</div>
+					<div class="large-2 columns text-right">
+						[:ProductQuantityBlock,CategoryList]
+					</div>
+					<div class="large-2 columns a-right">
+						[?WebsiteFeatures.Checkout|Yes=
+							[?Product.ProductType|Configurable=
+							<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+								<span><span>[_Configure]</span></span>
+							</button>
+							|=
+								[?Product.HasRequiredOptions|Yes=
+									<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+										<span><span>[_Configure]</span></span>
+									</button>
+								|=
+
+							  	<button class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="IncraShoppingCart.ajaxAddToCart({submit_url : '[Website.GetUrl,IncraShop,AddToCart]',second_url : '[UserInput.DefaultUrlPart]',flag:true,id :'[Product.Id]',post_data: 'qty=[Product.MinInShoppingCart]'}); return false;" class="button btn-cart" title="[_Add to Cart]" type="button">
+									<span><span>[_Add to Cart]</span></span>
+								</button>
+								]
+							]
+						]
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</li>
+|Grid=
+<li layout-block-name="list_item_container" class="product-item Corporate">
+	<div class="item-wrapper column"  id="prd[Product.Id]">
+		[?Product.Sale|sale=<div class="product-ribbon sale"></div>]
+		<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+			<div layout-block-name="list_item_primary_block" class="product-image">
+		   		<img src="/[Product.BaseImage=[ProductImage.ImageUrl]]" alt="[Product.Name]" width="100%"/>
+			</div>
+		</a>
+		<div layout-block-name="list_item_secondary_block" class="product-details">
+		 	<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]" alt="[Product.Name]">
+				<h6 class="product-name">[Product.Name]</h6>
+			</a>
+			<div class="desc">
+				<span>[Product.Description]</span>
+			</div>
+			<div class="price-add-to-cart-wrapper clearfix" >
+				<div class="price-block small-6 columns">
+					[?Product.ProductType
+						|Configurable=
+							[?SimpleProduct.ActualPriceTakenFrom
+								|Standard=<span class="price standard">[SimpleProduct.ActualPrice]</span>
+								|=
+									<span class="old-price"><s>[SimpleProduct.Price]</s></span>
+									<span class="price [SimpleProduct.ActualPriceTakenFrom]">[SimpleProduct.ActualPrice]</span>
+							]
+						|Simple=
+							[?Product.ActualPriceTakenFrom
+								|Standard=<span class="price standard">[Product.ActualPrice]</span>
+								|=
+									<span class="old-price"><s>[Product.Price]</s></span>
+									<span class="price [Product.ActualPriceTakenFrom]">[Product.ActualPrice]</span>
+							]
+					]
+				</div>
+				[?WebsiteFeatures.Checkout|Yes=
+				<div class="add-to-cart small-6 columns a-right">
+					[?Product.ProductType|Configurable=
+						<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+						<span><span>[_Configure]</span></span>
+						</button>
+					|=
+						[?Product.HasRequiredOptions|Yes=
+							<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+							<span><span>[_Configure]</span></span>
+							</button>
+						|=
+
+					  	<button class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="IncraShoppingCart.ajaxAddToCart({submit_url : '[Website.GetUrl,IncraShop,AddToCart]',second_url : '[UserInput.DefaultUrlPart]',flag:true,id :'[Product.Id]',post_data: 'qty=[Product.MinInShoppingCart]'}); return false;" class="button btn-cart" title="[_Add to Cart]" type="button">
+							<span><span>[_Add to Cart]</span></span>
+						</button>
+						]
+					]
+				</div>
+				]
+			</div>
+		</div>
+	</div>
+</li>
+]
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery("#prd[Product.Id] .desc").substring({ max_char: 100 });
+	})
+</script>

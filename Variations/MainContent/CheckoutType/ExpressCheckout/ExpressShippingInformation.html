@@ -1,0 +1,87 @@
+<div class="step-title">
+	<ul class="inline-list">
+		<!--<li class="step-number">2</li> -->
+		<li>[_Shipping Address]</li>
+	</ul>
+</div>
+<div class="content large-12">
+	<div class="shipping-info-form">
+		<div id="shipping-new-address-form">
+			<form id="exp-shipping-address-form" action="" name="co-shipping-method-form">
+				<ul>
+					<li class="row collapse">
+						<div class="small-6 column" style="padding-right: 5px;">
+							<label class="required" for="shipping_firstname">[_First Name]</label>
+							<input type="text" class="input-text required " title="[_firstname]" name="firstname" id="shipping_firstname">
+						</div>
+						<div class="small-6 column">
+							<label class="required" for="shipping_lastname">[_Last Name]</label>
+							<input type="text" class="input-text required" name="lastname" title="[_lastname]" id="shipping_lastname"> 
+						</div>
+					</li>
+					<li>
+			  			<label for="shipping_company">[_Company]</label>
+						<input type="text" id="shipping_company" name="company" value="" title="[_Company]" class="input-text" />
+					</li>
+					<li>
+						[?Customer.LoggedIn|No=
+						<label class="required " for="shipping_email">[_Email]<em>*</em></label>
+						<input type="text" class="input-text email required"  value="" id="shipping_email" title="[_email]" name="email">
+						]
+					</li>
+			   		 <!--<li class="no-display"><input type="hidden" value="1" name="save_in_address_book"></li>-->
+			   		 <li>
+						<div class="large-12 row collapse clearfix">
+							<div class="large-6 column" style="padding-right: 5px;">
+								<label class="required" for="shipping_city">[_City] <em>*</em></label>
+								<input type="text" class="input-text required"  value="" id="shipping_city" title="[_address]" name="city">
+							</div>
+							<div class="large-6 column">
+								<label class="required" for="shipping_province_id">[_State/Province] <em>*</em></label>
+								 <select class="validate-select" id="shipping_province_id" name="region_id" onchange="addressByCountry_bp(this.value);">
+									<option value="">[_Please select state]</option>
+									[CheckOut.AvailableCountries=
+										<option value="[Country.Id]">[Country.Name] </option>
+									]
+								</select>
+							</div>
+						</div>
+					</li>
+					<li class="row collapse">
+						<label class="required" for="shipping_address1">[_Address] <em>*</em></label>
+						<div class="large-6 column" style="padding-right: 5px;">
+							<input type="text" class="input-text medium-6 column address-field required"  value="" id="shipping_address1" title="[_address]" name="street">
+						</div>
+						<div class="large-6 column">
+							<input type="text" class="input-text medium-6 column address-field"  value="" id="shipping_address2" title="[_address2]" name="street2">
+						</div>
+					</li>
+					<li class="wide">
+						<label class="required" for="shipping_country_id">[_Country]<em>*</em></label>
+						<select class="validate-select required" id="shipping_country_id" name="country_id" onchange="expressCheckout.saveShippingAddress()">
+							<option value="">[_Please select country]</option>
+							[Website.AvailableCountries=
+								[CountryGroup.Countries=<option value="[Country.Id]">[Country.Name] </option>]
+							]
+						</select>
+						<script type="text/javascript">
+							jQuery("#shipping_country_id option\\[value=[Configuration.DefaultCountryId]\\]").attr("selected","selected");
+						</script>
+					</li>
+					<li>
+						<div class="large-12 row collapse clearfix">
+							<div class="large-6 column" style="padding-right: 5px;">
+								<label class="required" for="shipping_postal_code">[_Zip/Postal Code] <em>*</em></label>
+								<input type="text" class="input-text required"  value="" id="shipping_postal_code" title="[_zip/postal code]" name="postcode">
+							</div>
+							<div class="large-6 column">
+								<label class="required" for="shipping_telephone">[_Telephone] <em>*</em></label>
+								<input type="text" id="shipping_telephone" class="input-text required" value="" name="telephone" title="[_telephone]">
+							</div>
+						</div>
+					</li>
+				</ul>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,61 @@
+/*
+*	Renders the variation list of Product attributes.
+*
+*/
+
+[?Product.ProductType|Configurable=
+	<div class="large-12 product-attributes Corporate clearfix">
+		<div class="large-12 clearfix">
+				[Product.ConfigurableAttributes=
+					<div class="attrib-container">
+						<select [?Attribute.ValueRequired|Yes=required] name="[Attribute.AttributeCode]" id="attribute[Attribute.Id][Product.Id]"  onchange="setAttributeValue('[Attribute.AttributeCode]',this.value)" class="span2 product-attrib" style="display:none;">
+						<option value="">[_Please select]</option>
+						[Product.ConfigurableChildProducts,[Attribute.AdminTitle]=
+						<option value="[AttributeOption.Id]" admin="[AttributeOption.Admin]" [?UserInput.ConfigurableAttributeValueValid,[Attribute.AdminTitle],[AttributeOption.Admin]|yes=selected]>[AttributeOption.Admin]</option>
+						 ]
+						</select>
+				  		<strong>[Attribute.Title] [?Attribute.ValueRequired|Yes=<em class="required">*</em>]</strong>
+				  		<input name="[Attribute.AttributeCode]" type="hidden" id="attribute_[Attribute.AttributeCode]" class="product-attrib" required/>
+							[Product.ConfigurableChildProducts,[Attribute.AdminTitle]=
+								<div class="attribute-option-wrapper">
+									<input type="radio" name="[Attribute.AttributeCode]" id="attribute_[AttributeOption.Admin]" class="radio " onclick="jQuery('#attribute[Attribute.Id][ParentProduct.Id]').val([AttributeOption.Id]).trigger('change');"
+
+									[?UserInput.ConfigurableAttributeValueValid,[Attribute.AdminTitle],[AttributeOption.Admin]|Yes=checked="checked"]
+									/>
+									<label for="attribute_[AttributeOption.Admin]">
+										[?Attribute.AttributeCode
+											|Color=<div class="available-color [?UserInput.ConfigurableAttributeValueValid,[Attribute.AdminTitle],[AttributeOption.Admin]|Yes=selected]" style="background:[AttributeOption.Color]"></div>
+										]
+										[AttributeOption.Admin]
+									</label>
+								</div>
+								
+							]
+					</div>
+				]
+		</div>
+
+		<script type="text/javascript">
+			
+			var attrib = jQuery(".product-attrib").initProductAttributes({
+								'product_url' 		: '[Website.GetUrl,Product,[Product.Id]]',
+								'ajax_url'	  		: '[Website.GetUrl,Ajax,Update]',
+								'attribute_class'  	: 'product-attrib',
+								'callback'			: {
+							 		afterAttributeSelect : function(){
+										product_zoom = new Product.Zoom('image', 'track', 'handle', 'zoom_in', 'zoom_out', 'track_hint');
+										//console.log(product_zoom);
+							 		}
+								}
+							});
+
+			function setAttributeValue(id,value){
+				if(id!=""){
+					attrib.selectAttribute();
+				}else{
+
+				}
+			}
+		</script>
+	</div>
+]

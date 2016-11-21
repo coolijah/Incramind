@@ -1,0 +1,42 @@
+<div layout-block-name="header_block" class="header-container eCommerce">
+	<div class="large-12 header">
+		<div class="dark-ribbon">
+			<div class="header-top row opac">
+				<div class="header-top-block1 large-12  clearfix">
+					<div class="large-5 columns">
+						<div class="large-6 columns">
+							[:eCommerce.HeaderLanguageSwitcherBlock]
+						</div>
+						<div class="large-6 columns">
+							[:eCommerce.HeaderCurrencySwitcherBlock]
+						 </div>
+					</div>
+					<div class="large-7 columns a-right">
+						<div class="in-block">
+							[:HeaderWelcomeMessageBlock]
+						</div>
+						<div class="summary-cart-icon in-block">
+							<a href="[Website.GetUrl,Cart]"><span class="fa fa-shopping-cart"></span>
+							<span class="nr-items">[ShoppingCart.NrItems]</span>
+							</a>
+						</div>
+						
+					</div>
+				</div>	
+				<div class="header-top-block2 large-12 clearfix">
+					<div class="large-4 columns">
+						[:HeaderLogoBlock]
+					</div>
+					<div class="large-8 columns a-right">
+						[:HeaderTopNavigationLinksBlock]
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="orange-ribbon">
+			<div class="row opac">
+				<div class="large-12 columns">[:eCommerce.HeaderMiniSearchBlock]</div>
+			</div>
+		</div>
+	</div>
+</div>

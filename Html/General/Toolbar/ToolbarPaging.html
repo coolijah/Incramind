@@ -1,0 +1,32 @@
+/*
+*		Renders Toolbar view mode for displaying product listing.
+*
+*/
+
+[?Filter.PageCount|1=
+|=
+<ul class="pagination">
+	
+	<!-- <li class="prev"><span onclick="paging('[Filter.PrevPage]')">[_Prev] &laquo;</span></li> -->
+	[?Filter.IsFirstPage|no=
+	<li class="arrow"><span onclick="IncraToolbar.setPage('[Filter.PrevPage]')">[_Prev] &laquo;</span></li>
+	]
+	[Filter.PagesSmart=
+		[?Filter.LoopPageIsCurrent
+		|yes=
+			<li class="current">
+				<a href="#">[Filter.LoopPageNr]</a>
+			</li>
+		|no=
+			<li class="">
+				<a href="#" onclick="IncraToolbar.setPage('[Filter.LoopPageNr]')">[Filter.LoopPageNr]</a>
+			</li>
+		]
+		<li class="elipses">[Filter.NextElipsis]</li>
+	]
+	[?Filter.IsLastPage|no=
+
+	<li class="arrow "> <span onclick="IncraToolbar.setPage('[Filter.NextPage]')">[_Next] &raquo;</span></li>
+	|yes=]
+</ul>
+]

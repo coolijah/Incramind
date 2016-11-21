@@ -1,0 +1,19 @@
+/*
+*		Renders a block that contains a list of products that others are looking at.
+*
+*/
+
+[?Website.LoopProductsCount,OtherLookingAt|0=|=
+<div class="block products-block otherslookingat SingleItem">
+	<div class="title">
+		<h2>[_OTHERS LOOKING AT]</h2>
+	</div>
+	<div class="block-content">
+		<div class="item-container">
+		[Website.LoopProducts,OtherLookingAt,1=
+			[:SideBlockSingleItemContent]
+		]
+		</div>
+	</div>
+</div>
+]

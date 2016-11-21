@@ -1,0 +1,67 @@
+/*
+*	Renders the default ProductMediaImage controls with default zoom slider.
+*
+*/
+
+<div class="product-img-box Simple" style="">
+	<p class="product-image product-image-zoom">
+		<a class="fancybox" href="/[Product.BaseImage=[ProductImage.ImageUrl]]" onclick="return false;" title="[Product.Name]" >
+	   		<img id="image" src="/[Product.BaseImage=[ProductImage.ImageUrl,250,300]]" alt="" title="" width="100%" />
+	   	</a>
+	</p>
+	<script type="text/javascript">
+	
+	</script>
+	<div class="large-12 zoom-button  clearfix">
+		<div class="large-12 columns text-left">
+			<a href="/[Product.BaseImage=[ProductImage.ImageUrl]]"  class="fancybox" data-fancybox-group="gallery">[_Zoom] <i class="fa fa-search fa-lg"></i></a>
+		</div>
+	</div>
+	<div class="product-gallery large-12 columns">
+		<ul class="small-block-grid-4">
+			[Product.Images,4=
+				<li>
+					<a class="gallery-button" href="#" onclick="setThumbail(this); return false;"  title="[ProductImage.Label]" data-image="/[ProductImage.ImageUrl,250,300]">
+						<img class="" src="/[ProductImage.ImageUrl,100,125]" title="[ProductImage.Label]" class="" />
+					</a>
+				</li>
+			]
+		</ul>
+	</div>
+</div>
+<script type="text/javascript">
+	function setThumbail(obj){
+		var img = jQuery(obj).attr("data-image");
+		var label = jQuery(obj).attr("title");
+		jQuery("#image").attr("src",img);
+		jQuery(".zoom-button a.fancybox").attr('href',img);
+		jQuery(".zoom-button .image-label").html('');
+		jQuery(".zoom-button .image-label").html(label);
+		
+		jQuery(".image-thumbnail ul li").removeClass("active");
+		jQuery(obj).parent().addClass("active");
+		return false;
+	}
+	
+	jQuery(document).ready(function ()  {
+		/*
+		 *  Simple image gallery. Uses default settings
+		 */
+		/*
+		 *  Different effects
+		 */
+		// Change title type, overlay closing speed
+		
+		jQuery('.fancybox').fancybox();
+		[?DesignLayout.Layout|2ColumnsRight=
+			jQuery("#media-image-block").removeClass("large-5").addClass("large-6");
+			jQuery("#product-details-block").removeClass("large-7").addClass("large-6")
+		]
+
+	});
+</script>
+<!--<style type="text/css">
+	.fancybox-custom .fancybox-skin {
+		box-shadow: 0 0 50px #222;
+	}
+</style>-->

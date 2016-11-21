@@ -1,0 +1,51 @@
+/*
+*		Renders the a single filter navigation option.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              FilterNavigation.StyleA
+Location:          /Html/Category/Content/FilterNavigationVariation/FilterNavigation.StyleA.html
+Created By:        Leslie Canete
+Created At:        13-Okt-2014 18:44 (rename header and side blocks)
+Last modified By:  Seth Malaki
+Last modified At:  21-Okt-2014 17:09 (myupdates on addingComments)
+Possible call:    SideCategoryNavigationMenu.Accordion 	SideCategoryNavigationMenu.Popup 	SideCategoryNavigationMenu.StyleA 	SideCategoryNavigationMenu.StyleB 	SideCategoryNavigationMenu 	
+Calling unknown:   FilterNavigationAttributeType.[LayeredAttribute.CurrentType] 	
+--------------------------------------------------------------------**/
+
+
+[?Filter.Empty|no=
+<div class="filter-container Flat" style="[?Filter.LayeredAttributesCount|0=display:none]">
+	<div class="layered-navigation">
+		[?UserInput.ShoppingByAvailable|No=
+			|Yes=
+			<div class="selected-attr">
+				<dl>
+					<dt>[_Currently Shopping By:]</dt>
+					[Filter.SelectedLayeredAttributes=
+						<dd>
+							<em>[LayeredAttribute.Name] </em> 
+							<span class="selected-layered-values">[LayeredAttribute.SelectedOptionsName]</span>
+							<span class="f-right"><img class="img-remove" src="[File:/images/btn_remove.gif]" title="[_remove]" onclick="IncraFilterNavigation.removeFilter({update_url :'[Website.GetUrl,Ajax,Update]',filter_url : '[UserInput.DefaultUrlPart]', params : '[UserInput.DefaultUrlPart]/filter/-[LayeredAttribute.Name]/[LayeredAttribute.SelectedOptionsName]'})"/></span>
+						</dd>
+					]
+				</dl>
+				<div class="a-right">
+					<a href="javascript:void(0)" onclick="IncraFilterNavigation.removeFilter({update_url : '[Website.GetUrl,Ajax,Update]',filter_url : '[UserInput.DefaultUrlPart]',params : '[UserInput.DefaultUrlPart]/filter/clear'})">[_Clear All]</a>
+				</div>
+			</div>
+		]
+		<div id="nav-attributes">
+			[Filter.AllLayeredAttributes=
+				[:FilterNavigationAttributeType.[LayeredAttribute.CurrentType]]
+			]
+			<!-- slider, select and price slider not yet -->
+		</div>
+	</div>
+	<script type="text/javascript">
+		function setFilter(params,isselected,ismultiple){
+			IncraFilterNavigation.submitFilter({update_url:'[Website.GetUrl,Ajax,Update]', filter_url :'[UserInput.DefaultUrlPart]', params : params , isselected : isselected , ismultiple : ismultiple});
+		}
+	</script>
+</div>
+]

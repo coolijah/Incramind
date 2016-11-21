@@ -1,0 +1,101 @@
+[?Url.MVC4
+|ajax=
+|=
+<html>
+	<head>
+		<title>[_IncraPages] - [_Url]</title>
+		[:ManHead]
+		<style type="text/css">
+			.description a{text-decoration:none;}
+		</style>
+		<!--\[if IE 7\]>
+			<link href="styles-ie7.css" rel="stylesheet" type="text/css"/>
+			<!\[endif\]-->
+	</head>
+	<body>
+		<div class="topnav">
+			<nav class="incra-right">
+			</nav>
+		</div>
+		<div id="content_container">
+			[:ManHeader]
+			<div class="large-12 clearfix ">
+				<div class="large-2 columns panel man-tree-container">
+					[:Man_Tree]
+				</div>
+				<div class="large-10 columns man-content-container">
+					]
+					<section class="doc">
+						<h2 class="text-left">[_Url Code] : [Man.UrlCode]</h2>
+						<p class="short-desc">[Man.UrlName] </p>
+						
+						<p class="long-desc">[Man.UrlDescription]</p>
+
+						<h3>[_Url Blocks]</h3>
+						<table>
+							<thead>
+								<tr>
+									<th width="200">[_Url Code]</th>
+									<th>[_Block Name]</th>
+									<th>[_Block Name]</th>
+								</tr>
+							</thead>
+							<tbody>
+								[Man.UrlBlocks=
+								<tr>
+									<td>[Man.BlockCode]</td>
+									<td>[Man.BlockName]</td>
+									<td>[Man.BlockDescription]</td>
+								</tr>
+								]
+							</tbody>
+						</table>
+						[?Man.PostsAvailable|Yes=
+						<h3>[_Posts]</h3>
+						<table>
+							<thead>
+								<tr>
+									<th width="200">[_Name]</th>
+									<th>[_Description]</th>
+								</tr>
+							</thead>
+							<tbody>
+								[Man.IteratePosts=
+								<tr>
+									<td>[Man.PostName]</td>
+									<td>[Man.PostDescription]</td>
+								</tr>
+								]
+							</tbody>
+						</table>
+						]
+						[?Man.PresetsAvailable|Yes=
+						<h3>[_Presets]</h3>
+						<table>
+							<thead>
+								<tr>
+									<th width="200">[_Scope]</th>
+									<th>[_Description]</th>
+								</tr>
+							</thead>
+							<tbody>
+								[Man.IteratePresets=
+								<tr>
+									<td>[Man.PreSetName]</td>
+									<td>[Man.PreSetDescription]</td>
+								</tr>
+								]
+							</tbody>
+						</table>
+						]
+						
+					</div>
+					[?Url.MVC4
+					|ajax=
+					|=
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+]

@@ -1,0 +1,34 @@
+/*
+*		Renders a block that contains a list of new product.
+*
+*/
+
+/*[Website.SaleProducts,1,,'Name',Ascending]*/
+[?Website.LoopProductsCount,Sales|0=|=
+<div class="block products-block saleproducts Thumbnail">
+	<div class="title">
+		<h2>[_SALE PRODUCTS]</h2>
+	</div>
+	<div class="block-content">
+		<div class="products-grid scroll-up-carousel" id="side_sale_products_carousel">
+		[Website.LoopProducts,Sales=
+			[:ProductThumbnailListItem]
+		]
+		</div>
+	</div>
+	<script type="text/javascript">
+	jQuery(function() {
+		var side_sale_carousel=new ProductCarousel({
+			carousel_id: '#side_sale_products_carousel',
+			items:	2,
+			direction:'up',
+			duration:5000
+		});
+		[?Filter.Count|1=
+		|=
+		side_sale_carousel.continuouslyscrolling();
+		]
+	});
+	</script>
+</div>
+]

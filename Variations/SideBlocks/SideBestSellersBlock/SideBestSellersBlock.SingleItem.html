@@ -1,0 +1,20 @@
+/*
+*		Renders a block that contains a list of new product.
+*
+*/
+[?Website.LoopProductsCount,Bestsellers|0=|=
+<div class="block products-block bestsellers SingleItem">
+	<div class="title">
+		<h2>[_BEST SELLER]</h2>
+	</div>
+	<div class="block-content">
+		<ul>
+		[Website.LoopProducts,Bestsellers,1,,'Name'=
+			<li class="item-container">
+				[:ProductThumbnailSingleItem]
+			</li>
+		]
+		</ul>
+	</div>
+</div>
+]

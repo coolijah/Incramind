@@ -1,0 +1,33 @@
+/*
+*		Renders a block that contains a list of new product.
+*
+*/
+/*
+[Website.NewProducts,1,1,'Name',Ascending]
+[?Filter.Empty|no=
+	<div class="block products-block newproducts Default">
+		<div class="title">
+			<h2>[_NEW PRODUCTS]</h2>
+		</div>
+		<div class="block-content">
+			[Filter.Products=
+				[:ProductThumbnailListItem]
+			]
+		</div>
+	</div>
+]
+*/
+[?Website.LoopProductsCount,New|0=|=
+<div class="block products-block newproducts Default">
+	<div class="title">
+		<h2>[_NEW PRODUCTS]</h2>
+	</div>
+	<div class="block-content">
+		[Website.LoopProducts,New,4,,'Name'=
+			[:ProductThumbnailListItem]
+		]
+
+	</div>
+	<hr>
+</div>
+]

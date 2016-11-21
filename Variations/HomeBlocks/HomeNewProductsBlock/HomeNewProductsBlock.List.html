@@ -1,0 +1,32 @@
+/*
+*	Renders a block containing list of new products.
+*/
+[?Website.LoopProductsCount,New|0=|=
+<div class="new-products-block home-block list-style">
+	<div class="block-title"><h3>[_New Products] </h3></div>
+	<div class="home-block-wrapper">
+		<ul class="inline-list">
+			[Website.LoopProducts,New,5,,'Name'=
+				<li class="item">
+					<div class="item-wrapper row">
+						<div class="large-4 columns">
+							<a title="[Product.Name]" href="[Website.GetUrl,Product,[Product.Id]]">
+								<img class="product-image" width="110" data-src="holder.js/300x200" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,140,150]]" alt="">
+							</a>
+						</div>
+						<div class="product-details large-8 columns">
+							<a title="[Product.Name]" class="product-name" href="[Website.GetUrl,Product,[Product.Id]]">
+								<h4>[Product.Name]</h4>
+							</a>
+							<p class="description">[Product.Description]</p>
+							<div class="product_price-container">
+								<div class="price-box"><span class="price">[:PriceBlock?Product.Sale]</span></div>
+							</div>
+					  	</div>
+					  </div>
+				</li>
+			]
+		</ul>
+	</div>
+</div>
+]

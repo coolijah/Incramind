@@ -1,0 +1,31 @@
+/*
+*		renders the a list of products tagged as crossells.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              ProductCrossSellsBlock
+Location:          /Html/Cart/Content/CartCrossSellsBlock.html
+Created By:        Leslie Canete
+Created At:        07-Okt-2014 16:54 (move to and rename ShoppingCartBlocks to Cart)
+Last modified By:  Seth Malaki
+Last modified At:  21-Okt-2014 17:09 (myupdates on addingComments)
+Called from:       mainContent.Cart 	
+Calling blocks:    PriceBlock 	
+--------------------------------------------------------------------**/
+[?ShoppingCart.HasCrossSells|Yes=
+	<div class="crossells-box Compact large-12 columns">
+		<div class="large-12 columns">
+			<p>[_Based on your selection, you may be interested in the following items:]</p>
+		</div>
+		<div class="large-12 columns">
+			<ul class="products-grid small-block-grid-1 medium-block-grid-3 large-block-grid-5">
+				[ShoppingCart.CrossSells,5=
+					<li class="item ">
+						[:ProductMiniListItem,No,No]
+					</li>
+				]
+			</ul>
+		</div>
+	</div>
+]
+

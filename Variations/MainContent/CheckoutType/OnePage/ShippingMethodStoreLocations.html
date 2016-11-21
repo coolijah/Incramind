@@ -1,0 +1,67 @@
+<div id="shipping_storelocations_content_[ShippingMethod.Code]" class="shipping-storelocations-content">
+[?ShippingMethod.ShowStoreLocations|Yes=
+	[?Website.MultipleStoreLocationsAvailable|Yes=
+		<div>
+		<label>[_Choose Store :]</label>
+		<ul style='margin-left:12px'>
+		[Website.StoreLocations=
+			<li>
+				<input id="store_location_[StoreLocation.Id]" type="radio" class="storelocation_value" name="StoreLocationId\\\\[[General.Param1]\\\\]" value="[StoreLocation.Id]" [?StoreLocation.Isdefault|Yes=checked]><label for="store_location_[StoreLocation.Id]">[StoreLocation.AddressSummary]</label><i class="view-store-location" onclick="jQuery('#store_location_details_[StoreLocation.Id]').toggle(); showStoreMap('[StoreLocation.Addresssummary]','[StoreLocation.Latitude]','[StoreLocation.Longitude]','gmap_canvas[StoreLocation.Id]');">[_View Store Details]</i>
+			</li>
+		]
+		</ul>
+		</div>
+	
+		[Website.StoreLocations=
+		<div id="store_location_details_[StoreLocation.Id]" class="store-location-pop-up" style="display:none">
+			<div class="store-location-overlay"></div>
+			<div class="store-location-content">
+				<div class="close-store-location a-right"><span  class="close-store-location" onclick="jQuery('#store_location_details_[StoreLocation.Id]').hide();">Close</span>
+				</div>
+				<div class="store-location-details small-6 columns">
+					<div>
+						<div class="a-center"><h4>[StoreLocation.Name] [?StoreLocation.IsMainBranch|Yes=[_- Main Branch]]</h4></div>
+						<div class="a-center">[?StoreLocation.DescriptionAvailable|Yes=[StoreLocation.Description]]<br>
+							[?StoreLocation.AdditionalInformationAvailable|Yes=
+								[StoreLocation.AdditionalInformation]
+							]
+							<hr>
+						</div>
+						<div class="row">
+							<div class="small-6 columns">
+								<div><strong>[_Address : ]</strong> <br></div>
+								<div>[StoreLocation.AddressSummary]</div>	
+							</div>
+							<div class="small-6 columns">
+								<div><strong>[_Contact :]</strong><br></div>
+								<div>[StoreLocation.TelNumber]</div>		
+								<div>[StoreLocation.EMail]</div>
+							</div>
+						</div>
+						[?StoreLocation.OpeningTimesAvailable|Yes=	
+						<div><strong>[_Store Hours :]</strong></div><div>[StoreLocation.OpeningTimes] <br><br></div>	
+						]
+						
+						[?StoreLocation.RouteDescriptionAvailable|Yes=	
+						<div><strong>[_Route Description :]</strong></div><div>[StoreLocation.RouteDescription]</div>	
+						]
+					</div>
+				</div>
+				<div class="store-location-google-map small-6 columns">	
+					[?StoreLocation.CoordinatesAvailable|Yes=
+					<div style="overflow:hidden;">
+						<div id='gmap_canvas[StoreLocation.Id]' class="gmap-canvas" style='height:500px;width:100%;'></div>
+					</div>
+					]
+				</div>
+			</div>
+		</div>
+		]
+	|=
+		<div><input id="store_location_[StoreLocation.Id]" type="hidden" class="storelocation_value" name="StoreLocationId" value="[StoreLocation.Id]">
+		[Website.DefaultStoreLocations=[StoreLocation.AddressSummary]]
+		</div>
+	]
+]
+</div>
+

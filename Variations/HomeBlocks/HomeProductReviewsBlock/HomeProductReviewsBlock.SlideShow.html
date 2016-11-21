@@ -1,0 +1,64 @@
+/*
+*	Renders a block containing product reviews.
+*/
+
+[?Website.ReviewsAvailable|Yes=
+<div class="recent-reviews home-block  SlideShow">
+	<div class="block-title"><h3> [_What Our Customers Say...]</h3></div>
+	
+	<div class="block-content">
+		<div class="navigation">
+			<a class="prev" id="pr_prev" href="#"><span class=" fa fa-angle-left"></span></a>
+			<a class="next" id="pr_next" href="#"><span class="fa fa-angle-right"></span></a>
+		</div>
+		<ul class="inline-list" id="product_reviews_slideshow">
+			[Website.RecentReviews=
+			<li class="review-details">
+				<div class="review-wrapper clearfix">
+					<div class="product-image large-3 columns a-center">
+						<a href="[Website.GetUrl,Product,[ProductReview.ProductId]]"><h4 class="product-name">[ProductReview.ProductName]</h4></a>
+						<img src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,140,150]]"/>
+					</div>
+					<div class="review-comment large-9 columns">
+						<div class="rating-box">
+							<div class="rating" style="width:[ProductReview.RatingPercentage]%" title="[ProductReview.RatingPercentage]%"></div>
+						</div>
+						<a href="[Website.GetUrl,Product,0,Review/View/[ProductReview.Id]]" class="review-title">[ProductReview.Title]</a> <span> [_by %1, [ProductReview.NickName]]</span>
+						<blockquote>
+							"[ProductReview.Detail]"
+						</blockquote>
+						<p class="date">([_Posted on %1, [ProductReview.CreatedAt]])</p>
+					</div>
+				</div>
+			</li>
+			]
+		</ul>
+	</div>
+	
+	<script type="text/javascript">
+	jQuery(function() {
+		jQuery('.review-details').width(jQuery('#product_reviews_slideshow').width());
+		jQuery('#product_reviews_slideshow').carouFredSel({
+			width: '100%',
+			items: 1,
+			height:225,
+			scroll: {
+				pauseOnHover: true,
+				fx: 'crossfade',
+				duration: 300,
+				timeoutDuration: 3000,
+				onBefore: function() {
+					jQuery(this).children().removeClass('hover');
+				}
+			},
+			prev: '#pr_prev',
+			next:'#pr_next',
+			auto:{
+				pauseOnEvent: 'resume',
+			}
+		});
+	 
+	});
+	</script>
+</div>
+]

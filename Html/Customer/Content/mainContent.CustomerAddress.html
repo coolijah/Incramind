@@ -1,0 +1,87 @@
+/*
+*		Renders the main content information of the CustomerAddressPage.
+*							
+*/
+
+<div class="my-account">
+	<div class="page-title title-buttons">
+		<h2>[_Address Book]</h2>
+		<button onclick="window.location='[Website.GetUrl,Customer,AddressNew]';" class="button" title="[_Add New Address]" type="button"><span><span>[_Add New Address]</span></span></button>
+	</div>
+	<div class="col2-set addresses-list row">
+			<div class="col-1 addresses-primary small-6 columns">
+				<h2>[_Default Addresses]</h2>
+				<ol class="box">
+				    <li class="item">
+				    	<div class="box-title">
+							<h3 class="billing-title">[_Default Billing Address]</h3>
+						</div>
+						[Customer.DefaultInvoiceAddress=<address>
+							[Address.FirstName] [Address.LastName]<br>
+							[Address.StreetName]<br>
+							[Address.City],  [Address.PostalCode]<br>
+							[Address.State] [Address.Country=[Country.Name]]<br>
+							T: [Address.TelNumber]
+						</address>
+						<p><a href="[Website.GetUrl,Customer,AddressEdit/[Address.Id]]">[_Change Billing Address]</a></p>
+						]
+				   	</li>
+					<li class="item">
+						<div class="box-title">
+							<h3 class="billing-title">[_Default Shiping Address]</h3>
+						</div>
+						[Customer.DefaultShippingAddress=<address>
+							[Address.FirstName] [Address.LastName]<br>
+							[Address.StreetName]<br>
+							[Address.City],  [Address.PostalCode]<br>
+							[Address.State] [Address.Country=[Country.Name]]<br>
+							T: [Address.TelNumber]
+						</address>
+						<p>
+							<a href="[Website.GetUrl,Customer,AddressEdit/[Address.Id]]">[_Change Shipping Address]</a>
+						</p>
+						]
+				    </li>
+				</ol>
+		    </div>
+		    <div class="col-2 addresses-additional small-6 columns">
+				<h2>[_Additional Address Entries]</h2>
+				[?Customer.NumberOfAddresses
+				|more=
+					<ol class="box">
+						[Customer.Addresses=
+							[?Address.Type
+							|billing=
+							|shipping=
+							|both=
+							|other=
+							<li class="item"><address>
+								[Address.FirstName] [Address.LastName]<br>
+								[Address.StreetName]<br>
+								[Address.City],  [Address.PostalCode]<br>
+								[Address.State] [Address.Country=[Country.Name]]<br>
+								T: [Address.TelNumber]
+							</address>
+							<p>
+								<a href="[Website.GetUrl,Customer,AddressEdit/[Address.Id]]">[_Edit Address]</a>
+							</p>
+							<a onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,RemoveAddress]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[Address.Id]');return false;" class="button tiny alert">
+								[_Remove Address]
+							</a>
+							</li>
+							]
+						]
+					</ol>
+				|=
+					<ol class="box">
+						<div class="item empty">
+							<p>[_You have no additional address entries in your address book.]</p>
+						</div>
+					</ol>
+				]
+		    </div>
+		</div>
+		<div class="buttons-set large-12">
+		    <p class="back-link"><a href="[Website.GetUrl,Customer,Account]"><small><<</small>[_Back]</a></p>
+		</div>
+</div>

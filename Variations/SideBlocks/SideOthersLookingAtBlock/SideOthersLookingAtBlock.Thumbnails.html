@@ -1,0 +1,19 @@
+/*
+*	Renders a block that contains a list of products that is sale.
+*
+*/
+
+[?Website.LoopProductsCount,OtherLookingAt|0=|=
+<div class="block products-block otherslookingat Thumbnail">
+	<div class="title">
+		<h2>[_OTHERS LOOKING AT]</h2>
+	</div>
+	<div class="block-content">
+		<div class="products-grid">
+			[Website.LoopProducts,OtherLookingAt,3=
+				[:ProductThumbnailListItem]
+			]
+		</div>
+	</div>
+</div>
+]

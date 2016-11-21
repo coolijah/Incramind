@@ -1,0 +1,17 @@
+<div class="block usp Elegant">
+	[Website.CmsPageGroupNames=
+	<div class="title"><h6 class="media-heading">[CmsPage.GroupingName]</h6></div>
+	<div class="block-content">
+		<ul class="media-list">
+			[Website.CmsPagesInGroup,[CmsPage.GroupingName]=
+				[?CmsPage.InLeftMenu|Yes=
+				<li class="media flow-inline-block">
+					<a href="[Website.GetUrl,CmsPage,[CmsPage.Id]]" title="[CmsPage.Name]" class="cms-link " >
+						<i class="fa fa-play-circle large"></i> <strong>[CmsPage.Name]</strong>	
+					</a>
+				</li>]
+			]
+		</ul>
+	</div>
+	]
+</div>

@@ -1,0 +1,66 @@
+/*
+*	
+*		renders the containing items in the shopping cart.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              CartItemsBlock
+Location:          /Html/Cart/Content/CartTableBlock/CartItemsBlock.html
+Created By:        Leslie Canete
+Created At:        07-Okt-2014 16:54 (move to and rename ShoppingCartBlocks to Cart)
+Last modified By:  Seth Malaki
+Last modified At:  21-Okt-2014 17:09 (myupdates on addingComments)
+Called from:       CartTableBlock 	
+--------------------------------------------------------------------**/
+
+[ShoppingCart.Items= 
+	<tr class="first last">
+		<td class="product-cart-image">
+			<a class="product-image" title="[Product.Name]" href="[Website.GetUrl,Product,[Product.Id]]">
+				<img src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,100,125]]">
+			</a>
+		</td>
+	    <td class="product-cart-info">
+			<h2 class="product-name">
+				<a href="[Website.GetUrl,Product,[Product.Id]]">[Product.Name] </a>
+			</h2>
+			<div class="cart-desc">[Product.SKU]</div>
+			[?SimpleProduct.IsReserved,[Customer.Id]|Yes=
+				<p>[_Time reservation for reservation : ] [Product.ReservationForCustomer,[Customer.Id]=[Reservation.TimeRemaining]]</p>
+			]
+				<p class="item-msg error">[ShoppingCartItem.Message]</p>
+			[ShoppingCartItem.Attributes=
+				<dl class="item-options">
+					<dt>[Attribute.AdminTitle] : [ShoppingCartItemAttribute.Value]</dt>
+				</dl>
+			]
+			[ShoppingCartItem.Options=
+				<dl class="item-options">
+					<dt>[ShoppingCartOption.ValueAsText]</dt>
+				</dl>
+			]
+		</td>
+	    
+	    <td class="product-cart-price">
+			<span class="cart-price">
+				<span class="price">[ShoppingCartItem.PriceEach]</span>
+			</span>
+		</td>
+		<td class="product-cart-actions">
+			<input name="qty[ShoppingCartItem.Id]" type="text" value="[ShoppingCartItem.Quantity]" size="4" title="[_Qty]" class="input-text qty" maxlength="12">
+			<ul class="cart-links">
+				<li><a class="edit" title="Edit item parameters" href="[Website.GetUrl,Product,[Product.Id]]">[_Edit]</a></li>
+				<li><a class="cjiconbtn option2" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to Wishlist]" alt="[_Add to Wishlist]" class="link-wishlist"><img class="imgwishlist" src="/Test/designs/Sample6/icons/wishlist.png"> </a></li>
+			</ul>
+		</td>
+		<td class="product-cart-total">
+			<span class="cart-price">
+				<span class="price">[ShoppingCartItem.RowTotal]</span>
+			</span>
+		</td>
+		<td class="a-center product-cart-remove last">
+			<img class="img-remove" src="[File:/images/closev1.png]"  onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,RemoveFromCart]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[ShoppingCartItem.Id]');"  alt="[_Remove Item]"/>
+		</td>
+	</tr>
+]
+

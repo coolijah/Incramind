@@ -1,0 +1,18 @@
+/*
+*	Renders a block that contains a list of most interesting products .
+*
+*/
+[?Website.LoopProductsCount,MostInteresting|0=|=
+	<div class="block products-block mostinteresting Thumbnail">
+		<div class="title">
+			<h2>[_MOST INTERESTING]</h2>
+		</div>
+		<div class="block-content">
+			<div class="products-grid">
+			[Website.LoopProducts,MostInteresting,1,,'Name'=
+				[:ProductThumbnailListItem]
+			]
+			</div>
+		</div>
+	</div>
+]

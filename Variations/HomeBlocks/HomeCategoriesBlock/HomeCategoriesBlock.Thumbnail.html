@@ -1,0 +1,25 @@
+/*
+*	Renders a block containing list of categories.
+*/
+
+<div layout-block-name="home_block_container" class="categories-block home-block Thumbnail">
+	<ul class="category-grid small-block-grid-4 medium-block-grid-3 large-block-grid-2">
+		[Website.TopCategories=
+			<li class="item">
+				<div class="item-wrapper row">
+					<div class="category-image large-6 columns">
+						<a href="[Website.GetUrl,Category,[Category.Id]]" title="[Category.Name]">
+							<img class="prod-list" src="/[Category.Image]" alt="[Category.Name]" width="100%"/>
+						</a>
+					</div>
+					<div class="category-title large-6 columns">
+						<h2><a href="[Website.GetUrl,Category,[Category.Id]]" alt="[Category.Name]">[Category.Name]</a></h2>
+						<p class="description">
+							[Category.Description]
+						</p>
+					</div>
+				</div>
+			</li>
+		]
+	</ul>
+</div>

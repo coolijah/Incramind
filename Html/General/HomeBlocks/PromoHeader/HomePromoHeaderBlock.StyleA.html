@@ -1,0 +1,26 @@
+/*
+*	Renders a block containing promoheader block.
+*/
+[Website.Promoheader,Test =
+<div class="categorypromoheader layoutcontainer home-block stylea">
+	[?PromoHeader.Enabled|Yes=
+		[PromoHeader.Blocks=  
+			[?PromoHeaderBlock.Type
+			|slider=
+			<div class="[PromoHeader.LayoutType] _block[PromoHeaderBlock.Position] slideshow blocks-preview large-6 columns"> 
+				[:PromoHeaderSlideShow]
+			</div>
+			|media=
+			<div class="[PromoHeader.LayoutType] _block[PromoHeaderBlock.Position] blocks-preview" id="media large-6 columns">
+				[?PromoHeaderBlock.HasMediaUrl|Yes=[PromoHeaderBlock.MediaUrl]]
+			</div>
+			|image=
+				<div class="[PromoHeader.LayoutType] _block[PromoHeaderBlock.Position] blocks-preview large-6 columns" style="[?PromoHeaderBlock.HasImage|Yes=background:url('/[PromoHeaderBlock.Image]')]">		
+					[:PromoHeaderImage]
+				</div>
+			]
+		]
+	]
+</div>
+]
+

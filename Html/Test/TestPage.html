@@ -1,0 +1,171 @@
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Incra Test</title>
+	<script src="[File:/Js/jquery-1.11.3.js]"></script>
+	<script src="[File:/Js/jQuery/jquery.class.js]"></script>
+	<script type="text/javascript" src="[File:/Js/IncraTestApi.js]"></script>
+
+	<script src="[File:/Js/angular.min.js]"></script>
+	<link href="[File:/css/styles.css]" rel="stylesheet" type="text/css"/>
+	<link href="[File:/css/foundation5/css/foundation.css]" rel="stylesheet" type="text/css"/>
+	<style>
+		body{ font-family :arial; }
+		ul { margin-bottom: 10px;}
+		ul li { list-style: none; }
+		tr.error{
+			background:  #FDB8BC !important;
+		}
+		table tr td { padding : 5px; font-size:12px; !important; word-wrap: break-word }
+		table {border-collapse:collapse; table-layout:fixed; width:310px;}
+		table td {border:solid 1px #fab; width:100px; word-wrap:break-word;}
+	</style>
+</head>
+<body>
+[:TestFormApiBlock]
+[:DisplayResultsBlock]
+
+<script>
+	//jQuery(document).ready(function(){
+	var api_test= new IncraTestApi({});
+	
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/Logout");
+
+	//api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=[Locate:Configuration,3][Set:Configuration.RequireEMailConfirmation,No]", "html");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/SignUp/elcey/1234567/lesliepcanete@gmail.com/title/ceyel/poligrates/canete/12-16-1987/12/F/Yes");
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/Logout");
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/Login/elcey/1234567");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/AddAddress/Ms/Leslie/C/Scofield/Street1/Street2/23/Ext/Tagbilaran/6300/Region/15/ABC Company/lesliescofield@gmail.com/123/1/1","json");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/UpdateAddress/"+api_test.applicable_id+"/Miss/LeslieU/CU/ScofieldU/Street1U/Street2U/23U/ExtU/TagbilaranU/6300U/RegionU/14/Company/leslieuescofield@gmail.com/456/1/1","json");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/RemoveAddress/"+api_test.applicable_id,"json");
+	
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/SubscribeToNewsletter/leslie/leslieuescofield@gmail.com");
+	
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/UnsubscribeFromNewsletter/leslieuescofield@gmail.com");
+	
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/UpdateAccount/blessie/blessie@gmail.com/Mr/Blessie/C/Mraz/06-16-1987/123/M");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/UpdatePassword/1234567/blessie");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/Logout");
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/Login/blessie/blessie");
+
+	//add to cart
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/ClearCart");
+	
+	api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate : Product,3\]\[Set: Product.MaxQuantityToReserveFromTemplate,No\] \[Set:product.MaxQuantityToReserve,6\]\[product.MaxQuantityToReserve\]");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate : Product,3\]\[Set: Product.MaxProductsReservedFromTemplate,No\]\[Set: Product.MaxProductsReserved, 10\]\[Product.MaxProductsReserved\]");
+
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate: Configuration,3\]\[Set : Configuration.ReservationGuestCanReserve, Yes\]\[Configuration.ReservationGuestCanReserve\]");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/AddToCart/3/2");
+	
+	api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate:Product,3\]\[Product.NumberInStock\]");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate:Product,3\]\[Product.reservedqty\]");
+		
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/RemoveFromCart/"+api_test.applicable_id);
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/AddToCart/3/2");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/UpdateItemInCart/"+api_test.applicable_id+"/4");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate:Product,3\]\[Product.NumberInStock\]");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate:Product,3\]\[Product.reservedqty\]");
+	
+	
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/CartProcessDiscountCoupon/CODE");
+
+	//checkout now
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/CartSetShippingAddress/Miss/Blessie/C/Escofield/Street1/Street2/E12/NT/City/PostCode/1/153/Company/blessie@gmail.com/123/1");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/CartSetBillingAddress/Miss/Blessie/C/Escofield/Street1/Street2/E12/NT/City/PostCode/1/153/Company/blessie@gmail.com/123/1");
+
+
+	//api_test.processUrl("[Website.GetUrl,RestApi]/call/CartSelectBillingAddress/2");
+
+	//api_test.processUrl("[Website.GetUrl,RestApi]/call/CartSelectShippingAddress/1");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/CartSetShippingMethod/1");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/CartAddExtraDataField/5/13");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/CartSetStoreLocation/2");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/CartSetPaymentMethod/8");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/CartAddExtraDataField/3/123456");
+
+	api_test.processUrl("[Website.GetUrl,RestApi]/call/CartPlaceOrder");
+
+	var data=api_test.temp_array;
+	
+	var myApp = angular.module("myApp", []);
+
+	myApp.controller("myController", function($scope){
+	   $scope.logs = data; 
+
+	});
+
+
+	//});
+</script>
+
+
+<!--
+<form method="post" action="[Website.GetUrl,RestApi]/evaluate_debug">
+<textarea cols=50 rows=5 name="data" style="width:700px;height:500px;"></textarea>
+<br>
+<input type="submit" value="Submit">
+</form>
+<form method="post" action="[Website.GetUrl,RestApi]/evaluate_debug">
+<textarea cols=50 rows=5 name="data" style="width:700px"></textarea>
+<br>
+<input type="submit" value="Submit">
+</form>
+-->
+/*[Man.Models=<a href="[Website.GetUrl,[Man.ModelName]]">[Man.ModelName]</a><br>]
+
+[Man.Urls=<a href="[Man.UrlName]">[Man.UrlName]</a><br>] 
+=[Url.Controller]=
+[Design.TopFolders=[Folder.Name], ]
+*/
+
+
+</body>
+</html>
+
+<!--
+RestApi/(cart) call/AddExtraDataField
+[Website.GetUrl,RestApi]/call/AddExtraDataField/{CheckOutExtraDataField.Id}/{value}
+
+RestApi/(cart) call/SelectBillingAddress
+[Website.GetUrl,RestApi]/call/SelectBillingAddress/{addressId}
+
+RestApi/(cart) call/SelectShippingAddress
+[Website.GetUrl,RestApi]/call/SelectShippingAddress/{addressId}
+*/
+
+RestApi/(cart) call/SetPaymentMethod
+[Website.GetUrl,RestApi]/call/SetPaymentMethod
+
+
+RestApi/(cart) call/PlaceOrder
+[Website.GetUrl,RestApi]/call/PlaceOrde
+
+
+
+RestApi/(cart) call/SetShippingMethod
+[Website.GetUrl,RestApi]/call/SetShippingMethod
+
+
+RestApi/(cart) call/SetStoreLocation
+[Website.GetUrl,RestApi]/call/SetStoreLocation
+-->	

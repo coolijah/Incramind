@@ -1,0 +1,48 @@
+<div class="block side-slider Classic">
+	[Website.Promoheader,Test =
+		[?PromoHeader.Enabled|Yes=
+			[PromoHeader.Blocks=  
+				[?PromoHeaderBlock.Type
+				|slider=
+					<ul class="side-promo-slider" id="side_slider">
+						[PromoHeaderBlock.Sliders=
+							[?PromoHeaderSlider.Enabled|Yes=
+								[?PromoHeaderBlock.HasImage|Yes=
+								<li class="item">
+									<img src="[File:/images/promoheader/fashion-slide1.jpg]" width="100%"/>
+								</li>
+								]
+							]
+						]
+					</ul>
+					<div class="pagination" id="promopagination"></div>
+
+					<script type="text/javascript">
+				
+						width = jQuery("#side-slider").width();
+						jQuery(function() {
+							jQuery('#side_slider').carouFredSel({
+								width: '100%',
+								items: 1,
+								auto: {
+									pauseOnEvent: 'resume'
+								},
+								scroll: {
+									fx: 'crossfade',
+									duration: 3000,
+									timeoutDuration: 3000,
+									pauseOnHover: 'immediate'
+								},
+								pagination: {
+									container: '#promopagination'
+								}
+							});
+						 
+						});
+				
+					</script>
+				]
+			]
+		]
+	]
+</div>

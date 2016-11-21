@@ -1,0 +1,44 @@
+/*
+/*
+*		renders the cart discount coupon form.
+*
+*/
+
+<div class="discount-coupon-box IncraTheme">
+	<!--<form id="discount-coupon-form" method="post" action="">-->
+		<div class="discount">
+			<h3 class="discount-title">[_Discount Codes]</h3>
+			<div class="discount-form clearfix">
+				/*<label for="coupon_code">[_Enter your coupon code if you have one.]</label>*/
+				<input id="remove-coupon" type="hidden" value="0" name="remove">
+				<input class="input-text required f-left" id="coupon_code" placeholder="[_Enter coupon code here]" type="text" name="coupon_code" value="">
+				<button type="submit" title="[_Apply]" class="button btn-secondary[Design.DesignSelectionName,ButtonStyle]" onclick="discountForm(false);" value="[_Apply]"><span><span>[_Apply]</span></span></button>
+			
+			</div>
+		</div>
+	<!--</form>-->
+
+	<script type="text/javascript">
+	var discountForm = function (isRemove) {
+		
+	    if (isRemove) {
+		jQuery('#coupon_code').removeClass('required');
+		jQuery('#remove-coupon').val("1");
+	    } else {
+		jQuery('#coupon_code').addClass('required');
+		jQuery('#remove-coupon').val("0");
+	    }
+	   
+		IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,ProcessDiscountCoupon]',IncraWindow.formatUrl('[Url.FullUrl]'),true,'coupon_code='+jQuery('#coupon_code').val(),'GET');
+	   
+	}
+	[?DesignLayout.Layout|3Columns=
+		jQuery(document).ready(function(){
+			jQuery("#coupon_code").css("margin-bottom","10px");
+
+		})
+	]
+
+	</script>
+</div>
+

@@ -1,0 +1,92 @@
+/*
+*	Renders the product content layout contaning picture(product images), product 
+*								information and product additional information in a typical block form.
+*/
+<div layout-block-name="product_content_layout" class="product-content-layout pic-info-blocks Default">
+	<div class="product-page">
+		<form id="product_addtocart_form" class="">
+			<div layout-block-name="product_content_layout_block_upper" class="product-essential clearfix">
+					<div class="large-12 column">
+						<div class="large-8 medium-8 small-6 columns" layout-block-name="product_content_layout_block_upper_primary_media" id="media-image-block">
+							[:ProductMediaImageContainer] <!-- contains design variation lightbox - changed already to image plugin -->
+						</div>
+						<div class="large-4 medium-4 small-6 columns" layout-block-name="product_content_layout_block_upper_primary_info" id="product-details-block">
+							<div class="product-shop">
+								<div class="large-12 clearfix">
+									[:ProductAvailabilityBlock]<!-- design variation -->
+								</div>
+
+								<div class="product-name small-12 columns">
+									<h1 class="">[Product.Name]</h1>
+								</div>
+									
+								<div class="ratings-block large-5 columns text-right">
+									<div class="row">
+										[:ProductRating] <!--design variation -->
+										[:ProductEmailToAFriend]  <!--design variation -->
+									</div>
+									
+								</div>
+								<div class="price-box in-block">
+									[:ProductPriceBlock?Product.Sale]   <!--should this be PriceBlock? -->
+								</div>
+								
+								
+								<div class="large-12 clearfix">
+									[:ProductTierPrice]<!-- design variation -->
+								</div>
+								<div class="large-12 clearfix">
+									[:ProductAvailabilityBlock]<!-- design variation -->
+								</div>
+								<div class="large-12 clearfix">
+									[:ProductAttributesBlock]<!-- should this be ProductAttributes? -->
+								</div>
+								
+								[?Product.HasOptions|No=
+									<div class="add-to-box row collapse">
+										[?Product.InStock|Yes=
+											<div class="large-9 columns text-right">
+												[:ProductQuantityBlock] <!-- design variation -->
+											</div>
+											
+											<div class="add-to-cart large-3 columns text-center">
+												[:ProductAddToCartButton.Simple]
+											</div>
+											<!-- <span class="or">OR</span> -->
+										]
+										<div class="large-12 columns text-right">
+											[:ProductAddTo] <!-- design variation -->
+										</div>
+									</div>
+								]
+								<div class="short-description">
+									<h2>[_Overview]</h2>
+									<p>[Product.ShortDescription]</p>
+									[?Product.HasBrand|Yes=
+										[Product.Brand=
+											<p>
+												<span>[_Brand]: <a href="[Brand.WwwLink]" target="_blank"><img src="/[Brand.LogoSmall]" alt="[Brand.Name]" width="150px"></a>
+											</p>
+										]
+									]
+								</div>
+							</div>
+						</div>
+					</div>
+					<div layout-block-name="product_content_layout_block_upper_secondary"class="large-12 columns">
+						[:ProductOptions] 	<!-- design variation -->
+					</div>
+			</div>
+		</form>
+		<div layout-block-name="product_content_layout_block_bottom" class="product-info large-12 columns">
+			[?Url.View|Review=
+					[:ProductReviewsAndRatingsBlock] <!-- this should be ProductReviewsAndRatingsBlock -->
+				|=
+					[:ProductDetails]			<!-- product details design variation  -->
+					[:ProductUpsellBlock]		<!-- design variation -->
+					[:ProductRelatedBlock]		<!-- design variation -->
+					[:ProductTagsBlock]			<!-- design variation -->
+			]
+		</div>
+	</div>
+</div>

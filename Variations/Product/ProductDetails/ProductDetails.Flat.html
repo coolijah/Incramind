@@ -1,0 +1,35 @@
+/*
+*	Renders the variation of product details and extra attributes.
+*
+*/
+
+<div class="large-12 Product-details-block Flat">
+	<div class="detail-border large-12 columns">
+		<div class="product-details">
+			<h2>[_Details]</h2>
+			<p>[Product.Description]</p>
+		</div>
+	</div>
+	<div class="detail-border large-12 columns">		
+		[?Product.HasInfoAttributes |Yes=
+			<div class="product-details details-block product-additional-info">
+				<h2>[_Additional Information]</h2>
+				<p>
+					<table class="table table-bordered">
+						<colgroup>
+							<col width="40">
+							<col width="200">
+						</colgroup>
+						<tbody>
+						[Product.IterateAttributesForProductPage= 
+							<tr>
+								<th><strong>[Attribute.Title]</strong></th><td>[ProductAttribute.Value]</td>
+							</tr>
+						]
+						</tbody>
+					</table>
+				</p>
+			</div>
+		]
+	</div>
+</div>

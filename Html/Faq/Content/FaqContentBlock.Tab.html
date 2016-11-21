@@ -1,0 +1,50 @@
+<div class="faq">
+	[:FaqSearchBlock]
+	<div class="panel">
+			<ul class="tabs" data-tab="" role="tablist">
+				[Website.FaqCategoriesSorted=
+					[?FaqCategory.Enabled|Yes=
+					<li class="tab-title" role="presentational"><a href="#" role="tab" tabindex="0" aria-selected="true" content="faqCategory[FaqCategory.Id]">[FaqCategory.CategoryName]</a></li>
+					]
+				]
+			</ul>
+			<div class="tabs-content">
+				[Website.FaqCategoriesSorted=
+					[?FaqCategory.Enabled|Yes=
+					<section role="tabpanel" aria-hidden="false" class="content" id="faqCategory[FaqCategory.Id]">
+						<p class="faq-category"><h4>[FaqCategory.CategoryName]</h4></p>
+						<dl class="faq-answers">
+							[FaqCategory.QuestionsSorted=
+								[?Faq.Enabled|Yes=
+								<a name="faq_[Faq.Id]"></a>
+								<dt><a href="[Website.GetUrl,Faq,question/[faq.id]]">[Faq.Question]</a></dt>
+								<dd>[Faq.Answer]
+									 <br><a href="#faq_[Faq.Id]">[_Back to Top]</a>
+								</dd>
+								]
+							]
+						</dl>
+					</section>
+					]
+				]
+			</div>
+			<script type="text/javascript">
+					jQuery(".tabs li.tab-title").first().addClass("active");
+					jQuery(".tabs-content .content").first().addClass("active");
+
+				 	jQuery(document).ready(function(){
+				 		jQuery(".tabs .tab-title a").click(function(){
+							var tab = jQuery(this);
+							console.log(tab.attr("content"));
+							jQuery(".tabs .tab-title").removeClass("active");
+							tab.parent().addClass("active");
+							var content_id = tab.attr("content");
+							jQuery(".tabs-content section").removeClass("active");
+							jQuery("#"+content_id).addClass("active");
+							return false;
+						});
+				 	})
+
+			</script>
+	</div>
+</div>

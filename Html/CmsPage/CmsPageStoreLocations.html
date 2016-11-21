@@ -1,0 +1,152 @@
+<div class="page-title a-center"><h1> [_Our Stores]</h1></div>
+<div class="large-12 columns">
+	<div class="store-location-details">
+		<div class="small-3 columns">
+			[Website.StoreLocations=
+				<a href="#" onclick="jQuery('#store_location_details_[StoreLocation.Id]').toggle();"><h5>[StoreLocation.Name] [?StoreLocation.IsMainBranch|Yes=[_- Main Branch]]</h5></a>
+				<hr>
+			]
+		</div>
+		<div class="small-9 columns">
+			<div id="gmap_canvas" class="gmap-canvas" style="height:500px;width:100%;"></div>					
+		</div>
+	</div>
+	[Website.StoreLocations=
+	<div id="store_location_details_[StoreLocation.Id]" style="display:none;">
+		<div class="store-location-overlay"></div>
+		<div class="large-12 large-centered columns">
+			<div>
+				<div class="store-location-content">
+					<div class="close-store-location a-right"><span class="close-store-location" onclick="jQuery('#store_location_details_[StoreLocation.Id]').hide();">Close</span>
+					</div>
+					<div class="large-6 columns">
+						<div class="a-center">
+							<h3>[StoreLocation.name]</h3>
+							[?StoreLocation.DescriptionAvailable|Yes=[StoreLocation.Description]]<br>
+							[?StoreLocation.AdditionalInformationAvailable|Yes=
+								[StoreLocation.AdditionalInformation]
+							]	
+							<hr>
+						</div>
+						<div class="large-12">
+							<div class="large-6 columns">
+								<strong>[_Address : ]</strong> <br>
+								<div>[StoreLocation.AddressSummary]</div>	
+							</div>
+							<div class="large-6 columns">
+								<strong>[_Contact : ]</strong><br>
+								<div>[StoreLocation.TelNumber]</div>		
+								<div>[StoreLocation.EMail]</div>
+							</div>
+						</div>	
+						[?StoreLocation.OpeningTimesAvailable|Yes=	
+							<div class="large-12 columns">
+								<strong>[_Store Hours :]</strong><div>[StoreLocation.OpeningTimes]</div>
+							</div>
+						]
+					</div>
+					<div class="large-6 columns">
+						<div class="large-12 columns" >
+							[?StoreLocation.ImageAvailable|Yes=<img src="/[StoreLocation.Image]">]
+						</div>
+						[?StoreLocation.RouteDescriptionAvailable|Yes=	
+							<div class="large-12 columns">
+								<strong>[_Route Description :]</strong><div>[StoreLocation.RouteDescription]</div>	
+							</div>
+						]
+						/*<div class="large-12 columns"><span class="view-store-location" onclick="jQuery('#gmap_canvas[StoreLocation.Id]').toggle(); jQuery('#store_location_store[StoreLocation.Id]').toggle(); showStoreMap('[StoreLocation.Addresssummary]','[StoreLocation.Latitude]','[StoreLocation.Longitude]','gmap_canvas[StoreLocation.Id]');"><strong>[_Show Map]</strong></span></div>*/
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	]
+</div>
+/*<div class="large-12 columns">
+	<div class="store-location-details">
+		<div class="small-6 columns">
+			<div class="a-center"><h4>[StoreLocation.Name] [?StoreLocation.IsMainBranch|Yes=[_- Main Branch]]</h4></div>
+			<div class="a-center">[?StoreLocation.DescriptionAvailable|Yes=[StoreLocation.Description]]<br>
+				[?StoreLocation.AdditionalInformationAvailable|Yes=
+					[StoreLocation.AdditionalInformation]
+				]
+				<hr>
+			</div>
+			<div class="large-12">
+				<div class="large-6 columns">
+					<strong>[_Address : ]</strong> <br>
+					<div>[StoreLocation.AddressSummary]</div>	
+				</div>
+				<div class="large-6 columns">
+					<strong>[_Contact : ]</strong><br>
+					<div>[StoreLocation.TelNumber]</div>		
+					<div>[StoreLocation.EMail]</div>
+				</div>
+				
+			</div>
+		
+			[?StoreLocation.OpeningTimesAvailable|Yes=	
+			<div class="large-12 columns">
+				<strong>[_Store Hours :]</strong><div>[StoreLocation.OpeningTimes]</div>	
+				<hr>
+			</div>
+			]
+			
+			[?StoreLocation.RouteDescriptionAvailable|Yes=	
+			<div class="large-12 columns">
+				<strong>[_Route Description :]</strong><div>[StoreLocation.RouteDescription]</div>	
+			</div>
+			]
+			
+			<div class="large-12 columns"><span class="view-store-location" onclick="jQuery('#gmap_canvas[StoreLocation.Id]').toggle(); jQuery('#store_location_store[StoreLocation.Id]').toggle(); showStoreMap('[StoreLocation.Addresssummary]','[StoreLocation.Latitude]','[StoreLocation.Longitude]','gmap_canvas[StoreLocation.Id]');"><strong>[_Show Map]</strong></span></div>
+		</div>
+		<div class="small-6 columns">
+			<div style="height:500px" id="store_location_store[StoreLocation.Id]" >
+				[?StoreLocation.ImageAvailable|Yes=<img src="/[StoreLocation.Image]">]
+			</div>
+			<div id="gmap_canvas[StoreLocation.Id]" class="gmap-canvas" style="height:500px;width:100%; display:none"></div>
+			<script type="text/javascript">
+			var myOptions_[StoreLocation.Id] = {zoom:14,center:new google.maps.LatLng([StoreLocation.Latitude],[StoreLocation.Longitude]),mapTypeId: google.maps.MapTypeId.ROADMAP};
+			map = new google.maps.Map(document.getElementById("gmap_canvas[StoreLocation.Id]"), myOptions_[StoreLocation.Id]);
+			marker = new google.maps.Marker({map: map,position: new google.maps.LatLng([StoreLocation.Latitude],[StoreLocation.Longitude])});
+			infowindow = new google.maps.InfoWindow({content:"<b>[StoreLocation.Name]</b><br/>[StoreLocation.AddressSummary]" });
+			google.maps.event.addListener(marker, "click", function(){infowindow.open(map,marker);});infowindow.open(map,marker);
+			</script>
+
+		</div>
+	</div>
+	<div style="large-6 columns">
+	
+	</div>
+	<hr>
+</div>*/
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script src="[File:/Js/google-map.js]"></script>
+<script type="text/javascript">	
+str=\[\];
+coordinate =\[\];
+[Website.StoreLocations= coordinate.push({"lat": [StoreLocation.Latitude],"long": [StoreLocation.Longitude]}); ]
+
+var myOptions = {zoom:10,center:new google.maps.LatLng(coordinate\[0\]\['lat'\],coordinate\[0\]\['long'\]),mapTypeId: google.maps.MapTypeId.ROADMAP};
+
+map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);
+
+[Website.StoreLocations=
+	marker = new google.maps.Marker({map: map,position: new google.maps.LatLng([StoreLocation.Latitude],[StoreLocation.Longitude])});
+	infowindow = new google.maps.InfoWindow({content:"<b>[StoreLocation.Name]</b><br/>[StoreLocation.AddressSummary]" });
+	google.maps.event.addListener(marker, "click", function(){infowindow.open(map,marker);});infowindow.open(map,marker);
+	str.push(new google.maps.LatLng ([StoreLocation.Latitude],[StoreLocation.Longitude]));
+]
+
+var LatLngList =str;
+//  Create a new viewpoint bound
+var bounds = new google.maps.LatLngBounds ();
+//  Go through each...
+for (var i = 0, LtLgLen = LatLngList.length; i < LtLgLen; i++) {
+//  And increase the bounds to take this point
+bounds.extend (LatLngList[i]);
+}
+//  Fit these bounds to the map
+map.fitBounds (bounds);
+</script>

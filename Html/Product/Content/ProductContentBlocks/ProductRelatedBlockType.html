@@ -1,0 +1,60 @@
+/**
+[Design.DesignSelectionName,ProductRelatedBlock] - this returns the variation of the ProductRelatedBlock (style, could be Elegant, Corporate, Classic , etc - this would only affect the skin and typography of the title and content)
+**/
+[?Product.HasRelatedProducts|yes=
+<div class="product-related-block-type [Design.DesignSelectionName,ProductRelatedBlock] Default large-12 columns">
+	<div class="block-related Default">
+		<div class="block-title">
+			<h6>[_Related Products]</h6>
+		</div>
+			<p class="block-subtitle">[_Check items to add to the cart or]&nbsp;<a href="#" onclick="selectAllRelated(this);return false;">[_Select all]</a>
+		</p>
+		<ul id="block-related-list" class="large-block-grid-4">
+			[Product.RelatedProducts,4= 
+			<li>
+				<div class="add-related-products-checkbox">		
+					<label for="related-checkbox[Product.Id]">
+					<input style="margin: 0px;" type="checkbox" class="checkbox related-checkbox" id="related-checkbox[Product.Id]" name="related_products[]" value="[Product.Id]"> [_Add to cart]</label>
+				</div>
+				[:ProductMiniListItem,No,No]
+			</li>
+			]
+		</ul>
+	</div>
+	<script type="text/javascript">
+		jQuery('.related-checkbox').click(function(){
+			addRelatedToProduct();
+		});
+		var relatedProductsCheckFlag = false;
+		function selectAllRelated(txt){
+			if (relatedProductsCheckFlag == false) {
+				jQuery('.related-checkbox').each(function(){
+					jQuery(this).prop('checked',true);
+				});
+				relatedProductsCheckFlag = true;
+				jQuery(txt).html("unselect all");
+			} else {
+				jQuery('.related-checkbox').each(function(){
+					jQuery(this).removeAttr('checked');
+				});
+				relatedProductsCheckFlag = false;
+				jQuery(txt).html("select all");
+			}
+			addRelatedToProduct();
+		}
+		function addRelatedToProduct(){
+			if (jQuery('#related-products-field').length==0){
+				jQuery('#product_addtocart_form').append('<input type="hidden" name="related_product" id="related-products-field">');
+			}
+			var checkboxes = jQuery('.related-checkbox');
+			var values = \[\];
+			for(var i=0;i<checkboxes.length;i++){
+				if (jQuery(checkboxes\[i\]).prop('checked')) values.push(jQuery(checkboxes\[i\]).val()); 
+			}
+			if(jQuery('#related-products-field')){
+				jQuery('#related-products-field').val(values.join(','));
+			}
+		}
+	</script>
+</div>
+]

@@ -1,0 +1,61 @@
+<div class="step-title">
+	<ul class="inline-list">
+		<li class="step-number">4</li> 
+		<li>[_Review your Order]</li>
+	</ul>
+</div>
+<div class="loading-progress text-center" style="display:none">
+	<i class="fa fa-spinner fa-lg fa-spin"></i>
+</div>
+<div class="content">
+	<table class="order-review-table large-12">
+		<colgroup>
+	        <col>
+	        <col width="1">
+	        <col width="1">
+            <col width="1">
+        </colgroup>
+		<thead>
+			<tr>
+				<th class="">[_Product Name]</th>
+				<th class="a-center ">[_Price]</th>
+				<th class="a-center">[_Qty]</th>
+				<th class="a-center no-right-border">[_Subtotal]</th>
+			</tr>
+		</thead>
+		<tbody>
+			[ShoppingCart.Items= 
+				<tr>
+					<td>[Product.Name]</td>
+					<td class="a-right">[ShoppingCartItem.PriceEach]</td>
+					<td class="a-center">[ShoppingCartItem.Quantity]</td>
+					<td class="a-right">[ShoppingCartItem.RowTotal]</td>	
+				</tr>
+			]
+		</tbody>
+	</table>
+	<div class="large-12 clearfix totals-block">
+		<div class="row">
+			<div class="large-8 columns text-right">[_Subtotal (Incl. Tax)]</div>
+			<div class="large-4 columns text-right"><span class="table-price">[ShoppingCart.TotalInclTax]</span></div>
+		</div>
+		<div class="row">
+			<div class="large-8 columns text-right">[_Grand Total (Incl. Tax)]</div>
+			<div class="large-4 columns text-right"><span class="table-price">[ShoppingCart.TotalInclTax]</span></div>
+		</div>
+	</div>
+	<div class="terms_and_conditions_block">
+		[Website.TermsAndConditions=
+			[?TermsAndConditions.Enabled|Yes=
+				<div id="terms[TermsAndConditions.Id]">
+					<label>
+						<input class="agree-terms-and-conditions" type="checkbox"/> &nbsp;[TermsAndConditions.CheckBoxText]
+					</label>
+				</div>
+			]
+		]
+	</div>
+	<div class="checkout-button-top" style="padding-right:10px">
+		<button value="" class="btn-checkout" onclick="review.save()" title=""><span><span>[_PLACE ORDER]</span></span></button>
+	</div>
+</div>

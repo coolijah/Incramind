@@ -1,0 +1,82 @@
+/*
+*	Renders the product content layout contaning picture(product images), product 
+*								information and product additional information in a typical block form.
+*/
+<div layout-block-name="product_content_layout" class="product-content-layout pic-info-blocks">
+	<div class="product-page">
+		<form id="product_addtocart_form" class="">
+			<div layout-block-name="product_content_layout_block_upper" class="product-essential clearfix">
+				<div class="large-12 column">
+					<div layout-block-name="product_content_layout_block_upper_primary_media" id="media-image-block" 
+						class="[?DesignLayout.Layout|1Column=large-4|=large-5 medium-5] columns">
+						[:ProductMediaImageContainer] <!-- contains design variation lightbox - changed already to image plugin -->
+					</div>
+					<div layout-block-name="product_content_layout_block_upper_primary_info" id="product-details-block" 
+						class="[?DesignLayout.Layout|1Column=large-8|=large-7 medium-7] columns">
+						<div class="product-shop">
+							<div class="row">
+								<div class="product-name large-7 columns">
+									<h4 class="">[Product.Name]</h4>
+								</div>
+								<div class="ratings-block large-5 columns text-right">
+									<div class="row">
+										[:ProductRating] <!--design variation -->
+										[:ProductEmailToAFriend]
+										<script type="text/javascript">
+											jQuery(document).ready(function(){
+												jQuery(".product-rating .rating-links").addClass("text-right");
+											})
+										</script>
+									</div>
+								</div>
+							</div>							
+							<div class="large-12 clearfix">[:PriceBlock,ProductPage]</div>
+							<div class="large-12 clearfix">[:ProductTierPrice]</div> <!-- design variation -->
+							<div class="large-12 clearfix">[:ProductAvailabilityBlock]</div>
+							<div class="large-12 clearfix">[:ProductAttributes]</div>
+							[?Product.HasOptions|No=
+								<div class="add-to-box large-12 columns">
+									[?Product.InStock|Yes=
+										<div class="add-to-cart large-12 text-left clearfix">
+											[:ProductQuantityBlock]
+											[:ProductAddToCartButton]
+										</div>
+										<!-- <span class="or">OR</span> -->
+									]
+									<div class="large-12 text-left clearfix">
+										[:ProductAddTo]
+									</div>
+								</div>
+							]
+							<div class="short-description large-12 columns">
+								<h2>[_Overview]</h2>
+								<p>[Product.ShortDescription]</p>
+								[?Product.HasBrand|Yes=
+									[Product.Brand=
+										<p>
+											<span>[_Brand]: <a href="[Brand.WwwLink]" target="_blank"><img src="/[Brand.LogoSmall]" alt="[Brand.Name]" width="150px"></a>
+										</p>
+									]
+								]
+							</div>
+						</div>
+					</div>
+					<div layout-block-name="product_content_layout_block_upper_secondary"class="large-12 columns">
+						[:ProductOptions] 	<!-- design variation -->
+					</div>
+				</div>
+			</div>
+		</form>
+		<div layout-block-name="product_content_layout_block_bottom" class="product-info large-12 columns">
+			[?Url.View|Review=
+					[:ProductReviewsAndRatingsBlock]
+				|=
+					[:ProductDetails]			<!-- product details design variation  -->
+					[:ProductUpsellBlockType]
+					[:ProductRelatedBlockType]
+					[:ProductOthersAlsoBoughtType]
+					[:ProductTagsBlock]			<!-- design variation -->
+			]
+		</div>
+	</div>
+</div>

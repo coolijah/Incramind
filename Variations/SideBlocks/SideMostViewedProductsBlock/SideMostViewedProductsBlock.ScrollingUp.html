@@ -1,0 +1,33 @@
+/*
+*		Renders a block that contains a list of new product.
+*
+*/
+
+[?Website.LoopProductsCount,MostViewed|0=|=
+<div class="block products-block mostviewed Thumbnail ScrollingUp">
+	<div class="title">
+		<h2>[_MOST VIEWED]</h2>
+	</div>
+	<div class="block-content">
+		<div class="products-grid scroll-up-carousel" id="side_mostviewed_products_carousel">
+		[Website.LoopProducts,MostViewed,1,,'Name'=
+			[:ProductThumbnailListItem]
+		]
+		</div>
+	</div>
+	<script type="text/javascript">
+	jQuery(function() {
+		var side_mostviewed_carousel=new ProductCarousel({
+			carousel_id: '#side_mostviewed_products_carousel',
+			items:	2,
+			direction:'up',
+			duration:5000
+		});
+		[?Filter.Count|1=
+		|=
+		side_mostviewed_carousel.continuouslyscrolling();
+		]
+	});
+	</script>
+</div>
+]

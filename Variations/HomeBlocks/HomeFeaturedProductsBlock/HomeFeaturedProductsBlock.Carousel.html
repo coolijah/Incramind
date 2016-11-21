@@ -1,0 +1,38 @@
+/*
+*	Renders a block containing list of featured products.
+*/
+[?Website.LoopProductsCount,Featured|0=|=
+	<div class="featured-products-block home-block Carousel">
+		<div class="home-block-style [Design.DesignSelectionName, HomeBlocksStyle]">
+			<div class="block-title"><h5 class="subheader">[_Featured Products] </h5></div>
+			<div class="block-content">
+				<ul class="products-grid inline-list" id="featured_simpleslider_carousel">
+					[Website.LoopProducts,Featured,8,,'Name'=
+						<li class="item">
+							[:ProductMiniListItem,No]
+						</li>
+					]
+				</ul>
+				<div class="navigation">
+					<a class="prev" id="featured_simpleslider_prev" href="#"><span class="fa fa-angle-left"></span></a>
+					<a class="next" id="featured_simpleslider_next" href="#"><span class="fa fa-angle-right"></span></a>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+		var container_width=jQuery('#featured_simpleslider_carousel').parents('.home-block-style').width();
+		jQuery(function() {
+			var fsc = new ProductCarousel({
+				carousel_id : '#featured_simpleslider_carousel',
+				prevbtn: '#featured_simpleslider_prev',
+				nextbtn:'#featured_simpleslider_next',
+				width:'100%',
+				items:4
+			});
+			jQuery('#featured_simpleslider_carousel li').width((container_width-100)/4);
+			fsc.carousel();
+			
+		});
+		</script>
+	</div>
+]

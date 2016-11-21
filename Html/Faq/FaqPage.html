@@ -1,0 +1,60 @@
+/*
+*		Used in rendering page that contains a list of Faq questions.
+*/
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	[:MetaData,[Website.Name] | [_Frequently Asked Questions]]
+	[:head]
+
+	<!-- ProductContentLayout css -->
+	<link href="[File:/css/product-content-layout.css]" rel="stylesheet" type="text/css"/>
+	<style type="text/css">
+	/*** search block **/
+		
+		.faq-search-block{
+			width:50%;
+			position:relative;
+			border-radius:10px;
+			border:1px solid #ccc;
+			padding:10px;
+			background:#fff;
+		}
+		#faq-search{
+			width:80%;
+			display:inline-block;
+			margin:0;
+			border:1px solid #ddd;
+		}
+		#faq-search-button{
+			margin:0;
+			width:90px;
+		}
+		.faqsearch-autocomplete{
+			position:absolute; 
+			background:#fff;
+			padding:5px;
+			border:1px solid #ccc;
+			display:none;
+			width:96%;
+			z-index:100;
+		}
+	</style>
+</head>
+<body>
+<div class="page">
+	[:header]
+	<div class="one-column">
+		<div class="row">
+			<div class="main-content large-12 columns">
+				<div class="">
+					[:notification]
+					[:FaqContentBlock]
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	[:footer]
+</div>

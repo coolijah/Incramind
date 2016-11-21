@@ -1,0 +1,24 @@
+/*
+*		Renders a block that contains usps list information.
+*		list of cms with image
+*/
+
+<div class="block usp Classic">
+	[Website.CmsPageGroupNames=
+	<div class="title"><h2 class="media-heading">[CmsPage.GroupingName]</h2></div>
+	<div class="block-content">
+		<ul class="media-list">
+		[Website.CmsPagesInGroup,[CmsPage.GroupingName]=
+			[?CmsPage.InLeftMenu|Yes=
+			<li class="media flow-inline-block">
+				<div class="media-body">
+					<a href="[Website.GetUrl,CmsPage,[CmsPage.Id]]" title="[CmsPage.Name]" class="cms-link fa fa-angle-right" >
+						[CmsPage.Name]
+					</a>
+				</div>
+			</li>]
+		]
+		</ul>
+	</div>
+	]
+</div>

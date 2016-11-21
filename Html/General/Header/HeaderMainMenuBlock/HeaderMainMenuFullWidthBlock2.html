@@ -1,0 +1,82 @@
+<div class="dropdown menu-full-width sub-menu-3">
+	<div class="row">
+		<div class="large-8 column menu-divider-right">
+			<div class="row">
+				<div class="large-3 columns">
+					<!-- <h6>Shoes</h6>
+					<ul class="category-list">
+						[?Website.LoopProductsCount,MostViewed|0=|=
+							[Website.LoopProducts,All,3,15,'Name'=
+								<li><a href="[Product.UrlKey]"><i class="fa fa-angle-right"></i> [Product.Name]</a></li>		
+							]
+						]
+					</ul> -->
+				</div>
+				<div class="large-6 columns">
+					<h6>[_Shirts]</h6>
+					<ul class="category-list">
+						[?Website.LoopProductsCount,MostViewed|0=|=
+							[Website.LoopProducts,All,3,19,'Name'=
+								<li><a href="[Product.UrlKey]"><i class="fa fa-angle-right"></i> [Product.Name]</a></li>		
+							]
+						]
+					</ul>
+				</div>
+				<div class="large-6 columns">
+					<h6>[_Others]</h6>
+					<ul class="category-list">
+						[?Website.LoopProductsCount,MostViewed|0=|=
+							[Website.LoopProducts,All,3,21,'Name'=
+								<li><a href="[Product.UrlKey]"><i class="fa fa-angle-right"></i> [Product.Name]</a></li>		
+							]
+						]
+					</ul>
+				</div>
+				<!-- <div class="large-3 columns">
+					<h6>Suits and smoking</h6>
+					<ul class="category-list">
+						[?Website.LoopProductsCount,MostViewed|0=|=
+							[Website.LoopProducts,All,3,20,'Name'=
+								<li><a href="[Product.UrlKey]"><i class="fa fa-angle-right"></i> [Product.Name]</a></li>		
+							]
+						]
+					</ul>
+				</div> -->
+			</div>
+			<div class="row ">
+				<div class="large-12 columns sub-menu-featured-category">
+					<hr/>
+					<div class="large-3 column">
+						<h6 class="subheader" style="font-size:12px;">
+							[_Featured categories :]
+						</h6>
+					</div>
+					<div class="large-9 column">
+						<a href="[Website.GetUrl,Category,17]" class="button secondary tiny">[_Beachwear]</a>
+						<a href="[Website.GetUrl,Category,20]" class="button secondary tiny">[_Suits]</a>
+						<a href="[Website.GetUrl,Category,18]" class="button secondary tiny">[_Trousers]</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="large-4 columns">
+			<div class="large-12 columns">
+				[:HeaderMainMenuBestSellerBlockSlider]
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		var left = jQuery(".sub-menu-3").parent().offset().left;
+		var sub_menu_width = jQuery(".menu-full-width").outerWidth();
+		var new_left = ((jQuery(window).width() - sub_menu_width)/2) - left;
+		/*
+		console.log(left);
+		console.log(sub_menu_width);
+		console.log(jQuery(window).width());
+		console.log(new_left);
+		*/
+		jQuery(".sub-menu-3").css("left",new_left+"px");
+	});
+</script>

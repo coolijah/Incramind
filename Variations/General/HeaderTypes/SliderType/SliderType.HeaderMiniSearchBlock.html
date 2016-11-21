@@ -1,0 +1,30 @@
+<div class="searchbar-block">
+	<!--<form id="search_mini_form"  method="post">-->
+	<div class="searchbar-content clearfix">
+		<div class="search-input">
+			<input id="product-search" placeholder="Search..." type="text" name="q" value="" class="input-text in-block" maxlength="128" autocomplete="off">
+			<button id="mini-search-button" type="button" class="btn-icon in-block"><span><span class="fa fa-search"></span></span></button>
+		</div>
+		<div id="search_autocomplete" class="search-autocomplete">
+		</div>
+	</div>
+	<!--</form>-->
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery("#mini-search-button").click(function(){
+				doSearch();
+			});
+			jQuery("#product-search").keydown(function(event){
+				if(event.keyCode == 13) {
+					doSearch();
+				}
+			});
+		});
+		function doSearch(){
+			var str = jQuery('#product-search').val();
+			if (str.length==0)
+				return;
+			window.location = "[Website.GetUrl,Search,Text/]"+jQuery("#product-search").val();
+		}
+	</script>
+</div>

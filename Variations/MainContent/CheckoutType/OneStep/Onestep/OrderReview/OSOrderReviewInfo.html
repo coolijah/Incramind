@@ -1,0 +1,36 @@
+ <!-- items before-->
+<div class="step-title ">
+    <h6 class="">[_Review your order]</h6>
+</div>
+<div id="checkout-review-table-wrapper" class="large-12 columns">
+	<p class="note">[_Please review the Payment Details below and click] <span>[_Checkout Now]</span> [_to complete your secure payment.]</p>
+    <table class="checkout-review-table" id="">
+		<col />
+		<col width="" />
+		<col width="1" />
+		<thead>
+		    <tr>
+				<th rowspan="1">[_Item Name]</th>
+				<th rowspan="1">[_Qty]</th>
+				<th colspan="1" class="a-right">[_Subtotal]</th>
+		    </tr>
+		</thead>
+		[:OSOrderReviewTotals]
+		<tbody>
+			[:OSOrderReviewItem]
+		</tbody>
+    </table>
+    <div id="checkout-review-submit" class="">
+	 	<div class="large-12 clearfix">[:OSCheckoutAgreements]</div>
+	    <div class="buttons-set large-12 columns" id="review-buttons-container" style="clear:both">
+			<p class="edit-cart in-block">[_Forgot an Item?] <a href="[Website.GetUrl,Cart]">[_Edit Your Cart]</a></p>
+			[:OSOrderReviewButton]
+	    </div>
+		<script type="text/javascript">
+			//review = new Review('[Website.GetUrl,CheckOut,saveOrder]', '[Website.GetUrl,Home]', $('checkout-agreements'));
+		</script>
+	</div>
+</div>
+
+
+

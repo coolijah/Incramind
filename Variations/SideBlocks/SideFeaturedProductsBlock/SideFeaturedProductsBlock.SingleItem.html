@@ -1,0 +1,19 @@
+/*
+*		Renders a block that contains a list of new product.
+*
+*/
+/*[Website.FeaturedProducts,1,1,'Name',Ascending]*/
+[?Website.LoopProductsCount,Featured|0=|=
+<div class="block products-block featuredproducts SingleItem">
+	<div class="title">
+		<h2>[_FEATURED]</h2>
+	</div>
+	<div class="block-content">
+		<div class="item-container">
+			[Website.LoopProducts,Featured,1,,'Name'=
+				[:ProductThumbnailSingleItem]
+			]
+		</div>
+	</div>
+</div>
+]

@@ -1,0 +1,32 @@
+/*
+*	Renders a block containing list of featured products.
+*/
+[?Website.LoopProductsCount,Featured|0=|=
+	<div layout-block-name="home_block_container" class="featured-products-block home-block SlideShow">
+		<div class="home-block-style [Design.DesignSelectionName, HomeBlocksStyle]">
+			<div class="block-title"><h5>[_Featured] </h5></div>
+			<div class="block-content">
+				<ul class="products-grid inline-list" id="featured_singleitem_carousel">
+					[Website.LoopProducts,Featured,8,,'Name'=
+						<li class="item">
+							[:ProductMiniListItem,No]
+						</li>
+					]
+				</ul>
+				<script type="text/javascript">
+				var container_width=jQuery('#featured_singleitem_carousel').parents('.home-block-style').width();
+				jQuery(function() {
+					var fsi = new ProductCarousel({
+						carousel_id : '#featured_singleitem_carousel',
+						items:4,
+						fx:'scroll',
+						width:container_width
+					});
+					jQuery('#featured_singleitem_carousel li').width((container_width-100)/4);
+					fsi.slideshow();
+				});
+				</script>
+			</div>
+		</div>
+	</div>
+]

@@ -1,0 +1,64 @@
+/*
+*		Renders a variation of toolbar block in listings of products, search results and others
+*
+*/
+<div class="toolbar Flat clearfix">
+	<div class="pager clearfix">
+		<div class="result-count large-2 columns text-left">
+			<label>
+				<strong>[_%1 items, [Filter.Count]]</strong>
+			</label>
+		</div>
+		<div class="product-pagination large-10 columns">
+			<div class="large-10 columns">
+				<ul>
+					[Filter.PagesSmart=
+						<li>
+							[?Filter.LoopPageIsCurrent
+								|yes=<span class="current">[Filter.LoopPageNr]</span>
+								|no=<span onclick="IncraToolbar.setPage('[Filter.LoopPageNr]')">[Filter.LoopPageNr]</span>
+							]
+						</li>
+					]
+				</ul>
+			</div>
+			<div class="prev large-1 column">
+				<div class="row text-center">
+					<span [?Filter.IsFirstPage|no=onclick="IncraToolbar.setPage('[Filter.PrevPage]')" style="cursor:pointer"]>[_Prev]</span>
+				</div>
+			</div>
+			<div class="next large-1 column">
+				<div class="row  text-center">
+					<span [?Filter.IsLastPage|no=onclick="IncraToolbar.setPage('[Filter.NextPage]')" style="cursor:pointer"|yes=]>[_Next]</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="sorter large-12 columns clearfix">
+		<div class="view-mode large-5 columns text-left">
+			[:ToolbarViewmode]
+		</div>
+		<div class="large-7 columns">
+			<div class="row">
+				<div class="limiter large-12 columns text-right">
+					[:ToolbarLimiter] &nbsp; [:ToolbarSortby]
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	IncraToolbar.init({
+		update_url : "[Website.GetUrl,Ajax,Update]",
+		current_url :"[Url.FullUrl]",
+		default_url:"[UserInput.DefaultUrlPart]",
+		filter_url:"/[UserInput.FilterUrl]",
+		sort_value:"/[UserInput.PageAscending]",
+		sort_by_value:"/[UserInput.PageSort]",
+		pagination_url:"/[UserInput.PaginationUrl]",
+		page_from :"[UserInput.PageFrom]",
+		page_nr_on: "[UserInput.PageNrOn]"
+	});
+	
+	
+</script>

@@ -1,0 +1,48 @@
+<div class="checkout-onepage Default">
+	<div class="page-title border-bottom-large orange">
+		<h2>[_Checkout]</h2>
+	</div>
+	<div id="checkoutSteps" class="opc accordion checkout-steps">
+		[?Customer.LoggedIn|Guest=
+			[:CheckoutOnepageMethodBlock,1]
+			[:BillingInformationBlock,2]
+			[:ShippingInformationBlock,3]
+			[:ShippingMethodBlock,4]
+			[:PaymentMethodBlock,5]
+			[:OrderReviewBlock,6]
+		|LoggedIn=
+			[:BillingInformationBlock,1]
+			[:ShippingInformationBlock,2]
+			[:ShippingMethodBlock,3]
+			[:PaymentMethodBlock,4]
+			[:OrderReviewBlock,5]
+		]
+	</div>
+</div>
+<script type="text/javascript">
+	var checkout = new OnePageCheckOut();
+	checkout.method_url = '[Website.GetUrl,CheckOut,saveMethod]';
+	checkout.country_config_url = "[Website.GetUrl,ajax,block/CustomerAddressCountryConfiguration/country/]";
+	/*jQuery(document).on({
+			click : function(){
+						checkout.gotoSection(jQuery(this).attr('step'));
+			}},".checkout-block.allow .title");*/
+
+	[?Customer.LoggedIn|LoggedIn=checkout.gotoSection("billing");]
+
+	function openCheckoutStep(obj){
+		if(jQuery(obj).hasClass("allow")){
+			checkout.gotoSection(jQuery(obj).attr("step"));	
+		}
+	}
+
+	function updateRegion(country_id,element_id){
+		var region = INCRACOUNTRYCONFIG.getRegion(country_id);
+		var obj = jQuery("#"+element_id);
+		if(region){
+			region.forEach(function(el){
+				obj.append("<option>"+el.state_name+"</option>");
+			});
+		}
+	}
+</script>

@@ -1,0 +1,76 @@
+/*
+*		renders the shipping calculation block.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              CartShippingCalculationBlock
+Location:          /Html/Cart/Content/CartShippingCalculationBlock.html
+Created By:        Leslie Canete
+Created At:        07-Okt-2014 16:54 (move to and rename ShoppingCartBlocks to Cart)
+Last modified By:  Seth Malaki
+Last modified At:  21-Okt-2014 17:09 (myupdates on addingComments)
+Called from:       mainContent.Cart 	
+--------------------------------------------------------------------**/
+
+<div class="shipping">
+	<h2>[_ESTIMATED SHIPPING AND TAX]</h2>
+		<div class="shipping-form">
+			<form id="shipping-zip-form" method="post" action="">
+				<p class="shipping-desc">[_Enter your destination to get a shipping estimate.]</p	>
+				<ul class="form-list">
+					<li class="shipping-country">
+						<label for="country-address">[_Country] <em>*</em></label>
+						<div class="input-box">
+							<select id="country-address" class="required small" title="[_Country]" onchange="loadRegions(this.value)">
+								<option value="PH">[_Philippines]</option>
+								[Website.AvailableCountries=
+									[CountryGroup.Countries=
+										<option value="[Country.Id]">[Country.Name]</option>
+									]
+								]
+							</select>
+							<script type="text/javascript">
+								jQuery("#country-address option\[value=[Configuration.TaxDefaultCountryId]\]").attr("selected","selected");
+							</script>
+						</div>
+					</li>
+					<li class="shipping-region">
+						<label for="country-address">[_State/Province] <em>*</em></label>
+						<div class="input-box">
+							<select id="province-address" class="required small" title="[_Province]" onchange="loadRegions(this.value)">
+								<option>[_Please select region, state or province]</option>
+								[Website.AvailableProvince=
+									[ProvinceGroup.Province=
+										<option value="[Province.Id]">[Province.Name]</option>
+									]
+								]
+							</select>
+							<script type="text/javascript">
+								jQuery("#province-address option\[value=[Configuration.TaxDefaultProvinceId]\]").attr("selected","selected");
+							</script>
+						</div>
+					</li>
+					<li class="shipping-postcode">
+						<label for="country-address">[_Zip] <em>*</em></label>
+						<div class="input-box">
+							<select id="country-address" class="required small" title="[_Zip]" onchange="loadRegions(this.value)">
+								<option></option>
+								[Website.AvailableProvince=
+									[ProvinceGroup.Province=
+										<option value="[Province.Id]">[Province.Name]</option>
+									]
+								]
+							</select>
+							<script type="text/javascript">
+								jQuery("#country-address option\[value=[Configuration.TaxDefaultCountryId]\]").attr("selected","selected");
+							</script>
+						</div>
+					</li>
+					
+				</ul>
+				<div class="button-wrapper">
+					<button value="[_Get A Quote]" class="button f-left" onclick="discountForm(false);" title="[_Apply Coupon]" type="submit"><span><span>[_Estimate]</span></span></button>
+				</div>
+			</form>
+	</div>	
+</div>

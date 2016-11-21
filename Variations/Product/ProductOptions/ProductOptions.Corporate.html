@@ -1,0 +1,84 @@
+/*
+*	Renders a block in product page that contains product options as configured in the backend.
+*
+*/
+
+[?Product.HasOptions
+|Yes=
+	<div class="custom-options-container Corporate">
+		<h2 class="title">[_Product Options] </h2>
+		<div class="custom-options">
+			[Product.Options=
+				[?ProductOption.Type
+				|Field=[:ProductOptionTypeText]
+				|Area=[:ProductOptionTypeText] 
+				|File=[:ProductOptionTypeFile]
+				|DropDown=[:ProductOptionTypeSelect.StyleC]
+				|RadioBox=[:ProductOptionTypeCheckRadio.Corporate]
+				|CheckBox=[:ProductOptionTypeCheckRadio.Corporate]
+				|MultipleSelect=[:ProductOptionTypeSelect]	
+				|Date=[:ProductOptionTypeDate]
+				|DateTime=[:ProductOptionTypeDate]
+				|Time=[:ProductOptionTypeDate]
+				]
+			]
+		</div>
+		<div class="custom-options-bottom large-12 columns">
+			<div class="text-left large-6 columns">
+				[:ProductPriceWithOptions]
+			</div>
+			<div class="add-to-box large-6 columns text-right">
+				[?WebsiteFeatures.Checkout|Yes=
+					<div class="[?DesignLayout.Layout|1Column=large-9|=large-8] columns add-to-box">
+						[:ProductQuantityBlock]
+					</div>
+					<div class="add-to-cart [?DesignLayout.Layout|1Column=large-3|=large-4] columns ">
+						<button type="submit" title="[_Add to Cart]" class="button btn[Design.DesignSelectionName,ButtonStyle]"><span><span>[_Add to Cart]</span></span></button>	
+						<script type="text/javascript">
+							jQuery("#product_addtocart_form").validate({
+								submitHandler: function(form) {
+									
+									if (jQuery('#simple_id').length>0){
+										var id=jQuery('#simple_id').val();
+									}else{
+										var id='[Product.id]';
+									}
+									var validator = jQuery( "#product_addtocart_form" ).validate();
+									var err = Array();
+									if(jQuery("input[required]").length){
+										jQuery("input[required]").each(function(){
+											if(validator.element( this )==false)
+												err.push(false);
+										});
+									}
+									
+									if(err.length == 0){
+										/*
+										actionCart('product_addtocart_form','[Website.GetUrl,IncraShop,AddToCart]','[Website.GetUrl,Product,[Product.Id]]',true,id,'[Website.GetUrl,Cart]',jQuery('#product_addtocart_form').serialize());
+										*/
+										IncraShoppingCart.ajaxAddToCart({
+										  				submit_url 	: 	'[Website.GetUrl,IncraShop,AddToCart]',
+										  				second_url 	: 	'[Website.GetUrl,Product,[Product.Id]]',
+										  				flag 		:	true,
+										  				id 			: 	id,
+										  				cart_url 	: 	'[Website.GetUrl,Cart]',
+										  				post_data 	: 	jQuery('#product_addtocart_form').serialize()
+
+										  			}); return false;
+									}
+								 }	
+							});
+						</script>
+					</div>
+				]
+				[:ProductAddTo]
+			</div>
+		</div>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery(".custom-options-container .quantity-block").css("float","right");
+			//jQuery(".custom-options-container .add-to-box .add-to-cart").css("marginTop","0px");
+		})
+	</script>
+</div>
+]

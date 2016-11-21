@@ -1,0 +1,38 @@
+/*
+*	Renders the variation of product details and extra attributes.
+*
+*/
+
+<div class="Product-details-block TabStyle">
+	<ul class="tabs" data-tab>
+	  <li class="tab-title active first"><a href="#panel_description" content="panel_description">[_Description]</a></li>
+	  [Product.IterateAttributesForProductPage= 
+	  <li class="tab-title"><a href="#panel_[Attribute.AttributeCode]" content="panel_[Attribute.AttributeCode]">[Attribute.Title]</a></li>
+	  ]
+	</ul>
+	<div class="tabs-content">
+	  <div class="content active" id="panel_description">
+	    <p>[Product.Description]</p>
+	  </div>
+	  [Product.IterateAttributesForProductPage= 
+	  <div class="content" id="panel_[Attribute.AttributeCode]">
+	    <p>[ProductAttribute.Value]</p>
+	  </div>
+	  ]
+	</div>
+
+	<script type="text/javascript">
+	 
+ 		jQuery(".Product-details-block .tab-title a").click(function(){
+			var tab = jQuery(this);
+			jQuery(".Product-details-block .tab-title").removeClass("active");
+			tab.parent().addClass("active");
+			var content_id = tab.attr("content");
+			jQuery(".Product-details-block .tabs-content .content").removeClass("active");
+			jQuery("#"+content_id).addClass("active");
+			return false;
+		});
+		
+	 	
+	</script>
+</div>

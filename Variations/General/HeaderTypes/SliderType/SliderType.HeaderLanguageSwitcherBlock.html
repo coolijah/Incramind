@@ -1,0 +1,26 @@
+/*
+*		Renders the store language switcher. Also refered to store view switcher.
+*
+*/
+<div class="language-switcher-block">
+	<div class="form-language">
+		<span class="select-wrapper">
+			<select id="select-language" class="custom-select" title="[_Your Language]" onchange="window.location='[Website.GetUrl,Storeview,'+this.value+']';">
+				<option></option>
+				[Website.StoreViews=
+					<option value="[StoreView.Id]">[StoreView.Name]</option>
+				]
+			</select>
+			<span class='holder'></span><span class='fa fa-angle-down'></span>
+		</span>
+	</div>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery("#select-language option\[value=[Website.CurrentStoreView=[StoreView.Id]]\]").attr("selected","selected");
+
+			var selectedOption = jQuery('#select-language').find(":selected").text();
+		    jQuery('#select-language').next(".holder").text(selectedOption);
+		});
+		
+	</script>
+</div>

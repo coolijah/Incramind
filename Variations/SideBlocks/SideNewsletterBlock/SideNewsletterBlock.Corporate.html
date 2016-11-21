@@ -1,0 +1,43 @@
+/*
+*		
+*
+*/
+<div class="block newsletter Corporate">
+	<h6 class="a-center"><span class="fa fa-envelope"></span></h6>
+
+	<div class="block-content">
+		<p class="a-center">
+			<label for="nm-email">[_Sign up for our newsletter]</label>
+		</p>
+		 <form class="form-inline" id="minimal-newsletter-validate-detail" method="post" action="">
+		 	<div class="newsletter-wrapper">
+				<input id="nm-email" type="text" class="input-small span3" name="email" placeholder="your email">
+				<div class="newsletter-error"></div>
+				<div class="action"><button class="fa fa-chevron-right" onclick="submitNewsletter('minimal-newsletter-validate-detail','[Website.GetUrl,IncraShop,SubscribeToNewsLetter]');" type="button" title="[_Submit]"></button></div>
+			</div>
+		 </form>
+	</div>
+	<script type="text/javascript">
+	submitNewsletter = function(form,surl){
+		url= surl+"/"+IncraWindow.formatUrl('[Url.FullUrl]')+"/true";
+	
+			jQuery.ajax(url,{	
+				type: "POST",  
+				dataType: "json",
+				cache: false, 
+				data: jQuery("#"+form).serialize(),
+				success: function(response, textStatus, jqXHR){
+						jQuery(".newsletter-error").html(response[0].Content);
+					},
+				error: function(jqXHR, textStatus, errorThrown)
+					{
+						//alert("The request was not completed successfuly.");
+						console.log(errorThrown);
+					}
+				});
+			return false;
+	}
+	</script>
+</div>
+
+

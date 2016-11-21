@@ -1,0 +1,24 @@
+/*
+*		Renders a typical image and text control for a single filter navigation attributes option.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              FilterNavigationAttributeType.ImagesAndText
+Location:          /Html/Category/Content/FilterNavigationVariation/FilterNavigationAttributeTypes/FilterNavigationAttributeType.ImagesAndText.html
+Created By:        Leslie Canete
+Created At:        13-Okt-2014 18:44 (rename header and side blocks)
+Last modified By:  Seth Malaki
+Last modified At:  21-Okt-2014 17:09 (myupdates on addingComments)
+--------------------------------------------------------------------**/
+
+<div class="menu-header"><h5>[LayeredAttribute.Name]</h5> </div>
+<ul class="links-navigation">
+	[LayeredAttribute.Options=
+	<li>
+		<div class="link-attribute" onclick="setFilter('[LayeredAttribute.AttributeCode]/[LayeredOption.AdminName]',[?LayeredAttribute.IsOptionSelected,[LayeredOption.AdminName]|Yes=true|=false])">
+			<img src="" alt="image"/>
+			<span class="count">([LayeredOption.Count])</span>
+		</div>
+	</li>
+	]
+</ul>

@@ -1,0 +1,43 @@
+/*
+*	Renders the variation list of Product attributes.
+*
+*/
+
+<div id="conf-attributes[Product.Id]" class="large-12 product-attributes Flat">
+	<dl>
+		[Product.ConfigurableAttributes=
+	  		<dt>[Attribute.Title]</dt>
+	  		<dt>
+	  			[?Attribute.AttributeCode|Color=
+	  				<input [?Attribute.ValueRequired|Yes=required] class="product-attributes product-attrib" id="attribute_[Attribute.AttributeCode]" type="hidden" name="[Attribute.AttributeCode]"/>
+	  				<ul class="color-plp" id="[Attribute.Id][Product.Id]">
+					[Product.ConfigurableChildProducts,[Attribute.AdminTitle]=
+						<li onclick="setAttributeValue('attribute_[Attribute.AttributeCode]','[AttributeOption.Admin]');">
+							<div id="[AttributeOption.Id]" class="links-nav colorbox [?UserInput.ConfigurableAttributeValueValid,[Attribute.AdminTitle],[AttributeOption.Admin]|yes=selected]" style="background-color:[AttributeOption.Color];"></div>
+						</li>
+					]
+					</ul>
+	  			]
+	  			<select [?Attribute.ValueRequired|Yes=required] name="[Attribute.AttributeCode]" id="attribute[Attribute.Id][Product.Id]"  onchange="attrib.selectAttribute()" class="span2 product-attrib large-9" [?Attribute.AttributeCode|Color=style="display:none"]>
+					<option value="">[_Please select]</option>
+					[Product.ConfigurableChildProducts,[Attribute.AdminTitle]=
+					<option value="[AttributeOption.Id]" admin="[AttributeOption.Admin]" [?UserInput.ConfigurableAttributeValueValid,[Attribute.AdminTitle],[AttributeOption.Admin]|yes=selected]>[AttributeOption.Admin]</option>
+					 ]
+				</select>
+			</dt>
+		]
+	</dl>
+	<script type="text/javascript">
+		var attrib = jQuery(".product-attrib").initProductAttributes({
+									'product_url' 		: '[Website.GetUrl,Product,[Product.Id]]',
+									'ajax_url'	  		: '[Website.GetUrl,Ajax,Update]',
+									'attribute_class'  	: 'product-attrib'
+								});
+		function setAttributeValue(id,value){
+			if(id!=""){
+				jQuery("#"+id).val(value);
+				attrib.selectAttribute();
+			}
+		}
+	</script>
+</div>

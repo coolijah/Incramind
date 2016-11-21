@@ -1,0 +1,82 @@
+@font-face {
+    font-family: 'Myriad Pro';
+    src: url('fonts/MyriadPro-Regular.otf') format('truetype');
+    font-style: normal;
+
+}
+
+html, body { 
+margin: 0 auto; 
+padding:0; 
+font-family: Myriad Pro;
+}
+#container { 
+margin: 0 auto; 
+padding: 0; 
+width: 726px; 
+}
+.header { 
+background:url('../images/gradient.png') scroll 0 0 transparent; 
+margin: 0; 
+padding: 0; 
+height: 60px; 
+width: 726px; 
+-moz-border-radius: 20px 20px 0 0; 
+-webkit-border-radius: 20px 20px 0 0; 
+-khtml-border-radius:20px 20px 0 0; 
+border-radius: 20px 20px 0 0; 
+}
+
+.header p {
+font-family: Myriad Pro; 
+color: #ffffff;
+font-size: 22px;
+font-weight: bold;
+margin: 0;
+padding: 16px 24px;
+}
+
+.main_content_wrapper { 
+margin: 0; 
+padding: 0; 
+background-color: #eaeaea; 
+-moz-border-radius: 0 0 20px 20px; 
+-webkit-border-radius: 0 0 20px 20px; 
+-khtml-border-radius:0 0 20px 20px;  
+border-radius: 0 0 20px 20px; 
+ 
+}
+
+.main_content_wrapper form { margin:0; padding: 0; }
+
+.main_content { margin: 0; padding: 0; min-height: 500px;}
+
+.details1_wrapper { margin: 0; padding: 20px; }
+
+.details1_wrapper form { margin: 0; border: none; }
+.details1_wrapper fieldset { margin: 0; padding: 0; border: none; }
+
+ul.details1 { margin: 20px 8px; padding: 0; }
+.details1 ul, li { display: block; list-style-type: none; margin: 8px 0 0; padding: 0; }
+
+ul.details1 label { display: inline-block; *display: inline; zoom: 1; width: 300px; font-weight: bold; color: #737373; vertical-align: top;}
+ul.details1 span { display: inline-block; *display: inline; zoom: 1; width: 368px; color: #737373; }
+
+
+.details2_wrapper { margin: 0; padding: 20px; }
+
+.details2_wrapper fieldset { margin: 0; padding: 0; border: none; }
+
+ul.details2 { margin: 20px 8px; padding: 0; }
+.details2 ul, li { display: block; list-style-type: none; margin: 8px 0 0; padding: 0; }
+
+ul.details2 label { display: inline-block; *display: inline; zoom: 1; width: 300px; font-weight: bold; color: #737373; /*vertical-align: top;*/ }
+ul.details2 input { display: inline-block; *display: inline; zoom: 1; width: 356px; padding: 5px;
+border: 1px solid #CCC;}
+ul.details2 select { display: inline-block; *display: inline; zoom: 1; width: 260px; padding: 5px;}
+
+button { margin: 0px; padding: 8px 32px; color: #4F4F4F;}
+
+.footer { border-top: thin solid #C9C9C9; height: 50px; margin: 40px auto 0; padding: 0; width: 690px; }
+.footer p { color: #fd5f00; font-size: 14px; margin: 16px; padding: 0; } 
+

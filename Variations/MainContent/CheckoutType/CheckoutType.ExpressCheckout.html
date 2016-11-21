@@ -1,0 +1,103 @@
+<div class="checkout ExpressCheckout">
+	<div class="checkout-title">
+		<h2>[_Express Checkout]</h2>
+	</div>
+	/*billing address complete = [ShoppingCart.BillingAddressComplete]<br/>
+	shipping address complete = [ShoppingCart.ShippingAddressComplete]<br/>
+	shipping method complete = [ShoppingCart.ShippingMethodComplete]<br/>
+	payment method complete = [ShoppingCart.PaymentMethodComplete]<br/>*/
+	<div id="checkoutSteps" class="osc large-12 clearfix">
+		<div class="large-4 columns checkout-panel">
+			<div class="exp-billing">
+				[:ExpressBillingInformation]
+			</div>
+			<div class="exp-shipping hide">
+				[:ExpressShippingInformation]
+			</div>
+		</div>
+		<div class="large-4 columns checkout-panel">
+			<div class="exp-shipping-method">
+				[:ExpressShippingMethod]
+			</div>
+			<div class="exp-payment">
+				[:ExpressPaymentMethod]
+			</div>
+		</div>
+		<div class="large-4 columns checkout-panel">
+			<div class="exp-review">
+				[:ExpressReview]
+			</div>
+			<br/>
+			<div class="large-12">
+				<div class="large-11 columns large-centered exp-promo">
+					<h6>DISCOUNT COUPON</h6>
+					<div class="large-12 larged-centered text-right">
+						<input type="text" class="" name="discount-code"/>
+					</div>
+					<div class="large-12 text-right">
+						<a href="#" class="button small">
+							[_Apply Coupon]
+						</a>
+					</div>
+				</div>
+				<div class="large-11 columns large-centered exp-shipping-calc">
+					<h6 class="estimated-title">[_ESTIMATED SHIPPING AND TAX]</h6>
+					<div class="estimated-tax-form">
+						<label>[_Enter your destination to get a shipping estimate.] </label>
+						<label for="country-address">[_Country] <em>*</em></label>
+						<select id="country-address" class="required small" title="Country" onchange="loadRegions(this.value)">
+							<option></option>
+							[Website.AvailableCountries=
+								[CountryGroup.Countries=
+								<option value="[Country.Id]">[Country.Name]</option>
+								]
+							]
+						</select>
+						<script type="text/javascript">
+							jQuery("#country-address option\[value=[Configuration.DefaultCountryId]\]").attr("selected","selected");
+						</script>
+					</div>
+					<div class="large-12 text-right">
+						<a href="#" class="button small">
+							[_Calculate Shipping]
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	
+	var billing 		= new Billing(
+								'exp-billing-form',
+								'[Website.GetUrl,CheckOut,selectBillingAddress]',
+								'[Website.GetUrl,CheckOut,saveBillingAddress]'
+							);
+
+	var shipping 		= new Shipping(
+								'exp-shipping-address-form',
+								'[Website.GetUrl,CheckOut,selectShippingAddress]',
+								'[Website.GetUrl,CheckOut,SaveShippingAddress]',
+								'[Website.GetUrl,CheckOut,SaveShippingAddress]'
+							);
+	var shippingMethod 	= new ShippingMethod(
+								'exp-shipping-method-form',
+								'[Website.GetUrl,CheckOut,SaveShippingMethod]'
+							);
+
+	var payment 		= new Payment(
+								'exp-payment-form',
+								'[Website.GetUrl,CheckOut,SavePaymentMethod]'
+							);
+
+	var review 			= new Review(
+								'[Website.GetUrl,CheckOut,saveConfirmation]',
+								'[Website.GetUrl,CheckOut,Success]',
+								''
+							);
+
+	var expressCheckout = new ExpressCheckout({
+								country_config_url : '[Website.GetUrl,Checkout,CountryConfig]'
+							});
+</script>

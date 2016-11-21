@@ -1,0 +1,54 @@
+/*
+*		Renders the layout of product listings in a certain category.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              CategoryListLayout.2ProductsInARow
+Location:          /Html/Category/Content/CategoryListLayoutVariation/CategoryListLayout.2ProductsInARow.html
+Created By:        Leslie Canete
+Created At:        09-Okt-2014 16:49 (categorylistlayoutvariation, categorysidenavigation, checkouttype, change to button style)
+Last modified By:  Seth Malaki
+Last modified At:  23-Okt-2014 17:52 (myupdates in adding comments)
+Called from:       CategoryListLayout 	
+Possible call:    mainContent.AdvancedSearchResult 	mainContent.BestRated 	mainContent.BestSellers 	mainContent.Brand 	mainContent.Category 	mainContent.Featured 	mainContent.MostInteresting 	mainContent.MostViewed 	mainContent.New 	mainContent.OthersAreViewing 	mainContent.RecentlyViewed 	mainContent.Sales 	mainContent.Search 	mainContent.Tag 	
+Calling blocks:    ProductListItem(2) 	
+--------------------------------------------------------------------**/
+<div class="category-list-layout TwoProductsInARow clearfix">
+	[?UserInput.CatalogMode
+		|List=
+			<div class="product-list">
+				[?Design.DesignSelectionName,ProductListItem
+					|eCommerce=
+						<ul class="list large-block-grid-2">
+							[Filter.Products=
+								[:ProductListItem]
+							]
+						</ul>
+					|=
+						<ul class="list large-block-grid-1">
+							[Filter.Products=
+								[:ProductListItem]
+							]
+						</ul>
+				]
+			</div>
+		|Grid=
+			<div class="product-list">
+				<ul class="grid large-block-grid-2 medium-block-grid-3">
+					[Filter.Products=
+						[:ProductListItem]
+					]
+				</ul>
+			</div>
+	]
+</div>
+<script type="text/javascript">
+	function over(obj){
+		jQuery(obj).find(".popup-wrapper").addClass("show");
+		jQuery(obj).find(".ecommerce-popup").addClass("show");
+	}
+	function out(obj){
+		jQuery(obj).find(".popup-wrapper").removeClass("show");
+		jQuery(obj).find(".ecommerce-popup").removeClass("show");
+	}
+</script>

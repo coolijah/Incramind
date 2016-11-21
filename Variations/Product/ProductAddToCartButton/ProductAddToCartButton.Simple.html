@@ -1,0 +1,37 @@
+<div class="add-to-cart in-block">
+	<button type="submit" title="[_Add to Cart]" class="button"><span><span>[_Add to Cart ]</span></span></button>	
+	<input type="hidden" value="[SimpleProduct.Id]" id="simple_product_id"/>
+	<input type="hidden" value="[Website.GetUrl,Product,[SimpleProduct.Id]]" id="second_url"/>
+	<script type="text/javascript">
+	
+	jQuery("#product_addtocart_form").validate({
+		
+		submitHandler: function(form) {
+			var id=jQuery('#simple_product_id').val();
+			var validator = jQuery( "#product_addtocart_form" ).validate();
+			var tmp_second_url=jQuery("#second_url").val();
+			var err = Array();
+			if(jQuery("input\\[required\\]").length){
+				jQuery("input\\[required\\]").each(function(){
+					if(validator.element( this )==false)
+						err.push(false);
+				});
+			}
+			
+			if(err.length == 0){
+				/*
+				actionCart('product_addtocart_form','[Website.GetUrl,IncraShop,AddToCart]','[Website.GetUrl,Product,[Product.Id]]',true,id,'[Website.GetUrl,Cart]',jQuery('#product_addtocart_form').serialize());
+				*/
+				IncraShoppingCart.ajaxAddToCart({
+				  				submit_url 	: 	'[Website.GetUrl,IncraShop,AddToCart]',
+				  				second_url 	: 	tmp_second_url,
+				  				flag 		:	true,
+				  				id 			: 	id,
+				  				cart_url 	: 	'[Website.GetUrl,Cart]',
+				  				post_data 	: 	jQuery('#product_addtocart_form').serialize()
+				  			}); return false;
+			}
+		 }	
+	});
+	</script>
+</div>

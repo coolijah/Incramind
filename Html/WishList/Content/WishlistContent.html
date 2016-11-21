@@ -1,0 +1,113 @@
+<div class="my-account">
+	<div class="my-wishlist">
+		<div class="page-title">
+		<h2>
+		<img class="imgwl" src="/Test/designs/Sample6/icons/wishlisthallowb.png">[_My Wishlist]</h2></div>
+		[?WishList.Empty|WishListFilled=
+		<div class="my-fieldset">
+			<form id="form-wishlist" method="post">
+				<table id="wishlist-table" class="clean-table linearize-table">
+					
+					<thead class="first last">
+						<tr>
+							<th class="customer-wishlist-item-image"></th>
+							<th class="customer-wishlist-item-info"></th>
+							<th class="customer-wishlist-item-quantity">[_Qty]</th>
+							<th class="customer-wishlist-item-price">[_Price]</th>
+							<th class="customer-wishlist-item-cart"></th>
+							<th class="customer-wishlist-item-remove"></th>
+						</tr>
+					</thead>
+					<tbody>
+						[WishList.Items=
+						<tr>
+							<td class="wishlist-cell0 customer-wishlist-item-image">
+								<a class="product-image" href="[Website.GetUrl,Product,[Product.Id]]">
+									<img src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,205,220]]" alt="[Product.Name]">
+								</a>
+							</td>
+							<td class="wishlist-cell1 customer-wishlist-item-info">
+								<h3 class="product-name"><a href="[Website.GetUrl,Product,[Product.Id]]" class="product-name">[Product.Name]</a>
+								</h3>
+								/*<ul>[WishListItem.Attributes=<li>[WishListItemAttribute.Value]</li>]</ul>
+								<dl>[WishListItem.Options=
+									<dt> [ProductOption.Label]</dt> 
+									<dd>[WishListOption.ValueAsText]</dd>
+									]
+								</dl>*/
+								<div class="wishlist-desc">[Product.SKU]</div>
+								<textarea title="[_Comment]" cols="5" rows="3" name="description\\\[[WishListItem.Id]\\\]" onfocus="focusComment(this)" onblur="focusComment(this)">[?WishListItem.CommentEmpty|Set=[WishListItem.Description] |Empty=[_Please enter your comments...]]</textarea>
+								<div class="item-manage">
+									<a class="button">[_Update Wishlist]</a>
+								</div>
+							</td>
+						
+							<td class="wishlist-cell2 customer-wishlist-item-quantity">
+								<div class="cart-cell">
+									<div class="add-to-cart-alt">
+										[?WebsiteFeatures.Checkout|Yes=
+											<input type="text" name="qty\\\\[[WishListItem.Id]\\\\]" value="[WishListItem.Quantity]" size="2" class="qty" id="qty[WishListItem.Id]">
+										]
+									</div>
+								</div>
+							</td>
+							<td class="wishlist-cell3 customer-wishlist-item-price">
+								<div class="cart-cell">
+									<div class="price-box">[:ProductPriceBlock?Product.Sale]</div>
+								</div>
+							</td>
+							<td class="wishlist-cell4 customer-wishlist-item-cart">
+								[?WebsiteFeatures.Checkout|Yes=
+									[?Product.ProductType|Configurable=
+										<button  class="button" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+											<span><span>[_Configure]</span></span>
+										</button>
+									|=
+										[?Product.HasRequiredOptions|Yes=
+											<button  class="button" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+												<span><span>[_Configure]</span></span>
+											</button>
+										|=
+										<p><a class="button btn-cart" title="[_add to cart]"  onclick="IncraShoppingCart.ajaxAddToCart({submit_url : '[Website.GetUrl,IncraShop,AddFromWishlistToCart]',second_url : '[Url.FullUrl]',flag:true,id :'[WishListItem.Id]',post_data:'qty='+jQuery('#qty[WishListItem.Id]').val()}); return false;">[_Add to Cart]</a></p>
+										]
+									]
+								]
+								<p><a class="link-edit button button-secondary">[_Edit]</a></p>
+							</td>
+							<td class="wishlist-cell5 customer-wishlist-item-remove last">
+								<img onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,RemoveFromWishList]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[WishListItem.Id]');"  class="img-remove" alt="[_Remove Item]" src="[File:/images/closev1.png]"/>
+							</td>
+						</tr>
+
+						]
+					</tbody>
+				</table>
+				<div class="buttons-set buttons-set2">
+					<button type="button" class="button btn-add" onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddAllToCart]',IncraWindow.formatUrl('[Url.FullUrl]'),'true');"><span><span>[_ADD ALL TO CART]</span></SPAN></button>]
+					<button type="submit" class="button btn-update"><span><span>[_UPDATE WISHLIST]</span></SPAN></button>
+					<button type="button" class="button btn-update" onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,ClearWishList]',IncraWindow.formatUrl('[Url.FullUrl]'),'true');"><span><span>[_Clear Wishlist]</span></SPAN></button>
+					<button type="button" class="button btn-share"><span><span>[_Share Wishlist]</span></SPAN></button>
+					
+					[?WebsiteFeatures.Checkout|Yes=				
+					
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript">
+			function focusComment(obj) {
+				if( obj.value == '[_Please enter your comments...]' ) {
+				    obj.value = '';
+				} else if( obj.value == '' ) {
+				    obj.value = '[_Please enter your comments...]';
+				}
+			}
+			jQuery("#form-wishlist").validate({
+				submitHandler: function(form) {
+					IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,UpdateWishList]',IncraWindow.formatUrl('[Url.FullUrl]'),'true',jQuery('#form-wishlist').serialize(),'POST');
+				 }	
+			});
+		</script>
+		|WishListEmpty=[_Your wishlist is empty.]]
+	
+	</div>
+</div>

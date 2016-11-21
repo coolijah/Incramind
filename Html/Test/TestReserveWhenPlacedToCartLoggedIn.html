@@ -1,0 +1,58 @@
+<script>
+var api_test= new IncraTestApi({});
+
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate: Product,3\]\[Product.NumberInStock\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate: Product,3\]\[Product.ReservedQty\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate: Product, 3\]\[Set: Product.ReserveWhenPlacedIntoCartFromTemplate, No\]\[Set: Product.ReserveWhenPlacedIntoCart,Yes\]\[Product.ReserveWhenPlacedIntoCart\]");
+
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate:Product,3\]\[Set:Product.ManageStocksFromTemplate,No\]\[Set:Product.ManageStocks,Yes\]\[Product.ManageStocks\]");
+
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate: Product,3\]\[Set: Product.CanReserveThisProductFromTemplate, No\]\[Set: Product.CanReserveThisProduct,Yes\]\[Product.CanReserveThisProduct\]");
+
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate : Product,3\]\[Set: Product.MinStockWhenCanReserveFromTemplate,No\]\[Set: Product.MinStockWhenCanReserve, 0\]\[Product.MinStockWhenCanReserve\]");
+
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate : Product,3\]\[Set: Product.MaxQuantityToReserveFromTemplate,No\]\[Set: Product.MaxQuantityToReserve, 6\]\[Product.MaxQuantityToReserve\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate : Product,3\]\[Set: Product.MaxProductsReservedFromTemplate,No\]\[Set: Product.MaxProductsReserved, 10\]\[Product.MaxProductsReserved\]");
+
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/AddToCart/3/2");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate:Product,3\]\[Product.NumberInStock\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate:Product,3\]\[Product.reservedqty\]");
+
+// delete item from cart 
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/RemoveFromCart/"+api_test.applicable_id);
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate:Product,3\]\[Product.NumberInStock\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate:Product,3\]\[Product.reservedqty\]");
+
+
+//add again, then update
+api_test.processUrl("[Website.GetUrl,RestApi]/call/AddToCart/3/2");
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate:Product,3\]\[Product.NumberInStock\]");
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate:Product,3\]\[Product.reservedqty\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/UpdateItemInCart/"+api_test.applicable_id+"/4");
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate:Product,3\]\[Product.NumberInStock\]");
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate:Product,3\]\[Product.reservedqty\]");
+
+var data=api_test.temp_array;
+
+var myApp = angular.module("myApp", []);
+
+myApp.controller("myController", function($scope){
+   $scope.logs = data; 
+});
+
+</script>

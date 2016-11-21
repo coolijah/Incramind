@@ -1,0 +1,29 @@
+/*
+*	Renders a block product rating and a  link to add new product review.
+*
+*/
+<div class="product-rating large-12 no-padding GreyBlack">
+	<div class="rating-wrapper">
+		<div class="stars">
+				<i class="fa fa-star fa-lg"></i>
+				<i class="fa fa-star fa-lg"></i>
+				<i class="fa fa-star fa-lg"></i>
+				<i class="fa fa-star fa-lg"></i>
+				<i class="fa fa-star fa-lg"></i>
+		</div>
+		<div class="stars rated" style="width:[Product.Ranking]%">
+				<i class="fa fa-star fa-lg"></i>
+				<i class="fa fa-star fa-lg"></i>
+				<i class="fa fa-star fa-lg"></i>
+				<i class="fa fa-star fa-lg"></i>
+				<i class="fa fa-star fa-lg"></i>
+		</div>
+	</div>
+	<div class="rating-links">
+		<a id="read" href="[Website.GetUrl,Product,0,Review/List/[Product.Id]/ListReview/#read_review]">[_%1 Review(s),[Product.NumberOfReviews]]</a>
+		<!--<span class="separator">|</span>-->
+		<a  class="write" href="[Website.GetUrl,Product,0,Review/List/[Product.Id]/AddReview/#write_review]">[_Add Review]</a>
+	</div>
+</div>
+
+

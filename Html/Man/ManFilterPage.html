@@ -1,0 +1,89 @@
+[?Url.MVC4
+|ajax=
+|=
+<html>
+	<head>
+		<title>IncraPages - [_Scope]</title>
+		[:ManHead]
+		<style type="text/css">
+			.description a{text-decoration:none;}
+		</style>
+		<!--\[if IE 7\]>
+			<link href="styles-ie7.css" rel="stylesheet" type="text/css"/>
+			<!\[endif\]-->
+	</head>
+	<body>
+		<div class="topnav">
+			<nav class="incra-right">
+			</nav>
+		</div>
+		<div id="content_container">
+			[:ManHeader2]
+			<div class="large-12 clearfix ">
+				<div class="large-2 columns panel man-tree-container">
+					[:Man_Tree2]
+				</div>
+				<div class="large-10 columns man-content-container">
+					]
+					<h6 class="text-left">[_Filter]: [Man.FilterName]</h6>
+					<p class="scope-description  text-left">[Man.FilterDescription]
+					<br/> [Man.ScopeLongDescription]</p>
+
+					<div id="main_content">
+						<div class="large-7 columns content-list" style="padding:0px 10px 0px 0px;">
+							<ul class="tabs" data-tab role="tablist">
+								<li class="tab-title active" role="presentational" ><a href="#panel2-1" role="tab" tabindex="0" aria-selected="true" controls="panel2-1">[_Parent]</a></li>
+								<li class="tab-title " role="presentational" ><a href="#panel2-2" role="tab" tabindex="0" aria-selected="true" controls="panel2-1">[_Loops Over]</a></li>
+							</ul>
+							<div class="tabs-content">
+								<section role="tabpanel" aria-hidden="false" class="content active" id="panel2-1">
+									<table >
+										<thead>
+											<tr>
+												<th width="200">[_Scope]</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>[Man.FilterParent]</td>
+											</tr>
+										</tbody>
+									</table>
+								</section>
+								<section role="tabpanel" aria-hidden="false" class="content " id="panel2-2">
+									<table >
+										<thead>
+											<tr>
+												<th width="200">[_Scope]</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>[Man.FilterLoopsOver]</td>
+											</tr>
+											
+										</tbody>
+									</table>		
+								</section>
+							</div>
+						</div>
+						
+					</div>
+					<script type="text/javascript">
+						jQuery(document).foundation({
+							tab: {
+							  callback : function (tab) {
+
+							  }
+							}
+						});
+					</script>
+					[?Url.MVC4
+					|ajax=
+					|=
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+]

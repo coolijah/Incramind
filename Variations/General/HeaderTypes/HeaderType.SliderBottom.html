@@ -1,0 +1,59 @@
+/*
+*		Renders the store currency switcher.
+* logo is centered but with different layout
+*/
+
+<div class="header-container SliderBottom">
+	<div class="large-12 header">
+		<div class="orange-ribbon">
+			<div class="row">
+				<div class="header-secondary">
+					<div class="large-6 columns">
+						<div class="in-block">[:SliderBottom.headerlanguageswitcherblock]</div>
+						<div class="in-block">[:SliderBottom.headercurrencyswitcherblock]</div>
+					</div>
+					<div class="large-6 columns a-right">
+						[:HeaderTopNavigationLinksBlock]
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header-primary">
+			<div class="row">
+				<div class="large-7 columns">[:HeaderLogoBlock]</div>
+				<div class="large-5 columns a-right">[:HeaderMiniSearchBlock]
+					<br>
+					<div class="summary-cart-icon">
+						<a href="[Website.GetUrl,Cart]"><span class="fa fa-shopping-cart"></span>
+						<span class="nr-items">[ShoppingCart.NrItems]</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="gray-ribbon">
+			[:HeaderMainMenuBlock]
+		</div>
+		<div class="header-promoheaderblock">
+			[Website.Promoheader,Test=
+				<div class="categorypromoheader large-12">
+					[?PromoHeader.Enabled|Yes=
+						[PromoHeader.Blocks=
+							[?PromoHeaderBlock.Type
+								|slider=
+								<div class="Layout1 _block1 blocks-preview">
+								[:HeaderPromoHeaderSlideShow]
+								</div>
+								
+							]
+							
+						]
+					]
+				</div>
+			]
+		</div>
+	</div>
+</div>
+
+[:SubmitAsPostVar]
+

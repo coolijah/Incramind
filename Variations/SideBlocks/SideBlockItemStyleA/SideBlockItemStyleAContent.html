@@ -1,0 +1,13 @@
+<div class="product-image a-center">
+	<a title="[Product.Name]" href="[Website.GetUrl,Product,[Product.Id]]">
+		<img src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,140,150]]" width="140px">
+	</a>
+</div>
+<div class="product-details">
+	<a title="[Product.Name]" class="product-name" href="[Website.GetUrl,Product,[Product.Id]]">
+		<h4>[Product.Name]</h4>
+	</a>
+	<p class="desc">[Product.ShortDescription]</p>
+	<div class="price-box"><span class="price">[:PriceBlock?Product.Sale]</span></div>
+
+</div>

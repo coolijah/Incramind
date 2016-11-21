@@ -1,0 +1,51 @@
+/*
+*		Renders Toolbar view mode for displaying product listing.
+*
+*/
+
+<label class="large-3 columns">[_View as]</label>
+[?Configuration.CatalogListMode
+|ListOnly=
+	<strong>[_List]</strong>
+|GridOnly=
+	<strong>[_Grid]</strong>
+|ListDefault=
+	[?UserInput.CatalogMode
+	|Grid=
+	<div class="large-9 columns">
+		<div class="large-4 columns"><span><span class="selected"><strong>[_Grid]</strong></span></span></div>
+		<div class="large-4 columns"><span><span class="opt-mode" onclick="IncraToolbar.setCatalogMode('List')">[_List]</span></span></div><div class="large-4 columns"></div>
+	</div>
+		
+
+	|List=
+		<div class="large-9 columns">
+			<div class="large-4 columns">
+				<span><span class="opt-mode" onclick="IncraToolbar.setCatalogMode('Grid')">[_Grid]</span></span>
+			</div>
+			<div class="large-4 columns">
+				<span><span class="selected"><strong>[_List]</strong></span></span>
+			</div><div class="large-4 columns"></div>
+		</div>
+	]
+|GridDefault=
+	[?UserInput.CatalogMode
+ 	|Grid=
+		<div class="large-9 columns">
+			<div class="large-4 columns">
+				<span><span class="selected"><strong>[_Grid]</strong></span></span>
+			</div>	
+				<span><span class="opt-mode" onclick="IncraToolbar.setCatalogMode('List')">[_List]</span></span>&nbsp;
+			</div><div class="large-4 columns"></div>
+		</div>
+	|List=
+		<div class="large-4 columns">
+			<div class="large-4 columns">
+ 				<span><span class="opt-mode" onclick="IncraToolbar.setCatalogMode('Grid')">[_Grid]</span></span>
+			</div>
+			<div class="large-4 columns">
+				<span><span class="selected"><strong>[_List]</strong></span></span>
+			</div><div class="large-4 columns"></div>
+		</div>
+	]
+]

@@ -1,0 +1,41 @@
+/*
+*	Renders a block containing add to wishlist and add to compare links.
+*
+*/
+[?General.Param1
+|CategoryList=
+<ul class="add-to-links inline-list">
+	[?WebsiteFeatures.WishList|Yes=
+	<li>
+		<a  href="#" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to wishlist]" alt="[_Add to wishlist]" class="link-wishlist">[_Add to WishList]
+		</a>
+	</li>
+	<li><span class="separator">[:PipeSlash]</span> </li>
+	]
+	<li>
+		<a href="#" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to compare]" alt="[_Add to compare]" class="link-compare">[_Add to Compare]</a>
+	</li>
+</ul>
+|CategoryGrid=
+<ul class="add-to-links">
+	[?WebsiteFeatures.WishList|Yes=
+	<li>
+		<a  href="#" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to Wishlist]" alt="[_Add to wishlist]" class="link-wishlist">[_WishList]
+		</a>
+	</li>
+	]
+	<li>
+		<a href="#" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to Compare]" alt="[_Add to compare]" class="link-compare">[_Compare]</a>
+	</li>
+</ul>
+|=
+<ul class="add-to-links list-inline-block">
+	[?WebsiteFeatures.WishList|Yes=
+	<li>
+		<a  href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST'); " class="link-wishlist">[_Add to WishList]
+		</a></li>
+	<li><span class="separator">[:PipeSlash]</span> </li>
+	]
+	<li><a href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST');" class="link-compare">[_Add to Compare]</a></li>
+</ul>
+]

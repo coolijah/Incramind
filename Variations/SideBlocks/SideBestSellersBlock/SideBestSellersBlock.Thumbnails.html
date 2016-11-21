@@ -1,0 +1,21 @@
+/*
+*	Renders a block that contains a list of products that is sale.
+*
+*/
+
+[?Website.LoopProductsCount,Bestsellers|0=|=
+<div class="block products-block bestsellers Thumbnail">
+	<div class="title">
+		<h2>[_BEST SELLERS]</h2>
+	</div>
+	<div class="block-content">
+		<ul class="products-grid">
+			[Website.LoopProducts,Bestsellers,1,,'Name'=
+				<li class="item">
+					[:ProductThumbnailListItem]
+				</li>
+			]
+		</ul>
+	</div>
+</div>
+]

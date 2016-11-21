@@ -1,0 +1,45 @@
+/*
+*	Renders a block of product tier prices.
+*
+*/
+<div class="tier-price-container SimpleTable clearfix">
+	[?Product.ProductType|Simple=
+		[?Product.TierPricesExist|Yes=
+			<table class="[?DesignLayout.Layout|3Columns=large-6|=large-10]">
+				<thead>
+					<td class="text-center">[_Qty]</td>
+					<td class="text-center">[_Price]</td>
+					<td class="text-right"></td>
+				</thead>
+				<tbody>
+					[Product.TierPrices=
+						<tr>
+							<td class="text-center">[TierPrice.Number]</td>
+							<td class="text-right">[TierPrice.ActualPriceEach]</td>
+							<td>([_Save] <strong>[TierPrice.ActualSavePercent]%</strong>)</td>	
+						</tr>
+					]
+				</tbody>
+			</table>
+		]
+	|Configurable=
+		[?SimpleProduct.TierPricesExist|Yes=
+			<table class="[?DesignLayout.Layout|3Columns=large-6|=large-10]">
+				<thead>
+					<td class="text-center">[_Qty]</td>
+					<td class="text-right">[_Price]</td>
+					<td class="text-right"></td>
+				</thead>
+				<tbody>
+					[Product.TierPrices=
+						<tr>
+							<td class="text-center">[TierPrice.Number]</td>
+							<td class="text-right">[TierPrice.ActualPriceEach]</td>
+							<td>([_Save] <strong>[TierPrice.ActualSavePercent]%</strong>)</td>	
+						</tr>
+					]
+				</tbody>
+			</table>
+		]
+	]
+</div>

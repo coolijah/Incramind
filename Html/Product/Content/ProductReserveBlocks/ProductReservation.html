@@ -1,0 +1,59 @@
+<div class="form-reserve modal" id="myModal">
+	<div class="modal-content">
+		<div class="modal-body">
+		<form action="[Website.GetUrl,Product,Reserveproduct/[Product.Id]]" method="post" id="reserve-form">
+			<fieldset>
+				<span class="close" onclick="INCRA_MODAL.close('myModal');">×</span>
+				<h3>[_Reserve] [Product.Name]</h3>
+				<ul class="form-list">
+					<li>
+						<label for="reserve_email" class="required">[_Email] <em> *</em></label>
+						<div class="input-box">
+							<input type="text" name="Email" id="reserve_email" class="input-text required" value="[Customer.Email]" />
+						</div>
+					</li>
+					<li>
+						<label for="reserve_quantity" class="required">[_Quantity] <em> *</em></label>
+						<div class="input-box">
+							<input type="text" name="qty" id="reserve_quantity" class="input-text required" value="" />
+						</div>
+					</li>
+					<li>
+						<label for="reserve_duration" class="required">[_Duration] <em> *</em></label>
+						<div class="input-box">
+							<input type="text" name="Duration" id="reserve_duration" class="input-text required" value="" />
+						</div>
+					</li>
+					<li>
+						<label for="reserve_reason" class="required">[_Reason] <em> *</em></label>
+						<div class="input-box">
+							<textarea name="Reason" id="reserve_reason" cols="100" rows="3" class="required" style="width:100%"></textarea>
+						</div>
+					</li>
+				</ul>
+				
+				<div class="buttons-set">
+					<button type="submit" title="[_Reserve]" class="button btn[Design.DesignSelectionName,ButtonStyle]"><span><span>[_Reserve]</span></span></button>
+				</div>
+			</fieldset>
+		</form>
+		<script type="text/javascript">
+			// When the user clicks anywhere outside of the modal, close it
+				var modal = document.getElementById('myModal');
+				window.onclick = function(event) {
+				    if (event.target == modal) {
+				        modal.style.display = "none";
+				    }
+				}
+			jQuery("#reserve-form").validate({
+				submitHandler: function(form) {
+					//IncraAjaxUpdater.submitAjax('[Website.GetUrl,Product,Reserveproduct/[Product.Id]]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[Product.Id]',jQuery('#reserve-form').serialize(),'POST');
+				
+					IncraReserve.submit('[Website.GetUrl,Product,Reserveproduct/[Product.Id]]',jQuery('#reserve-form').serialize(),'POST');
+					modal.remove();
+				 }	
+			});
+		</script>
+		</div>
+	</div>
+</div>

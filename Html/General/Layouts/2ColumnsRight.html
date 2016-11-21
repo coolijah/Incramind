@@ -1,0 +1,29 @@
+/*
+*		Renders the 2 columns layout containing mainContent and right column, loads for most of the pages.  This can be enherited on per model basis.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              2ColumnsRight
+Location:          /Html/General/Layouts/2ColumnsRight.html
+Created By:        Leslie Canete
+Created At:        06-Okt-2014 14:51 (relocating)
+Last modified By:  Seth Malaki
+Last modified At:  23-Okt-2014 17:52 (myupdates in adding comments)
+Calling blocks:    breadcrumb 	Footer 	header 	mainContent 	notification 	rightColumn 	
+--------------------------------------------------------------------**/
+<div class="page">
+	[:header]
+	<div class="two-columns-right">
+		<div class="row">
+			[:breadcrumb]
+			<div layout-block-name="main_column" class="main-content large-9 medium-9 small-12 columns grid-col2-main no-gutter">
+				[:notification]
+				[:mainContent]
+			</div>
+			<div layout-block-name="right_column" class="right-content large-3 medium-3 small-12 columns grid-col2-sidebar no-gutter">
+				[:rightColumn]
+			</div>
+		</div>
+	</div>
+	[:Footer]
+</div>

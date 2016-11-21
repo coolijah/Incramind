@@ -1,0 +1,39 @@
+<div class="checkout OneStep">
+	<div class="checkout-title">
+		<h3>[_One Step Checkout]</h3>
+	</div>
+	<div id="checkoutSteps" class="osc-container large-12 columns">
+		[?Customer.LoggedIn|Guest=
+				<div class="large-4 columns">
+					<div>[:OneStepCheckoutOnepageMethodBlock,1]</div>
+					<div>[:OSCheckoutBilling,2]</div>
+					<div>[:OSCheckoutShippingMethod,3]</div>
+				</div>
+				<div class="large-4 columns">
+					[:OSCheckoutPayment,4]
+				</div>
+				<div class="large-4 columns">
+					[:OSCheckoutOrderReview]
+				</div>
+			|LoggedIn=
+				<div class="large-4 columns">
+					<div>[:OSCheckoutBilling,1]</div>
+					<div>[:OSCheckoutShipping,2]</div>
+				</div>
+				<div class="large-4 columns">
+					<div>[:OSCheckoutShippingMethod,3]</div>
+					<div>[:OSCheckoutPayment,4]</div>
+				</div>
+				<div class="large-4 columns">
+					<div class="clearfix">[:OSCheckoutOrderReview]</div>
+				</div>
+		]
+	</div>
+</div>
+<script type="text/javascript">
+	var checkout = new OneStepCheckout();
+	checkout.method_url = '[Website.GetUrl,CheckOut,saveMethod]';
+	checkout.country_config_url = "[Website.GetUrl,ajax,block/CustomerAddressCountryConfiguration/country]";
+</script>
+[:CustomerAddressJs]
+

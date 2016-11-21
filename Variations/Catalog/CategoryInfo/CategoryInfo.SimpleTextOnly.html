@@ -1,0 +1,33 @@
+/*
+[?Category.HasChildren|yes=
+	<div class="subcategory-block large-12 SimpleTextOnly">
+		<p>[_Sub Categories]</p>
+		<div class="sub-cat-container">
+			[Category.ChildCategories=
+				<div class="item in-block">
+					<div class="cat-name">
+						<a href="[Website.GetUrl,Category,[Category.Id]]" alt="[Category.Name]">[Category.Name]</a>
+					</div>
+				</div>
+			]
+		</div>
+	</div>
+]
+*/
+
+[?Category.HasChildren|yes=
+	<div class="subcategory-block large-12 SimpleTextOnly">
+		<p>[_Sub Categories]</p>
+		<div class="sub-cat-container">
+			<ul class="[?DesignLayout.Layout|3Columns=large-block-grid-4|=large-block-grid-5]">
+				[Category.ChildCategories=
+					<li class="item">
+						<div class="cat-name text-center">
+							<a href="[Website.GetUrl,Category,[Category.Id]]" alt="[Category.Name]">[Category.Name]</a>
+						</div>
+					</li>
+				]
+			</ul>
+		</div>
+	</div>
+]

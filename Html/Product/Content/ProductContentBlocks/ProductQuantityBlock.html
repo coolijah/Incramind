@@ -1,0 +1,18 @@
+/*
+*	Renders a block of quantity field in a product page.
+*	Param 1 : from which block this is called
+*/
+<div class="quantity-block Default">
+	[?General.Param1
+	|CategoryList=
+	<div class="quantity">
+		<label for="qty">[_Qty:]</label>
+		<input type="text" name="qty" id="qty" maxlength="12" value="1" title="[_Qty]" class="input-text qty">
+	</div>
+	|=
+	<div class="quantity">
+		<label for="qty">[_Qty:]</label>
+		<input type="text" name="qty" id="qty" maxlength="12" value="[Product.MinInShoppingCart]" title="[_Qty]" class="input-text qty" style="height: 30px;margin-bottom: 0px;">
+	</div>
+	]
+</div>

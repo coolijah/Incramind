@@ -1,0 +1,75 @@
+/*
+*	Renders a block in product page that contains product options as configured in the backend.
+*
+*/
+
+[?Product.HasOptions
+|Yes=
+<div class="custom-options-container Default ">
+	<h2 class="title">[_Product Options]</h2>
+	<div class="custom-options">
+		[Product.Options=
+			[?ProductOption.Type
+			|Field=[:ProductOptionTypeText]
+			|Area=[:ProductOptionTypeText]
+			|File=[:ProductOptionTypeFile]
+			|DropDown=[:ProductOptionTypeSelect]
+			|RadioBox=[:ProductOptionTypeCheckRadio]
+			|CheckBox=[:ProductOptionTypeCheckRadio]
+			|MultipleSelect=[:ProductOptionTypeSelect]
+			|Date=[:ProductOptionTypeDate]
+			|DateTime=[:ProductOptionTypeDate]
+			|Time=[:ProductOptionTypeDate]
+		]
+	]
+	</div>
+	<div class="custom-options-bottom large-12 columns clearfix">
+		<div class="price-block large-6 columns">
+			[:ProductPriceWithOptions]
+		</div>
+		[?WebsiteFeatures.Checkout|Yes=
+			[?Product.HasOptions|Yes=
+			<div class="add-to-box large-6 columns">
+				<div class="large-12 columns text-right add-to-cart">
+					<div class="large-7 columns">
+						[:ProductQuantityBlock]
+					</div>
+					<div class="large-5 columns">
+						<button type="submit" title="[_Add to Cart]" class="button"><span><span>[_Add to Cart]</span></span></button>
+					</div>
+					[:ProductAddTo]
+					<script type="text/javascript">
+					jQuery("#product_addtocart_form").validate({
+						submitHandler: function(form) {
+							if (jQuery('#simple_id').length>0){
+								var id=jQuery('#simple_id').val();
+							}else{
+								var id='[Product.id]';
+							}
+							IncraShoppingCart.ajaxAddToCart({
+				  				submit_url 	: 	'[Website.GetUrl,IncraShop,AddToCart]',
+				  				second_url 	: 	'[Website.GetUrl,Product,[Product.Id]]',
+				  				flag 		:	true,
+				  				id 			: 	id,
+				  				cart_url 	: 	'[Website.GetUrl,Cart]',
+				  				post_data 	: 	jQuery('#product_addtocart_form').serialize()
+				  			}); return false;
+						 }
+					});
+					</script>
+				</div>
+			</div>
+			]
+		]
+	</div>
+</div>
+]
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery(".custom-options-container.Default .quantity-block").css("float","right");
+		jQuery(".custom-options-container.Default .add-to-box .add-to-cart").css("marginTop","0px");
+		[?DesignLayout.Layout|1Column=
+			jQuery(".custom-options-container.Default .add-to-box").removeClass("large-6").addClass("large-4");
+		]	
+	})
+</script>

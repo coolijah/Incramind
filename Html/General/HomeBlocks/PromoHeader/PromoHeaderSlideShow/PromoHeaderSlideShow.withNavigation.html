@@ -1,0 +1,23 @@
+<ul id="slides[PromoHeader.Id]" class="promoslides inline-list">
+	[PromoHeaderBlock.Sliders= 
+		<li class="item">
+		[:PromoHeaderSlideShowItem]
+		</li>
+	]
+</ul>
+<a class="prev" id="promo_prev" href="#"><span>[_prev]</span></a>
+<a class="next" id="promo_next" href="#"><span>[_next]</span></a>
+<script type="text/javascript">
+	jQuery(function() {
+		
+		
+		jQuery(function() {
+			jQuery("#slides[PromoHeader.Id]").carouFredSel({
+				items: 1,
+				prev: '#promo_prev',
+				next: '#promo_next'
+			});
+		});
+	});
+	
+</script>

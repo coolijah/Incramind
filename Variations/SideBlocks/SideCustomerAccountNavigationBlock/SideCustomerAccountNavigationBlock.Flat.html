@@ -1,0 +1,41 @@
+[?Customer.LoggedIn|LoggedIn=
+<div class="block account-menu Flat">
+	<div class="title">
+		<h6>[_MY ACCOUNT]</h6>
+	</div>
+	<ul class="menu-list">
+		<li><a href="[Website.GetUrl,Customer,Account]">[_Account Dashboard]</a></li>
+		<li><a href="[Website.GetUrl,Customer,Address]">[_Address Book]</a></li>
+		[?WebsiteFeatures.WishList|Yes=
+		<li><a href="[Website.GetUrl,WishList]">[_My WishList]</a></li>]
+		<li><a href="[Website.GetUrl,Compare]">[_Compared Products]</a></li>
+		[?WebsiteFeatures.Orders|Yes=
+		<li><a href="[Website.GetUrl,Customer,History]">[_My Orders]</a></li>
+		<li><a href="[Website.GetUrl,Customer,InvoiceList]">[_Invoice History]</a></li>
+		<li><a href="[Website.GetUrl,Customer,ShippingList]">[_Shipping History]</a></li>]
+		[?WebsiteFeatures.Checkout|Yes=
+		<li><a href="[Website.GetUrl,Cart]">[_My Shopping Cart]</a></li>]
+		[?WebsiteFeatures.Catalog|Yes=
+		<li><a href="[Website.GetUrl,Customer,ProductReview]">[_My Reviews]</a></li>
+		<li class="last"><a href="[Website.GetUrl,Customer,Tag]">[_My Tags]</a></li>]
+	</ul>
+	
+</div>
+	<!-- comment this for now, because functionality is not yet okay-->
+	/*
+	[?WebsiteFeatures.Forum|Yes=
+	<div class="block account-menu Flat">
+		<div class="title">
+			<h6>[_FORUM]</h6>
+		</div>
+		<ul class="menu-list">
+			<li><a href="[Website.GetUrl,Customer,Forum]">[_Inbox] ([Customer.NrMessagesInInbox])</a></li>
+			<li><a href="[Website.GetUrl,Customer,Forum]">[_Deleted Items] ([Customer.NrMessagesInDeletedItems])</a></li>
+			<li><a href="[Website.GetUrl,Customer,Forum]">[_Send Items] ([Customer.NrMessagesInSendItems])</a></li>
+			<li><a href="[Website.GetUrl,Customer,Forum]">[_Spam] ([Customer.NrMessagesInSpam])</a></li>
+			<li class="last"><a href="[Website.GetUrl,Customer,Forum]">[_Posts] ([Customer.NrPostsInForum])</a></li>
+		</ul>
+	</div>
+	]
+	*/
+]

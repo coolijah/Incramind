@@ -1,0 +1,143 @@
+<div id="opc-review" class="checkout-block order-review last" >
+	<div class="title">
+		<div class="circle-number in-block">[General.Param1]</div>
+		<div class="in-block">
+			<h6>[_Order Review]</h6>
+		</div>
+	</div>
+	<div class="content " style="">
+		<form id="exp-review-form" action="[Website.GetUrl,CheckOut,Confirm]" method="get">
+			<table class="order-review-table data-table">
+				<colgroup>
+					<col>
+			        <col width="1">
+			        <col width="1">
+			        <col width="1">
+	            </colgroup>
+				<thead>
+					<tr class="first last">
+						<th rowspan="1">[_Product]</th>
+						<th class="a-center" colspan="1">[_Unit Price]</th>
+						<th class="a-center" rowspan="1">[_Qty]</th>
+						<th class="a-center" colspan="1">[_Subtotal]</th>
+					</tr>
+					
+				</thead>
+				<tbody>
+					[ShoppingCart.Items= 
+					<tr class="first last">
+						<td>
+							<h3 class="product-name">[Product.Name]</h3>
+						</td>
+						<td class="a-right">
+							<span class="cart-price"><span class="price">[ShoppingCartItem.PriceEach]</span></span>
+						</td>						
+						<td class="a-center" style="color: #999; font-size: 14px;">[ShoppingCartItem.Quantity]</td>
+					
+						<td class="a-right last">
+							<span class="cart-price"><span class="price">[ShoppingCartItem.RowTotal]</span></span>
+						</td>	
+					</tr>
+					]
+					<tfoot>
+							<tr class="first">
+								<td colspan="3" align="right" class="a-right no-all-borders ">[_Subtotal]</td>
+								<td class="a-right last no-all-borders"><span class="price">[ShoppingCart.BasePrice]</span></td>
+							</tr>
+							
+						[?ShoppingCart.HasDiscounts
+						|yes=
+							<tr>
+								<td colspan="3" align="right" class="a-right no-all-borders ">
+									[_Discounts:]
+									[ShoppingCart.Discounts= [ShoppingCartDiscount.Name] [ShoppingCartDiscount.Amount]  ([ShoppingCartDiscount.AmountText]) 
+									]
+								</td>
+								<td class="a-right last no-all-borders">
+									<span class="price">[ShoppingCart.TotalDiscounts]</span>
+								</td>
+							</tr>
+						]
+						
+						[?ShoppingCart.FreeShipping
+						|n/a=
+						|Yes=
+							<tr>
+								<td colspan="3" align="right" class="a-right no-all-borders ">
+									[_Shipping Costs:]
+								</td>
+								<td class="a-right last">
+									[_Free Shipping]
+								</td>
+							</tr>
+						|No=<tr>
+								<td colspan="3" align="right" class="a-right no-all-borders ">
+									[_Shipping Costs:]
+								</td>
+								<td class="a-right last no-all-borders">
+									<span class="price">[ShoppingCart.ShippingCosts]</span>
+								</td>
+							</tr>
+						]
+						[?ShoppingCart.PaymentCostAvaiable|Yes=
+							<tr>
+								<td colspan="3" align="right" class="a-right no-all-borders ">
+									[_Payment Costs:]
+								</td>
+								<td class=" a-right last no-all-borders">
+									<span class="price">[ShoppingCart.PaymentCost]</span>
+								</td>
+							</tr>
+						]
+						<tr>
+							<td colspan="3" align="right" class="a-right no-all-borders "><strong>[_SubTotal Excl. Tax]</strong></td>
+							<td class="a-right last no-all-borders"><span class="price"><strong>[ShoppingCart.TotalExclTax]</strong></span></td>
+						</tr>
+						
+						[?ShoppingCart.HasTaxes
+						|yes=
+
+						<tr>
+							<td colspan="3" align="right" class="a-right no-all-borders ">
+								[_Taxes:] [ShoppingCart.TaxAndCosts=[ShoppingCartTaxAndCost.Name]  [ShoppingCartTaxAndCost.Amount]%  [ShoppingCartTaxAndCost.Value]  [?ShoppingCart.AllTaxesIncluded|yes=inclusive btw|no=exclusive btw]
+							]
+							</td>
+							<td class="a-right last no-all-borders">
+								<span class="price">[ShoppingCart.TotalTax]</span>
+							</td>
+						</tr>
+						]
+						<tr>
+							<td colspan="3" align="right" class="a-right no-all-borders "> <span class="grand-total default-orange">[_Grand Total]</span></td>
+							<td class="a-right last no-all-borders"><span class="price grand-total default-orange">[ShoppingCart.TotalInclTax]</span></td>
+						</tr>
+						<tr class="last">
+							<td colspan="3" align="right" class="a-right no-all-borders "> <span class="">[_Total Included Tax]</span></td>
+							<td class="a-right last no-all-borders"><span class="price">***</span></td>
+						</tr>
+						[?Configuration.EnableTermsAndConditions|Yes=
+							<tr>
+								<td colspan="4">
+									[:TermsAndConditionsBlock]
+								</td>
+							</tr>
+						]						
+					</tfoot>
+				</tbody>
+			</table>
+		</form>
+		<div id="checkout-review-submit">
+			<div id="review-buttons-container" class="buttons-set">
+				<button value="" class="button btn-checkout" onclick="review.save();" title=""><span><span>[_PLACE ORDER]</span></span></button>
+				<p class="f-left">
+					[_Forgot an item?]
+					<a href="[Website.GetUrl,Cart]" onclick="return confirm('Are you sure you want to leave this page? You will need to go through the checkout steps again.')">[_Edit Your Cart]</a>
+				</p>
+			</div>
+		</div>
+		<br>
+	</div>
+</div>
+<script type="text/javascript">
+	var review = new Review('[Website.GetUrl,CheckOut,Confirm]','[Website.GetUrl,CheckOut,Confirm]','exp-review-form');
+</script>

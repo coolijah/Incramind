@@ -1,0 +1,32 @@
+/*
+*	Renders a block containing list of categories.
+*/
+
+<div class="home-block featured-categories-block [Design.DesignSelectionName,HomeCategoriesBlock]">
+	<div class="home-block-style-[Design.DesignSelectionName, HomeBlocksStyle]">
+		<div class="block-title">
+			<h5 class="subheader">[_FEATURED CATEGORIES]</h5>
+		</div>
+		<div class="block-content">
+			<ul class="small-block-grid-1 medium-block-grid-4 [?DesignLayout.Layout|3Columns= large-block-grid-2|=  large-block-grid-4]">
+				[Website.TopCategories,3=
+					<li class="small-text-center">
+						<a href="[Website.GetUrl,Category,[Category.Id]]" alt="[Category.Name]">
+							<div class="cat-image" style="width:200px;height:200px; margin : 0 auto;">
+								<img id="cat-[Category.Id]" class="prod-list" src="/[Category.Image]" alt="[Category.Name]" />
+							</div>
+							<h6>[Category.Name]</h6>
+							<p class="description">[Category.Description]</p>
+						</a>
+					</li>
+				]
+			</ul>
+		</div>
+
+		<script type="text/javascript">
+			jQuery(document).ready(function(){
+				//jQuery(".cat-image img").imgCentering();
+			});
+		</script>
+	</div>
+</div>

@@ -1,0 +1,36 @@
+/*
+*	Renders a block containing list of best sellers products.
+*/
+
+/*[Website.FeaturedProducts,1,4,[Category.Id],'Name',Ascending]*/
+[?Website.LoopProductsCount,Bestsellers|0=|=
+	<div layout-block-name="home_block_container" class="home-block bestselling-products large-12 Default">
+		<div class="home-block-style-[Design.DesignSelectionName,HomeBlocksStyle]">
+			<div class="block-title">
+				<h5 class="subheader">[_BEST-SELLING PRODUCTS]</h5>
+			</div>
+			<div class="block-content">
+				<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
+					[Website.LoopProducts,Bestsellers,4,1,'Name'=
+		  				<li class="small-text-center">
+							[:ProductMiniListItem, No]
+		  				</li>
+		  			]
+		  		</ul>
+			</div>
+		</div>
+	</div>
+]
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		//jQuery(".product-image img").imgCentering();
+		/* substring function to shorten text character to equalize the hight of the 
+		 * list item. default max_char is 100.
+		 */
+		[?DesignLayout.Layout|3Columns=
+			jQuery(".mini-list-item-wrapper .desc").substring({ max_char: 70 });
+			|=
+			jQuery(".mini-list-item-wrapper .desc").substring();
+		]
+	});
+</script>

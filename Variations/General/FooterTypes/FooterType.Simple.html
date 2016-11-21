@@ -1,0 +1,33 @@
+/*
+*		renders the footer type information.
+*
+*/
+<div layout-block-name="footer_block_container" class="footer Simple">
+	<div class="footer-info">
+		<div class="row footer-up">
+			<div class="large-5 columns">
+				<div class="block-grid footer-newsletter a-left">[?DesignLayout.CheckFooter,[Url.Model],FooterNewsletterSubscriberBlock|Yes=[:FooterNewsletterSubscriberBlock]]</div>
+				
+			</div>
+			<div class="large-4 columns">
+				<div class="block-grid">[?DesignLayout.CheckFooter,[Url.Model],FooterPaymentsImagesBlock|Yes=[:FooterPaymentsImagesBlock]]</div>
+			</div>
+			
+			<div class="large-3 columns">
+				<div class="footer-social-media" >
+				[?DesignLayout.CheckFooter,[Url.Model],FooterSocialMediaBlock|Yes=[:FooterSocialMediaBlock]] [:FooterSocialMediaBlock]
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-bottom">	
+		<div class="row">
+			<div class="large-7 columns">
+				<div class="block-grid footer-links">
+				 [:FooterLinksBlock]
+				</div>
+			</div>
+			<div class="large-5 columns a-right">[?DesignLayout.CheckFooter,[Url.Model],FooterCopyrightsBlock|Yes=[:FooterCopyrightsBlock]] [:FooterCopyrightsBlock]</div>
+		</div>	
+	</div>
+</div>

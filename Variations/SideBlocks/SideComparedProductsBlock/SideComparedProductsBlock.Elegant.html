@@ -1,0 +1,86 @@
+<div class="block comparedproducts Elegant">
+	<div class="title">
+		<h6>[_COMPARE PRODUCTS] ([Comparer.NrOfItems])</h6>
+	</div>
+	<div class="block-content">
+		[?Comparer.HasItems|yes=
+			<ol id="compare-items">
+			[Comparer.Items= 
+				<li id="side-compare-item-[ComparerItem.Id]">
+					<span class="product-title"><a href="[Website.GetUrl,Product,[ComparerItem.ProductId]]">[Product.Name]</a></span>
+					<span class="f-right">
+						<img class="img-remove" src="[File:/images/btn_remove.gif]" title="[_remove this item]" onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,RemoveFromCompare]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[ComparerItem.Id]');"/>
+					</span>
+				</li>
+			]
+			</ol>
+			<p class="a-right">
+				<a href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,ClearCompare]',IncraWindow.formatUrl('[Url.FullUrl]'),'true');">[_Clear All] </a>
+			</p>
+			
+			<div class="actions">
+				/*
+				<button type="button btn-secondary[Design.DesignSelectionName,ButtonStyle]" title="[_Compare]" class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="IncraWindow.popupWindow('[Website.GetUrl,Test,Test]','compare','width=820,height=560,toolbar=no,menubar=yes,location=0,status=1,scrollbars=0,resizable=1,left=0,top=0');"><span><span>[_Compare]</span></span></button>
+				*/
+				<button type="button" title="[_Compare]" class="button btn-secondary[Design.DesignSelectionName,ButtonStyle]" onclick="comparePopUp(); return false;"><span><span>[_Compare]</span></span>
+				</button>				
+			</div>
+		|No=
+			<p>[_You have no item/s to compare]</p>
+		]
+	</div>
+</div>
+<script type="text/javascript">
+		var url = "[Website.GetUrl,ajax]/block/PopUpCompareProducts";
+		function comparePopUp(){						
+			jQuery.ajax(url,{
+				type: "GET",
+				success: function(responseText){
+					/*jQuery(".compare-popup-container").fadeIn().css({
+						'top' : window.scrollY + 20,
+					});*/
+					jQuery(".compare-popup-container").fadeIn();
+					jQuery(".compare-product-content").html(responseText);
+				}
+			});
+		}
+		function unloadComparePopup(){
+			jQuery(".compare-popup-container").fadeOut();
+		}
+		function removeMe(obj,id){
+			jQuery.ajax({
+				url     : "[Website.GetUrl,ajax]/block/SideComparedProductsAjaxUpdate",
+				success : function(responseText){
+					jQuery(".block.comparedproducts").html(responseText);
+					jQuery.ajax(url,{
+						type: "GET",
+						success: function(responseText){
+							jQuery(".compare-product-content").html(responseText);
+						}
+					});
+				}
+			});
+			/*jQuery("#side-compare-item-"+id).remove();
+			jQuery(obj).parent().parent().parent().fadeOut(500,function(){
+				jQuery(obj).parent().parent().parent().remove();
+			});*/
+		}
+		function addCompareItemToCart(id,qty){
+			
+			var success = IncraShoppingCart.ajaxAddToCartOnly({
+				  				submit_url 	: 	'[Website.GetUrl,IncraShop,AddToCart]',
+				  				second_url 	: 	'[Url.FullUrl]',
+				  				flag 		:	true,
+				  				id 			: 	id,
+				  				cart_url 	: 	'[Website.GetUrl,Cart]',
+				  				post_data 	: 	'qty='+qty
+				  			});
+			if(success){
+				jQuery("#compare_notification").html('<ul class="messages"><li class="notify-msg"><span>Product added to cart<span></li></ul>');
+			}
+			return false;
+		}
+		function clearAllItems(){
+			IncraAjaxUpdater.submitOnly('[Website.GetUrl,IncraShop,ClearCompare]',IncraWindow.formatUrl('[Url.FullUrl]'),'','','GET','[Url.FullUrl]');
+		}
+</script>

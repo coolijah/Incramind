@@ -1,0 +1,30 @@
+/*
+*		Renders the main menu block container of the header.
+*
+*/
+<div class="row ">
+	<div class="large-12 clearfix IncraTheme-container ">
+		<div class="large-12 left main-menu clearfix">
+			[:HeaderMainMenuLinks]
+		</div>
+	</div>
+</div>
+
+[?DesignLayout.HeaderType|2RowRightLogo=
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery(".IncraTheme-container .main-menu div ul:not(.dropdown) li").css("padding","14px 20px");
+			jQuery(".IncraTheme-container").css("margin-top","2px");
+		});
+
+	</script>
+	|SliderType=
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery(".IncraTheme-container .main-menu div ul:not(.dropdown) > li").css("padding","17px 20px");
+			//jQuery(".IncraTheme-container").css("margin-top","2px");
+		});
+
+	</script>
+]
+

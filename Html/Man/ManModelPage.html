@@ -1,0 +1,97 @@
+[?Url.MVC4
+|ajax=
+|=
+<html>
+	<head>
+		<title>IncraPages - [_Model]</title>
+		[:ManHead]
+		<style type="text/css">
+			.description a{text-decoration:none;}
+		</style>
+		<!--\[if IE 7\]>
+			<link href="styles-ie7.css" rel="stylesheet" type="text/css"/>
+			<!\[endif\]-->
+	</head>
+	<body>
+		<div class="topnav">
+			<nav class="incra-right">
+			</nav>
+		</div>
+		<div id="content_container">
+			[:ManHeader2]
+			<div class="large-12 clearfix ">
+				<div class="large-2 columns panel man-tree-container">
+					[:Man_Tree2]
+				</div>
+				<div class="large-10 columns man-content-container">
+					]
+					<h6 class="text-left">[_Model] : [Man.ModelName]</h6>
+					<p class="scope-description  text-left">[Man.ModelDescription]
+						<br/>
+					</p>
+					<div id="main_content" class="large-12">
+						<div class="large-12 columns content-list" style="padding:0px 10px 0px 0px;">
+							<ul class="tabs" data-tab role="tablist">
+								<li class="tab-title active" role="presentational" ><a href="#panel2-1" role="tab" tabindex="0" aria-selected="true" controls="panel2-1">[_Urls]</a></li>
+								<li class="tab-title " role="presentational" ><a href="#panel2-2" role="tab" tabindex="0" aria-selected="true" controls="panel2-2">[_Blocks]</a></li>
+							</ul>
+							<div class="tabs-content">
+								<section role="tabpanel" aria-hidden="false" class="content active" id="panel2-1">
+									<table >
+										<thead>
+											<tr>
+												<th width="200">[_Url]</th>
+												<th >[_Description]</th>
+											</tr>
+										</thead>
+										<tbody>
+											[Man.ModelUrls=
+											<tr>
+												<td valign="top"><a href="[Website.GetUrl, Man, Url]/[Man.UrlCode]">[Man.UrlName]</a></td>
+												<td valign="top">[Man.UrlDescription]</td>
+											</tr>
+											]
+										</tbody>
+									</table>
+								</section>
+								<section role="tabpanel" aria-hidden="false" class="content" id="panel2-2">
+									<table >
+										<thead>
+											<tr>
+												<th width="200">[_Block code]</th>
+												<th width="200">[_Associated Html block]</th>
+												<th >[_Description]</th>
+											</tr>
+										</thead>
+										<tbody>
+											[Man.ModelBlocks=
+											<tr>
+												<td valign="top">[Man.BlockCode]</td>
+												<td valign="top">[Man.UrlName]</td>
+												<td valign="top">[Man.BlockDescription]</td>
+											</tr>
+											]
+										</tbody>
+									</table>
+								</section>
+							</div>
+						</div>
+					</div>
+					<script type="text/javascript">
+						jQuery(document).foundation({
+							tab: {
+							  callback : function (tab) {
+							  }
+							}
+						});
+					</script>
+
+					[?Url.MVC4
+					|ajax=
+					|=
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+]

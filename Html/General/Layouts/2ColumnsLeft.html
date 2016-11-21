@@ -1,0 +1,33 @@
+/*
+*		Renders the 2 columns layout containing mainContent and left column, loads for most of the pages.  This can be enherited on per model basis.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              2ColumnsLeft
+Location:          /Html/General/Layouts/2ColumnsLeft.html
+Created By:        Leslie Canete
+Created At:        06-Okt-2014 14:51 (relocating)
+Last modified By:  Seth Malaki
+Last modified At:  23-Okt-2014 17:52 (myupdates in adding comments)
+Called from:       FeaturedPage 	
+Calling blocks:    breadcrumb 	Footer 	header 	leftColumn 	mainContent 	notification 	
+--------------------------------------------------------------------**/
+<div class="wrapper"> 
+	<div class="page">	
+		[:header]
+		<div class="two-columns-left">		
+			<div class="row">					
+				<div layout-block-name="left_column" class="left-content large-3 medium-3 small-12 columns grid-col2-sidebar no-gutter">
+					[:leftColumn]
+				</div>
+				<div layout-block-name="main_column" class="main-content large-9 medium-9 small-12 columns grid-col2-main no-gutter">					
+					[:notification]
+					[:mainContent]
+					[:Footer]
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+

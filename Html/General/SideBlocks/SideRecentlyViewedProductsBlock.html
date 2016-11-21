@@ -1,0 +1,41 @@
+/*
+*		Renders a block that contains a recently viewed products.
+*
+*/
+/*
+[Website.RecentlyViewed,1]
+[?Filter.Empty|No=
+<div class="block products-block recentlyviewed Default">
+	<div class="title">
+		<h2>[_RECENTLY VIEWED]</h2>
+	</div>
+	<div class="block-content">
+		<ul class="products-grid">
+		[Filter.Products=
+			<li class="item">
+				[:ProductThumbnailListItem]
+			</li>
+		]
+		</ul>
+	</div>
+</div>
+]
+*/
+
+[?Website.LoopProductsCount,RecentlyViewed|0=|=
+<div class="block products-block recentlyviewed Default">
+	<div class="title">
+		<h2>[_RECENTLY VIEWED]</h2>
+	</div>
+	<div class="block-content">
+		<ul class="products-grid">
+		[Website.LoopProducts,RecentlyViewed,1=
+			<li class="item">
+				[:ProductThumbnailListItem]
+			</li>
+		]
+		</ul>
+	</div>
+	<hr>
+</div>
+]

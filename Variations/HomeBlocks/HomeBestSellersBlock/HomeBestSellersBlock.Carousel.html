@@ -1,0 +1,38 @@
+/*
+*	Renders a block containing list of best sellers products.
+*/
+[?Website.LoopProductsCount,Bestsellers|0=|=
+	<div layout-block-name="home_block_container" class="bestselling-products home-block Carousel">
+		<div class="home-block-style [Design.DesignSelectionName, HomeBlocksStyle]">
+			<div class="block-title"><h3 class="subheader">[_BEST-SELLING PRODUCTS] </h3></div>
+			<div class="block-content">
+				<ul class="products-grid inline-list" id="bestseller_simpleslider_carousel">
+					[Website.LoopProducts,Bestsellers,8,,'Name'=
+						<li class="item">
+							[:ProductMiniListItem,No]
+						</li>
+					]
+				</ul>
+				<div class="navigation">
+					<a class="prev" id="bestseller_simpleslider_prev" href="#"><span class="fa fa-angle-left"></span></a>
+					<a class="next" id="bestseller_simpleslider_next" href="#"><span class="fa fa-angle-right"></span></a>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+		var container_width=jQuery('#bestseller_simpleslider_carousel').parents('.home-block-style').width();
+		jQuery(function() {
+			var bsc = new ProductCarousel({
+				carousel_id : '#bestseller_simpleslider_carousel',
+				prevbtn: '#bestseller_simpleslider_prev',
+				nextbtn:'#bestseller_simpleslider_next',
+				width:'100%',
+				items:4
+			});
+			jQuery('#bestseller_simpleslider_carousel li').width((container_width-100)/4);
+			bsc.carousel();
+		});
+		</script>
+	</div>
+
+]

@@ -1,0 +1,110 @@
+<script type="text/javascript">
+var all_availablecountries =
+\[[Website.AvailableCountries=
+	[CountryGroup.Countries=
+	       {
+		"country_id"      :       [Country.Id],
+		"country_name"    :       "[Country.Name]",
+		"states"        :"[Country.States={ 'state_id': [State.Id], 'state_name': \"[State.Name]\"},]",
+	       },
+	]
+]\];
+
+all_availablecountries.forEach(function(el){
+       var temp = eval('\['+el.states+'\]');
+       el.states = temp;
+});
+
+jQuery(document).ready(function(){
+	addressByCountry(jQuery('#country-address').val());
+});
+
+function loadRegions(countryid){
+	all_availablecountries.forEach(function(data){
+		if (data\['country_id'\]==countryid){
+			data\['states'\].forEach(function(states){
+				jQuery("#region_id").append('<option value="'+states.state_id+'">'+states.state_name+'</option>');
+			});
+		}
+	});
+}
+
+var addressByCountry=function(val){
+	var url='[Website.GetUrl,ajax,block/CustomerAddressCountryConfiguration/country/]'+val;
+	jQuery.ajax(url,{	
+		type: "GET",  
+		dataType: "html",
+		success: function(data, textStatus, jqXHR){
+			JSON.stringify(eval("(" + data + ")"));
+
+			if(country.showpostal=="Yes"){
+				jQuery('#postal_field').show();
+			}
+			else{
+				jQuery('#postal_field').hide();
+			}
+			if(country.postalrequired=="No"){
+				jQuery('#postal_field').find('label').removeClass('required');
+				jQuery('#postal_field').find('input').removeClass('required');
+				jQuery('#postal_field').find('em').html('');
+			}else{
+				jQuery('#postal_field').find('label').addClass('required');
+				jQuery('#postal_field').find('input').addClass('required');
+				jQuery('#postal_field').find('em').html('*');
+			}
+			if(country.showpostal=="Yes" && country.showpostalbeforeplace=="Yes"){
+				var postal_html=jQuery('#postal_field').detach();
+				jQuery('#postalcode_placeholder').html(postal_html);
+			}else{
+				var postal_html=jQuery('#postal_field').detach();
+				jQuery('#postcode_placeholder_after').html(postal_html);
+			}
+			
+			if(country.showmiddlename=="Yes"){
+				console.log('show middle name : Yes');
+				jQuery('#middlename_field').show();
+				jQuery('#firstname_field').attr("class","large-4 columns");
+				jQuery('#lastname_field').attr("class","large-4 columns");
+			}
+			else if(country.showmiddlename=="No"){
+				console.log('show middle name : No');
+				jQuery('#middlename_field').hide();
+				jQuery('#firstname_field').attr("class","large-5 columns");
+				jQuery('#lastname_field').attr("class","large-5 columns");
+			}
+			if(country.showregion=="Yes"){
+				jQuery('#region_field').show();
+			}else if(country.showregion=="No"){
+				jQuery('#region_field').hide();
+			}
+			if(country.showtitle=="Yes"){
+				jQuery('#title_field').show();
+			}else if(country.showtitle=="No"){
+				jQuery('#title_field').hide();
+			}
+			if(country.showaddress2=="Yes"){
+				jQuery('#address2_field').show();
+			}else if(country.showaddress2=="No"){
+				jQuery('#address2_field').hide();
+			}
+			if(country.showhousenumberext=="Yes"){
+				jQuery('#housenumberext_field').show();
+			}else if(country.showhousenumberext=="No"){
+				jQuery('#housenumberext_field').hide();
+			}
+			if(country.showhousenumberseparate=="Yes"){
+				jQuery('#housenumber_field').show();
+			}else if(country.showhousenumberseparate=="No"){
+				jQuery('#housenumber_field').hide();
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown)
+		{
+			jQuery("#loading").remove();
+			alert("The request was not completed successfuly.");
+
+		}
+	});
+	loadRegions(val);
+};
+</script>

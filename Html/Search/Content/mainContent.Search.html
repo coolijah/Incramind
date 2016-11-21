@@ -1,0 +1,22 @@
+/*
+*	Renders the main content of the SearchPage.  Contains the list of products based on search keywords.
+*/
+
+[Website.SearchResults,[Url.Controller]]
+[?Filter.HasOtherPages|Yes=
+<div class="page-title"><h2>[_Search Results for %1, [Url.Controller]]</h2></div>
+/*<div class="other-results">
+	<h3>[_Other Results] ([Filter.OtherPagesCount])</h3>
+	<ul>
+	[Filter.OtherPages,3=<li><a href="[Filter.OtherPageUrl]">[Filter.OtherPageTitle]</a></li>]
+	</ul>
+</div>*/
+]
+<div class="category-view">
+	[?Filter.Empty|no=[:toolbar]]
+
+	[:CategoryListLayout]
+
+	[?Filter.Empty|no=|yes=<p class='no-results'>[_There are no products matching the selection.]</p>]
+</div>
+

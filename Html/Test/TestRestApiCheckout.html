@@ -1,0 +1,67 @@
+<script type="text/javascript">
+var api_test= new IncraTestApi({});
+/*
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate : Product,3\]\[Product.NumberInStock\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/AddToCart/3/2");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/UpdateItemInCart/"+api_test.applicable_id+"/4");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate : Product,3\]\[Product.ReservedQty\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/cartSelectBillingAddress/2");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/cartSelectShippingAddress/1");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/cartSetShippingMethod/1");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/cartAddExtraDataField/5/13");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/cartSetStoreLocation/2");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/cartSetPaymentMethod/8");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/cartAddExtraDataField/3/123456");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/cartPlaceOrder");*/
+
+//checkout as guest
+api_test.processUrl("[Website.GetUrl,RestApi]/call/Logout");
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate : Product,3\]\[Product.NumberInStock\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/AddToCart/3/2");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/ProcessDiscountCoupon/HUNGRY00");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/UpdateItemInCart/"+api_test.applicable_id+"/4");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate : Product,3\]\[Product.ReservedQty\]"); 
+
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/CartSetShippingAddress/Miss/Blessie/C/Escofield/Street1/Street2/E12/NT/City/PostCode/1/153/Company/blessie@gmail.com/123/1");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/CartSetBillingAddress/Miss/Blessie/C/Escofield/Street1/Street2/E12/NT/City/PostCode/1/153/Company/blessie@gmail.com/123/1");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/CartSetShippingMethod/1");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/CartAddExtraDataField/5/13");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/CartSetStoreLocation/2");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/CartSetPaymentMethod/8");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/CartAddExtraDataField/3/123456");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/CartPlaceOrder");
+
+var data=api_test.temp_array;
+
+var myApp = angular.module("myApp", []);
+
+myApp.controller("myController", function($scope){
+   $scope.logs = data; 
+});
+</script>
+
+
+

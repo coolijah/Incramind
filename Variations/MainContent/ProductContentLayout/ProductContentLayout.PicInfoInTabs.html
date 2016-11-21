@@ -1,0 +1,63 @@
+/*
+*		Renders the product content layout contaning  product information block
+*		picture(product images), inside a tab control.  Tab controls contains additional 
+*		product information also.
+*/
+
+<div class="product-content-layout info-pic-in-tabs">
+	<div class="large-12 columns product-page">
+		<ul class="info-pic-in-tabs tabs" data-tab="" role="tablist">
+			<li class="tab-title active" role="presentational"><a href="#" role="tab" tabindex="0" aria-selected="true" content="product-info">[_Product Info]</a></li>
+			<li class="tab-title " role="presentational"><a href="#" role="tab" tabindex="0" aria-selected="true" content="details">[_Product details]</a></li>
+			<li class="tab-title" role="presentational"><a href="#" role="tab" tabindex="0" aria-selected="false" content="upsell">[_Upsell products]</a></li>
+			<li class="tab-title " role="presentational"><a href="#" role="tab" tabindex="0" aria-selected="true" content="related">[_Related products]</a></li>
+			<li class="tab-title" role="presentational"><a href="#" role="tab" tabindex="0" aria-selected="false" content="tags">[_Tags</a></li>
+		</ul>
+		<div class="large-12 columns product-info product-additional-info ">
+			<form id="product_addtocart_form" class="row collapse clearfix">
+				<div class="tabs-content">
+					<section role="tabpanel" aria-hidden="false" class="content active" id="product-info">
+						<div class="large-12 clearfix">
+							<div layout-block-name="product_content_layout_block_upper_primary_media" id="media-image-block" class="large-5 medium-5 columns">
+								[:ProductMediaImageContainer] <!-- contains design variation lightbox - changed already to image plugin -->
+							</div>
+							<div layout-block-name="product_content_layout_block_upper_primary_info" id="product-details-block" class="large-7 medium-7 columns">
+								[:ProductContentLayoutInfoBlock]
+							</div>
+						</div>
+						<div class="large-12">
+							[:ProductOptions] 			<!-- design variation -->
+						</div>
+					</section>
+					<section role="tabpanel" aria-hidden="false" class="content " id="details">
+						[:ProductContentLayoutTabsContentProductDetails]
+					</section>
+					<section role="tabpanel" aria-hidden="false" class="content " id="upsell">
+						[:ProductContentLayoutTabsContentProductUpsell]
+					</section>
+					<section role="tabpanel" aria-hidden="false" class="content " id="related">
+						[:ProductContentLayoutTabsContentProductRelated]
+					</section>
+					<section role="tabpanel" aria-hidden="false" class="content " id="tags">
+						[:ProductContentLayoutTabsContentProductTags]	
+					</section>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+ 	jQuery(document).ready(function(){
+ 		jQuery(".tabs .tab-title a\\[role=tab\\]").click(function(){
+			var tab = jQuery(this);
+			jQuery(".tabs .tab-title").removeClass("active");
+			tab.parent().addClass("active");
+			var content_id = tab.attr("content");
+			jQuery(".tabs-content .content").removeClass("active");
+			jQuery("#"+content_id).addClass("active");
+			return false;
+		});
+		jQuery(".block-upsell .item .product-name, .block-related .mini-list-item-wrapper .product-name").substring({ max_char : 11 })
+ 	})
+</script>

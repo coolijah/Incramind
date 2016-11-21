@@ -1,0 +1,26 @@
+<div ng-app="myApp" ng-controller="myController">
+	<table style="width:90%">
+		<colgroup>
+		<col width="500">
+  		<col width="150">
+  		<col width="80">
+  		<col width="80">
+  		</colgroup>
+		<thead>
+			<tr>
+				<th>Call</th>
+				<th>Result</th>
+				<th>Applicable Id</th>
+				<th>Error</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="log in logs" ng-class="{'error' : {{log.Error}}==true}">
+				<td>{{log.Call}}</td>
+				<td>{{log.Result}} </td>
+				<td>{{log.ApplicableId}}</td>
+				<td>{{log.Error}} </td>
+			</tr>
+		</tbody>
+	</table>
+</div>

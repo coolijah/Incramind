@@ -1,0 +1,62 @@
+/*
+*		Renders the store currency switcher.
+* with promoheader
+*/
+
+<div class="header-container SliderType">
+	<div class="large-12 header">
+		<div class="header-top">
+			<div class="header-promoheader">
+				[Website.Promoheader,Test=
+					<div class="categorypromoheader large-12">
+						[?PromoHeader.Enabled|Yes=
+							[PromoHeader.Blocks=
+								[?PromoHeaderBlock.Type
+									|slider=
+									<div class="Layout1 _block1 blocks-preview">
+									[:HeaderPromoHeaderSlideShow]
+									</div>
+									
+								]
+								
+							]
+						]
+					</div>
+				]
+			</div>
+			<div class="header-primary">
+				<div class="header-float row">
+					<div class="large-3 columns logo-container">[:HeaderLogoBlock]</div>
+					<div class="large-2 columns">
+						[?Design.DesignSelectionName,HeaderMiniSearchBlock|Ajax=
+							[:SliderType.HeaderMiniSearchBlock.Ajax]
+						|=
+							[:SliderType.HeaderMiniSearchBlock]
+						]
+					</div>
+					<div class="large-5 columns a-right">
+						<div class="in-block">[:HeaderWelcomeMessageBlock]</div>
+						<div class="in-block">[:SliderType.HeaderTopNavigationLinksBlock]</div>
+					</div>
+					<div class="large-2 columns switchers-container">
+						<div class="in-block">[:SliderType.HeaderCurrencySwitcherBlock]</div>
+						<div class="in-block">[:SliderType.HeaderLanguageSwitcherBlock]</div>
+						<div class="in-block">
+							<div class="summary-cart-icon">
+								<a href="[Website.GetUrl,Cart]"><span class="fa fa-shopping-cart"></span>
+								<span class="nr-items">[ShoppingCart.NrItems]</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header-bottom">
+			[:HeaderMainMenuBlock]
+		</div>
+	</div>
+</div>
+
+[:SubmitAsPostVar]
+

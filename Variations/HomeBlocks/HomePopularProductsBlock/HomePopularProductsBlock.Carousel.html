@@ -1,0 +1,39 @@
+/*
+*	Renders a block containing list of popular products.
+*/
+[?Website.LoopProductsCount,MostInteresting|0=|=
+<div layout-block-name="home_block_container" class="popular-products-block home-block Carousel">
+	<div class="home-block-style [Design.DesignSelectionName, HomeBlocksStyle]">
+		<div class="block-title"><h5 class="subheader">[_Popular Products] </h5></div>
+		<div class="block-content">
+			<ul class="products-grid inline-list" id="popular_simpleslider_carousel">
+				[Website.LoopProducts,MostInteresting,8,,'Name'=
+					<li class="item" data-equalizer-watch>
+						[:ProductMiniListItem]
+					</li>
+				]
+			</ul>
+			<div class="navigation">
+				<a class="prev" id="popular_simpleslider_prev" href="#"><span>[_prev]</span></a>
+				<a class="next" id="popular_simpleslider_next" href="#"><span>[_next]</span></a>
+			</div>
+		</div>
+		<script type="text/javascript">
+		jQuery(function() {
+			var container_width=jQuery('#popular_simpleslider_carousel').parents('.home-block-style').width();
+			var psc = new ProductCarousel({
+				carousel_id : '#popular_simpleslider_carousel',
+				prevbtn: '#popular_simpleslider_prev',
+				nextbtn:'#popular_simpleslider_next',
+				width:'100%',
+				items: 4
+			});
+			jQuery('#popular_simpleslider_carousel li').width((container_width-100)/4);
+			psc.carousel();
+			
+		});
+		</script>
+	</div>
+</div>
+
+]

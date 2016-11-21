@@ -1,0 +1,103 @@
+/*
+*		Renders a variation of toolbar block in listings of products, search results and others
+*
+*/
+
+<div class="toolbar Aqua clearfix">
+	[?Filter.PageCount|1=
+	|=
+		<div class="pager clearfix">
+			
+			<div class="prev large-1 column"><span [?Filter.IsFirstPage|no=onclick="IncraToolbar.setPage('[Filter.PrevPage]')" style="cursor:pointer"]>[_Prev]</span></div>
+			
+			<div class="product-pagination large-10 columns">
+				<ul>
+					[Filter.PagesSmart=
+						<li>[?Filter.LoopPageIsCurrent
+						|yes=<span class="current">[Filter.LoopPageNr]</span>
+						|no=<span onclick="IncraToolbar.setPage('[Filter.LoopPageNr]')">[Filter.LoopPageNr]</span>]</li>
+						<li class="elipses">[Filter.NextElipsis]</li>
+					]
+				</ul>
+			</div>
+			
+			<div class="next large-1 column"> <span [?Filter.IsLastPage|no=onclick="IncraToolbar.setPage('[Filter.NextPage]')" style="cursor:pointer"|yes=]>[_Next]</span></div>
+			
+		</div>
+	]
+	<div class="sorter-container clearfix">
+		<div class="result-count large-2 columns text-center">
+			<label >
+				<strong>[Filter.Count] [_items]</strong>
+			</label>
+		</div>
+		<div class="view-mode large-3 columns text-center">
+			<label>[_View as]:</label>
+			[?Configuration.CatalogListMode
+			|ListOnly=
+				<span><span class="selected">[_List]</span></span>
+			|GridOnly=
+				<span><span class="selected">[_Grid]</span></span>
+			|ListDefault=
+				 [?UserInput.CatalogMode
+				 |Grid=
+					<span><span class="selected">[_Grid]</span></span>
+					<span>&#124;</span>
+					<span><span class="opt-mode" onclick="IncraToolbar.setCatalogMode('List')">[_List]</span>&nbsp;</span>&nbsp;
+			
+				 |List=
+				 	<span><span class="opt-mode" onclick="IncraToolbar.setCatalogMode('Grid')">[_Grid]</span></span>
+				 	<span>&#124;</span>
+					<span><span class="selected">[_List]</span></span>
+				 ]
+			|GridDefault=
+				 [?UserInput.CatalogMode
+				 |Grid=
+					<span><span class="selected">[_Grid]</span></span>
+					<span>&#124;</span>
+					<span><span class="opt-mode" onclick="IncraToolbar.setCatalogMode('List')">[_List]</span>&nbsp;</span>&nbsp;
+			
+				 |List=
+				 	<span><span class="opt-mode" onclick="IncraToolbar.setCatalogMode('Grid')">[_Grid]</span></span>
+				 	<span>&#124;</span>
+					<span><span class="selected">[_List]</span></span>
+				 ]
+			]
+			
+		</div>
+		[?DesignLayout.Layout|3Columns=
+			|=
+				<div class="limiter large-3 columns text-center">
+					[:ToolbarLimiter]
+				</div>
+				<div class="sort-by large-3 columns text-center">
+					[:ToolbarSortby]
+				</div>
+		]
+	</div>
+	[?DesignLayout.Layout|3Columns=
+		<div class="large-12 columns clearfix">
+			<div class="limiter large-6 columns text-left" style="border:none;">
+				[:ToolbarLimiter]
+			</div>
+			<div class="sort-by large-6 columns text-right">
+				[:ToolbarSortby]
+			</div>
+		</div>
+	]
+</div>
+<script type="text/javascript">
+	IncraToolbar.init({
+		update_url : "[Website.GetUrl,Ajax,Update]",
+		current_url :"[Url.FullUrl]",
+		default_url:"[UserInput.DefaultUrlPart]",
+		filter_url:"/[UserInput.FilterUrl]",
+		sort_value:"/[UserInput.PageAscending]",
+		sort_by_value:"/[UserInput.PageSort]",
+		pagination_url:"/[UserInput.PaginationUrl]",
+		page_from :"[UserInput.PageFrom]",
+		page_nr_on: "[UserInput.PageNrOn]"
+	});
+	
+	
+</script>

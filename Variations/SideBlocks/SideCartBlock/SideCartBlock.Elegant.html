@@ -1,0 +1,57 @@
+/*
+*		Renders a mini side cart of the current customer.
+*
+*/
+
+<div class="block cart Elegant">
+	<div class="title">
+		<h6>[_My Cart] ([ShoppingCart.NrItems])</h6>
+	</div>
+	<div class="block-content">
+		[?ShoppingCart.Empty
+		|CartFilled=
+			<div class="cart-items large-12">
+				<h6>[_Recently Added Item(s)]</h6>
+				<ul class="media-list">
+					[ShoppingCart.RecentlyAddedItems,3=
+						<li class="clearfix">
+							<div class="mini-product-image large-3 column">
+								<a href="[Website.GetUrl,Product,[Product.Id]]">
+								  <img class="img-polaroid" width="50" title="[Product.Name]" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,100,100]]">
+								</a>
+								
+							</div>
+							<div class="product-details large-9 columns">
+								<div class="large-10 columns">
+									<span class="product-title">
+										<a href="[Website.GetUrl,Product,[Product.Id]]">[Product.Name]</a>
+									</span>
+								</div>
+								<div class="large-2 columns text-right">
+									<span class="remove-icon fa fa-times-circle" onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,RemoveFromCart]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[ShoppingCartItem.Id]');"></span>
+								</div>
+								<div class="large-6 columns">
+									Qty : [ShoppingCartItem.Quantity]
+								</div>
+								<div class="large-6 columns text-right">
+									[ShoppingCartItem.PriceEach]
+								</div>
+							</div>
+					  	</li>
+					  ]
+				</ul>
+			</div>
+			<div class="summary a-right clearfix">
+				<div class="large-7 columns subtotal text-left">[_SUBTOTAL:] <br><strong>[ShoppingCart.TotalExclTax]</strong><br>
+				(<strong>[ShoppingCart.TotalInclTax]</strong> [_Incl. Tax)]</div>
+				<div class="large-5 columns action a-right">
+					<button type="button" title="[_Checkout]" class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="IncraWindow.setLocation('[Website.GetUrl,CheckOut,OnePage]')"><span><span>[_Checkout]</span></span></button>
+				</div>
+				
+			</div>
+			
+		|CartEmpty=<p>[_You have no item/s in your cart]</p>
+		]
+		
+	</div>
+</div>

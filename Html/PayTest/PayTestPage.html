@@ -1,0 +1,100 @@
+<html>
+	<head>
+		<title>[_Paytest Page]</title>
+		<link href="[File:/css/paytest_style.css]" rel="stylesheet" type="text/css"/>
+		<script src="[File:/Js/jquery.min.js]"></script>
+		<script src="[File:/Js/jQuery.noConflict.js]"></script>
+	</head>
+	<body>
+		<div id="container">
+			<div class="header">
+				<p>[_PAYTEST PAGE] [OrderMutation.Id]</p>
+			</div>
+			<div class="main_content_wrapper">
+				<form id="paytest_form" method="post" action="[PayTest.ConfirmUrl]">
+					<div class="main_content">
+						<div class="details1_wrapper">
+							<fieldset>
+								<ul class="details1">
+									<li><label for="transaction_title">[_TRANSACTION ID:]</label><span>[PayTest.Id]</span></li>
+									<li><label for="transaction_title">[_TRANSACTION TITLE:]</label><span>[PayTest.TransactionName]</span></li>
+									<li><label for="transaction_description">[_TRANSACTION DESCRIPTION:]</label><span>[PayTest.Description]</span></li>
+									<li><label for="transaction_description">[_PRICE:]</label><span>[PayTest.Amount]</span></li>
+								</ul>
+							</fieldset>
+						</div>
+						<div class="details2_wrapper">
+							[PayTest.Success]
+							<fieldset>
+								<ul class="details2">
+									<li><label>[_FIRST NAME:]</label><input type="text" name="firstname" value="[PayTest.FirstName]"/></li>
+									<li><label>[_MIDDLE NAME:]</label><input type="text" name="middlename" value="[PayTest.MiddleName]"/></li>
+									<li><label>[_LAST NAME:]</label><input type="text" name="lastname" value="[PayTest.LastName]"/></li>
+									<li><label>[_ADDRESS:]</label><input type="text" name="address" value="[PayTest.AddressLine1]"/></li>
+									<li><label>[_EMAIL ADDRESS:]</label><input type="text" name="email" value="[PayTest.EMail]"/></li>
+									<li><label>[_BANK ACCOUNT NUMBER:]</label><input type="text" name="bank_account_number" value="[PayTest.AccountNumber]"/></li>
+									<li><label>[_BANK:]</label>
+										<select name="bank">
+										$echo [PayTest.Bank]
+											<option value="">[_Select Bank]</option>
+											<option value="abn_amro">[_ABN AMRO]</option>
+											<option value="rabo_bank">[_RABO BANK]</option>
+											<option value="sns">[_SNS]</option>
+											<option value="ing_bank">[_ING BANK]</option>
+										</select>
+									</li>
+								</ul>
+								<div style="text-align:right;padding-top: 20px;padding-right:20px;">
+									<button type="submit" name="Submit">[_Success]</button>
+									<button type="button" onclick="canceTransaction()" name="cancel">[_Fail]</button>
+									<button type="button" onclick="processingPayTest()" name="processing">[_Processing]</button>
+									<p>
+										<button type="button" onclick="processingFail()" name="processing_fail">[_Processing (and fail later)]</button>
+										<button type="button" onclick="processingSucceed()" name="processing_succeed">[_Processing (and succeed later)]</button>
+									</p>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+				</form>
+				<div class="footer">
+					<p align="center">Demoshop. [_Copyright] &copy; 2013</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	function submitPayTest(){
+		jQuery.ajax({
+			url : '[Website.GetUrl,PayTest,]/[PayTest.ConfirmUrl]',
+			method : 'post',
+			data : jQuery("#paytest_form").serialize(),
+			Success : function(responseText){
+						
+					}
+		})
+	}
+	function canceTransaction(){
+		window.location.href = "[PayTest.CancelUrl]";
+	}
+	function processingPayTest(){
+		window.location.href = "[PayTest.ProcessingUrl]";
+	}
+	function processingFail(){
+		jQuery.ajax({
+			url: "[Website.GetUrl,Paytest,ProcessingFail]/[OrderMutation.Id]",
+			success: function(result){
+				window.location.href = "[Paytest.ProcessingUrl]";
+			}
+		});
+	}
+	function processingSucceed(){
+			jQuery.ajax({
+			url: "[Website.GetUrl,Paytest,ProcessingSucceed]/[OrderMutation.Id]",
+			success: function(result){
+				window.location.href = "[Paytest.ProcessingUrl]";
+			}
+		});
+	}
+</script>

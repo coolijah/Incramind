@@ -1,0 +1,40 @@
+/****
+[Design.DesignSelectionName,ProductUpsellBlock] - this returns the variation of the ProductUpsellBlock (style, could be Elegant, Corporate, Classic , etc - this would only affect the skin and typography of the title and content)
+**/
+[?Product.HasUpSellProducts|yes=
+<div class="product-upsell-block-type [Design.DesignSelectionName,ProductUpsellBlock] Carousel large-12 columns">
+		<div class="block-upsell">
+			<div class="block-title">
+				<h6>[_You might also be interested in the following products]</h6>
+			</div>
+			<ul class="list-inline-block" id="block_upsell_list">
+				[Product.UpSells= 
+				<li class="item ">
+					[:ProductMiniListItem,No,No]
+				</li>
+				]
+			</ul>
+			<div class="navigation">
+				<a class="prev" id="upsell_carousel_prev" href="#"><span class="fa fa-angle-left"></span></a>
+				<a class="next" id="upsell_carousel_next" href="#"><span class="fa fa-angle-right"></span></a>
+			</div>
+		</div>
+		<script type="text/javascript">
+		var container_width=jQuery('#block_upsell_list').parents('.block-upsell').width();
+			jQuery(function() {
+				var upsell_carousel = new ProductCarousel({
+					carousel_id : '#block_upsell_list',
+					prevbtn: '#upsell_carousel_prev',
+					nextbtn:'#upsell_carousel_next',
+					width:'100%',
+					height:'300px',
+					items:4
+				});
+				//jQuery(document).ready(function(){
+					jQuery('#block_upsell_list li').width((container_width-100)/4);
+					upsell_carousel.carousel();
+			//	})
+			});
+		</script>
+</div>
+]

@@ -1,0 +1,24 @@
+/*
+*		Renders a typical checkbox for a single filter navigation attributes option.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              FilterNavigationAttributeType.CheckBoxes
+Location:          /Html/Category/Content/FilterNavigationVariation/FilterNavigationAttributeTypes/FilterNavigationAttributeType.CheckBoxes.html
+Created By:        Leslie Canete
+Created At:        13-Okt-2014 18:44 (rename header and side blocks)
+Last modified By:  Seth Malaki
+Last modified At:  21-Okt-2014 17:09 (myupdates on addingComments)
+--------------------------------------------------------------------**/
+
+
+<div class="menu-header"><h5>[LayeredAttribute.Name]</h5></div>
+<ul class="links-navigation" id="checkbox-layered-nav">
+	[LayeredAttribute.Options=
+	<li>
+		<input id="[LayeredAttribute.AttributeCode]_[LayeredOption.ChoiceId]" class="checkbox attr_[LayeredAttribute.AttributeCode]" onclick="setFilter('[LayeredAttribute.AttributeCode]/[LayeredOption.AdminName]',[?LayeredAttribute.IsOptionSelected,[LayeredOption.AdminName]|Yes=true|=false])" type="checkbox" name="[LayeredAttribute.AdminName]" value="[LayeredOption.AdminName]" id="[LayeredOption.AdminName]" [?LayeredAttribute.IsOptionSelected,[LayeredOption.AdminName]|Yes=checked] >
+		<label for="[LayeredAttribute.AttributeCode]_[LayeredOption.ChoiceId]">[LayeredOption.Name]</label>
+		<span class="count">([LayeredOption.Count])</span>
+	</li>
+	]
+</ul>

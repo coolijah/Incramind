@@ -1,0 +1,50 @@
+/*
+*		Renders a mini side cart of the current customer.
+*
+*/
+<div class="block cart IncraTheme">
+	<div class="title">
+		<h2>[_MY SHOPPING CART]</h2>
+	</div>
+	<div class="block-content">
+		[?ShoppingCart.Empty
+			|CartFilled=
+				<div class="cart-items-block">
+					<div class="summary">
+						<p class="amount text-center">[_There is/are <strong>%1</strong> items in your shopping cart., [ShoppingCart.NrItems]]</p>
+						<p class="subtotal"><strong>[_CART SUBTOTAL:]</strong> <span>[ShoppingCart.TotalExclTax]</span>
+							<!--<br>
+						(<strong>[ShoppingCart.TotalInclTax]</strong> Incl. Tax)--></p>
+					</div>
+					<div class="actions a-center">
+						<button type="button" title="[_Checkout]" class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="IncraWindow.setLocation('[Website.GetUrl,CheckOut,OnePage]')"><span><span>[_Proceed To Checkout]</span></span>
+						</button>
+					</div>
+					<h2>[_Recently Added Item(s)]</h2>
+					<div>
+						<ul class="media-list">
+						[ShoppingCart.RecentlyAddedItems,2=
+							<li class="media row">
+								<div class="mini-product-image small-3 columns">
+									<a href="[Website.GetUrl,Product,[Product.Id]]">
+									  <img class="img-polaroid" width="50" title="[Product.Name]" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,100,100]]">
+									</a>
+								</div>
+								<div class="product-details small-7 columns">
+									<span class="product-title">
+										<a href="[Website.GetUrl,Product,[Product.Id]]">[Product.Name]</a>
+									</span>
+									<p>[ShoppingCartItem.Quantity] x [ShoppingCartItem.PriceEach]</p>
+								</div>
+								<div class="small-2 columns text-right">
+									<img class="img-remove " src="[File:/images/btn_remove.gif]" title="remove" onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,RemoveFromCart]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[ShoppingCartItem.Id]');"/>
+								</div>
+						  	</li>
+						  ]
+						</ul>
+					</div>
+				</div>
+			|CartEmpty=<p>[_You have no item/s in your cart]</p>
+		]
+	</div>
+</div>

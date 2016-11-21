@@ -1,0 +1,93 @@
+<div class="my-account">
+	<div class="page-title tttle-buttons">
+		[?Order.CanReturn|Yes=
+			<h1>New Return Order</h1>
+		|No=
+			<h1>[_This order cannot returned.]</h1>
+			<p>[Order.CanNotReturnReason]</p>
+		]
+	</div>
+	<form id="form_return_order" method="post" action="[Website.GetUrl,Customer,ReturnOrderSave]/[Order.Id]">
+	<table class="data-table">		
+		<tbody>
+			<tr>
+				<td  class="a-right">[_Order Number]</td>
+				<td colspan=2>[Order.OrderNumber] <input type="hidden" value="[OrderAddress.EMail]" name="email"></td>
+			</tr>
+			<tr>
+				<td class="a-right">[_Customer Name]</td>
+				<td colspan=2>[Order.ShipToName]</td>
+			</tr>
+			<tr>
+				<td  class="a-right">[_Shipping Address]</td>
+				<td colspan=2><address>[Order.LatestShippingAddress=
+					[OrderAddress.FirstName] [OrderAddress.MiddleName] [OrderAddress.LastName]<br>
+					[OrderAddress.Street]<br>
+					[OrderAddress.City],  [OrderAddress.PostalCode]<br>
+					[OrderAddress.State] [OrderAddress.Country]<br>
+					T: [OrderAddress.TelNumber]
+				]</address>
+				</td>
+			</tr>
+			<tr>
+				<td  class="a-right">[_Status]</td>
+				<td colspan=2>[Order.LastStatus,Front]</td>
+			</tr>
+			<tr>
+				<td colspan=3 style="background: #D9E4EE"><strong class="order-label items">[_Return Items Information]</strong></td>
+			</tr>
+			<tr>
+			 	<td class="a-right"><strong>[_Return]</strong> [?Order.CanReturn|Yes=<div class="return-all"><input type="checkbox" value="Yes" name="all" id="return_all"><label for ="return_all">[_All]</label></div>]</td>
+			    <td class="a-left" ><strong>[_Product Name]</strong></td>
+			    <td class="a-center"><strong>[_Quantity to Return]</strong></td>
+			</tr>
+		   
+			[Order.ItemsSummary=
+
+			
+			<tr>
+				<td class="a-right"><input type="checkbox" [?OrderItem.CanReturn|No=disabled] value="Yes" name="" onclick="jQuery('#order_quantity[OrderItem.OriginalId]').attr('disabled', !this.checked)" id="order_return[OrderItem.OriginalId]">
+				 </td>
+			    <td><label for="order_return[OrderItem.OriginalId]">[OrderItem.Name]</label>
+				 <p class="reason">[OrderItem.CanNotReturnReason]</p></td>
+			    <td class="a-center"><input class="quantity" type="text" disabled name="item\\[[OrderItem.OriginalId]\\]" value="[OrderItem.Quantity]" id="order_quantity[OrderItem.OriginalId]"></td>
+	
+			</tr>
+			]
+			<tr>
+				<td class="a-right"><label class="required">[_Reason to Return]<em>*</em></label></td>
+				<td colspan=2><select class="input-text" name="reasonCategory">
+					<option value=1>[_Broken/ Not Working]</option>
+					<option value=2>[_Wrong size/color]</option>
+					<option value=3>[_Don't like it]</option>
+					<option value=4>[_It is not what I expected]</option>
+					<option value=5>[_Others]</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td class="a-right v-align-top">[_Comments]</td>
+				<td colspan=2><textarea name="reason" rows=3 ></textarea></td>
+			</tr>
+		</tbody>
+		</table>
+		</form>
+			[?Order.CanReturn|Yes=
+			<div class="buttons-set">
+				<p class="required">* [_required fields]</p>
+				<button type="submit" title="[_Return]" class="button btn[Design.DesignSelectionName,ButtonStyle] f-right" ><span><span>[_Return]</span></span>
+			</div>
+			]
+			<div class="buttons-set">
+				<p class="back-link">
+					<a onclick="window.location='[Website.GetUrl,Customer,History]'"><small><<</small>[_Back to My Orders]</a>
+				</p>
+			</div>
+		<script type="text/javascript">
+			jQuery("#form_return_order").validate({
+				submitHandler: function(form){
+					this.submit();
+					/*IncraAjaxUpdater.submitOnly('[Website.GetUrl,Customer,ReturnOrderSave]/[Order.Id]',IncraWindow.formatUrl('[Url.FullUrl]'),'false',jQuery('#form_return_order').serialize(),'POST','[Website.GetUrl,Customer,Account]');*/
+				}
+			});
+			</script>
+</div>

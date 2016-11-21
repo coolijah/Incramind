@@ -1,0 +1,39 @@
+/*
+*	Renders a block containing list of featured products.
+*/
+[?Website.LoopProductsCount,New|0=|=
+<div layout-block-name="home_block_container" class="new-products-block home-block Carousel">
+	<div class="home-block-style [Design.DesignSelectionName, HomeBlocksStyle]">
+		<div class="block-title"><h5 class="subheader">[_New Products] </h5></div>
+		<div class="block-content">
+			<ul class="products-grid inline-list" id="new_simpleslider_carousel">
+				[Website.LoopProducts,New,8,,'Name'=
+					<li class="item">
+						[:ProductMiniListItem]
+					</li>
+				]
+			</ul>
+			<div class="navigation">
+				<a class="prev" id="new_simpleslider_prev" href="#"><span class="fa fa-angle-left"></a>
+				<a class="next" id="new_simpleslider_next" href="#"><span class="fa fa-angle-right"></a>
+			</div>
+		</div>
+		<script type="text/javascript">
+		var container_width=jQuery('#new_simpleslider_carousel').parents('.home-block-style').width();
+		jQuery(function() {
+			var nsc = new ProductCarousel({
+				carousel_id : '#new_simpleslider_carousel',
+				prevbtn: '#new_simpleslider_prev',
+				nextbtn:'#new_simpleslider_next',
+				width:'100%',
+				items:4
+			});
+			jQuery('#new_simpleslider_carousel li').width((container_width-100)/4);
+			nsc.carousel();
+			
+		});
+		</script>
+	</div>
+</div>
+
+]

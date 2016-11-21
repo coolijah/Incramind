@@ -1,0 +1,109 @@
+/*
+*		Renders the main content information of the CustomerAccountEditPage.
+*							
+*/
+
+<div class="my-account">
+	<div class="page-title">
+		<h1>[_Edit Account Information]</h1>
+	</div>
+	<form id="form-validate" method="post" action="">
+		<div class="fieldset">
+			<h2 class="legend">[_Account Information]</h2>
+			<p class="required">[_* Required Fields]</p>
+			<ul class="form-list">
+				<li class="fields"></li>
+				<li class="fields">
+					<div class="field name-firstname">
+						<label class="required" for="firstname">[_First Name]<em>*</em></label>
+						<div class="input-box">
+							<input type="text" class="input-text required" title="[_First Name]" value="[Customer.FirstName]" name="firstname" id="firstname" maxlength="255">
+						</div>
+					</div>
+				</li>
+				<li class="fields">
+					<div class="field name-lastname">
+						<label class="required" for="lastname">[_Last Name]<em>*</em></label>
+						<div class="input-box">
+							<input type="text" class="input-text required" title="[_Last Name]" value="[Customer.LastName]" name="lastname" id="lastname" maxlength="255">
+						</div>
+					</div>
+					<div class="field">
+						<div class="field name-middlename">
+							<labelfor="middlename">[_Middle Name]</label>
+							<div class="input-box">
+								<input type="text" class="input-text" title="[Middle Name]" value="[Customer.MiddleName]" name="middlename" id="middlename" maxlength="255">
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<label class="required" for="email">[_Email Address]<em>*</em></label>
+					<div class="input-box">
+						<input type="text" class="input-text required email" title="[_Email Address]" value="[Customer.Email]" id="email" name="email" maxlength="255">
+					</div>
+				</li>
+				<li class="control">
+					<input type="checkbox" class="checkbox" title="[_Change Password]" onclick="setPasswordForm(this.checked)" value="1" id="change_password" name="change_password"><label for="change_password" class="in-block">[_Change Password]</label>
+				</li>
+			</ul>
+		</div>
+				
+		<div class="fieldset" id="change-password" style="display:none;">
+			<h2 class="legend">[_Change Password]</h2>
+			<ul class="form-list">
+				<li>
+					<label for="current_password" class="required"><em>*</em>[_Current Password]</label>
+					<div class="input-box">
+					    <input type="password" title="[_Current Password]" class="input-text" name="current_password" id="current_password" />
+					</div>
+				</li>
+				<li class="fields">
+					<div class="field">
+					    <label for="customer_password" class="required"><em>*</em>[_New Password]</label>
+					    <div class="input-box">
+						<input type="password" title="[_New Password]" class="input-text" name="password" id="customer_password" />
+					    </div>
+					</div>
+					<div class="field">
+					    <label for="confirm_password" class="required"><em>*</em>[_Confirm New Password]</label>
+					    <div class="input-box">
+						<input type="password" title="[_Confirm New Password]" class="input-text" name="confirm_password" id="confirm_password" />
+					    </div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="buttons-set">			
+			<div><p class="back-link"><a href="[Website.GetUrl,Customer,Account]"><small><<</small>[_Back]</a></p></div>
+			<button class="button" title="[_Save]" type="submit"><span><span>[_Save]</span></span></button>
+		</div>
+
+		<script type="text/javascript">
+			jQuery("#form-validate").validate({
+				rules: { 
+					password: {
+						required: true,
+						minlength: 6
+					},
+					confirm_password: {
+						required: true,
+						minlength: 6,
+						confirmPassword: "#customer_password"
+					}
+				},
+				submitHandler: function(form){
+					IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,UpdateAccount]',IncraWindow.formatUrl('[Url.FullUrl]'),'true',jQuery('#form-validate').serialize(),'POST');
+				}
+			});
+		</script>
+	</form>
+
+		<script type="text/javascript">
+		if (('[Url.Controller]'=='ChangePassword') && ('[Url.MVC4]'=='1')){
+			jQuery('#change_password').prop('checked', true);
+			setPasswordForm(true);
+		}
+		</script>
+	
+</div>

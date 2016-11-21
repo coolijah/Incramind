@@ -1,0 +1,22 @@
+/*
+*		Renders a typical multiselect dropdown control for a single filter navigation attributes option.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              FilterNavigationAttributeType.MultipleSelect
+Location:          /Html/Category/Content/FilterNavigationVariation/FilterNavigationAttributeTypes/FilterNavigationAttributeType.MultipleSelect.html
+Created By:        Leslie Canete
+Created At:        13-Okt-2014 18:44 (rename header and side blocks)
+Last modified By:  Seth Malaki
+Last modified At:  21-Okt-2014 17:09 (myupdates on addingComments)
+--------------------------------------------------------------------**/
+
+
+<div class="menu-header"><h5>[LayeredAttribute.Name]</h5></div>
+	<select multiple="multiple" id="attr_[LayeredAttribute.AdminName]" name="[LayeredAttribute.AdminName]">
+		[LayeredAttribute.Options=
+		  <option value="[LayeredOption.Name]" id="[LayeredOption.Name]" [?LayeredAttribute.IsOptionSelected,[LayeredOption.Name]|Yes=selected]>[LayeredOption.Name]</option>
+		]
+	</select>
+	<br><br>
+	<button class="button btn[Design.DesignSelectionName,ButtonStyle]" type="button" onclick="setFilter(IncraFilterNavigation.parseMultipleSelOptions(jQuery('#attr_[LayeredAttribute.AdminName]')),false,true);"><span><span>[_Filter]</span></span></button>

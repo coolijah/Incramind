@@ -1,0 +1,55 @@
+<div layout-block-name="footer_block_container" class="footer Default">
+	<p id="back-top" style="display: block;">
+		<a href="#top">
+			<span><img src="/Test/designs/Sample6/images/top.png"></span>
+		</a>
+	</p>
+	[?DesignLayout.CheckFooter,[Url.Model],FooterNewsletterSubscriberBlock|Yes=[:FooterNewsletterSubscriberBlock]]
+	<div layout-block-name="footer_block_upper" class="footer-info footer-categories-block">
+		<div class="row footer-bottom">
+
+			<div layout-block-name="footer_block_upper_primary" class="large-8 medium-12 small-12 columns footer-categories hide-for-small">
+				<div class="large-12">
+					[?DesignLayout.CheckFooter,[Url.Model],FooterCategoriesBlock|Yes=[:FooterCategoriesBlock]]
+				</div>
+				<div class="large-12">
+					[?DesignLayout.CheckFooter,[Url.Model],FooterInfoLinksBlock|Yes=[:FooterInfoLinksBlock]]
+				</div>
+			</div>
+			<div layout-block-name="footer_block_upper_secondary" class="large-4 medium-12 columns footer-up-content text-left">
+				
+				<div class="large-12 medium-12 small-12 text-right small-only-text-left">
+					[?DesignLayout.CheckFooter,[Url.Model],FooterPaymentsImagesBlock|Yes=[:FooterPaymentsImagesBlock]]
+				</div>
+				<div class="large-12 medium-12 small-12 footer-social-media">
+					[?DesignLayout.CheckFooter,[Url.Model],FooterSocialMediaBlock|Yes=[:FooterSocialMediaBlock]]
+				</div>	
+			</div>
+		</div>
+	</div>
+<!-- 	
+	<div class="footer-info">
+		<div class="row">
+			<div class="large-6 columns text-left">
+				
+			</div>
+			
+		</div>
+	</div> 
+-->
+	<div layout-block-name="footer_block_bottom"class="footer-info footer-links-block text-center">
+		<div class="row">
+		[?DesignLayout.CheckFooter,[Url.Model],FooterLinksBlock|Yes=[:FooterLinksBlock]]
+		</div>
+	</div>
+	<div layout-block-name="footer_block_bottom_absolute" class="footer-info copyright-footer">
+		<div class="row">
+			<div class="large-12">
+				[?DesignLayout.CheckFooter,[Url.Model],FooterCopyrightsBlock|Yes=[:FooterCopyrightsBlock]]
+			</div>
+		</div>
+	</div>
+</div>
+<div class="compare-popup-container">
+	<div class="compare-product-content"></div>
+</div>

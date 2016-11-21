@@ -1,0 +1,69 @@
+/*
+*	Renders the search ajax container popup block.  This container contains the result of ajax search.
+*/
+
+<div class="search-ajax-container">
+	[Website.SearchResults,[Url.Controller],1,3, Name,Ascending]
+	<div id="popover-search" class="popover fade bottom in" style="display: block;position:relative;max-width:395px">
+		<div class="arrow" style="left: 80%"></div>
+		<ul>
+		[Website.SearchSuggestions,[Url.Controller]=
+			<li> <a href="[Website.GetUrl,Search,Text/[SearchTerm.SearchQuery]]">[SearchTerm.SearchQuery]</a></li>
+		]
+		</ul>
+	
+		[?Filter.Empty|no=
+		<h3 class="popover-title"> [_ %1 results found for <strong>'%2'</strong>, [Filter.Count], [Url.Controller]]
+		<a href="#" onclick="closeSearch();" id="close-search" class="pull-right close">&times;</a>
+		</h3>
+		<div class="popover-content">
+			<ul class="media-list">
+			[Filter.Products=
+			  <li class="media search-items">
+				<div class="image-thumbnail"><a href="[Website.GetUrl,Product,[Product.Id]]">
+				  <img class="img-polaroid" width="60" title="[Product.Name]" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,100,100]]">
+				</a>
+				</div>
+				<div class="media-body">
+				  <h5 class="media-heading" style="font-size: 12px;">
+				  <a product_id="[Product.Id]" href="[Website.GetUrl,Product,[Product.Id]]" class="search-product-title">[Product.Name]</a>
+				  </h6>
+				  <!-- Nested media object -->
+				  <div>
+				  <i>[Product.ShortDescription]</i>
+				 </div>
+				</div>
+			  </li>
+			]
+			</ul>
+		</div>
+		<div class="show-all-link"><a href="[Website.GetUrl,Search,Text/[Url.Controller]]">[_Show All Results]</a></div>
+		|yes=
+		<div class="popover-content">[_No products found]</div>
+		]
+		[?Filter.HasOtherPages|Yes=
+		<h3 class="popover-title"> [_Other Results] : [_ %1 results found , [Filter.OtherPagesCount]]</h3>
+		<div class="popover-content">
+			<ul class="media-list">[Filter.OtherPages,2=
+				<li class="media search-items"><a href="[Filter.OtherPageUrl]">[Filter.OtherPageTitle]</a></li>]
+			</ul>
+		</div>
+		]
+	</div>
+	
+	<!--[?Filter.Empty|no=
+		<div class="results-found ">[Filter.Count] [_results found for] [Url.Controller]</div>
+		<ul id="search-auto">
+			[Filter.Products=<li><div class="image"><a href="[Website.GetUrl,Product,[Product.Id]]"><img title="[Product.Name]" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,40,50]]"></a></div><div class="name-desc"><a href="[Website.GetUrl,Product,[Product.Id]]">[Product.Name]</a>
+			<p><i>[Product.ShortDescription]</i></p></div></li>]	
+		</ul>
+	|yes=
+		<span class="no-result">[_No results found]</span>
+	]
+	<div class="all-results">
+	[?Filter.SinglePage
+	|more=<a href="[Website.GetUrl,Search,Text/[Url.Controller]]">[_See All Results]</a>
+	]</div>-->
+</div>
+
+

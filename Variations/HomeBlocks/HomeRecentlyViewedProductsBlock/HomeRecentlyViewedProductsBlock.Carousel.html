@@ -1,0 +1,39 @@
+/*
+*	Renders a block containing list of featured products.
+*/
+[?Website.LoopProductsCount,RecentlyViewed|0=|=
+<div layout-block-name="home_block_container" class="recently-viewed-block home-block Carousel">
+	<div class="home-block-style [Design.DesignSelectionName, HomeBlocksStyle]">
+		<div class="block-title"><h5 class="subheader">[_Recently Viewed Products] </h5></div>
+		<div class="block-content">
+			<ul class="products-grid inline-list" id="recentlyviewed_simpleslider_carousel">
+				[Website.LoopProducts,RecentlyViewed,8,,'Name'=
+					<li class="item">
+						[:ProductMiniListItem]
+					</li>
+				]
+			</ul>
+			<div class="navigation">
+				<a class="prev" id="recentlyviewed_simpleslider_prev" href="#"><span>[_prev]</span></a>
+				<a class="next" id="recentlyviewed_simpleslider_next" href="#"><span>[_next]</span></a>
+			</div>
+		</div>
+		<script type="text/javascript">
+		jQuery(function() {
+		var container_width=jQuery('#recentlyviewed_simpleslider_carousel').parents('.home-block-style').width();
+			var rsc = new ProductCarousel({
+				carousel_id : '#recentlyviewed_simpleslider_carousel',
+				prevbtn: '#recentlyviewed_simpleslider_prev',
+				nextbtn:'#recentlyviewed_simpleslider_next',
+				width:'100%',
+				items:4
+			});
+			jQuery('#recentlyviewed_simpleslider_carousel li').width((container_width-100)/4);
+			rsc.carousel();
+			
+		});
+		</script>
+	</div>
+</div>
+
+]

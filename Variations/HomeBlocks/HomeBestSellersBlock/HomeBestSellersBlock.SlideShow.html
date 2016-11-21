@@ -1,0 +1,33 @@
+/*
+*	Renders a block containing list of best sellers products.
+*/
+[?Website.LoopProductsCount,Bestsellers|0=|=
+	<div layout-block-name="home_block_container" class="bestselling-products home-block SlideShow">
+		<div class="home-block-style [Design.DesignSelectionName, HomeBlocksStyle]">
+			<div class="block-title"><h5 class="subheader">[_Best Selling Products] </h5></div>
+			<div class="block-content">
+				<ul class="products-grid inline-list" id="bestselling_carousel">
+					[Website.LoopProducts,Bestsellers,8,,'Name'=
+						<li class="item">
+							[:ProductMiniListItem,No]
+						</li>
+					]
+				</ul>
+				<script type="text/javascript">
+				var container_width=jQuery('#bestselling_carousel').parents('.home-block-style').width();
+				jQuery(function() {
+					var bsi = new ProductCarousel({
+						carousel_id : '#bestselling_carousel',
+						items:4,
+						fx:'scroll',
+						width:container_width
+					});
+					jQuery('#bestselling_carousel li').width((container_width-100)/4);
+					bsi.slideshow();
+					
+				});
+				</script>
+			</div>
+		</div>
+	</div>
+]

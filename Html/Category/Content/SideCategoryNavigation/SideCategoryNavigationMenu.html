@@ -1,0 +1,146 @@
+/*
+*	(default variation) Renders the side category navigation menu.
+*/
+/** -------------------------------------------------------------------
+Name:              SideCategoryNavigationMenu
+Location:          /Html/Category/Content/SideCategoryNavigationMenuVariation/SideCategoryNavigationMenu.html
+Created By:        Leslie Canete
+Created At:        13-Okt-2014 18:44 (rename header and side blocks)
+Last modified By:  Aris Catan
+Last modified At:  27-Okt-2014 13:01 (updates on adding comments)
+Called from:       SideCategoryNavigationBlock 	
+Calling blocks:    FilterNavigation 	
+--------------------------------------------------------------------**/
+
+/*
+<div class="category-menu Default">
+	[?Url.Model
+	|Product=
+	<ul class="level-0">
+		[Product.MainCategory=
+		<li class="menu-header"><a>[Category.Name]</a></li>
+			[Category.ChildCategories=
+				<li class="level-0">
+					<a href="[Website.GetUrl,Category,[Category.Id]]" class="level-0"> <span class="[?Category.IsCurrent|same=current|different=]">[Category.Name]</span></a>
+					<div class="panel">
+						<ul class="level-1">[Category.ChildCategories=
+							<li class="level-1"><a href="[Website.GetUrl,Category,[Category.Id]]"><span class="[?Category.IsCurrent|same=current|different=]">[Category.Name]</span></a>[?Category.HasChildren|yes=
+								<div class="panel">
+									<ul class="level-2">
+										[Category.ChildCategories=<li class="level-2"><a href="[Website.GetUrl,Category,[Category.Id]]"><span class="[?Category.IsCurrent|same=current|different=]">[Category.Name]</span></a>
+										</li>]
+									</ul>
+								</div>
+								|no=]
+							</li>]
+						</ul>
+					</div>
+				</li>
+			]
+		]
+	</ul>
+	
+	|=
+
+	<ul class="level-0">
+		[Website.TopCategories=
+			<li class="level-0">
+			<a href="[Website.GetUrl,Category,[Category.Id]]" class="level-0"> <span class="[?Category.IsCurrent|same=current|different=]">[Category.Name]</span></a>
+			<div class="panel">
+				<ul class="level-1">[Category.ChildCategories=
+					<li class="level-1"><a href="[Website.GetUrl,Category,[Category.Id]]"><span class="[?Category.IsCurrent|same=current|different=]">[Category.Name]</span></a>[?Category.HasChildren|yes=
+						<div class="panel">
+							<ul class="level-2">
+								[Category.ChildCategories=<li class="level-2"><a href="[Website.GetUrl,Category,[Category.Id]]"><span class="[?Category.IsCurrent|same=current|different=]">[Category.Name]</span></a>
+								</li>]
+							</ul>
+						</div>
+						|no=]
+					</li>]
+				</ul>
+			</div>
+		</li>
+		]
+	</ul>
+	]
+</div>*/
+<div class="left-category-menu Default">
+		<ul class="accordion">	
+			[Website.LeftMenuSorted=
+				<li class="[?MenuOption.HasChildren|Yes=is-accordion-submenu-parent|No=[?MenuOption.MenuOptionType|Category=is-accordion-submenu-parent]] ">
+					<a class="[?MenuOption.IsCurrent|same=accordion-content|different=|parent=is-accordion-submenu-parent]" href="[MenuOption.FullUrl]"><span>[MenuOption.Name]</span></a>
+							[?MenuOption.HasChildren|Yes=
+								<ul class="menu vertical nested is-active">
+									[MenuOption.TopMenuChildrenSorted=
+										[?MenuOption.InTopMenu|Yes=
+											<li class="[?MenuOption.HasChildren|Yes=is-accordion-submenu-parent]">
+												<a href="[MenuOption.FullUrl]" class="[?MenuOption.IsCurrent|same=accordion-content|different=|parent= is-accordion-submenu-parent]">
+													<span class="cjsubmenu">[MenuOption.Name]</span></a>
+													[?MenuOption.HasChildren|Yes=
+														<ul class="menu vertical nested">
+															[MenuOption.TopMenuChildrenSorted=
+																[?MenuOption.InTopMenu|Yes=
+																	<li class="[?MenuOption.HasChildren|Yes=is-accordion-submenu-parent]">
+																		<a href="[MenuOption.FullUrl]" class="[?MenuOption.IsCurrent|same=accordion-content|different=|parent= is-accordion-submenu-parent]"><span class="supersubmenu">[MenuOption.Name]</span></a>
+																	</li>
+																]
+															]
+														</ul>
+
+													]
+												
+											</li>
+										]
+									]
+								</ul>
+							]
+				</li>
+			]
+		</ul>
+</div>
+	/*<div class="left-category-menu Default">
+		<ul class="vertical menu" data-accordion-menu>	
+			[Website.LeftMenuSorted=
+				<li class="[?MenuOption.HasChildren|Yes=has-submenu is-accordion-submenu-parent|No=[?MenuOption.MenuOptionType|Category=is-submenu-item is-accordion-submenu-item]] ">
+					<a class="[?MenuOption.IsCurrent|same=|different=|parent=]" href="[MenuOption.FullUrl]"><span>[MenuOption.Name]</span></a>
+							[?MenuOption.HasChildren|Yes=
+								<ul class="menu vertical nested is-active submenu is-accordion-submenu">
+									[MenuOption.TopMenuChildrenSorted=
+										[?MenuOption.InTopMenu|Yes=
+											<li class="[?MenuOption.HasChildren|Yes=is-submenu-item is-accordion-submenu-item|No=[?MenuOption.MenuOptionType|Category=is-submenu-item is-accordion-submenu-item]]">
+												<a href="[MenuOption.FullUrl]" class="[?MenuOption.IsCurrent|same=|different=|parent=]">
+													<span class="cjsubmenu[?MenuOption.IsCurrent|same=|different=|parent=]">[MenuOption.Name]</span>
+													[?MenuOption.HasChildren|Yes=]
+												</a>
+											</li>
+										]
+									]
+								</ul>
+							]
+				</li>
+			]
+		</ul>
+	</div>*/
+<!--<div class="left-category-menu Default">
+	<ul class="accordion" data-accordion>	
+		[Website.LeftMenuSorted=
+			<li class="[?MenuOption.HasChildren|Yes=accordion-navigation|No=[?MenuOption.MenuOptionType|Category=accordion-navigation]] ">
+				<a class="[?MenuOption.IsCurrent|same= current|different=|parent=current]" href="[MenuOption.FullUrl]" ><span class="cjtopmenu"> [MenuOption.Name]</span></a>
+				[?MenuOption.HasChildren|Yes=
+					<ul class="accordion" data-accordion style="[?MenuOption.IsCurrent|same=display:block|parent=display:block]">
+						[MenuOption.TopMenuChildrenSorted=
+							[?MenuOption.InTopMenu|Yes=
+								<li class="[?MenuOption.HasChildren|Yes=accordion-navigation]">
+									<a href="[MenuOption.FullUrl]" class="[?MenuOption.IsCurrent|same= current|different=|parent= current]">
+										<span class="cjsubmenu[?MenuOption.IsCurrent|same= current|different=|parent= current]">[MenuOption.Name]</span>
+										[?MenuOption.HasChildren|Yes=<span class="toggle">+</span>]
+									</a>
+								</li>
+							]
+						]
+					</ul>
+				]
+			</li>
+		]
+	</ul>
+</div>-->

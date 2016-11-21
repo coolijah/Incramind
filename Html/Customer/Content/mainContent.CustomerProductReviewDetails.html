@@ -1,0 +1,91 @@
+/*
+*		Renders the main content detailed information of the CustomerProductReviewDetailsPage.
+*							
+*/
+<div class="my-account">
+	<div class="page-title clearfix">
+		<h2 class="f-left">
+			[ProductReview.ProductName] <em>[ProductReview.Sku]</em>
+		</h2>
+		<div class="f-left ">
+			<div class="rating-box">
+				<div class="rating" style="width:[ProductReview.RatingPercentage]%"></div>
+			</div>
+		</div>
+		[ProductReview.Ratings=
+			[ProductRating.RatingCodeId]  [ProductRating.Percentage]
+		]
+	</div>
+	<div class="review-info-con">
+		<p>[_Review Status :] <em>[ProductReview.Status,Front]</em></p>
+		<p>[_Date Reviewed :] <i>[ProductReview.CreatedAt]</i></p>
+	</div>
+	<div class="form-add-review">
+		<form action="" method="post" id="review-form">
+			<fieldset>
+				<table class="data-table" id="product-review-table" style="width:70%">
+					<colgroup>
+						<col width="2">
+						<col width="1">
+						<col width="1">
+						<col width="1">
+						<col width="1">
+						<col width="1">
+						<col width="1">
+					</colgroup>
+					<thead>
+						<tr class="first last">
+							<th>&nbsp;</th>
+							<th><span class="nobr">[_1 star]</span></th>
+							<th><span class="nobr">[_2 stars]</span></th>
+							<th><span class="nobr">[_3 stars]</span></th>
+							<th><span class="nobr">[_4 stars]</span></th>
+							<th><span class="nobr">[_5 stars]</span></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						[Website.RatingCodes=
+						<tr class="">
+							<td><strong>[RatingCode.Name]</strong></td>
+							<td class="value"><input type="radio" name="percentage" id="[RatingCode.Code]_1" value="1" class="radio rating-code"></td>
+							<td class="value"><input type="radio" name="percentage" id="[RatingCode.Code]_2" value="2" class="radio rating-code"></td>
+							<td class="value"><input type="radio" name="percentage" id="[RatingCode.Code]_3" value="3" class="radio rating-code"></td>
+							<td class="value"><input type="radio" name="percentage" id="[RatingCode.Code]_4" value="4" class="radio rating-code"></td>
+							<td class="value last"><input type="radio" name="percentage" id="[RatingCode.Code]_5" value="5" class="radio rating-code-[RatingCode.Id]"></td>
+							<td class="value last"><button type="button" class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="IncraAjaxUpdater.updateAjax('[Website.GetUrl,IncraShop,UpdateRating]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[ProductRating.Id]','percentage='+ jQuery('.rating-code-[RatingCode.Id]:checked').val(),'POST');"><span><span>[_Update]</span></span></button></td>
+						</tr>
+						]
+					</tbody>
+				</table>
+				<ul class="form-list">
+					<li>
+						<label for="summary_field" class="required">[_Summary of Your Review] <em> *</em></label>
+						<div class="input-box">
+							<input type="text" name="title" id="summary_field" class="input-text required" value="[ProductReview.Title]" />
+						</div>
+					</li>
+					<li>
+						<label for="review_field" class="required">[_Review] <em> *</em></label>
+						<div class="input-box">
+							<textarea name="detail" id="review_field" cols="100" rows="3" class="required" style="resize:vertical;width:100%">[ProductReview.Detail]</textarea>
+						</div>
+					</li>
+				</ul>
+				<div class="buttons-set">
+					<button type="submit" title="[_Submit Review]" class="button btn[Design.DesignSelectionName,ButtonStyle]"><span><span>[_Submit Review]</span></span></button>
+				</div>
+			</fieldset>
+		</form>
+		<script type="text/javascript">
+			jQuery("#review-form").validate({
+				submitHandler: function(form) {
+					IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,UpdateReview]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[ProductReview.Id]',jQuery('#review-form').serialize(),'POST');
+				 }	
+			});
+		</script>
+	</div>
+	<div class="buttons-set">
+		<p class="back-link"><a href="[Website.GetUrl,Customer,ProductReview]"><small>« </small>[_Back]</a></p>
+	</div>
+</div>

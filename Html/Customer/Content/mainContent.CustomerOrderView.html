@@ -1,0 +1,148 @@
+/*
+*		Renders the main content detailed information of the CustomerOrderViewPage.
+*							
+*/
+<div class="my-account">
+	<div class="page-title title-buttons">
+		<!-- <h1><?php echo $this->__('Order #%s - %s', $_order->getRealOrderId(), $_order->getStatusLabel()) ?></h1>
+		<?php echo $this->getChildHtml('buttons') ?>-->
+		<h1>Order #[Order.OrderNumber] - [Order.LastStatus,Front]</h1>
+		<a class="link-reorder" href="[Website.GetUrl,Cart]">[_Reorder]</a>
+		<span class="separator">[_|]</span>
+		<a class="link-print" onclick="window.print(); return false;">[_Print Order]</a>		
+	</div>
+	
+
+	<dl class="order-info">
+	<!--<?php echo $this->getStatusHistoryRssUrl($_order) ?>-->
+
+		<dt>[_About This Order] : </dt>
+		<dd>
+			<ul id="order-info-tabs">
+				<li class="current first last">[Order.OrderNumber]</li>
+			</ul>
+		</dd>
+	</dl>
+	<p class="order-date">[_Order date] : [Order.LastDate] </p>
+<!--<?php if (!$_order->getIsVirtual()): ?>-->
+	<div class="row order-info-box">
+	    <div class="small-6 columns">
+			<div class="box">
+			    <div class="box-title">
+					<h3>[_Shipping Address]</h3>
+			    </div>
+			    <div class="box-content">
+					<address>
+					[Order.LatestShippingAddress=
+						[OrderAddress.FirstName] [OrderAddress.MiddleName] [OrderAddress.LastName]<br>
+						[OrderAddress.Street]<br>
+						[OrderAddress.City],  [OrderAddress.PostalCode]<br>
+						[OrderAddress.State] [OrderAddress.Country]<br>
+						T: [OrderAddress.TelNumber]
+					]</address>			
+			    </div>
+			</div>
+	    </div>
+	    <div class="small-6 columns">
+			<div class="box">
+			    <div class="box-title">
+					<h3>[_Shipping Method]</h3>
+			    </div>
+			    <div class="box-content">
+				<!--<?php if ($_order->getShippingDescription()): ?>
+				    <?php echo $_order->getShippingDescription() ?>
+				<?php else: ?>
+				    <p><?php echo $this->helper('sales')->__('No shipping information available'); ?></p>
+				<?php endif; ?> --> [Order.OrgShippingMethod]
+			
+			    </div>
+			</div>
+	    </div>
+	</div>
+	<!--<?php endif; ?>-->
+	<div class="row order-info-box">
+	    <div class="small-6 columns">
+			<div class="box">
+			    <div class="box-title">
+					<h3>[_Billing Address]</h3>
+				</div>
+				<div class="box-content">
+					<address>
+					[Order.LatestDeliveryAddress=
+						[OrderAddress.FirstName] [OrderAddress.MiddleName] [OrderAddress.LastName]<br>
+						[OrderAddress.Street]<br>
+						[OrderAddress.City],  [OrderAddress.PostalCode]<br>
+						[OrderAddress.State] [OrderAddress.Country]<br>
+						T: [OrderAddress.TelNumber]
+					]
+					</address>
+			    </div>
+			</div>
+	    </div>
+	    <div class="small-6 columns">
+			<div class="box box-payment">
+			    <div class="box-title">
+					<h3>[_Payment Method]</h3>
+			    </div>
+			    <div class="box-content">
+					[Order.OrgPaymentMethod]
+			    </div>
+			</div>
+	    </div>
+	</div>	
+	<hr>
+	<div class="order-items order-details"><h2>[_Items Ordered]</h2>
+		<table class="data-table">
+		    <thead>
+			<tr>
+			    <th class="a-left" >[_Product Name]</th>
+			    <th class="a-left" width="15%">[_SKU]</th>
+			    <th class="a-center" width="15%">[_Price]</th>
+			    <th class="a-center" width="15%">[_Qty]</th>
+			    <th class="a-right" width="20%">[_Subtotal]</th>
+			</tr>
+		    </thead>
+		    <tbody>
+		
+			[Order.ItemsSummary=
+			<tr>
+			    <td><h3 class="product-name">[OrderItem.Name]<h3></td>
+			    <td class="a-left">[OrderItem.Sku]</td>
+			    <td class="a-center">[OrderItem.PriceEach]</td>
+			    <td class="a-center">[OrderItem.Quantity]</td>
+			    <td class="a-right">[OrderItem.Price]</td>
+	
+			</tr>]
+			
+		    </tbody>
+		    <tfoot>
+			<tr>
+			    <td colspan="4" class="a-right">[_Subtotal]</td>
+			    <td class="a-right">[Order.TotalNet]</td>
+			</tr>
+			<tr>
+			    <td colspan="4" class="a-right">[_Tax]</td>
+			    <td class="a-right">[Order.TotalTax]</td>
+			</tr>
+			<tr>
+			<td colspan="4" class="a-right">[_Costs]</td>
+			    <td class="a-right">[Order.TotalCosts]</td>
+			</tr>
+			<tr>
+			    <td colspan="4" class="a-right">[_Discounts]</td>
+			    <td class="a-right">[Order.TotalDiscounts]</td>
+			</tr>
+			<tr class="grandtotal">
+			    <td colspan="4" class="a-right"><strong>[_Grand Total]</strong></td>
+			    <td class="a-right"><strong>[Order.TotalPrice]</strong></td>
+			</tr>
+		    </tfoot>
+		</table>
+	</div>
+	/*[:CustomerOrderMutationContent]*/
+	<div class="buttons-set">
+		<p class="back-link">
+			<a onclick="window.location='[Website.GetUrl,Customer,History]'"><small><<</small>[_Back to My Orders]</a>
+		</p>
+	</div>
+</div>

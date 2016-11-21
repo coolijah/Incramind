@@ -1,0 +1,34 @@
+/*
+*		Renders Toolbar dropdown sorter.  This provides a control to sort the product listings.
+*
+*/
+
+<select class="dropdown" onchange="IncraToolbar.setSortBy(this.value)" >
+	[Configuration.IterateAvailableSortBy=
+		<option class="selected" value="[configuration.CurrentAvailableSortBy]">[configuration.CurrentAvailableSortBy]</option>
+	]
+</select>
+
+<div class="sort in-block" style="vertical-align:middle;padding:0px 5px;">
+	<a href="javascript:IncraToolbar.setSorting('Ascending');" class="asc-direction"  title="Set Ascending Direction"  style="display:[?UserInput.PageAscending|Ascending=none|=block]"><img src="[File:/images/i_desc_arrow.gif]" alt="Set Ascending Direction" class="v-middle" /></a>
+	 <a href="javascript:IncraToolbar.setSorting('Descending');"  class="desc-direction" title="Set Descending Direction"  style="display:[?UserInput.PageAscending|Ascending=block|=none]" > <img  src="[File:/images/i_asc_arrow.gif]" alt="Set Descending Direction" class="v-middle" /></a>
+</div>
+
+<script type="text/javascript">
+var selected_sort_by='[UserInput.PageSort]';
+if (!selected_sort_by)
+	selected_sort_by='[Configuration.CatalogDefaultSortBy]';
+jQuery(".sorter").val(selected_sort_by);
+</script>
+
+/*<div class="dropdown">
+	<select onchange="IncraToolbar.setSortBy(this.value)" >
+		[Configuration.IterateAvailableSortBy=
+			<option class="selected" value="[configuration.CurrentAvailableSortBy]">[configuration.CurrentAvailableSortBy]</option>
+		]
+	</select>
+</div>
+<div class="sort-by-switcher">
+	<a href="javascript:IncraToolbar.setSorting('Ascending');" class="asc-direction"  title="Set Ascending Direction"  style="display:[?UserInput.PageAscending|Ascending=none|=block]"><img src="[File:/images/i_desc_arrow.gif]" alt="Set Ascending Direction" class="v-middle" /></a>
+	 <a href="javascript:IncraToolbar.setSorting('Descending');"  class="desc-direction" title="Set Descending Direction"  style="display:[?UserInput.PageAscending|Ascending=block|=none]" > <img  src="[File:/images/i_asc_arrow.gif]" alt="Set Descending Direction" class="v-middle" /></a>
+</div>*/

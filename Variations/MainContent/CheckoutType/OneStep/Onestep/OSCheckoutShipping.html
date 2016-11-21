@@ -1,0 +1,123 @@
+<form id="osc-shipping-form" method="POST">
+    <div class="step-title ">
+        <h6 class=""><span class="number in-block">[General.Param1]</span> [_Shipping Information]</h6>
+    </div>
+    <div class="checkout-onestep-content clearfix">
+        <ul >
+            [?Customer.NumberOfAddresses|more=
+                <li class="large-12 clearfix">
+                    <label for="shipping-address-select">[_Select a shipping address from your address book or enter a new address.]</label>
+                    <div class="input-box">
+                    <select onchange="shipping.newAddress(this.value); shipping.save();" title="" class="address-select " id="shipping-address-select" name="shipping_address_id">
+                      <option>--Select Address--</option>
+                      [Customer.Addresses=
+                        <option  value="[Address.Id]" >[Address.FirstName] [Address.LastName] [Address.StreetName], [Address.City],  [Address.PostalCode]  [Address.State],  [Address.Country=[Country.Name]]</option>
+                      ]
+                        <option value="0">[_New Address]</option>
+                    </select> 
+                  </div>            
+                </li>
+            ]
+            <li id="shipping-new-address-form"  [?Customer.NumberOfAddresses|more=style=display:none]>
+                <input type="hidden" id="shipping:address_id" value="" name="address_id">
+                    <div class="large-12 clearfix">
+                        <label class="required" for="shipping:country_id">[_Country] <em>*</em></label>
+                        <select class="validate-select required " id="shipping:country_id" name="country_id" onchange="addressByCountry(this.value);shipping.save()"><option value="">[_Please select country]</option>
+                            <option value="">[_Please select country]</option>
+                            [Website.AvailableCountries=
+                                [CountryGroup.Countries=<option value="[Country.Id]">[Country.Name]</option>]
+                            ]
+                        </select>
+                        <script type="text/javascript">
+                            jQuery("#shipping_country_id option\\[value=[Configuration.DefaultCountryId]\\]").attr("selected","selected");
+                        </script>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="large-6 columns">
+                            <label class="required" for="shipping:firstname">[_First Name]<em>*</em></label>
+                            <div class="input-box2">
+                                <input type="text" class="input-text required" title="[_firstname]" name="firstname" id="shipping:firstname">
+                            </div>
+                        </div>
+                        <div class="large-6 columns">
+                            <label class="required" for="shipping:lastname">[_Last Name]<em>*</em></label>
+                            <div class="input-box2">
+                                <input type="text" class="input-text required" name="lastname" title="[_lastname]" id="shipping:lastname"> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="large-6 columns">
+                            <label for="shipping:company">[_Company]</label>
+                            <div class="input-box">
+                                <input type="text" id="shipping:company" name="company" value="" title="[_Company]" class="input-text" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row clearfix">
+                        
+                        <div class="large-6 columns">
+                            <label for="shipping:company">[_Address]</label>
+                            <div class="input-box">
+                                <input type="text" class="input-text address-field required"  value="" id="shipping_address1" title="[_address]" name="street">
+                            </div>
+                        </div>
+                        <div class="large-6 columns">
+                            <label for="shipping:company">[_Address 2]</label>
+                            <div class="input-box">
+                                <input type="text" class="input-text address-field"  value="" id="shipping_address2" title="[_address2]" name="street2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="large-6 columns city">
+                            <label class="required" for="shipping_city">[_City] <em>*</em></label>
+                            <div class="input-box">
+                                <input type="text" class="input-text required"  value="" id="shipping_city" title="[_address]" name="city">
+                            </div>
+                        </div>
+                        <div class="large-6 columns telephone">
+                            <label class="required" for="shipping_province_id">[_State/Province] <em>*</em></label>
+                            <select class="validate-select" id="shipping_province_id" name="region_id" >
+                                <option value="">[_Please select state]</option>
+                                /*[Website.AvailableCountries=
+                                    <option value="[Country.Id]">[Country.Name]</option>
+                                ]*/
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="large-6 columns telephone">
+                            <label class="required" for="shipping_postal_code">[_Zip/Postal Code] <em>*</em></label>
+                            <div class="input-box">
+                                <input type="text" class="input-text required"  value="" id="shipping_postal_code" title="[_zip/postal code]" name="postcode">
+                            </div>
+                        </div>
+                        <div class="large-6 columns telephone">
+                            <label class="required" for="shipping:telephone">[_Telephone] <em>*</em></label>
+                            <div class="input-box">
+                                <input type="text" id="shipping:telephone" class="input-text required" value="" name="telephone" title="[_telephone]">
+                            </div>
+                        </div>
+
+                    </div>
+            </li>
+            <li class="control">
+                <input type="checkbox" name="same_as_billing" id="shipping:same_as_billing" value="1" title="[_Use Billing Address]" onclick="shipping.setSameAsBilling(this.checked)" class="checkbox" /><label for="shipping:same_as_billing">[_Use Billing Address]</label>
+            </li>
+        </ul>
+        <span class="please-wait" id="shipping-please-wait" style="display:none;float:left;">
+            <img src="[File:/images/zoomloader.gif]" alt="[_Loading next step]..." title="[_Loading]..." class="v-middle"> [_Loading]...        
+        </span>
+    </div>
+</form>
+<script type="text/javascript">
+    var shipping = new Shipping('osc-shipping-form','[Website.GetUrl,CheckOut,selectShippingAddress]','[Website.GetUrl,CheckOut,SaveShippingAddress]','[Website.GetUrl,CheckOut,SaveShippingAddress]');
+
+    jQuery(document).ready(function(){
+        var value = jQuery("#shipping_country_id").val();
+        INCRACOUNTRYCONFIG.populateToCombo(value,'shipping_province_id');
+    });
+</script>
+

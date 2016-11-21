@@ -1,0 +1,37 @@
+<div>
+	<ul class="promo-slider" >
+		[PromoHeaderBlock.Sliders=
+			<li class="slideshow">
+				[:PromoHeaderSlideShowItem]
+			</li>
+		]
+	</ul>
+</div>
+<div class="pagination" id="promopagination">
+</div>
+<script type="text/javascript">
+	width = jQuery(".categorypromoheader").width();
+	jQuery(function() {
+		jQuery('.promo-slider').carouFredSel({
+			responsive:true,
+			width: width,
+    		height: 430, 
+			auto: {
+				pauseOnEvent: 'resume'
+			},
+			scroll: {
+				fx: 'crossfade',
+				duration: 3000,
+				timeoutDuration: 3000,
+				pauseOnHover: 'immediate'
+			},
+			pagination: {
+				container: '#promopagination',
+				items: 1,
+				duration: 0.5,
+				queue: 'last'
+			}
+		});
+	 	jQuery(".categorypromoheader .Layout1 .slideshow .dynamic-button-text.RightBottom, .categorypromoheader .Layout1 .slideshow .dynamic-button-text.LeftBottom").css("bottom","25px");
+	});
+</script>

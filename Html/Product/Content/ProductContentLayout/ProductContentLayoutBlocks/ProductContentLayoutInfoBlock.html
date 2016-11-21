@@ -1,0 +1,40 @@
+
+<div class="product-shop">
+	<div class="additional-info">
+		<div class="product-sku"> [_PRODUCT CODE:]
+			<span class="sku-number">[Product.SKU]</span>
+		</div>
+		<p class="availability-only">
+			<span title="Only 210 left"></span>
+		</p>
+		<p class="availability in-stock">
+			<span class="label">[_Availability:] </span>
+			<span class="value">[?Product.InStock|Yes=[_In Stock] |=[_Out of Stock]]</span>
+		</p>
+	</div>
+	<div class="product-name secondary">
+		<span class="h1">[Product.Name]</span>
+	</div>
+	<div class="extra-info">
+		<div class="ratings">
+			<div class="rating-box star default">
+				<div class="rating" style="width:[Product.Ranking]%" title="[Product.Ranking]%"></div>
+			</div>
+			<span class="separator temp">[_|]</span>
+			<p class="rating-links">
+				<a href="[Website.GetUrl,Product,0,Review/List/[Product.Id]/ListReview]">[_%1 Reviews, [Product.NumberOfReviews]]</a>
+				<span class="separator"> [_|]</span>
+				<a  class="write" href="[Website.GetUrl,Product,0,Review/List/[Product.Id]/AddReview/#write_review]">[_Add Review]</a>
+			</p>
+		</div>
+	</div>
+	<div class="price-info">
+		<span class="regular-price">
+			<span class="price">[Product.Price]</span>
+		</span>
+	</div>
+	[:ProductAttributesBlock.Flat]
+	[:ProductQuantityBlock] 
+	[:ProductAddToCartButton.Simple]
+	[:ProductAddTo]
+</div>	

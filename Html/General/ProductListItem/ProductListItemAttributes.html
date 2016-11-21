@@ -1,0 +1,19 @@
+/*
+*	Renders product list item attributes
+*/
+<div id="conf-attributes[Product.Id]" class="default">
+	[Product.ConfigurableAttributes=
+		<div>
+			<label for="attribute[Attribute.Id][Product.Id]">[Attribute.Title]:</label>
+			<select class="product-list-attrib-[Product.Id] pull-right select-small span2" name="[Attribute.AttributeCode]" id="attribute[Attribute.Id][Product.Id]"  onchange="jQuery(this).initProductAttributes({'product_url':'[Website.GetUrl,Product,0,UpdateConfigurableInList/][Product.Id]','attribute_class':'product-list-attrib-[Product.Id]'}); jQuery(this).updateConfigurableProduct('#prd[Product.Id]');">
+				<option value="">[_Please select]</option>
+				[Product.ConfigurableChildProducts,[Attribute.AdminTitle]=
+					<option admin="[AttributeOption.Admin]"  value="[AttributeOption.Admin]" [?UserInput.ConfigurableprodAttributeValueValid,[Attribute.AdminTitle],[AttributeOption.Admin]|yes=selected]>[AttributeOption.Admin]</option>
+				]
+			</select>
+		</div>
+		<div class="attr-list clearfix">
+			[:ProductListItemAttributeType.[LayeredAttribute.CurrentType]]
+		</div>
+	]
+</div>

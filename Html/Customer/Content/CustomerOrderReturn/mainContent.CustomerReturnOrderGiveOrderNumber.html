@@ -1,0 +1,85 @@
+/*
+*	Renders the main content of LoginPage.  This displays login form, sign up link and a forgot password.
+*	
+*/
+
+<div class="account-login-container">
+	<div class="page-title">
+		<h2>[_Please Sign In]</h2>
+	</div>
+	[:notification]
+	<div class="col2-set">
+		<div class="col-1 new-users large-6 columns">
+			<form id="form-login" method="post" action="[Website.GetUrl,IncraShop,Login]">
+				<div class="content">
+				    <h2>[_RETURN USING MY ACCOUNT]</h2>
+				   	<ul class="form-list">
+					    <li>
+							<label class="required" for="enter_email">[_Enter Email]<em>*</em></label>
+							<div class="input-box">
+							    <input type="text" value="" size="30" class="input-text required span4" id="enter_email" alt="username" name="username">
+							</div>
+					    </li>
+					    <li>
+							<label class="required" for="email">[_Enter Password]<em>*</em></label>
+							<div class="input-box">
+							    <input type="password" value="" size="30" class="input-text required password span4" id="email" alt="password" name="password">
+							</div>
+					    </li>
+					</ul>
+					<p class="a-right"><em>* [_required fields] </em></p>
+				</div>
+				<div class="buttons-set">
+					<a href="[Website.GetUrl,Login,ForgotPassword]" class="f-left">[_Forgot Your Password?]</a>
+					<button type="submit" class="button btn[Design.DesignSelectionName,ButtonStyle]" title="[_Login]" name="send" id="send2"><span><span>[_Sign In]</span></span></button>
+				</div>
+			</form>
+			<script type="text/javascript">
+				jQuery("#form-login").validate({
+					submitHandler: function(form) {
+						IncraAjaxUpdater.submitOnly('[Website.GetUrl,IncraShop,Login]',IncraWindow.formatUrl('[Url.FullUrl]'),'false',jQuery('#form-login').serialize(),'POST','[Website.GetUrl,Customer,Account]');
+					 }
+				});
+			</script>
+		</div>
+		<div class="col-2 registered-users large-6 columns">
+			<form id="form-return" method="post" action="[Website.GetUrl,Customer,ReturnOrder]">
+				<div class="content">
+				  <h2>[_RETURN AS A GUEST]</h2>
+					<ul class="form-list">
+					    <li>
+							<label class="required" for="order_number">[_Enter Order Number]<em>*</em></label>
+							<div class="input-box">
+							    <input type="text" value="" size="30" class="input-text required span4" id="order_number" alt="OrderNumber" name="OrderNumber">
+							</div>
+					    </li>
+					    <li>
+							<label class="required" for="email">[_Enter Email]<em>*</em></label>
+							<div class="input-box">
+							    <input type="text" value="" size="30" class="input-text required span4" id="email" alt="email" name="email">
+							</div>
+					    </li>
+					</ul>
+					<p class="a-right"><em>* [_required fields] </em></p>
+				</div>
+				<div class="buttons-set">
+					<button type="submit" class="button btn[Design.DesignSelectionName,ButtonStyle]" title="[_Login]" name="send" id="send2"><span><span>[_Create Return]</span></span></button>
+				</div>
+			</form>
+			<script type="text/javascript">
+				jQuery("#form-return").validate({
+					submitHandler: function(form) {
+						this.submit();
+						//IncraAjaxUpdater.submitOnly('[Website.GetUrl,Customer,ReturnOrder]',IncraWindow.formatUrl('[Url.FullUrl]'),'false',jQuery('#form-return').serialize(),'POST','[Website.GetUrl,Customer,ReturnOrder]');
+					}
+					/*submitHandler: function(form){
+					IncraAjaxUpdater.submitAjax('[Website.GetUrl,Customer,ReturnOrder]',IncraWindow.formatUrl('[Url.FullUrl]'),'true',jQuery('#form-return').serialize(),'POST');
+					}*/
+				});
+			</script>
+		</div>
+	</div>	
+
+</div>
+
+

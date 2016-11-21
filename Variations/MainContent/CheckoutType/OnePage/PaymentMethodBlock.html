@@ -1,0 +1,60 @@
+<div id="opc-payment-method" class="checkout-block payment-method" step="payment" onclick="openCheckoutStep(this);">
+	<div class="title">
+		<div class="circle-number in-block">[General.Param1]</div>
+		<div class="in-block">
+			<h6>[_Payment Method]</h6>
+		</div>
+	</div>
+	<div class="content ">
+		<div class="payment-method-form">
+			<form action="" id="co-payment-form">
+				<input type="hidden" value="[Website.CurrentStoreView=[StoreView.Id]]" name="storeViewId">
+				[?ShoppingCart.AreThereAnyAvailablePaymentMethods|Yes=
+				<ul class="payment-method-list control">
+					[ShoppingCart.AvailablePaymentMethods=
+					<li>
+						<input class="payment-method-item" name="method" type="radio" value="[PaymentMethod.Id]" id="p_method_[PaymentMethod.Code]" class="radio in-block" onclick="showExtrPaymentInfo('[PaymentMethod.Code]')">
+						<label class="in-block payment-method-item" for="p_method_[PaymentMethod.Code]">[PaymentMethod.Name] <span>[ShoppingCart.PaymentCostsForCertainMethod,[PaymentMethod.Id]]</span> </label>
+						<div class="payment-additional-info hide" id="[PaymentMethod.Code]-extra-info" style="padding-left: 40px;">
+							<ul class="checkout-extrafields">
+							[PaymentProcessor.ExtraFields=
+								[:ExtraField,payment_method]
+							]
+							</ul>
+							<ul class="checkout-extrafields">
+							[PaymentMethod.ExtraFields=
+								[:ExtraField,payment_method]
+							]
+							</ul>
+						</div>
+					</li>
+					]
+				</ul>
+				|=
+					<p>[ShoppingCart.AvailabilityPaymentMethodsDescription]</p>
+				]
+				<div class="buttons-set">
+					<a class="step-back right" href="#" onclick="checkout.stepBack();return false;">
+						<small><< </small> [_Back]</a>
+					<span class="please-wait" id="payment-please-wait" style="display:none;">
+						<img src="[File:/images/opc-ajax-loader.gif]" alt="Loading next step..." title="[_Loading next step...]" class="v-middle">[_Loading next step...]
+					</span>
+					<button type="button" title="Create an Account" class="button" onclick="payment.save()" ><span><span>[_Continue]</span></span></button>
+				</div>
+				<br>
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var payment = new Payment('co-payment-form','[Website.GetUrl,CheckOut,SavePaymentMethod]');
+	function showExtrPaymentInfo(code){
+		console.log(code);
+		jQuery(".payment-additional-info").each(function(){
+			jQuery(this).addClass("hide");
+			jQuery(this).find(":input").attr("disabled","disabled");
+		});
+		jQuery("#"+code+"-extra-info").removeClass("hide");
+		jQuery("#"+code+"-extra-info").find(":input").removeAttr("disabled");
+	}
+</script>

@@ -1,0 +1,16 @@
+/*
+*	Renders product list item add to block. Contains link for add to wishlist and add to compare.
+*/
+
+<ul class="add-to-links inline-list">
+	[?WebsiteFeatures.WishList|Yes=
+	<li>
+		<a  href="#" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to wishlist]" alt="[_Add to wishlist]" class="link-wishlist">[_WishList]
+		</a>
+	</li>
+	<li><span class="separator">:</span> </li>
+	]
+	<li>
+		<a href="#" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to compare]" alt="[_Add to compare]" class="link-compare">[_Compare]</a>
+	</li>
+</ul>

@@ -1,0 +1,36 @@
+[?ShoppingCart.HasCrossSells|Yes=
+	<div class="crossells-box Carousel">
+		<div>
+			<p>[_Based on your selection, you may be interested in the following items:]</p>
+		</div>
+		<div>
+			<ul id="cross_sell_carousel" class="products-grid inline-list">
+				[ShoppingCart.CrossSells=
+					<li class="item ">
+						[:ProductMiniListItem,No,No]
+					</li>
+				]
+			</ul>
+			<div class="navigation">
+				<a class="prev" id="cross_sell_carousel_prev" href="#"><span class="fa fa-angle-left"></span></a>
+				<a class="next" id="cross_sell_carousel_next" href="#"><span class="fa fa-angle-right"></span></a>
+			</div>
+		</div>
+		<script type="text/javascript">
+		var container_width=jQuery('#cross_sell_carousel').parents('.crossells-box').width();
+		jQuery(function() {
+			var csc = new ProductCarousel({
+				carousel_id : '#cross_sell_carousel',
+				prevbtn: '#cross_sell_carousel_prev',
+				nextbtn:'#cross_sell_carousel_next',
+				width:'100%',	
+				height:'300px',
+				items:5
+			});
+			jQuery('#cross_sell_carousel li').width((container_width-100)/5);
+			csc.carousel();
+			
+		});
+		</script>
+	</div>
+]

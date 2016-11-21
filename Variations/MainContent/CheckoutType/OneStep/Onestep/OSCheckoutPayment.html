@@ -1,0 +1,33 @@
+<form id="osc-payment-form" method="POST">
+	<div class="step-title ">
+	    <h6 class=""><span class="number in-block">[General.Param1]</span> [_Payment Method]</h6>
+	</div>
+	<div class="checkout-onestep-content clearfix">
+		<ul class="sp-methods large-12 columns">
+			[ShoppingCart.AvailablePaymentMethods=
+				<li>
+					<input onclick="payment.save();" name="method" type="radio" value="[PaymentMethod.Id]" id="p_method_[PaymentMethod.Code]" class="radio">
+					<label for="p_method_[PaymentMethod.Code]">[PaymentMethod.Name] <span class="pm-price">[PaymentMethod.AdditionalCost]</span> </label>
+				</li>
+			]
+		</ul>
+		<div class="tool-tip" id="payment-tool-tip" style="display:none;">
+		    <div class="btn-close"><a href="#" id="payment-tool-tip-close" title="[_Close]">[_Close]</a></div>
+		    <div class="tool-tip-content"><img src="" alt="[_Card Verification Number Visual Reference]" title="[_Card Verification Number Visual Reference]" /></div>
+		</div>
+		<span class="please-wait" id="payment-please-wait" style="display:none;float:left;">
+			<img src="[File:/images/zoomloader.gif]" alt="[_Loading next step]..." title="[_Loading]..." class="v-middle"> [_Loading]...        
+		</span>
+	</div>
+</form>
+<script type="text/javascript">
+	var payment = new Payment('osc-payment-form','[Website.GetUrl,CheckOut,SavePaymentMethod]');
+	function showExtrPaymentInfo(code){
+		console.log(code);
+		jQuery(".payment-additional-info").each(function(){
+			jQuery(this).addClass("hide");
+		});
+		jQuery("#"+code+"-extra-info").removeClass("hide");
+	}
+</script>
+

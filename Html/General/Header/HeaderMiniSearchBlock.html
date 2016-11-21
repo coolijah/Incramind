@@ -1,0 +1,39 @@
+/*
+*		Renders the mini search block in the header.  Using ajax in searching it provides a popup span for search results.
+*
+*/
+
+<div class="searchbar-block">
+	<!--<form id="search_mini_form"  method="post">-->
+	<div class="searchbar-content clearfix">
+		<div class="search-input">
+			<div class="search_mini_form">
+		        <input id="product-search" class="search cjbox" placeholder="Search..." type="text" name="q" value="" class="input-text" maxlength="128" autocomplete="off">
+			</div>
+		</div>
+		<button id="mini-search-button" type="button" class="search-button"><img class="searchicon" src="/Test/designs/Sample6/icons/search.png">[_Search]</button>
+		<div id="search_autocomplete" class="search-autocomplete">
+		</div>
+	</div>   
+
+	<!--</form>-->
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery("#mini-search-button").click(function(){
+				doSearch();
+			});
+			jQuery("#product-search").keydown(function(event){
+				if(event.keyCode == 13) {
+					doSearch();
+				}
+			});
+		});
+		function doSearch(){
+			var str = jQuery('#product-search').val();
+			if (str.length==0)
+				return;
+			window.location = "[Website.GetUrl,Search,Text/]"+jQuery("#product-search").val();
+		}
+	</script>
+</div>
+

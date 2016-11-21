@@ -1,0 +1,47 @@
+/*
+*		Renders the layout of product listings in a certain category.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              CategoryListLayout
+Location:          /Html/Category/Content/CategoryListLayoutVariation/CategoryListLayout.html
+Created By:        Leslie Canete
+Created At:        09-Okt-2014 16:49 (categorylistlayoutvariation, categorysidenavigation, checkouttype, change to button style)
+Last modified By:  Aris Catan
+Last modified At:  27-Okt-2014 11:55 (my updates in adding comments)
+Called from:       mainContent.AdvancedSearchResult 	mainContent.BestRated 	mainContent.BestSellers 	mainContent.Brand 	mainContent.Category 	mainContent.Featured 	mainContent.MostInteresting 	mainContent.MostViewed 	mainContent.New 	mainContent.OthersAreViewing 	mainContent.RecentlyViewed 	mainContent.Sales 	mainContent.Search 	mainContent.Tag 	
+Calling blocks:    CategoryListLayout.2ProductsInARow 	
+--------------------------------------------------------------------**/
+
+<div class="category-list-layout Default clearfix">
+	<div class="product-list">
+		[?UserInput.CatalogMode
+			|List=<ul class="list">
+			|Grid=
+				[?Design.DesignSelectionName,ProductListItem
+					|eCommerceLarge=
+						<ul class="grid [?DesignLayout.Layout|3Columns=large-block-grid-3 medium-block-grid-3|=large-block-grid-3]">
+					|eCommerce=
+						<ul class="grid [?DesignLayout.Layout|3Columns=large-block-grid-3 medium-block-grid-3|1Column=large-block-grid-5|=large-block-grid-3] ">
+					|=
+						<ul class="grid [?DesignLayout.Layout|3Columns=large-block-grid-3 medium-block-grid-3|1Column=large-block-grid-5|=large-block-grid-3] ">
+				]
+		]
+			[Filter.Products=
+				[:ProductListItem]
+			]
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript">
+	function over(obj){
+		jQuery(obj).find(".popup-wrapper").addClass("show");
+		jQuery(obj).find(".ecommerce-popup").addClass("show");
+	}
+	function out(obj){
+		jQuery(obj).find(".popup-wrapper").removeClass("show");
+		jQuery(obj).find(".ecommerce-popup").removeClass("show");
+	}
+</script>
+

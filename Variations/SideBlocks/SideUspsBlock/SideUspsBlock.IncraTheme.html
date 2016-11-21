@@ -1,0 +1,22 @@
+/*
+*		Renders a block that contains usps list information.
+*
+*/
+
+<div class="block usp IncraTheme">
+	[Website.CmsPageGroupNames=
+	<div class="title"><h6 class="media-heading">[CmsPage.GroupingName]</h6></div>
+	<div class="block-content">
+		<ul class="usp-list" >
+			[Website.CmsPagesInGroup,[CmsPage.GroupingName]=
+				[?CmsPage.InLeftMenu|Yes=
+				<li class="usp-item">
+					<a href="[Website.GetUrl,CmsPage,[CmsPage.Id]]" title="[CmsPage.Name]" class="cms-link " >
+					<p>[CmsPage.Name]</p>	
+					</a>
+				</li>]
+			]
+		</ul>
+	</div>
+	]
+</div>

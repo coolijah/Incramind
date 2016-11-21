@@ -1,0 +1,27 @@
+[?CheckOutExtraDataField.Type
+|CheckBox=
+	<li>
+		<input class="[?CheckOutExtraDataField.Compulsary|Yes=required]" type="checkbox" id="[General.Param1]_extra[CheckOutExtraDataField.Id]" name="ExtraField\\[[CheckOutExtraDataField.Id]\\]" value="1">
+		<label for="[General.Param1]_extra[CheckOutExtraDataField.Id]">[CheckOutExtraDataField.Caption] [?CheckOutExtraDataField.Compulsary|Yes=<em>*</em>]</label>
+		
+	</li>
+|DropDown=
+	<li>
+		<label for="[General.Param1]_extra[CheckOutExtraDataField.Id]">[CheckOutExtraDataField.Caption]  [?CheckOutExtraDataField.Compulsary|Yes=<em>*</em>]</label>
+		<select id="[General.Param1]_extra[CheckOutExtraDataField.Id]" class="[?CheckOutExtraDataField.Compulsary|Yes=required]" name="ExtraField\\[[CheckOutExtraDataField.Id]\\]">
+		[CheckOutExtraDataField.Choices=
+			<option value="[CheckOutExtraDataFieldChoice.Id]" [?CheckOutExtraDataFieldChoice.IsDefault|Yes=selected]>[CheckOutExtraDataFieldChoice.Label]</option>
+		]
+		</select>
+	</li>
+|Date=
+	<li>
+		<label for="[General.Param1]_extra[CheckOutExtraDataField.Id]">[CheckOutExtraDataField.Caption]  [?CheckOutExtraDataField.Compulsary|Yes=<em>*</em>]</label>
+		<input class="datepicker input-text [?CheckOutExtraDataField.Compulsary|Yes=required]" id="[General.Param1]_extra[CheckOutExtraDataField.Id]" type="text" name="ExtraField\\[[CheckOutExtraDataField.Id]\\]" value="[CheckOutExtraDataField.DefaultValue]"/>
+	</li>
+|=
+	<li>
+	<label for="[General.Param1]_extra[CheckOutExtraDataField.Id]">[CheckOutExtraDataField.Caption]  [?CheckOutExtraDataField.Compulsary|Yes=<em>*</em>]</label>
+	<input class="input-text [?CheckOutExtraDataField.Compulsary|Yes=required]" id="[General.Param1]_extra[CheckOutExtraDataField.Id]" type="text" name="ExtraField\\[[CheckOutExtraDataField.Id]\\]" value="[CheckOutExtraDataField.DefaultValue]"/>
+	</li>
+]

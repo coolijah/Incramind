@@ -1,0 +1,210 @@
+<div class="step-title">
+	<ul class="inline-list">
+		<li class="step-number">1</li> 
+		<li>[_Billing Address]</li>
+	</ul>
+</div>
+<div class="content large-12">
+	[?Customer.LoggedIn|LoggedIn=
+		[?Customer.NumberOfAddresses|0=
+		|=
+			<label for="billing-address-select">[_Select a billing address from your address book or enter a new address.]</label>
+			<select onchange="selectBillingAction(this.value)" title="" class="address-select " id="billing-address-select" name="billing_address_id">
+				<option value="">--[_Select Address]--</option>
+				[Customer.Addresses=
+					<option  value="[Address.Id]">[Address.FirstName] [Address.LastName] [Address.StreetName], [Address.City],  [Address.PostalCode]  [Address.State],  [Address.Country=[Country.Name]]
+					</option>
+				]
+				<option value="new">[_New Address]</option>
+			</select> 
+			<script type="text/javascript">
+				function selectBillingAction(value){
+					switch(value){
+						case ''    : {}break;
+						case 'new' : {
+										jQuery("#billing-new-address-form").removeClass("hide");
+									 }break;
+						default    : {
+										console.log(value);
+										jQuery("#billing-new-address-form").addClass("hide");
+										expressCheckout.saveBilling();
+									 }break;
+					}
+				}
+			</script>
+		]
+	]
+	<div id="billing-new-address-form" class="[?Customer.LoggedIn|LoggedIn=[?Customer.NumberOfAddresses|more=hide]]">
+		<form id="exp-billing-form" method="post">
+			<ul style="margin-bottom: 0px;">	
+				<li class="row collapse">
+					<div class="small-6 column" style="padding-right: 5px;">
+						<label class="required" for="billing_firstname">[_First Name]</label>
+						<input type="text" class="input-text required " title="[_firstname]" name="firstname" id="billing_firstname">
+					</div>
+					<div class="small-6 column">
+						<label class="required" for="billing_lastname">[_Last Name]</label>
+						<input type="text" class="input-text required" name="lastname" title="[_lastname]" id="billing_lastname"> 
+					</div>
+				</li>
+				<li>
+					
+				</li>
+				<li>
+		  			<label for="billing_company">[_Company]</label>
+					<input type="text" id="billing_company" name="company" value="" title="[_Company]" class="input-text" />
+				</li>
+				<li>
+					[?Customer.LoggedIn|No=
+					<label class="required " for="billing_email">[_Email]<em>*</em></label>
+					<input type="text" class="input-text email required"  value="" id="billing_email" title="[_email]" name="email">
+					]
+				</li>
+				[?Customer.LoggedIn|No=
+				<li id="register-customer-password" style="display: block;">
+					<ul><li>
+						<label class="required" for="billing_customer_password">[_Password] <em>*</em></label>
+						<input type="password" class="input-text required password" id="billing_customer_password" name="customer_password" title="[_customer_password]">
+					</li>
+					<li>
+						<label class="required" for="billing_confirm_password">[_Confirm Password] <em>*</em></label>
+						<input type="password" class="input-text required cpassword" id="billing_confirm_password"  name="confirm_password" title="[_confirm_password]">
+					</li></ul>
+				</li>
+				]
+		   		 <!--<li class="no-display"><input type="hidden" value="1" name="save_in_address_book"></li>-->
+		   		 <li class="wide">
+					<label class="required" for="billing_country_id">[_Country]<em>*</em></label>
+					<select class="validate-select required" id="billing_country_id" name="country_id" onchange="expressCheckout.saveBilling()">
+						<option value="">[_Please select country]</option>
+						[Website.AvailableCountries=
+							[CountryGroup.Countries=<option value="[Country.Id]">[Country.Name] </option>]
+						]
+					</select>
+					<script type="text/javascript">
+						jQuery("#billing_country_id option\\[value=[Configuration.DefaultCountryId]\\]").attr("selected","selected");
+					</script>
+				</li>
+				<li class="row collapse">
+					<label class="required" for="billing_address1">[_Address] <em>*</em></label>
+					<div class="large-6 column" style="padding-right: 5px;">
+						<input type="text" class="input-text medium-6 column address-field required"  value="" id="billing_address1" title="[_address]" name="street">
+					</div>
+					<div class="large-6 column">
+						<input type="text" class="input-text medium-6 column address-field"  value="" id="billing_address2" title="[_address2]" name="street2">
+					</div>
+				</li>
+				
+				<li>
+					<div class="large-12 row collapse clearfix">
+						<div class="large-6 column" style="padding-right: 5px;">
+							<label class="required" for="billing_city">[_City] <em>*</em></label>
+							<input type="text" class="input-text required"  value="" id="billing_city" title="[_address]" name="city">
+						</div>
+							
+							<div class="large-6 column">
+								<label class="required" for="billing_province_id">[_State/Province] <em>*</em></label>
+								 <select class="validate-select" id="billing_province_id" name="region_id" onchange="addressByCountry_bp(this.value);">
+									<option value="">[_Please select state]</option>
+									[Website.AvailableCountries=
+										<option value="[Country.Id]">[Country.Name] </option>
+									]
+								</select>
+							</div>
+					</div>
+				</li>
+				
+				<li>
+					<div class="large-12 row collapse clearfix">
+						<div class="large-6 column" style="padding-right: 5px;">
+							<label class="required" for="billing_postal_code">[_Zip/Postal Code] <em>*</em></label>
+							<input type="text" class="input-text required"  value="" id="billing_postal_code" title="[_zip/postal code]" name="postcode">
+						</div>
+						<div class="large-6 column">
+							<label class="required" for="billing_telephone">[_Telephone] <em>*</em></label>
+							<input type="text" id="billing_telephone" class="input-text required" value="" name="telephone" title="[_telephone]">
+						</div>
+					</div>
+				</li>
+				<li>
+				</li>
+				[?Customer.LoggedIn|LoggedIn=
+					<li class="control">
+						<input type="checkbox" name="billing_save_in_address_book" value="1" title="[_Save in address book]" id="billing:save_in_address_book" onchange="" class="checkbox"><label class="in-block" for="billing:save_in_address_book">[_Save in address book]</label>
+					</li>
+				|=
+					<li class="no-display"><input type="hidden" value="1" name="billing_save_in_address_book"></li>
+				]
+			</ul>
+		</form>
+	</div>
+	<div class="large-12">
+		<input checked type="checkbox" name="same_as_billing" id="shipping_same_as_billing" value="1" title="[_Use for Shipping Address]" onclick="setSameAsBilling(this)" class="checkbox" />
+		<label for="shipping_same_as_billing" class="in-block">[_Use for Shipping Address]</label>
+		<script type="text/javascript">
+			function setSameAsBilling(obj){
+				if(obj.checked){
+					jQuery(".exp-shipping").addClass("hide");
+					shipping.setSameAsBilling(this.checked);
+				}else{
+					jQuery(".exp-shipping").removeClass("hide");
+				}
+			}
+		</script>
+	</div>
+	<div class="large-12">
+		[?Customer.LoggedIn|Guest=
+			<input type="checkbox" name="create_account" id="create_account" value="" title="[_Create an account for later use]" onclick="enableCreateAccount(this)" class="checkbox" />
+			<label for="create_account" class="in-block">[_Create an account for later use]</label>
+			<div id="create_account_block" class="row collapse hide" >
+				<div class="small-6 column" style="padding-right: 5px;">
+					<label class="required" for="billing_customer_password">[_Password] <em>*</em></label>
+						<input type="password" class="input-text required password" id="billing_customer_password" name="customer_password" title="[_customer_password]">
+				</div>
+				<div class="small-6 column">
+					<label class="required" for="billing_confirm_password">[_Confirm Password] <em>*</em></label>
+						<input type="password" class="input-text required cpassword" id="billing_confirm_password"  name="confirm_password" title="[_confirm_password]">
+				</div>
+			</div>
+		]
+		<script type="text/javascript">
+			function enableCreateAccount(obj){
+				if(obj.checked){
+					jQuery("#create_account_block").removeClass("hide");
+				}else{
+					jQuery("#create_account_block").addClass("hide");
+				}
+			}
+		</script>
+	</div>
+	
+</div>
+
+[?ShoppingCart.BillingAddressComplete=
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			var address_selected = jQuery("#billing-address-select").val();
+			switch(address_selected){
+				case ''	   	 : {} break;
+				case 'new' 	 : {
+									[ShoppingCart.InvoiceAddress=
+										jQuery("#billing_firstname").val('updated');
+										jQuery("#billing_lastname").val('updated');
+										jQuery("#billing_company").val('updated');
+										jQuery("#billing_address1").val('updated');
+										jQuery("#billing_address2").val('updated');
+										jQuery("#billing_city").val(1);
+										jQuery("#billing_province_id").val(1);
+										jQuery("#billing_postal_code").val('updated');
+										jQuery("#billing_telephone").val('updated');
+										jQuery("#billing:save_in_address_book").val(1);
+									]
+
+							   } break;
+				case default : {
+
+							   } break;
+			}
+		})
+	</script>
+]

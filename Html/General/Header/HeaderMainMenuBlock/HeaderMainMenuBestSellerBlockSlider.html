@@ -1,0 +1,97 @@
+<h6 class="" style="border-bottom:1px solid #eee">[_Bestsellers products]</h6>
+<div class="large-12 bestsellers-slider-block">
+	<a href="#" class="slide-prev" style="padding:0px 5px;" onclick="prevSlide(); return false;"><i class="fa fa-angle-left fa-lg"></i></a>
+	<a href="#" class="slide-next" style="padding:0px 5px;" onclick="nextSlide(); return false;"><i class="fa fa-angle-right fa-lg"></i></a>
+	<div class="bestsellers-slide-number"></div>
+	<div data-orbit data-options="" class="bestsellers-slides">
+		<!-- <div class="">
+			<div class="bestseller-item large-6 columns">  		
+				<img src="/Test/websites/Clothing/media/cached/size205x220/skirt3.jpg">
+					Skirt Angela
+			</div>
+			<div class="bestseller-item large-6 columns">  		
+				<img src="/Test/websites/Clothing/media/cached/size205x220/skirt3.jpg">
+					Skirt Angela
+			</div>
+		</div> -->
+	</div>
+</div>
+<script type="text/javascript">
+var bestseller_list = \[\];
+/*[Website.FeaturedProducts,1,4,'Name',Ascending]*/
+[?Website.LoopProductsCount,Bestsellers|0=|=
+	[Website.LoopProducts,Bestsellers,4,2,'Name'=
+		bestseller_list.push({
+				name : "[Product.Name]",
+				link : "[Website.GetUrl,Product,[Product.Id]]",
+				img: "/[Product.ThumbnailImage=[ProductImage.ImageUrl,205,220]]",
+				price : "[Product.ActualPrice]"
+		});
+	]
+]
+	console.log(bestseller_list);
+function nextSlide(){
+	jQuery(".orbit-next").click();
+}
+function prevSlide(){
+	jQuery(".orbit-prev").click();
+}
+jQuery(document).ready(function(){
+	[?Website.LoopProductsCount,Bestsellers|0=|=
+		[Website.LoopProducts,Bestsellers,4,2,'Name'=
+			bestseller_list.push({
+					name : "[Product.Name]",
+					link : "[Website.GetUrl,Product,[Product.Id]]",
+					img: "/[Product.ThumbnailImage=[ProductImage.ImageUrl,205,220]]",
+					price : "[Product.ActualPrice]"
+			});
+		]
+	]
+	console.log(bestseller_list);
+	var count = Math.ceil(bestseller_list.length / 2);
+	var x = 0;
+	var html = "";
+	for (var i = 0; i < count; i++) {
+		html = "";
+		if(x>=bestseller_list.length)
+			return;
+
+		html =  '<div class="">';
+		html += ' 	<div class="bestseller-item large-6 columns">';
+		html += '  		<img src="'+bestseller_list\[x\].img+'" />';
+		html += ' 		';
+		html += '			'+bestseller_list\[x\].name;
+		html += ' 	</div>';
+		html += '	';
+		x++;
+		html += ' 	<div class="bestseller-item large-6 columns">';
+		html += '  		<img src="'+bestseller_list\[x\].img+'" />';
+		html += ' 		';
+		html += '			<span class="bestseller-item-name">'+bestseller_list\[x\].name+'</span>';
+		html += ' 	</div>';
+		html += '</div>	';
+		jQuery(".bestsellers-slider-block .bestsellers-slides").append(html);
+		x++;
+	};
+	jQuery(".bestsellers-slider-block .bestseller-item-name").substring({ max_char : 15 });
+  	//jQuery(document).foundation('orbit', 'reflow');
+  	jQuery(document).foundation({
+  		orbit: {
+  			navigation_arrows: true,
+  			timer: false,
+  			timer_speed: 10000,
+  		}
+
+  		
+  	});	
+	jQuery(document).on({
+		"ready.fndtn.orbit" : function(event, orbit) {
+			jQuery(".bestsellers-slide-number").html(jQuery(".orbit-slide-number").html());
+		}},".bestsellers-slides");
+
+  	jQuery(document).on({
+  		"after-slide-change.fndtn.orbit" : function(event, orbit) {
+	  		jQuery(".bestsellers-slide-number").html(jQuery(".orbit-slide-number").html());
+		}},".bestsellers-slides");
+});
+</script>

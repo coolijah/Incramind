@@ -1,0 +1,22 @@
+<div class="Product-details-block Table">
+	<div class="block-title"><h6>[_Details]</h6></div>
+	<table  class="large-12">
+		<colgroup>
+			<col width="30%">
+			<col width="70%">
+		</colgroup>
+		<tbody>
+			<tr><th>[_Description]</th>
+				<td>[Product.Description]</td>
+			</tr>
+			[?Product.HasInfoAttributes|Yes=
+				[Product.IterateAttributesForProductPage=
+				<tr>
+					<th>[Attribute.Title]</th>
+					<td>[ProductAttribute.Value]</td>
+				</tr>
+				]
+			]
+		</tbody>
+	</table>
+</div>

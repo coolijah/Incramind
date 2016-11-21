@@ -1,0 +1,34 @@
+/*
+*	Renders a block containing list of featured products.
+*/
+[?Website.LoopProductsCount,New|0=|=
+<div layout-block-name="home_block_container" class="new-products-block home-block SlideShow">
+	<div class="home-block-style [Design.DesignSelectionName, HomeBlocksStyle]">
+		<div class="block-title"><h5 class="subheader">[_What's New] </h5></div>
+		<div class="block-content">
+			<ul class="products-grid inline-list" id="newproducts_singleitem_carousel">
+				[Website.LoopProducts,New,1,,'Name'=
+					<li class="item">
+						[:ProductMiniListItem]
+					</li>
+				]
+			</ul>
+		</div>
+		<script type="text/javascript">
+		var container_width=jQuery('#newproducts_singleitem_carousel').parents('.home-block-style').width();
+		jQuery(function() {
+			var nsi = new ProductCarousel({
+				carousel_id : '#newproducts_singleitem_carousel',
+				items:4,
+				fx:'scroll',
+				width:'100%'
+				
+			});
+			jQuery('#newproducts_singleitem_carousel li').width((container_width-100)/4);
+			nsi.slideshow();
+			
+		});
+		</script>
+	</div>
+</div>
+]

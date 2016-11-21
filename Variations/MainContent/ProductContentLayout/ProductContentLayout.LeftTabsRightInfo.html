@@ -1,0 +1,135 @@
+/*
+*	Renders the product content layout containing tab controls on the left then product
+*								information and image on the right
+*/
+
+<div layout-block-name="product_content_layout" class="product-content-layout left-info-right-tabs">
+	<div class="large-12 product-page">
+		<div layout-block-name="product_content_layout_block_upper" class="large-12 product-essential clearfix">
+			<div class="clearfix">
+				
+				<div layout-block-name="product_content_layout_block_upper_secondary" class="large-7 columns clearfix">
+					<ul class="pic-info-in-tabs tabs" data-tab="" role="tablist">
+
+						<li class="tab-title active" role="presentational"><a href="#" role="tab" tabindex="0" aria-selected="true" content="details">[_Product details]</a></li>
+						<li class="tab-title" role="presentational"><a href="#" role="tab" tabindex="0" aria-selected="false" content="upsell">[_Upsell products]</a></li>
+						<li class="tab-title " role="presentational"><a href="#" role="tab" tabindex="0" aria-selected="true" content="related">[_Related products]</a></li>
+						<!-- <li class="tab-title" role="presentational"><a href="#" role="tab" tabindex="0" aria-selected="false" content="tags">Tags</a></li> -->
+					</ul>
+					<div class=" product-info product-additional-info">
+						<div class="tabs-content">
+							
+							<section role="tabpanel" aria-hidden="false" class="content active" id="details">
+								[:ProductContentLayoutTabsContentProductDetails]
+								[:ProductContentLayoutTabsContentProductTags]
+							</section>
+							<section role="tabpanel" aria-hidden="false" class="content " id="upsell">
+								[:ProductContentLayoutTabsContentProductUpsell]
+							</section>
+							<section role="tabpanel" aria-hidden="false" class="content " id="related">
+								[:ProductContentLayoutTabsContentProductRelated]
+							</section>
+							<!-- <section role="tabpanel" aria-hidden="false" class="content " id="tags">
+									
+							</section> -->
+						</div>					
+					</div>
+				</div>
+				<div layout-block-name="product_content_layout_block_upper_primary_info" class="large-5 columns clearfix">
+					<div class="large-12 columns">
+						<div class="product-shop">
+							<div class="row">
+								<div class="product-name large-12 clearfix">
+									<h4 class="">[Product.Name]</h4>
+								</div>
+								<div class="ratings-block large-12 clearfix">
+									<div class="">
+										[:ProductRating] <!--design variation -->
+										[:ProductEmailToAFriend]
+										<script type="text/javascript">
+											jQuery(document).ready(function(){
+												jQuery(".rating-box").removeClass("f-right");
+												jQuery(".rating-links").addClass("in-block");
+											}
+										</script>
+									</div>
+								</div>
+							</div>
+							<div class="price-box in-block">
+								[:ProductPriceBlock?Product.Sale]
+							</div>
+							<div class="large-12 ">
+								[:ProductTierPrice] <!-- design variation -->
+							</div>
+							<div class="large-12 ">
+								[:ProductAvailabilityBlock]
+							</div>
+							<div class="large-12 ">
+								[:ProductAttributes]
+							</div>
+							
+							[?Product.HasOptions|No=
+								<div class="add-to-box large-12 clearfix">
+									[?Product.InStock|Yes=
+										<div class="large-12 clearfix">
+											[:ProductQuantityBlock] <!-- design variation -->
+										</div>
+										
+										<div class="add-to-cart large-12 clearfix">
+											[:ProductAddToCartButton.Simple]
+										</div>
+										<!-- <span class="or">OR</span> -->
+									]
+									<div class="large-12 columns">
+										[:ProductAddTo]
+									</div>
+								</div>
+							]
+							<div class="short-description large-12 columns">
+								<h2>[_Overview]</h2>
+								<p>[Product.ShortDescription]</p>
+								[?Product.HasBrand|Yes=
+									[Product.Brand=
+										<p>
+											<span>[_Brand]: <a href="[Brand.WwwLink]" target="_blank"><img src="/[Brand.LogoSmall]" alt="[Brand.Name]" width="150px"></a>
+										</p>
+									]
+								]
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br/>
+			<div layout-block-name="product_content_layout_block_bottom"  class="large-12 clearfix">
+				<div class="large-12 columns">
+					[:ProductOptions]			<!-- design variation -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+ 	jQuery(document).ready(function(){
+ 		jQuery(".tabs .tab-title a\\[role=tab\\]").click(function(){
+			var tab = jQuery(this);
+			jQuery(".tabs .tab-title").removeClass("active");
+			tab.parent().addClass("active");
+			var content_id = tab.attr("content");
+			jQuery(".tabs-content .content").removeClass("active");
+			jQuery("#"+content_id).addClass("active");
+			return false;
+		});;
+
+		jQuery(".custom-options-bottom").css("padding","5px;");
+		jQuery(".add-to-box > div").removeClass("large-8").addClass("large-6");
+
+		[?DesignLayout.Layout|3Columns=
+			jQuery(".rating-box").removeClass("f-right").addClass("left");
+			jQuery("#block-upsell-list").removeClass("large-block-grid-4").addClass("large-block-grid-2");
+			jQuery("#block-related-list").removeClass("large-block-grid-4").addClass("large-block-grid-2");	
+		]
+
+ 	});
+</script>

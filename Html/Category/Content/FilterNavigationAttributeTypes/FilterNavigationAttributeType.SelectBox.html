@@ -1,0 +1,20 @@
+/*
+*		Renders a typical dropdown control for a single filter navigation attributes option.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              FilterNavigationAttributeType.SelectBox
+Location:          /Html/Category/Content/FilterNavigationVariation/FilterNavigationAttributeTypes/FilterNavigationAttributeType.SelectBox.html
+Created By:        Leslie Canete
+Created At:        13-Okt-2014 18:44 (rename header and side blocks)
+Last modified By:  Seth Malaki
+Last modified At:  21-Okt-2014 17:09 (myupdates on addingComments)
+--------------------------------------------------------------------**/
+
+
+<div class="menu-header"><h5>[LayeredAttribute.Name]</h5></div>
+<select name="[LayeredAttribute.AdminName]" onchange="setFilter('[LayeredAttribute.AttributeCode]/'+this.value,false);">
+[LayeredAttribute.Options=
+  <option value="[LayeredOption.Name]" id="[LayeredOption.Name]" [?LayeredAttribute.IsOptionSelected,[LayeredOption.AdminName]|Yes=selected]>[LayeredOption.Name]</option>
+]
+</select>

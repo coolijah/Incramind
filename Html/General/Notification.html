@@ -1,0 +1,31 @@
+/*
+*		Renders all notification on every action made.
+*
+*/
+<div class="notification-container">
+	[?UserInput.NotificationType
+	|None=
+	|Confirmation=
+			<div class="messages confirmation-msg  a-center">
+				<span class="fa fa-check-circle"></span><span class="message-text">[UserInput.Notification]</span>
+			</div>
+	|Notify=
+			<div class="messages notify-msg  a-center">
+				<span class="fa fa-check-circle"></span><span class="message-text">[UserInput.Notification]</span>
+			</div>
+	|Error=
+			<div class="messages error-msg  a-center">
+				<span class="fa fa-exclamation-circle"></span><span class="message-text">[UserInput.Notification]</span>
+			</div>
+	|Warning=
+			<div class="messages warning-msg  a-center">
+				<span class="fa fa-exclamation-circle"></span><span class="message-text">[UserInput.Notification]</span>
+			</div>
+	|Critical=
+			<div class="messages error-msg  a-center">
+				<span class="fa fa-exclamation-circle"></span><span class="message-text">[UserInput.Notification]</span>
+			</div>
+	|Unknown=
+	]
+</div>
+

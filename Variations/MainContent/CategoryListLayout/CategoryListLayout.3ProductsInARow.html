@@ -1,0 +1,71 @@
+/*
+*		Renders the layout of product listings in a certain category.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              CategoryListLayout.3ProductsInARow
+Location:          /Html/Category/Content/CategoryListLayoutVariation/CategoryListLayout.3ProductsInARow.html
+Created By:        Leslie Canete
+Created At:        09-Okt-2014 16:49 (categorylistlayoutvariation, categorysidenavigation, checkouttype, change to button style)
+Last modified By:  Seth Malaki
+Last modified At:  23-Okt-2014 17:52 (myupdates in adding comments)
+Possible call:    mainContent.AdvancedSearchResult 	mainContent.BestRated 	mainContent.BestSellers 	mainContent.Brand 	mainContent.Category 	mainContent.Featured 	mainContent.MostInteresting 	mainContent.MostViewed 	mainContent.New 	mainContent.OthersAreViewing 	mainContent.RecentlyViewed 	mainContent.Sales 	mainContent.Search 	mainContent.Tag 	
+Calling blocks:    ProductListItem(2) 	
+--------------------------------------------------------------------**/
+
+/*
+[?UserInput.CatalogMode|list=
+	<div class="product-list">
+		<ul class="list">
+		[Filter.Products=
+			<li class="product-item">
+				[:ProductListItem]
+			</li>
+			]
+		</ul>
+	</div>
+|Grid=
+	<div class="product-list-three_products_in_a_row">
+		<ul class="grid">
+			[Filter.Products=
+				<li class="product-item in-block">
+					[:ProductListItem]
+				</li>
+			]
+		</ul>
+	</div>
+]
+*/
+<div class="category-list-layout ThreeProductsInARow clearfix">
+[?UserInput.CatalogMode
+	|List=
+		<div class="product-list">
+			<ul class="list large-block-grid-1">
+			[Filter.Products=
+				[Filter.Products=
+					[:ProductListItem]
+				]
+			]
+			</ul>
+		</div>
+	|Grid=
+		<div class="product-list">
+			<ul class="grid large-block-grid-3 medium-block-grid-3">
+				[Filter.Products=
+					[:ProductListItem]
+				]
+			</ul>
+		</div>
+]
+</div>
+
+<script type="text/javascript">
+	function over(obj){
+		jQuery(obj).find(".popup-wrapper").addClass("show");
+		jQuery(obj).find(".ecommerce-popup").addClass("show");
+	}
+	function out(obj){
+		jQuery(obj).find(".popup-wrapper").removeClass("show");
+		jQuery(obj).find(".ecommerce-popup").removeClass("show");
+	}
+</script>

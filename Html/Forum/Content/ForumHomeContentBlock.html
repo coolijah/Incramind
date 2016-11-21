@@ -1,0 +1,35 @@
+/*
+*		Renders the forum home content block. This list all forum groups in a forum.
+*
+*/
+
+<div class="content main-content">
+	[Website.Forums=
+		<div class="forum-block">
+			<div class="forum-header">[Forum.Name]</div>
+			[Forum.ForumGroups=
+				<div class="forum-content clearfix">
+					<div class="ribbon new"></div>
+					<div class="fdata large-12 columns">
+						<div class="large-3 columns">
+							<div class="large-12 columns">
+								<a class="forum-group-title" href="[Website.GetUrl,forum,group/[ForumGroup.Id]]">
+									<h6>[ForumGroup.Name]</h6>
+								</a>
+								<p>[ForumGroup.Description]</p>
+							</div>
+						</div>
+						<div class="large-6 columns">
+
+						</div>
+						<div class="large-3 columns forum-settings text-right">
+							<div class="replies"><span>10</span><br/>[_replies]</div>
+							<div class="views"><span>523</span><br/>[_views]</div>
+						</div>
+						/*[:ForumContentBlock]*/
+					</div>
+				</div>
+			]
+		</div>
+	]
+</div>

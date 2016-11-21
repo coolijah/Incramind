@@ -1,0 +1,79 @@
+/*
+*	Renders the variation list of Product attributes.
+*
+*/
+
+[?Product.ProductType|Configurable=
+	<div class="large-12 product-attributes eCommerce">
+		<div class="large-12">
+				[Product.ConfigurableAttributes=
+			  		<label>[Attribute.Title] [?Attribute.ValueRequired|Yes=<em class="required">*</em>]</label>
+			  		<input [?Attribute.ValueRequired|Yes=required] class="product-attrib" id="attribute_[Attribute.AttributeCode]" type="hidden" name="[Attribute.AttributeCode]"/>
+					<ul class="[?Attribute.AttributeCode
+									|Color=color-swatches
+									|Size=sizes-choice
+									|=attribute-items
+								]
+					">
+						[Product.ConfigurableChildProducts,[Attribute.AdminTitle]=
+							<li class="[Attribute.AttributeCode]">
+
+								<a href="#" 
+									onclick="selectAttribute(this,[Product.Id],'[Attribute.AttributeCode]','[AttributeOption.Admin]');return false;">
+									<div  class="item [?UserInput.ConfigurableAttributeValueValid,[Attribute.AdminTitle],[AttributeOption.Admin]|Yes=selected]">
+										[?Attribute.AttributeCode
+											|Color=<div class="available-color [?UserInput.ConfigurableAttributeValueValid,[Attribute.AdminTitle],[AttributeOption.Admin]|Yes=selected]" style="background:[AttributeOption.Color]"></div>
+										]
+										[AttributeOption.Admin]
+									</div>
+								</a>
+							</li>
+							[?UserInput.ConfigurableAttributeValueValid,[Attribute.AdminTitle],[AttributeOption.Admin]|Yes=
+								<script type="text/javascript">
+									jQuery("#attribute_[Attribute.AttributeCode]").val('[AttributeOption.Admin]');
+								</script>
+							]
+						]
+					</ul>
+
+		  			/*
+		  			<select name="[Attribute.AttributeCode]" id="attribute[Attribute.Id][Product.Id]"  onchange="setAttr([Product.Id])" class="msdropdown required span2" >
+						<option value="">[_Please select]</option>
+						[Product.ConfigurableChildProducts,[Attribute.AdminTitle]=
+							<option [?Attribute.AttributeCode|Color=data-title="[AttributeOption.Color]"] value="[AttributeOption.Id]" [?UserInput.ConfigurableAttributeValueValid,[Attribute.AdminTitle],[AttributeOption.Admin]|yes=selected]>[AttributeOption.Admin]</option>
+						 ]
+					</select>
+					*/
+				]
+		</div>
+	</div>
+	<script type="text/javascript">
+		function selectAttribute(obj,product_id,attr_code,value){
+			jQuery(".product-attributes ."+attr_code+ " .item").removeClass("selected");
+			jQuery(obj).children("div.item").addClass("selected");
+			jQuery("#attribute_"+attr_code).val(value);
+			
+			attrib.selectAttribute();
+		}
+		var attrib = jQuery(".product-attrib").initProductAttributes({
+							'product_url' 		: '[Website.GetUrl,Product,[Product.Id]]',
+							'ajax_url'	  		: '[Website.GetUrl,Ajax,Update]',
+							'attribute_class'  	: 'product-attrib' 
+						});
+
+		var setAttr=function(id) { 
+		var str=Array();
+			jQuery('.product-attributes.ecommerce input\\[used-for="product-attributes"\\]').each(function(){
+				if(jQuery(this).val()){
+					str.push(jQuery(this).attr("name"));
+					str.push(jQuery(this).val());
+				}
+			});
+			selectaction('[Website.GetUrl,Ajax,Update]','[Website.GetUrl,Product,[Product.Id]]',str.join('/'));
+		};
+		[Product.ConfigurableAttributes=
+			jQuery('#attribute[Attribute.Id][Product.Id] option\\\[value=[Product.DefaultConfigurableAttribute,[Attribute.AttributeCode]]\\\]').attr('selected','selected');
+		]
+		
+	</script>
+]

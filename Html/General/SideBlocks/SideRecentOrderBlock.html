@@ -1,0 +1,21 @@
+/*
+*		Renders a block that contains a list of customer recent orders.
+*
+*/
+
+[?Customer.OrdersAvailable|yes=
+<div class="block white-bg recent-order Default-style">
+	<div class="title">
+		<h2>[_RECENT ORDERS]</h2>
+	</div>
+	<div class="block-content">
+		<ul class="order-links">
+		[Customer.Orders,3=
+			<li><a href="[Website.GetUrl,Customer,OrderView/[Order.Id]]">[Order.OrderNumber]&nbsp;<span>[Order.LastDate]</span> </a></li>
+		]
+		</ul>
+		<p class="a-right no-margin"><a href="[Website.GetUrl,Customer,History]">[_View All]</a></p>
+	</div>
+	<hr>
+</div>
+]

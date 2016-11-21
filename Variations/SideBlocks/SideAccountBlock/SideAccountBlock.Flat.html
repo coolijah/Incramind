@@ -1,0 +1,48 @@
+[?Customer.LoggedIn|LoggedIn=
+	<div class="block logout Flat">
+		<div class="block-content">
+			<div class="logout-link">
+				<span class="welcome">
+					[_Welcome] [Customer.FirstName]!
+				</span>
+				<a href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,Logout]',IncraWindow.formatUrl('[Url.FullUrl]'),'true');">[_Logout]</a>
+			</div>
+		</div>
+	</div>
+	|=
+	<div class="block login Flat">
+		<div class="title"><h6>[_LOG IN]</h6></div>
+		<div class="block-content">
+			<form id="login-form" method="post">
+				
+				<label for="email">[_Email Address]</label>
+				<div class="input-box">
+
+					<input type="text" value="" name="username" id="email" size="29" class="required" />
+
+				</div>
+				<label for="password">[_Password]</label>
+				<div class="input-box">
+
+					<input type="password" value="" name="password" id="password" size="29" class="required password" />
+
+				</div>
+
+				<div id="button_holder" class="text-right">
+					<button class="button btn-secondary[Design.DesignSelectionName,ButtonStyle]" type="submit"><span><span>[_LOG IN]</span></span></button>
+				</div>
+			</form>
+			<br>
+			<p class="helplink">
+			[_Forgot your password?] <a href="[Website.GetUrl,Login,ForgotPassword]">[_CLICK HERE]</a>
+			</p>	
+			<script type="text/javascript">
+			jQuery("#login-form").validate({
+				submitHandler: function(form) {
+					IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,Login]',IncraWindow.formatUrl('[Url.FullUrl]'),'true',jQuery('#login-form').serialize(),'POST');
+				 }	
+			});
+			</script>
+		</div>
+	</div>
+]

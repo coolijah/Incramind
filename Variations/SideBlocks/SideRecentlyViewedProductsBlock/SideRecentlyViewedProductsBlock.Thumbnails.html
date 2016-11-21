@@ -1,0 +1,20 @@
+/*
+*	Renders a block that contains a list of products that is sale.
+*
+*/
+
+/*[Website.RecentlyViewed,1,3,'Name',Ascending]*/
+[?Website.LoopProductsCount,RecentlyViewed|0=|=
+<div class="block products-block recentlyviewed Thumbnail">
+	<div class="title">
+		<h2>[_RECENTLY VIEWED]</h2>
+	</div>
+	<div class="block-content">
+		<div class="products-grid">
+		[Website.LoopProducts,RecentlyViewed,3=
+			[:ProductThumbnailListItem]
+		]
+		</div>
+	</div>
+</div>
+]

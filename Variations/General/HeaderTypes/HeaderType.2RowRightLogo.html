@@ -1,0 +1,44 @@
+/*
+*		Renders the store currency switcher.
+* logo is in right part, menu is in left part
+*/
+
+<div  layout-block-name="header_block" class="header-container TwoRowRightLogo">
+	<div class="large-12 header">
+		<div class="dark-ribbon">
+			<div class="row opac">
+				<div class="large-3 columns">
+					<div class="large-12 clearfix">
+						[:HeaderMiniSearchBlock]
+					</div>
+					<div class="large-12 clearfix">
+						[:HeaderCurrencySwitcherBlock]
+					</div>
+				</div>
+				<div class="large-6 columns">
+					<div class="in-block">[:HeaderWelcomeMessageBlock]</div>
+					<div class="in-block">[:HeaderTopNavigationLinksBlock]</div>
+				</div>
+				<div class="large-3 columns a-right">
+					[?DesignLayout.CheckHeader,[Url.Model],HeaderLogoBlock|Yes=[:HeaderLogoBlock]]
+				</div>
+			</div>
+		</div>
+		<div class="orange-ribbon header-bottom">
+			<div class="row opac mainmenu-container">
+				<div class="large-9 columns">[:HeaderMainMenuBlock]</div>
+				<div class="large-3 columns a-right">
+					<div class="in-block">[:HeaderLanguageSwitcherBlock]</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+[:SubmitAsPostVar]
+[?DesignLayout.HeaderType|2RowRightLogo=
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery("#search_autocomplete").css("width","245px");
+		});
+	</script>
+]

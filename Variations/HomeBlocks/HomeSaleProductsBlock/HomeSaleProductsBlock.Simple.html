@@ -1,0 +1,27 @@
+/*
+*	Renders a block containing list of featured products.
+*/
+[?Website.LoopProductsCount,Sales|0=|=
+<div class="sale-products-block home-block two-items-slider large-6 columns">
+	<div class="block-title"><h3>[_Sale Products] </h3></div>
+	<ul class="products-grid inline-list" id="sale_twoitems_carousel">
+		[Website.LoopProducts,Sales,4,,'Name'=
+			<li class="item">
+				[:ProductMiniListItem]
+			</li>
+		]
+	</ul>
+	<script type="text/javascript">
+	jQuery(function() {
+		var sti = new ProductCarousel({
+			carousel_id : '#sale_twoitems_carousel',
+			effect	: 'crossfade',
+			items: 2,
+			width:'100%',
+			
+		});
+		sti.slideshow();
+	});
+	</script>
+</div>
+]

@@ -1,0 +1,290 @@
+/*
+*	
+*		renders the shopping cart items information in a table type format.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              CartTableBlock
+Location:          /Html/Cart/Content/CartTableBlock.html
+Created By:        Leslie Canete
+Created At:        07-Okt-2014 16:54 (move to and rename ShoppingCartBlocks to Cart)
+Last modified By:  Seth Malaki
+Last modified At:  21-Okt-2014 17:09 (myupdates on addingComments)
+Called from:       mainContent.Cart 	
+Calling blocks:    CartFooterButtonsBlock 	CartItemsBlock 	
+--------------------------------------------------------------------**/
+
+<div class="cart-details lines">
+	<form action="" method="post" id="cart-form">
+		<table  class="shopping-cart-table">
+			<colgroup>
+				<col width="75">
+				<col width="500">
+				<col width="20">
+				<col width="70">
+				<col width="50">
+				<col width="50">
+				<col width="45">
+			</colgroup>
+			<thead class="head-title">
+				<tr>
+					<th class="a-center" rowspan="1"></th>
+					<th class="a-left" rowspan="2">[_Product Name]</th>
+					<th class="a-center" colspan=""></th>
+					<th class="a-center" colspan="">[_Unit Price]</th>
+					<th class="a-center" rowspan="2">[_Qty]</th>
+					<th class="a-right" colspan="">[_Subtotal]</th>
+					<th class="a-center" rowspan="2"></th>
+				</tr>
+			</thead>
+			<tbody>
+				[ShoppingCart.Items= 
+					<tr class="a-center">
+						<td>
+							<a class="product-image" title="[Product.Name]" href="[Website.GetUrl,Product,[Product.Id]]">
+								<img width="60" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,100,125]]">
+							</a>
+						</td>
+					    <td class="p-items a-left">
+							<a href="[Website.GetUrl,Product,[Product.Id]]">[Product.Name] </a>
+							<p class="item-msg error">[ShoppingCartItem.Message] </p>
+							[ShoppingCartItem.Attributes=
+							<dl class="item-options">
+								<dt>[ShoppingCartItemAttribute.Value]</dt>
+							</dl>
+							]
+							[ShoppingCartItem.Options=
+							<dl class="item-options">
+								<dt>[ShoppingCartOption.ValueAsText]</dt>
+							</dl>
+							]
+						</td>
+					   <td>
+					   		<a class="edit-item" title="[_Edit item parameters]" href="[Website.GetUrl,Product,[Product.Id]]">
+								<i class="fa fa-pencil-square-o fa-lg"></i>
+							</a>
+						</td>
+					    <td class="a-center">
+							<div class="cart-price a-right">
+								<span class="price">[ShoppingCartItem.PriceEach]</span>
+							</div>
+						</td>
+						<td class="a-center">
+							<div class="cart-price">
+								<span class="qty"><input name="qty[ShoppingCartItem.Id]" type="text" value="[ShoppingCartItem.Quantity]" size="4" title="[_Qty]" class="input-text qty" maxlength="12"></span>
+							</div>
+						</td>
+						<td class="a-right">
+							<div class="cart-price a-right">
+								<span class="subtotprice">[ShoppingCartItem.RowTotal]</span>
+							</div>
+						</td>
+						<td class="a-center last">
+							<a class="delete-item" title="[_Remove Item]" href="#" onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,RemoveFromCart]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[ShoppingCartItem.Id]'); return false;">
+								<i class="fa fa-trash-o fa-2x"></i>
+							</a>
+						</td>
+						
+					</tr>
+					]
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="7" class="a-right">
+						<div class="cart-buttons">
+							<a href="[Website.GetUrl,Home]">
+								<i class="fa fa-hand-o-right"></i> [_Continue Shopping]
+							</a>
+						</div>
+						<div class="cart-buttons">
+							<a href="#" onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,ClearCart]',IncraWindow.formatUrl('[Url.FullUrl]'),'true');">
+								<i class="fa fa-trash-o"></i> [_Clear Cart]
+							</a>
+						</div>
+						<div class="cart-buttons">
+							<a href="#" onclick="submitForm(); return false;">
+								<i class="fa fa-repeat"></i> [_Update Shopping Cart]
+							</a>
+						</div>
+					</td>
+					<script type="text/javascript">
+						function submitForm(){
+							jQuery("#cart-form").submit();
+						}
+						jQuery("#cart-form").validate({
+							submitHandler: function(form) {
+								IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,UpdateCart]',IncraWindow.formatUrl('[Url.FullUrl]'),'true',jQuery('#cart-form').serialize(),'POST');
+							 }	
+						});
+					</script>
+				</tr>
+			</tfoot>
+		</table>
+	</form>
+	<div class="additional-info">
+	<div class="row">
+			<div class="large-12 ">
+				<div class="small-4 columns">
+					<div class="shipping-details">
+						[:CartDiscountCouponBlock]
+						[:CartShippingCalculationBlock]
+					</div>
+				</div>
+				<div class="small-8 columns">
+					<div class="large-12">
+						<div class="small-6">
+						</div>
+						<div class="small-6 right cart-totals-details clearfix">
+							<div class="large-12 row collapsed total-rows">
+								<div class="large-6 columns">
+									<strong>[_Subtotal]</strong>
+								</div>
+								<div class="large-6 columns text-right t-price">
+									[ShoppingCart.BasePrice]
+								</div>
+							</div>
+							<div class="small-12 row collapsed total-rows">
+								<div class="small-6 columns">
+									<strong>[_Grand Total]</strong>
+								</div>
+								<div class="small-6 columns text-right t-price">
+									<span class="grand-total">[ShoppingCart.TotalInclTax]</span>
+								</div>
+							</div>
+							<div class="totals-details" style="overflow:hidden; height:18px;">
+								<i class="fa fa-plus-square show-details" onclick="showDetails(this)"> [_show details]</i>
+								<div class="small-12">
+									<table class="cart-totals-table">
+										<colgroup>
+											<col width="200">
+											<col width="150">
+										</colgroup>
+										<tbody class="total-title">
+											[?ShoppingCart.HasDiscounts
+												|yes=
+												<tr>
+										    	<td class="a-right">
+												<strong>[_Discounts] <i title="[ShoppingCart.Discounts=[ShoppingCartDiscount.Id][ShoppingCartDiscount.Name][ShoppingCartDiscount.Amount]([ShoppingCartDiscount.AmountText]) ]" class="fa fa-question-circle"></i></strong>                   
+								                   </td>
+										    	   <td class="a-right">
+											          <span class="total-price">- [ShoppingCart.TotalDiscounts]</span>
+												  </td>
+												</tr>
+											]
+											[?ShoppingCart.FreeShipping
+											|n/a=
+											|Yes=
+												<tr>
+													<td class="a-right">
+														<strong>[_Shipping Costs:]</strong>
+													</td>
+													<td class="a-right">
+														[_Free Shipping]
+													</td>
+												</tr>
+											|No=<tr>
+												<td class="a-right">
+													<strong>[_Shipping Costs:]</strong>
+												</td>
+													<td class="a-right">
+														<span class="total-price">[ShoppingCart.ShippingCosts]</span>
+													</td>
+												</tr>
+											]
+											[?ShoppingCart.PaymentCostAvaiable
+											|yes=<tr>
+									    			<td class="a-right">
+													<strong>[_Payment Cost]</strong>
+												    </td>
+									    			<td class="a-right">
+													<span class="total-price">[ShoppingCart.PaymentCost]</span>
+												   </td>
+											</tr>
+											]
+											<tr>
+											      <td class="a-right"><strong>[_Subtotal (Excl. Tax)]</strong></td>
+											      <td class="a-right">
+												     <span class="total-price">[ShoppingCart.TotalExclTax]</span>
+											      </td>
+										    </tr>
+											[?ShoppingCart.HasTaxes
+												|yes=
+
+											  		[?ShoppingCart.AllTaxesIncluded
+
+										  		|yes=
+												      <tr>
+													        <td class="a-right"><strong>[_Tax]</strong></td>
+													        <td class="a-right">
+														     <span class="total-price">[ShoppingCart.TotalTax]</span>
+													        </td>
+												      </tr>
+												      <tr>
+													        <td class="a-right"><strong>[_Subtotal (Excl. Tax)]</strong></td>
+													        <td class="a-right">
+														     <span class="total-price">[ShoppingCart.TotalExclTax]</span>
+													        </td>
+												      </tr>
+												      <tr>
+													        <td class="a-right"><strong>[_Subtotal (Incl. Tax)]</strong></td>
+													        <td class="a-right">
+														    <span class="total-price">[ShoppingCart.TotalInclTax]</span>
+													        </td>
+												      </tr>
+										     	|no=
+													  <tr>
+											    	    <td class="a-right">
+														   <strong>[_Taxes] <i title="[ShoppingCart.TaxAndCosts= [ShoppingCartTaxAndCost.Id] [ShoppingCartTaxAndCost.Name]  [ShoppingCartTaxAndCost.Amount]%  [ShoppingCartTaxAndCost.Value][?ShoppingCart.CurrentTaxIncluded|yes=inclusive btw|no=exclusive btw]" class="fa fa-question-circle"></i></strong> 
+									                         ]
+									    				</td>
+											    		<td class="a-right">
+															<span class="total-price">+ [ShoppingCart.TotalTax]</span>
+														</td>
+													  </tr>
+							                    	]
+											]	
+										        
+										    <tr>
+										        	<td class="a-right"><strong>[_Grand Total]</strong></td>
+											        <td class="a-right">
+												         <span class="total-price">[ShoppingCart.TotalInclTax]</span>
+											        </td>
+										    </tr>	
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="checkout-button text-center">
+								[:CartCheckoutButtonBlock]
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="large-12 ">
+			[:ProductCrossSellsBlock]
+		</div>
+	</div>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery(".discount-coupon-box").css("margin-top","0px");
+		})
+		function showDetails(obj){
+			
+			var parent = jQuery(obj).parent();
+			console.log(parent);
+			if(parent.hasClass('show')){
+				jQuery(obj).removeClass('fa-minus-square').addClass('fa-plus-square');
+				parent.removeClass('show');
+				jQuery(".totals-details").css('height','18px');
+			}else{
+				jQuery(obj).removeClass('fa-plus-square').addClass('fa-minus-square');
+				parent.addClass("show");
+				var h = jQuery(".cart-totals-table").outerHeight()+30;
+				jQuery(".totals-details.show").css('height',h+'px');
+			}
+			
+		}
+	</script>
+</div>	

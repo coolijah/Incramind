@@ -1,0 +1,35 @@
+<script type="text/javascript">
+var api_test= new IncraTestApi({});
+// manual reserve for log in, manage stock is no
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate: Product,3\]\[Product.NumberInStock\]");
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate: Product,3\]\[Product.ReservedQty\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate: Product, 3\]\[Set: Product.CanReserveThisProduct, No\]\[Set: Product.CanReserveThisProduct,Yes\]\[Product.CanReserveThisProduct\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Set : WebsiteFeatures.Reservations,Yes\]\[WebsiteFeatures.Reservations\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate: Configuration,3\]\[Set : Configuration.ReservationManualReserveFunctionalityActivated,Yes\]\[Configuration.ReservationManualReserveFunctionalityActivated\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate: CustomerGroup, 5\]\[Set: CustomerGroup.CanReserve, Yes\]\[CustomerGroup.CanReserve\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/Reserve/3/2/1/lesliepcanete@gmail.com/for future use");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate: Product,3\]\[Product.NumberInStock\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate: Product,3\]\[Product.ReservedQty\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/call/Unreserve/3/2");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate: Product,3\]\[Product.NumberInStock\]");
+
+api_test.processUrl("[Website.GetUrl,RestApi]/evaluate?data=","html","\[Locate: Product,3\]\[Product.ReservedQty\]");
+
+var data=api_test.temp_array;
+
+var myApp = angular.module("myApp", []);
+
+myApp.controller("myController", function($scope){
+   $scope.logs = data; 
+});
+
+</script>

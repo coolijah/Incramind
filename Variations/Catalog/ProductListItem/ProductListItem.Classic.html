@@ -1,0 +1,141 @@
+/*
+*		Renders the listings of products of the current category.  
+*		Can be list as Grid type or List type.
+*
+*/
+<!-- used default for now to over ride --> 
+[?UserInput.CatalogMode|List=
+		<li class="product-item Classic">
+			<div class=" item-wrapper clearfix"  id="prd[Product.Id]">
+				[?Product.Sale|sale=<div class="product-ribbon sale"></div>]
+				<div class="product-image large-4 columns">
+				   <a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+				   	<img src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,205,220]]" alt="[Product.Name]" width="100%"/>
+				   </a>
+				</div>
+				<div class="product-details large-8 columns">
+					<div class="large-6 columns">
+						<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]" alt="[Product.Name]">
+							<h6 class="product-name text-left">[Product.Name]</h6>
+						</a>
+					</div>
+					<div class="large-6 columns text-right">[:ProductRating]</div>
+					
+					<div class="large-12 columns">
+						<strong>[_Overview]</strong>
+						<p>[Product.ShortDescription]</p>
+						[?Product.HasBrand|Yes=
+							[Product.Brand=
+								<p>
+									<span>[_Brand]: <a href="[Brand.WwwLink]" target="_blank"><img src="/[Brand.LogoSmall]" alt="[Brand.Name]" width="150px"></a>
+								</p>
+							]
+						]
+					</div>
+					<div class="large-12 columns clearfix" style="border-top:1px solid #CCC">
+						<div class="price-block large-6 columns text-left">
+							[?Product.ProductType|Simple=
+								[?Product.Sale|sale=
+									<span class="price special"><s>[Product.Price] </s>[Product.SpecialPrice]</span>
+									|=
+									<span class="price">
+										[Product.Price]
+									</span>
+									]
+								|Configurable=
+									[?SimpleProduct.Sale|sale=
+									<span class="price special"><s>[SimpleProduct.Price] </s>[SimpleProduct.SpecialPrice]</span>
+									|=
+									<span class="price">
+										[SimpleProduct.Price]
+									</span>
+									]
+							]
+						</div>
+						<div class="add-to-cart large-6 columns text-right">
+							[?Product.ProductType|Configurable=
+								<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+									<span><span>[_Configure]</span></span>
+								</button>
+							|=
+								<button  class="button view-button btn-secondaryClassic" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+									<span><span>[_Info]</span></span>
+								</button>&nbsp;
+								[?Product.HasRequiredOptions|Yes=
+									<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+									<span><span>[_Configure]</span></span>
+									</button>
+								|=
+							  	<button class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="IncraShoppingCart.ajaxAddToCart({submit_url : '[Website.GetUrl,IncraShop,AddToCart]',second_url : '[UserInput.DefaultUrlPart]',flag:true,id :'[Product.Id]',post_data: 'qty=[Product.MinInShoppingCart]'}); return false;" class="button btn-cart" title="[_Add to Cart]" type="button">
+									<span><span>[_Add to Cart]</span></span>
+								</button>
+								]
+							]
+						</div>
+					</div>
+				</div>
+			</div>
+		</li>
+	|Grid=
+		<li class="product-item Classic">
+			<div class=" item-wrapper "  id="prd[Product.Id]">
+				[?Product.Sale|sale=<div class="product-ribbon sale"></div>]
+				<div class="product-image">
+				   <a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+				   	<img src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,205,220]]" alt="[Product.Name]" width="100%"/>
+				   </a>
+				</div>
+				 <div class="product-details">
+					<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]" alt="[Product.Name]">
+						<h6 class="product-name text-center">[Product.Name]</h6>
+					</a>
+					<div class="price-block text-center">
+						[?Product.ProductType|Simple=
+							[?Product.Sale|sale=
+								<span class="price special"><s>[Product.Price] </s>[Product.SpecialPrice]</span>
+								|=
+								<span class="price">
+									[Product.Price]
+								</span>
+								]
+							|Configurable=
+								[?SimpleProduct.Sale|sale=
+								<span class="price special"><s>[SimpleProduct.Price] </s>[SimpleProduct.SpecialPrice]</span>
+								|=
+								<span class="price">
+									[SimpleProduct.Price]
+								</span>
+								]
+						]
+					</div>
+					
+						<div class="large-12 clearfix">
+							
+							<div class="add-to-cart large-12 columns text-center">
+								
+								[?Product.ProductType|Configurable=
+								<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+									<span><span>[_Configure]</span></span>
+									</button>
+								|=
+									<button  class="button view-button btn-secondaryClassic" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+										<span><span>[_Info]</span></span>
+									</button>&nbsp;
+									[?Product.HasRequiredOptions|Yes=
+										<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+										<span><span>[_Configure]</span></span>
+										</button>
+									|=
+								  	<button class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="IncraShoppingCart.ajaxAddToCart({submit_url : '[Website.GetUrl,IncraShop,AddToCart]',second_url : '[UserInput.DefaultUrlPart]',flag:true,id :'[Product.Id]',post_data: 'qty=[Product.MinInShoppingCart]'}); return false;" class="button btn-cart" title="[_Add to Cart]" type="button">
+										<span><span>[_Add to Cart]</span></span>
+									</button>
+									]
+								]
+							</div>
+							
+						</div>
+				</div>
+			</div>
+		</li>
+]
+

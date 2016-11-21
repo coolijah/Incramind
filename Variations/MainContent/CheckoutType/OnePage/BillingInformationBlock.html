@@ -1,0 +1,215 @@
+/*
+
+*/
+/** -------------------------------------------------------------------
+Name:              BillingInformationBlock
+Location:          /Html/Checkout/Content/CheckoutTypeVariation/OnePage/BillingInformationBlock.html
+Created By:        Leslie Canete
+Created At:        07-Okt-2014 16:54 (move to and rename ShoppingCartBlocks to Cart)
+Last modified By:  Leslie Canete
+Last modified At:  13-Okt-2014 11:56 (updating files, move css and images to root)
+--------------------------------------------------------------------**/
+<div id="opc-billing" class="checkout-block billing-information" step="billing" onclick="openCheckoutStep(this);">
+	<div class="title">
+		<div class="circle-number in-block">[General.Param1]</div>
+		<div class="in-block">
+			<h6>[_Billing Information]</h6>
+		</div>
+	</div>
+	<div class="content ">
+		<div class="billing-info-form">
+			<form action="" id="co-billing-form">
+				<div class="fieldset">
+				<p class="required">[_* Required Fields]</p>
+				<ul class="billing-info-list">
+					[?Customer.LoggedIn|LoggedIn=
+						[?Customer.NumberOfAddresses|0=
+							|=
+							<li class="wide">
+								<div>
+									<input type="hidden" name="billing_address_id" id="billing_address_id"/>
+									<label for="billing-address-select">[_Select a billing address from your address book or enter a new address.]</label>
+									<div class="input-box">
+										<select onchange="billing.newAddress(this.value)" title="" class="address-select " id="billing-address-select" >
+											[Customer.Addresses=
+												<option  value="[Address.Id]"
+													[?Address.DefaultInvoiceAddress|Yes=selected="selected"]
+												>
+													[Address.FirstName] [Address.LastName] [Address.StreetName], [Address.City],  [Address.PostalCode]  [Address.State],  [Address.Country=[Country.Name]]
+												</option>
+											]
+											<option value="new">[_New Address]</option>
+										</select>
+										[Customer.Addresses=
+											[?Address.DefaultInvoiceAddress|Yes=
+												<script type="text/javascript">
+													jQuery("#billing_address_id").val([Address.Id]);
+												</script>
+											]
+										]
+									</div>
+								</div>
+							</li>
+
+						]
+					]
+					
+					<li id="billing-new-address-form" [?Customer.LoggedIn|LoggedIn=[?Customer.NumberOfAddresses|more=style="display:none"|1=style="display:none"]]>
+						<ul>
+							<li class="fields">
+								<div class="field name-firstname">
+									<label class="required" for="firstname">[_First Name]<em>*</em></label>
+									<div class="input-box">
+										<input type="text" class="input-text required" title="[_First Name]" value="[Customer.FirstName]" name="firstname" id="firstname" maxlength="255">
+									</div>
+								</div>
+							</li>
+							<li class="fields">
+								<div class="field name-lastname">
+									<label class="required" for="lastname">[_Last Name]<em>*</em></label>
+									<div class="input-box">
+										<input type="text" class="input-text required" title="[_Last Name]" value="[Customer.LastName]" name="lastname" id="lastname" maxlength="255">
+									</div>
+								</div>
+								<div class="field">
+									<div class="field name-middlename">
+										<labelfor="middlename">[_Middle Name]</label>
+										<div class="input-box">
+											<input type="text" class="input-text" title="[Middle Name]" value="[Customer.MiddleName]" name="middlename" id="middlename" maxlength="255">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="fields">
+								<label for="company">[_Company]</label>
+									<div class="input-box">
+									    <input type="text" class="input-text" value="[Address.CompanyName]" title="[_Company]" id="company" name="company" maxlength="255">
+									</div>
+							</li>
+							<li class="wide">
+								<label class="required address" for="street1">[_Street Address]<em>*</em></label>
+								<div class="input-box">
+									<input type="text" class="input-text required" id="street1" title="[_Street Address]" value="[Address.StreetName]" name="street1">
+								</div>
+							</li>
+							<li class="wide">
+								<label class="" for="street1">[_Street Address 2] </label>
+								<div class="input-box">
+									<input type="text" class="input-text" id="street2" title="[_Street Address]" value="[Address.AddressLine2]" name="street2">
+								</div>
+							</li>
+							<li class="fields">
+								<div class="field">
+									<label class="required" for="billing_country_id">[_Country]<em>*</em></label>
+									<select class="validate-select required" id="billing_country_id" name="country_id" onchange="checkout.setCountryConfig(this); updateRegion(this.value,'billing_province_id');">
+										<option value="">[_Please select country]</option>
+										[Website.AvailableCountries=
+											[CountryGroup.Countries=<option value="[Country.Id]">[Country.Name]</option>]
+										]
+									</select>
+									<script type="text/javascript">
+										jQuery("#billing_country_id option\\[value=[Configuration.DefaultCountryId]\\]").attr("selected","selected");
+									</script>
+								</div>
+								<div class="field">
+									<label class="required" for="telephone"><em>*</em>[_Telephone]</label>
+								    <div class="input-box">
+										<input type="text" id="telephone" class="input-text required" title="[_Telephone]" value="[Address.TelNumber]" name="telephone" >
+								    </div>
+								</div>
+							</li>
+							<li class="fields">
+								<label class="required" for="region_id"><em>*</em>[_State/Province]</label>
+								<div class="input-box">
+									<select style="" class="validate-select" title="[_State/Province]" name="region_id" id="region_id" defaultvalue="0">
+										<option value="">[_Please select region, state or province]</option>
+									</select>
+								</div>
+							</li>
+							<li class="fields">
+								<div class="field">
+									<label class="required" for="city">[_City]<em>*</em></label>
+									<div class="input-box">
+										<input type="text" id="city" class="input-text required" title="[_City]" value="[Address.City]" name="city">
+									</div>
+								</div>
+								<div class="field">
+									<label class="required" for="postcode">[_Zip/Postal Code]<em>*</em></label>
+									<div class="input-box">
+										<input type="text" class="input-text validate-zip-international required" id="postcode" title="[_Zip/Postal Code]" value="[Address.PostalCode]" name="postcode">
+									</div>
+								</div>
+							</li>
+							
+							[?Customer.LoggedIn|Guest=
+								<li>
+									<label class="required " for="billing_email">[_Email] <em>*</em></label>
+									<input type="text" class="input-text email required"  value="" id="billing_email" title="[_email]" name="email">
+								</li>
+							]
+							
+							[?Customer.LoggedIn|Guest=
+								<li id="register-customer-password" style="display: none;">
+									<ul>
+										<li>
+											<label class="required" for="billing_customer_password">[_Password] <em>*</em></label>
+											<input type="password" class="input-text required password" id="billing_customer_password" name="customer_password" title="[_customer_password]">
+										</li>
+										<li>
+											<label class="required" for="billing_confirm_password">[_Confirm Password] <em>*</em></label>
+											<input type="password" class="input-text required cpassword" id="billing_confirm_password"  name="confirm_password" title="[_confirm_password]">
+										</li>
+									</ul>
+								</li>
+							]
+						</ul>
+						<ul>
+						[?Customer.LoggedIn|LoggedIn=
+							<li class="control">
+								<input style="width: 20px;" type="checkbox" name="billing_save_in_address_book" value="1" title="[_Save in address book]" id="billing:save_in_address_book" onchange="" class="checkbox"><label class="in-block" for="billing:save_in_address_book">[_Save in address book]</label>
+							</li>
+						|=
+							<li class="no-display"><input type="hidden" value="1" name="billing_save_in_address_book"></li>
+						]
+						</ul>
+					</li>
+				</ul>
+				<ul class="billing-address-options">
+					<li id="option-shipping" class="control control-checkbox">
+						<input type="radio" checked="checked"   onclick="" value="1" id="billing_use_for_shipping_yes" name="use_for_shipping">
+						<label class="in-block" for="billing_use_for_shipping_yes">[_Ship to this address]</label>
+					</li>
+					<li class="control">
+						<input type="radio"   value="0" id="billing_use_for_shipping_no"  onclick="" class="radio" name="use_for_shipping">
+						<label  class="in-block"for="billing_use_for_shipping_no">[_Ship to different address]</label>
+					</li>
+				</ul>
+				
+				<div class="buttons-set">
+					[?Customer.LoggedIn|Guest=
+						<a class="step-back left" href="#" onclick="checkout.stepBack();return false;">
+							<img src="[File:/images/i_asc_arrow.gif]"/> [_Back]
+						</a>
+					]
+					<span class="please-wait" id="billing-please-wait" style="display:none;">
+						<img src="[File:/images/opc-ajax-loader.gif]" alt="Loading next step..." title="[_Loading next step...]" class="v-middle"> [_Loading next step...]        
+					</span>
+					
+					<button type="button" title="[_Continue]" class="button a-left" onclick="billing.save();"><span><span>[_Continue]</span></span></button>
+					<br>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var billing = new Billing('co-billing-form','[Website.GetUrl,CheckOut,selectBillingAddress]','[Website.GetUrl,CheckOut,SaveBillingAddress]');
+
+	jQuery(document).ready(function(){
+		var value = jQuery("#billing_country_id").val();
+		INCRACOUNTRYCONFIG.populateToCombo(value,'billing_province_id');
+
+	});
+	
+</script>

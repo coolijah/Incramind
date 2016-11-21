@@ -1,0 +1,95 @@
+/*
+*	Renders a block of product tier prices.
+*
+*/
+
+[?Product.ProductType|Simple=
+	[?Product.TierPricesExist|Yes=
+		<div class="tier-block column-table large-12">
+			<table class="[DesignLayout.Layout|1Column=large-6|=large-10]">
+				<thead>
+					<td class="text-right">[_Qty]</td>
+					[Product.TierPrices=
+						<td class="text-right">[TierPrice.Number]</td>
+					]
+				</thead>
+				<tbody>
+					<tr>
+						<td class="text-right">[_Price]</td>
+						[Product.TierPrices=
+							<td class="text-right">[TierPrice.ActualPriceEach]</td>
+						]
+					</tr>					
+				</tbody>
+			</table>
+		</div>
+	]
+|Configurable=
+	[?SimpleProduct.TierPricesExist|Yes=
+		<div class="tier-block column-table large-12">
+			<table class="[DesignLayout.Layout|1Column=large-6|=large-10]">
+				<thead>
+					<td class="text-right">[_Qty]</td>
+					[Product.TierPrices=
+						<td class="text-right">[TierPrice.Number]</td>
+					]
+				</thead>
+				<tbody>
+					<tr>
+						<td class="text-right">[_Price]</td>
+						[Product.TierPrices=
+							<td class="text-right">[TierPrice.ActualPriceEach]</td>
+						]
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	]
+]
+
+<script type="text/javascript">
+/*var temp;
+	jQuery(document).ready(function(){
+		[?DesignLayout.Layout
+			|1Column=
+			|=
+				var tier = Array();
+				[Product.TierPrices=
+					tier.push({qty:'[TierPrice.Number]',price:'[TierPrice.ActualPriceEach]'});
+				]
+				temp = tier;
+
+				var x=0;
+				var tier_array = Array();
+				var t = Array();
+				tier.each(function(el,i){
+
+					if((i%3)!=0){
+						t.push({ qty:el.qty,price:el.price });
+					}else if(i==0){
+						t.push({ qty:el.qty,price:el.price });
+					}else{
+						tier_array.push(t);
+						t = Array();
+					}
+				});
+				var table = "";
+				tier_array.each(function(el,i){
+					table += '<table><thead>';
+						table += '<td class="text-center">Qty</td>';
+						el.each(function(_e){
+							table += '<td class="text-center">'+_e.qty+'</td>';
+						});
+						table += '</thead><tbody><tr>';
+							table += '<td class="text-center">Price</td>';
+						el.each(function(_e){
+							table += '<td class="text-center">'+_e.price+'</td>';
+						});
+						table += '</tr></table>';
+				});
+				jQuery(".tier-block").html(table);
+			
+		]
+		
+	})*/
+</script>

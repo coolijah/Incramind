@@ -1,0 +1,30 @@
+<div class="title">
+		<h2>[_COMPARE PRODUCTS] ([Comparer.NrOfItems])</h2>
+	</div>
+	<div class="block-content">
+		[?Comparer.HasItems|yes=
+			<ol id="compare-items">
+			[Comparer.Items= 
+				<li id="side-compare-item-[ComparerItem.Id]">
+					<span class="product-title"><a href="[Website.GetUrl,Product,[ComparerItem.ProductId]]">[Product.Name]</a></span>
+					<span class="f-right">
+						<img class="img-remove" src="[File:/images/btn_remove.gif]" title="[_remove this item]" onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,RemoveFromCompare]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[ComparerItem.Id]');"/>
+					</span>
+				</li>
+			]
+			</ol>
+			<p class="a-right">
+				<a href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,ClearCompare]',IncraWindow.formatUrl('[Url.FullUrl]'),'true');">[_Clear All] </a>
+			</p>
+			
+			<div class="actions">
+				/*
+				<button type="button btn[Design.DesignSelectionName,ButtonStyle]" title="[_Compare]" class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="IncraWindow.popupWindow('[Website.GetUrl,Test,Test]','compare','width=820,height=560,toolbar=no,menubar=yes,location=0,status=1,scrollbars=0,resizable=1,left=0,top=0');"><span><span>[_Compare]</span></span></button>
+				*/
+				<button type="button btn[Design.DesignSelectionName,ButtonStyle]" title="[_Compare]" class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="comparePopUp(); return false;"><span><span>[_Compare]</span></span>
+				</button>				
+			</div>
+		|No=
+			<p>[_You have no item/s to compare]</p>
+		]
+	</div>

@@ -1,0 +1,34 @@
+/*
+*	(StyleC variation) renders the product list item attribute color.
+*/
+
+<div id="conf-attributes[Product.Id]" class="productlist-attributes SimpleRounded">
+	[Product.ConfigurableAttributes=
+	
+		[?LayeredAttribute.CurrentType
+		|ColorsAndText=
+			<div style="display:none">
+				<label>[Attribute.Title]:</label>
+				<select class="product-list-attrib-[Product.Id] pull-right select-small span2" name="[Attribute.AttributeCode]" id="attribute[Attribute.Id][Product.Id]"  onchange="jQuery(this).initProductAttributes({'product_url':'[Website.GetUrl,Product,0,UpdateConfigurableInList/][Product.Id]','attribute_class':'product-list-attrib-[Product.Id]'}); jQuery(this).updateConfigurableProduct('#prd[Product.Id]')">
+					<option value="">[_Please select]</option>
+					[Product.ConfigurableChildProducts,[Attribute.AdminTitle]=
+						<option admin="[AttributeOption.Admin]" value="[AttributeOption.Admin]" [?UserInput.ConfigurableAttributeValueValid,[Attribute.AdminTitle],[AttributeOption.Admin]|yes=selected]>[AttributeOption.Admin]</option>
+					]
+				</select>
+			</div>
+			<div class="attr-list clearfix">
+			[:ProductListItemAttributeType.ColorsAndText]
+			</div>
+		]
+	]
+</div>
+<script type="text/javascript">
+/*
+var chooseoption=function(id) { 
+	var str=SelectedAttr(id);
+	var url='[Website.GetUrl,Product,0,UpdateConfigurableInList/]'+id+"/"+str;
+	alert(url);
+	updateconfigproduct(url,id);
+};
+*/
+</script>

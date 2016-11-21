@@ -1,0 +1,39 @@
+/** param 1 : include description, param 2 : include rating, param 3: include add to cart, param 4 : include add tos **/
+<div layout-block-name="mini_list_container" class="prod-design">
+	<div class="prod-image"><a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]"><img class="featured-image" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,205,220]]"/></a> 
+	</div>
+	<div class="prod-name">
+	<h5 class="product-name"><a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+		[Product.Name]</a></h5>	
+	</div>
+	<div class="prod-price price-box">
+		[:PriceBlock]
+	</div>
+	[?General.Param2|No=|=
+	<div class="prod-rating rating-box default">
+		<div class="rating" style="width:[Product.Ranking]%" title="[Product.Ranking]%"></div>
+	</div>
+	]	
+	[?General.Param1|No=|=
+	<div class="prod-desc text-justify small-only-text-center medium-only-text-left desc">
+		[Product.Description]
+	</div>
+	]	
+	[?General.Param3|No=|=
+		[?WebsiteFeatures.Checkout|Yes=
+		<div class="prod-option">
+			<button class="cjiconbtn option1" onclick="IncraShoppingCart.ajaxAddToCart({submit_url : '[Website.GetUrl,IncraShop,AddToCart]',second_url : '[UserInput.DefaultUrlPart]',flag:true,id :'[Product.Id]',post_data: 'qty=[Product.MinInShoppingCart]'}); return false;" class="button btn-cart" title="[_Add to Cart]" type="button"><span><span class="pull-left"><img src="/Test/designs/Sample6/icons/cart2.png"></span></span>
+			</button>
+			<ul class="add-to-links">
+				<li>
+					<a class="cjiconbtn option2" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to Wishlist]" alt="[_Add to Wishlist]" class="link-wishlist"><img class="imgwishlist" src="/Test/designs/Sample6/icons/wishlist.png"> </a>
+				</li>
+				<li>
+					<a class="cjiconbtn option3" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to Compare]" alt="[_Add to Compare]" class="link-compare"><img class="imgwishlist" src="/Test/designs/Sample6/icons/compare.png"> </a>
+				</li>
+			</ul>
+		</div>]
+	]
+	
+</div>
+

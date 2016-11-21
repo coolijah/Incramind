@@ -1,0 +1,51 @@
+/*
+*		Renders a page containing customer new address information.
+*	
+*/
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>[Website.Name] | [_Add Customer Address]</title>
+	[:head]
+</head>
+	<body>
+		<div class="wrapper"> 
+			<div class="page">
+				[:header]
+				<div class="three-columns">
+					<div class="row">				
+						<div class="off-canvas-wrap">
+							<div class="inner-wrap">
+								<nav class="tab-bar show-for-small-only">
+							      <section class="left-small">
+							        <a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+							      </section>
+							    </nav>
+								<aside class="left-off-canvas-menu">
+									
+								</aside>
+								<section class="main-section">
+									<div layout-block-name="left_column" class="left-content medium-3 large-3 columns grid-col3-sidebar no-gutter hide-for-small">
+										[:leftColumn]
+									</div>
+									<div layout-block-name="main_column" class="main-content small-12 medium-6 large-6 columns grid-col3-main no-gutter">	
+										[:mainContent.CustomerAddressNew]
+									</div>
+									<div layout-block-name="right_column" class="right-content medium-3 large-3 columns grid-col3-sidebar no-gutter hide-for-small">
+										<div class="side-block-wrapper [Design.DesignSelectionName,SideBlockStyle]">
+											[:SideCustomerAccountNavigationBlock]
+										</div>
+										[:rightColumn]
+									</div>
+									[:Footer]
+								</section>
+								<a class="exit-off-canvas"></a>
+							</div>					
+						</div>				
+					</div>		
+				</div>	
+			</div>
+		</div>
+	</body>
+</html>

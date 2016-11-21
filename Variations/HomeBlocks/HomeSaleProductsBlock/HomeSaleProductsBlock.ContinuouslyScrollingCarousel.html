@@ -1,0 +1,33 @@
+/*
+*	Renders a block containing list of sale products.
+*/
+[?Website.LoopProductsCount,Sales|0=|=
+<div class="sale-products-block home-block continuously-scrolling">
+	<div class="home-block-style [Design.DesignSelectionName, HomeBlocksStyle]">
+		<div class="block-title"><h5 class="subheader">[_Sale Products] </h5></div>
+		<div class="block-content">
+			<ul class="products-grid inline-list" id="sale_cs_carousel">
+				[Website.LoopProducts,Sales,8,,'Name'=
+					<li class="item">
+						[:ProductMiniListItem]
+					</li>
+				]
+			</ul>
+		</div>
+		<script type="text/javascript">
+		var container_width=jQuery('#sale_cs_carousel').parents('.home-block-style').width();
+		
+		jQuery(function() {
+			var fcs = new ProductCarousel({
+				carousel_id : '#sale_cs_carousel',
+				items:4,
+				width:container_width
+			});
+			jQuery('#sale_cs_carousel li').width((container_width-100)/4);
+			fcs.continuouslyscrolling();
+			
+		});
+		</script>
+	</div>
+</div>
+]

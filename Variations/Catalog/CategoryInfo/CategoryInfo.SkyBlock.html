@@ -1,0 +1,45 @@
+/*
+[?Category.HasChildren|yes=
+	<div class="subcategory-block large-12 columns large-centered sky-block">
+		<div class="category-grid clearfix">
+				[Category.ChildCategories=
+					<div class="large-3 columns ">
+						<div class="large-12 columns cat-item">
+							<a href="[Website.GetUrl,Category,[Category.Id]]" alt="[Category.Name]">
+								<div class="cat-image large-3 columns">
+									<img class="prod-list" src="/[Category.Image]" alt="[Category.Name]" />
+								</div>
+								<div class="cat-title large-8 columns">
+									<span>[Category.Name]</span>
+								</div>
+							</a>
+						</div>
+					</div>
+				]
+		</div>
+	</div>
+]
+*/
+[?Category.HasChildren|yes=
+	<div class="subcategory-block large-12 sky-block">
+		<p>[_Sub Categories]</p>
+		<div class="sub-cat-container">
+			<ul class="[?DesignLayout.Layout|3Columns=large-block-grid-3|=large-block-grid-4]">
+				[Category.ChildCategories=
+					<li class="item">
+						<div class="cat-item text-center clearfix">
+							<a href="[Website.GetUrl,Category,[Category.Id]]" alt="[Category.Name]">
+								<div class="cat-image large-3 columns">
+									<img class="prod-list" src="/[Category.Image]" alt="[Category.Name]" />
+								</div>
+								<div class="cat-title large-9 columns text-left">
+									<span>[Category.Name]</span>
+								</div>
+							</a>
+						</div>
+					</li>
+				]
+			</ul>
+		</div>
+	</div>
+]

@@ -1,0 +1,177 @@
+[?Customer.LoggedIn|LoggedIn=
+	<div class="block poll white-bg IncraTheme">
+		<div class="title">
+			<h6>[_COMMUNITY POLL]</h6>
+		</div>
+		<div class="block-content">
+			<form id="pollForm" action="" method="post">
+				[Website.ApplicablePolls=
+					[?Poll.Status|Open=
+						[?Customer.LoggedIn|LoggedIn=
+							[?Poll.CustomerOrLocationAlreadyFilledIn|Yes=
+								[Poll.Question=
+								<div class="block-subtitle">[PollQuestion.Question]</div>
+								<ol id="poll-answers">
+									[PollQuestion.AnswersSortedOnVotes=
+									<li class="">
+										<span class="answer">[PollAnswer.Answer]:</span>
+										<span class="votes">[PollAnswer.VoteCount] ([PollAnswer.VotePercentage]%)</span>
+									</li>
+									]
+								</ol>
+								]
+							|No=
+							
+								<input type="hidden" value="[Poll.Id]" name="id"/>
+								[Poll.Question=
+								<div class="block-subtitle">[PollQuestion.Question]</div>
+								<div id="poll-answers">
+									[PollQuestion.AnswersSortedOnVotes=
+									<div class="poll-opt">
+										<input type="radio" name="vote" class="radio poll_vote" id="vote_[PollAnswer.Id]" value="[PollAnswer.Id]">
+										<span class="in-block"><label for="vote_[PollAnswer.Id]">[PollAnswer.Answer]</label></span>
+									</div>
+									]
+								</div>
+								]
+								<div class="action a-right">
+									<button type="submit" title="[_Vote]" class="btn-blue"><span><span>[_Vote]</span></span></button>
+								</div>
+							]
+						|=
+							[?Poll.LocationAlreadyFilledIn|Yes=
+								[Poll.Question=
+								<div class="block-subtitle">[PollQuestion.Question]</div>
+								<ol id="poll-answers">
+									[PollQuestion.AnswersSorted=
+									<li class="">
+										<span class="answer">[PollAnswer.Answer]:</span>
+										<span class="votes">[PollAnswer.VoteCount] ([PollAnswer.VotePercentage]%)</span>
+									</li>
+									]
+								</ol>
+								]
+							|No=
+								
+								<input type="hidden" value="[Poll.Id]" name="id"/>
+								[Poll.Question=
+								<div class="block-subtitle">[PollQuestion.Question]</div>
+								<ul id="poll-answers">
+									[PollQuestion.AnswersSorted=
+									<li>
+										<input type="radio" name="vote" class="radio poll_vote" id="vote_[PollAnswer.Id]" value="[PollAnswer.Id]">
+										<span class="in-block"><label for="vote_[PollAnswer.Id]">[PollAnswer.Answer]</label></span>
+									</li>
+									]
+								</ul>
+								]
+								<div class="action a-right">
+									<button type="submit" title="[_Vote]" class="btn-blue"><span><span>[_Vote]</span></span></button>
+								</div>
+							]
+					
+						]
+					]
+				]
+			</form>
+			<script type="text/javascript">
+			jQuery("#pollForm").validate({
+				submitHandler: function(form) {
+					IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddPollVote]',IncraWindow.formatUrl('[Url.FullUrl]'),'true',jQuery('#pollForm').serialize(),'POST');
+				 }	
+			});
+			</script>
+		</div>
+	</div>
+	|Guest=
+		[?Configuration.PollGuestAreAllowedToVote|Yes=
+			<div class="block white-bg block-poll">
+				<div class="title greyed">
+					<h2>[_COMMUNITY POLL]</h2>
+				</div>
+				<div class="block-content">
+					<form id="pollForm" action="" method="post">
+						[Website.ApplicablePolls=
+							[?Poll.Status|Open=
+								[?Customer.LoggedIn|LoggedIn=
+									[?Poll.CustomerOrLocationAlreadyFilledIn|Yes=
+										[Poll.Question=
+										<div class="block-subtitle">[PollQuestion.Question]</div>
+										<ol id="poll-answers">
+											[PollQuestion.AnswersSortedOnVotes=
+											<li class="">
+												<span class="answer">[PollAnswer.Answer]:</span>
+												<span class="votes">[PollAnswer.VoteCount] ([PollAnswer.VotePercentage]%)</span>
+											</li>
+											]
+										</ol>
+										]
+									|No=
+									
+										<input type="hidden" value="[Poll.Id]" name="id"/>
+										[Poll.Question=
+										<div class="block-subtitle">[PollQuestion.Question]</div>
+										<div id="poll-answers">
+											[PollQuestion.AnswersSortedOnVotes=
+												<div class="poll-opt">
+													<input type="radio" name="vote" class="radio poll_vote" id="vote_[PollAnswer.Id]" value="[PollAnswer.Id]">
+													<span class="in-block">
+														<label for="vote_[PollAnswer.Id]">
+															[PollAnswer.Answer]
+														</label>
+													</span>
+												</div>
+											]
+										</div>
+										]
+										<div class="action a-right">
+											<button type="submit" title="[_Vote]" class="btn-blue"><span><span>[_Vote]</span></span></button>
+										</div>
+									]
+								|=
+									[?Poll.LocationAlreadyFilledIn|Yes=
+										[Poll.Question=
+										<div class="block-subtitle">[PollQuestion.Question]</div>
+										<ol id="poll-answers">
+											[PollQuestion.AnswersSorted=
+											<li class="">
+												<span class="answer">[PollAnswer.Answer]:</span>
+												<span class="votes">[PollAnswer.VoteCount] ([PollAnswer.VotePercentage]%)</span>
+											</li>
+											]
+										</ol>
+										]
+									|No=
+										
+										<input type="hidden" value="[Poll.Id]" name="id"/>
+										[Poll.Question=
+										<div class="block-subtitle">[PollQuestion.Question]</div>
+										<ul id="poll-answers">
+											[PollQuestion.AnswersSorted=
+											<li>
+												<input type="radio" name="vote" class="radio poll_vote" id="vote_[PollAnswer.Id]" value="[PollAnswer.Id]">
+												<span class="in-block"><label for="vote_[PollAnswer.Id]">[PollAnswer.Answer]</label></span>
+											</li>
+											]
+										</ul>
+										]
+										<div class="action a-right">
+											<button type="submit" title="[_Vote]" class="button btn-secondary[Design.DesignSelectionName,ButtonStyle]"><span><span>[_Vote]</span></span></button>
+										</div>
+									]
+							
+								]
+							]
+						]
+					</form>
+					<script type="text/javascript">
+						jQuery("#pollForm").validate({
+							submitHandler: function(form) {
+								IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddPollVote]',IncraWindow.formatUrl('[Url.FullUrl]'),'true',jQuery('#pollForm').serialize(),'POST');
+							 }	
+						});
+					</script>
+				</div>
+			</div>
+		]
+]

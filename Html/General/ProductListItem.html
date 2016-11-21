@@ -1,0 +1,114 @@
+/*
+*		Renders the listings of products of the current category.  
+*		Can be list as Grid type or List type.
+*
+*/
+[?UserInput.CatalogMode|List=
+<li layout-block-name="list_item_container" class="product-item Default">
+	 <div class="item-wrapper column" id="prd[Product.Id]">
+	 	<div layout-block-name="list_item_block_primary" class="column">
+			<div class="large-3 columns">
+				<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+					<div class="product-image">
+						<img alt="[Product.Name]" width="100%" src="/[Product.SmallImage=[ProductImage.ImageUrl,205,220]]">
+					</div>
+				</a>
+			</div>
+			<div class="product-details large-5 columns">
+				<h5 class="product-name"><a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+					[Product.Name]</a></h5>
+				
+				
+				<h5 class="subheader">[_OVERVIEW]</h5>
+				<div class="description">
+					[Product.Description] <a href="" class="more">[_Learn more]</a>
+				</div>
+				<div class="price-block">
+				[:PriceBlock,CategoryList]
+				</div>
+				<div class="row">
+					
+					<div class="attributes-con large-9 columns">
+						[:ProductListItemAttributeColor] /*variation*/
+					</div>
+				</div>
+				<div class="large-12 clearfix">
+					<div class="[?DesignLayout.Layout|3Columns=large-5|=large-4] columns">
+						[:ProductQuantityBlock,CategoryList]
+					</div>
+					[?Product.ProductType|Configurable=
+					<button id="cjbtn" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="cjbtn" title="[_Configure]" type="button">
+						<span><span>[_Configure]</span></span>
+						</button>
+					|=
+						[?Product.HasRequiredOptions|Yes=
+							<button id="cjbtn" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="cjbtn" title="[_Configure]" type="button">
+							<span><span>[_Configure]</span></span>
+							</button>
+						|=
+					  	<button id="cjbtn" onclick="actionCart('','[Website.GetUrl,IncraShop,AddToCart]','[UserInput.DefaultUrlPart]/',true,'[Product.Id]','[Website.GetUrl,Cart]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]')" class="cjbtn" title="[_Add to Cart]" type="button">
+							<span><span>[_Add to Cart]</span></span>
+						</button>
+						]
+					]
+				</div>
+				<div class="large-12">
+					[:ProductAddTo,CategoryList]
+				</div>
+			</div>
+			[?WebsiteFeatures.Checkout|Yes=
+			<div class="add-to-cart large-4 columns a-right">
+				<div class="large-12 columns ratings clearfix">
+					[:ProductRating,CategoryList]
+				</div>
+			</div>
+			]
+		</div>
+	</div>
+</li>
+|Grid=
+<li layout-block-name="list_item_container" class="product-item Default">
+	<div class="prod-design"  id="prd[Product.Id]">
+		[?Product.Sale|sale=<div class="product-ribbon sale"></div>]
+		[?Product.New|new=<div class="product-ribbon new"></div>]
+		<div class="prod-image"><a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+			<div layout-block-name="list_item_primary_block" class="product-image">
+		   		<img class="featured-image" src="/[Product.BaseImage=[ProductImage.ImageUrl]]" alt="[Product.Name]" width="100%"/>
+			</div>
+		</a> </div>
+		 <div layout-block-name="list_item_secondary_block" class="product-details">
+			<div class="prod-name">
+				<h5><a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+					[Product.Name]
+				</a></h5>
+			</div>
+		   	<div class="prod-rating rating-box default">
+				<div class="rating" style="width:[Product.Ranking]%" title="[Product.Ranking]%"></div>
+			</div>
+			<div class="prod-price price-block">
+				[:PriceBlock,CategoryGrid]
+			</div>
+			
+			<div class="prod-color product-attribute-color a-left">
+				[:ProductListItemAttributeColor]
+			</div>
+			<div class="prod-availability availability">
+				Available : [?Product.InStock|Yes=<span class="in-stock">In stock</span>|No=<span class="out-of-stock">Out of stock</span>]
+			</div>
+			[?WebsiteFeatures.Checkout|Yes=
+			<div class="prod-option" >
+				<button class="cjiconbtn option1" onclick="IncraShoppingCart.ajaxAddToCart({submit_url : '[Website.GetUrl,IncraShop,AddToCart]',second_url : '[UserInput.DefaultUrlPart]',flag:true,id :'[Product.Id]',post_data: 'qty=[Product.MinInShoppingCart]'}); return false;" class="button btn-cart" title="[_Add to Cart]" type="button"><span><span class="pull-left"><img src="/Test/designs/Sample6/icons/cart2.png"></span></span>
+				</button>
+				<ul class="add-to-links">
+					<li>
+						<a class="cjiconbtn option2" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to Wishlist]" alt="[_Add to Wishlist]" class="link-wishlist"><img class="imgwishlist" src="/Test/designs/Sample6/icons/wishlist.png"> </a>
+					</li>
+					<li>
+						<a class="cjiconbtn option3" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to Compare]" alt="[_Add to Compare]" class="link-compare"><img class="imgwishlist" src="/Test/designs/Sample6/icons/compare.png"> </a>
+					</li>
+				</ul>
+			</div>]
+		</div>
+	</div>
+</li>
+]

@@ -1,0 +1,18 @@
+/*
+*		Renders a block that contains a list of new product.
+*
+*/
+[?Website.LoopProductsCount,New|0=|=
+<div class="block products-block newproducts SingleItem">
+	<div class="title">
+		<h2>[_NEW PRODUCTS]</h2>
+	</div>
+	<div class="block-content">
+		<div class="item-container">
+		[Website.LoopProducts,New,1,,'Name'=
+			[:ProductThumbnailSingleItem]
+		]
+		</div>
+	</div>
+</div>
+]

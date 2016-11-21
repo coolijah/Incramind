@@ -1,0 +1,256 @@
+/*<div class="small-12 quickview-order-details">
+	<div class="progress-step-title small-12">
+		<h4>[_ORDER QUICKVIEW]</h4>
+	</div>
+	<div class="large-12">
+		<div class="content " style="">
+			<table class="quickview-order-review-table small-12">
+				<colgroup>
+					<col>
+			        <col width="1">
+	            </colgroup>
+				<thead>
+					<tr>
+						<th class="">[_Name]</th>
+						<th colspan="1" class="a-center no-right-border">[_Subtotal]</th>
+					</tr>
+				</thead>
+				<tbody>
+					[ShoppingCart.Items= 
+						<tr>
+							<td>
+								[Product.Name]<br/>
+								<span class="item-details">
+									([ShoppingCartItem.PriceEach] x [ShoppingCartItem.Quantity])
+								</span>
+							</td>
+							<td class="a-right">[ShoppingCartItem.RowTotal]</td>	
+						</tr>
+					]
+					<tfoot>
+							<tr>
+								<td colspan="1" align="right" class="a-right no-all-borders ">[_Subtotal]</td>
+								<td class="a-right no-all-borders"><span class="table-price">[ShoppingCart.BasePrice]</span></td>
+							</tr>
+							
+						[?ShoppingCart.HasDiscounts
+						|yes=
+							<tr>
+								<td colspan="1" align="right" class="a-right no-all-borders ">
+									[_Discounts:]
+								</td>
+								<td class="a-right no-all-borders">
+									<span class="table-price">- [ShoppingCart.TotalDiscounts]</span>
+								</td>
+							</tr>
+						]
+						
+						[?ShoppingCart.FreeShipping
+						|n/a=
+						|Yes=
+							<tr>
+								<td colspan="1" align="right" class="a-right no-all-borders ">
+									[_Shipping Costs:]
+								</td>
+								<td class="a-right">
+									[_Free Shipping]
+								</td>
+							</tr>
+						|No=<tr>
+								<td colspan="1" align="right" class="a-right no-all-borders ">
+									[_Shipping Costs:]
+								</td>
+								<td class="a-right no-all-borders">
+									<span class="table-price">[ShoppingCart.ShippingCosts]</span>
+								</td>
+							</tr>
+						]
+						[?ShoppingCart.PaymentCostAvaiable|Yes=
+							<tr>
+								<td colspan="1" align="right" class="a-right no-all-borders ">
+									[_Payment Costs:]
+								</td>
+								<td class=" a-right no-all-borders">
+									<span class="table-price">[ShoppingCart.PaymentCost]</span>
+								</td>
+							</tr>
+						]
+						<tr>
+							<td colspan="1" align="right" class="a-right no-all-borders "><strong>[_SubTotal Excl. Tax]</strong></td>
+							<td class="a-right no-all-borders"><span class="table-price"><strong>[ShoppingCart.TotalExclTax]</strong></span></td>
+						</tr>
+						
+						[?ShoppingCart.HasTaxes
+						|yes=
+
+						<tr>
+							<td colspan="1" align="right" class="a-right no-all-borders ">
+								[_Taxes:]
+							</td>
+							<td class="a-right no-all-borders">
+								<span class="table-price">[ShoppingCart.TotalTax]</span>
+							</td>
+						</tr>
+						]
+						<tr>
+							<td colspan="1" align="right" class="a-right no-all-borders "> <span class="grand-total default-orange">[_Grand Total]</span></td>
+							<td class="a-right no-all-borders"><span class="table-price grand-total default-orange">[ShoppingCart.TotalInclTax]</span></td>
+						</tr>
+						<tr>
+							<td colspan="1" align="right" class="a-right no-all-borders "> <small class="font12">[_Total Included Tax]</small></td>
+							<td class="a-right no-all-borders"><small class="table-price font12">***</small></td>
+						</tr>
+					</tfoot>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="checkout-onepage-page-progress">
+	<h4>[_YOUR CHECKOUT PROGRESS]</h4>
+	<div class="progress-block billing">
+		<div class="progress-step-title">
+			<span class="bold">[_Billing Address] </span> [?ShoppingCart.BillingAddressComplete|Yes=<a class="default-orange change-link" href="#" onclick="checkout.gotoSection('billing');">[_Change]</a>]
+		</div>
+		[?ShoppingCart.BillingAddressComplete|Yes=
+			<div class="progress-block-content">
+				<dt class="complete">
+					[_Billing Address]
+				</dt>
+				<div>
+					[ShoppingCart.InvoiceAddress=
+						<address> [Address.FirstName] [Address.LastName]<br>
+						[Address.StreetName]   [Address.HouseNumber]<br>
+						[Address.City], [Address.PostalCode] <br>
+						T:[Address.TelNumber]<br>
+						</address>
+					]
+				</div>
+			</div>
+		]
+	</div>
+	<div class="progress-block shipping">
+		<div class="progress-step-title">
+			<span class="bold">[_Shipping Address]</span> [?ShoppingCart.ShippingAddressComplete|Yes=<a class="default-orange change-link" href="#" onclick="checkout.gotoSection('shipping');">[_Change]</a>]
+		</div>
+		[?ShoppingCart.ShippingAddressComplete|Yes=
+			<div class="progress-block-content">
+				<dt class="complete">
+					[_Shipping Address]
+				</dt>
+				<div>
+					[ShoppingCart.ShippingAddress=
+						<address> [Address.FirstName] [Address.LastName]
+						<br>
+						[Address.StreetName]   [Address.HouseNumber]  <br>
+							[Address.City], [Address.PostalCode] <br>
+							T:[Address.TelNumber]<br>
+						</address>	
+					]
+				</div>
+			</div>
+		]	
+	</div>
+	<div class="progress-block shipping_method">
+		<div class="progress-step-title">
+			<span class="bold">[_Shipping Method]</span> [?ShoppingCart.ShippingMethodComplete|Yes=<a class="default-orange change-link" href="#" onclick="checkout.gotoSection('shipping_method');">[_Change]</a>]
+		</div>
+		[?ShoppingCart.ShippingMethodComplete|Yes=
+			<div class="progress-block-content">
+				<strong>[ShoppingCart.SelectedShippingMethod=[ShippingMethod.Name]]</strong>
+				[?ShoppingCart.StoreLocationId|0=
+				|=
+				<strong>[_Store :]</strong>
+				<address>[ShoppingCart.StoreLocation=[StoreLocation.Name]
+						<br>[StoreLocation.AddressSummary]
+					]</address>
+				]
+				
+				[?ShoppingCart.ExtraDetailsAvailableForShipping|Yes=
+
+				
+				<dl class="extra-fields">
+					[ShoppingCart.ExtraDetails= 
+						[?ShoppingCartExtraDetails.Type|ShippingMethod=
+						<dt>[ShoppingCartExtraDetails.Title]  </dt> <dd>[ShoppingCartExtraDetails.printableValue] </dd>
+						|ShippingProcessor=
+						<dt>[ShoppingCartExtraDetails.Title]  </dt> <dd>[ShoppingCartExtraDetails.printableValue] </dd>
+						]
+					]
+				</dl>
+				]
+			</div>
+		]
+	</div>
+	<div class="progress-block payment">
+		<div class="progress-step-title">
+			<span class="bold">[_Payment Method]</span> [?ShoppingCart.PaymentMethodComplete|Yes=<a class="default-orange change-link" href="#" onclick="checkout.gotoSection('payment');">[_Change]</a>]
+		</div>
+		[?ShoppingCart.PaymentMethodComplete|Yes=
+			<div class="progress-block-content">
+				<strong>[ShoppingCart.SelectedPaymentMethod=[PaymentMethod.Name]]</strong>
+				[?ShoppingCart.ExtraDetailsAvailableForPayment|Yes=
+				
+				<dl class="extra-fields">
+				[ShoppingCart.ExtraDetails= 
+					[?ShoppingCartExtraDetails.Type|PaymentMethod=
+					<dt>[ShoppingCartExtraDetails.Title]  </dt> <dd>[ShoppingCartExtraDetails.printableValue] </dd>
+					|PaymentProcessor=
+					<dt>[ShoppingCartExtraDetails.Title]  </dt> <dd>[ShoppingCartExtraDetails.printableValue] </dd>
+					]
+				]
+				</dl>
+				]
+			</div>
+		]
+	</div>
+</div>*/
+
+/*
+*		Renders the default blocks that is placed in the left column.  This can be enherited on per model basis.
+* by default we follow the sequence of blocks set in the design layout
+*/
+	
+<div class="side-block-wrapper [Design.DesignSelectionName,SideBlockStyle]">
+	
+	[?DesignLayout.LeftColumnUseGeneral
+		|Yes=
+			[:SideCategoryNavigationBlock]
+			[DesignLayout.LeftColumn,General=
+				[?DesignSelection.Name|SideCategoryNavigationBlock=
+				|=
+					/*[:[DesignSelection.Name]]*/
+					[:SideCategoryNavigationBlock]
+				]
+			]
+		|No=
+			[DesignLayout.LeftColumn,[Url.Model]=
+				/*[:[DesignSelection.Name]]*/
+					[:SideCategoryNavigationBlock]
+			]
+	]
+	/*[:SideSearchCloudBlock]
+	[:SideTagCloudBlock]
+	[:SideMostViewedProductsBlock]
+	[:SideBestSellersBlock]
+	[:SideRecentlyViewedProductsBlock]
+	[:SideNewProductsBlock]
+	[:SideNewsletterBlock]
+	[:SideFeaturedProductsBlock]
+	[:SidePopularProductsBlock]
+	[:SideSaleProductsBlock]
+	
+	[:SideCurrencySwitcherBlock]
+	[:SideComparedProductsBlock]
+	[:SideAccountBlock]
+	[:SideSearchCloudBlock]
+	[:SideLanguageSwitcherBlock]
+	[:SidePollBlock]
+	[:SideTagCloudBlock]
+
+	[:SideRecentOrderBlock]
+	[:SideCustomerAccountNavigationBlock]
+	[:SideSliderBlock]
+	[:SideUspsBlock]
+	[:SidePollBlock]*/
+</div>

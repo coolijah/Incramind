@@ -1,0 +1,33 @@
+/*
+*	Renders a block containing list of featured products.
+*/
+[?Website.LoopProductsCount,RecentlyViewed|0=|=
+<div layout-block-name="home_block_container" class="recently-viewed-block home-block SlideShow">
+	<div class="home-block-style [Design.DesignSelectionName, HomeBlocksStyle]">
+		<div class="block-title"><h5 class="subheader">[_Recently Viewed] </h5></div>
+		<div class="block-content">
+			<ul class="products-grid inline-list" id="recentlyviewed_singleitem_carousel">
+				[Website.LoopProducts,RecentlyViewed,1,,'Name'=
+					<li class="item">
+						[:ProductMiniListItem]
+					</li>
+				]
+			</ul>
+		</div>
+		<script type="text/javascript">
+			var container_width=jQuery('#recentlyviewed_singleitem_carousel').parents('.home-block-style').width();
+			jQuery(function() {
+				var rsi = new ProductCarousel({
+					carousel_id : '#recentlyviewed_singleitem_carousel',
+					items:4,
+					fx:'scroll',
+					width:'100%'
+				});
+				jQuery('#recentlyviewed_singleitem_carousel li').width((container_width-100)/4);
+				rsi.slideshow();
+			 	
+			});
+		</script>
+	</div>
+</div>
+]

@@ -1,0 +1,26 @@
+/*
+*		Renders a block that contains currency switcher.
+*
+*/
+
+<div class="block form-currency Default-style">
+	<div class="title">
+		<label for="side_currency_switcher">[_Choose Currency] :</label> 
+	</div>
+	<div class="block-content">
+		<select id="side_currency_switcher" title="[_Your Currency]" onchange="changeCurrency(this.value)">
+			[Website.Currencies=
+			<option value="[Currency.Id]">[Currency.Name]</option>
+			]
+		</select>
+	</div>
+	<script type="text/javascript">
+	
+		changeCurrency = function(value,url_redirect){
+			window.location ='[Website.GetUrl,Currency,'+value+']';
+		}
+		jQuery("#side_currency_switcher option\[value=[CurrentCurrencyUsed.Id]\]").attr("selected","selected");
+	
+	</script>
+	<hr>
+</div>

@@ -1,0 +1,23 @@
+[?Customer.LoggedIn|LoggedIn=
+	<div class="block account-menu IncraTheme">
+		<div class="title">
+			<h6>[_MY ACCOUNT]</h6>
+		</div>
+		<ul class="menu-list">
+			<li [?Url.View|Account=class="active"]><a href="[Website.GetUrl,Customer,Account]">[_Account Dashboard]</a></li>
+			<li [?Url.View|Address=class="active"]><a href="[Website.GetUrl,Customer,Address]"> [_Address Book]</a></li>
+			[?WebsiteFeatures.WishList|Yes=
+			<li [?Url.Model|WishList=class="active"]><a href="[Website.GetUrl,WishList]">[_My WishList]</a></li>]
+			<li ><a href="[Website.GetUrl,Compare]"> [_Compared Products]</a></li>
+			[?WebsiteFeatures.Orders|Yes=
+			<li [?Url.View|History=class="active"]><a href="[Website.GetUrl,Customer,History]">[_My Orders]</a></li>
+			<li ><a href="[Website.GetUrl,Customer,InvoiceList]">[_Invoice History]</a></li>
+			<li [?Url.View|ShippingList=class="active"]><a href="[Website.GetUrl,Customer,ShippingList]"> [_Shipping History]</a></li>]
+			[?WebsiteFeatures.Checkout|Yes=
+			<li [?Url.View|Cart=class="active"]><a href="[Website.GetUrl,Cart]">[_My Shopping Cart]</a></li>]
+			[?WebsiteFeatures.Catalog|Yes=
+			<li [?Url.View|Tag=class="active last"] ><a href="[Website.GetUrl,Customer,Tag]">[_My Tags]</a></li>]
+		</ul>
+		
+	</div>
+]

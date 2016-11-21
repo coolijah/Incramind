@@ -1,0 +1,56 @@
+/*
+*		Renders a mini side cart of the current customer.
+*
+*/
+/*[:FilterNavigation]*/
+<div class="block cart Default-style">
+	<div class="title">
+		<h2>[_MY CART]</h2>
+	</div>
+	<div class="block-content">
+		[?ShoppingCart.Empty
+			|CartFilled=
+				<div class="cart-items-block">
+					<div class="summary">
+						<p class="amount">[_There is/are <a href="[Website.GetUrl,Cart]">%1 items </a>  in your cart., [ShoppingCart.NrItems]]</p>
+						<p class="subtotal">
+							<span class="label">[_Cart Total:]</span>
+							<span class="price"> [ShoppingCart.TotalExclTax]</span>
+							<!--<br>
+						(<strong>[ShoppingCart.TotalInclTax]</strong> Incl. Tax)--></p>
+					</div>
+					
+					<h2>[_Recently Added Item(s)]</h2>
+					<ul class="media-list">
+					[ShoppingCart.RecentlyAddedItems,2=
+						<li class="media">
+							<a class="product-image" href="[Website.GetUrl,Product,[Product.Id]]">
+							  <img class="img-polaroid" width="50" title="[Product.Name]" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,100,100]]">
+							</a>
+							<div class="product-details">
+								<img class="img-remove " src="[File:/images/btn_remove.gif]" title="[_remove]" onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,RemoveFromCart]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[ShoppingCartItem.Id]');"/>
+								<p class="product-name">
+									<a href="[Website.GetUrl,Product,[Product.Id]]">[Product.Name]</a>
+								</p>
+								<a class="btn-edit" href="[Website.GetUrl,Product,[Product.Id]]"> [_Edit Item] </a>
+								[ShoppingCartItem.Quantity] x [ShoppingCartItem.PriceEach]
+							</div>
+								
+					  	</li>
+					  ]
+					</ul>
+					<div class="truncated">
+						<a title="[_Details]" class="details" href="#"><span><span>[_Details]</span></span>
+						</a>
+					</div>
+					<div class="actions">
+						<button type="button" title="[_Checkout]" class="button" onclick="IncraWindow.setLocation('[Website.GetUrl,CheckOut,OnePage]')"><span><span>[_Checkout]</span></span>
+						</button>
+					</div>
+					<br>
+				</div>
+			|CartEmpty=<p>[_You have no item/s in your cart]</p>
+		]
+	</div>
+	
+</div>

@@ -1,0 +1,31 @@
+/*
+*		Renders a block that contains list of featured products.
+*
+*/
+/*
+[Website.FeaturedProducts,1,1,'Name',Ascending]
+[?Filter.Empty|no=
+	<div class="block products-block featuredproducts">
+		<div class="title">
+			<h2>[_FEATURED PRODUCT]</h2>
+		</div>
+		<div class="block-content">
+			[Filter.Products=
+				[:ProductThumbnailListItem]
+			]
+		</div>
+	</div>
+]
+*/
+[?Website.LoopProductsCount,Featured|0=|=
+	<div class="block products-block featuredproducts">
+		<div class="title">
+			<h2>[_FEATURED PRODUCT]</h2>
+		</div>
+		<div class="block-content">
+			[Website.LoopProducts,Featured,1,,'Name'=
+				[:ProductThumbnailListItem]
+			]
+		</div>
+	</div>
+]

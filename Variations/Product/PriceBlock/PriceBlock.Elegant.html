@@ -1,0 +1,112 @@
+/*
+*	Renders a block of product price with tax options.
+*
+Param 1: block to which the price is used
+*/
+<div class="price-block Elegant">
+[?General.Param1
+|CategoryGrid=
+	[?Product.ProductType|Simple=
+		[?Product.ActualPriceTakenFrom
+		|Standard=
+			<span class="price standard">
+				[Product.Price]
+			</span>
+		|=
+			<span class="price [Product.ActualPriceTakenFrom]"><s>[Product.Price]</s>[Product.ActualPrice]</span>
+		]
+	|Configurable=
+		[?SimpleProduct.ActualPriceTakenFrom
+		|Standard=
+			<span class="price">
+				[SimpleProduct.Price]
+			</span>
+		|=
+			<span class="price [Product.ActualPriceTakenFrom]"><s>[SimpleProduct.Price] </s>[SimpleProduct.ActualPrice]</span>
+		]
+	]
+|CategoryList=
+	[?Product.ProductType|Simple=
+		[?Product.ActualPriceTakenFrom
+		|Standard=
+			<span class="price standard">
+				[Product.ActualPrice]
+			</span>
+			[?Product.TierPricesExist|Yes=
+			<p><a href="[Website.GetUrl,Product,[Product.Id]]">[_As low as: %1, [Product.LowestTierPrice]]</a></p>
+			]
+		|=
+			<span class="old-price">[_Regular Price : <s>%1</s>,[Product.Price]]</span>
+			<p class="special-price [Product.ActualPriceTakenFrom]">[_Special Price : <span class="price">%1</span>, [Product.ActualPrice]]</p>
+			
+			[?Product.TierPricesExist|Yes=
+			<p><a href="[Website.GetUrl,Product,[Product.Id]]">[_As low as: %1, [Product.LowestTierPrice]]</a></p>
+			]
+		
+		]
+	|Configurable=
+		[?SimpleProduct.ActualPriceTakenFrom
+		|Standard=
+			<span class="price standard">
+				[SimpleProduct.ActualPrice]
+			</span>
+			[?SimpleProduct.TierPricesExist|Yes=
+				<p><a href="[Website.GetUrl,Product,[Product.Id]]">[_As low as: %1, [SimpleProduct.LowestTierPrice]]</a></p>
+			]
+		|=
+			<span class="old-price">[_Regular Price : <s>%1</s>,[SimpleProduct.Price]]</span>
+			<p class="special-price [SimpleProduct.ActualPriceTakenFrom]">[_Special Price : <span class="price">%1</span>, [SimpleProduct.ActualPrice]]</p> 
+			[?SimpleProduct.TierPricesExist|Yes=
+			<p><a href="[Website.GetUrl,Product,[Product.Id]]">[_As low as: %1, [SimpleProduct.LowestTierPrice]]</a></p>
+			]
+		]
+	]
+
+|MiniListItem=
+|Thumbnail=
+|WishListPage=
+|ComparePage=
+|Upsell=
+|Related=
+|ProductPage=
+	[?Product.ProductType
+	|Configurable=
+		[?SimpleProduct.ActualPriceTakenFrom
+		|Standard=<span class="price-label">[_Price]</span><span class="price standard">[SimpleProduct.ActualPrice]</span>
+		|=
+			<span class="price-label">[_Special price]</span>
+			<span class="price [SimpleProduct.ActualPriceTakenFrom]">
+				[SimpleProduct.ActualPrice]
+				<span class="old-price"><s>[SimpleProduct.Price]</s></span>
+			</span>
+		]
+	|Simple=
+		[?Product.ActualPriceTakenFrom
+		|Standard=<span class="price-label">[_Price]</span><span class="price standard">[Product.ActualPrice]</span>
+		|=
+			<span class="price-label">[_Special price]</span>
+			<span class="price [Product.ActualPriceTakenFrom]">
+				[Product.ActualPrice]
+				<span class="old-price"><s>[Product.Price]</s></span>
+			</span>
+		]
+	]	
+|=
+	[?Product.ProductType
+	|Configurable=
+		[?SimpleProduct.ActualPriceTakenFrom
+		|Standard=<span class="price standard">[SimpleProduct.ActualPrice]</span>
+		|=
+			<span class="price [SimpleProduct.ActualPriceTakenFrom]">[SimpleProduct.ActualPrice]
+				<span class="old-price"><s>[SimpleProduct.Price] </s> </span></span>
+		]
+	|Simple=
+		[?Product.ActualPriceTakenFrom
+		|Standard=<span class="price standard">[Product.ActualPrice]</span>
+		|=
+			<span class="price [Product.ActualPriceTakenFrom]">[Product.ActualPrice]
+				<span class="old-price"><s>[Product.Price]</s></span></span>
+		]
+	]
+]
+</div>

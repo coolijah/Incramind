@@ -1,0 +1,189 @@
+<div class="compare-container">
+	<div class="page-title title-buttons">
+		<h2 class="center"><img class="imgcp" src="/Test/designs/Sample6/icons/compareb.png">[_Compare Products]</h2>
+		<a class="link-print" onclick="window.print(); return false;">[_Print This Page]</a>
+		<div class="close-button">
+			<a href="" onclick="unloadComparePopup(); return false;"><img class="img-remove" alt="[_Close Window]" src="[File:/images/btn_remove.gif]"/></a>
+		</div>
+		
+	</div>
+	<div id="compare_notification"></div>
+
+	[?Comparer.HasItems|Yes=
+	<table id="product-comparison" class="data-table compare-table">
+		<thead>
+			<tr class="first last">
+				<th>[_PRODUCT]</th>
+				[Comparer.Items,4=
+				<td class="a-right">
+					<a href="#" onclick="IncraAjaxUpdater.updateAjax('[Website.GetUrl,IncraShop,RemoveFromCompare]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[ComparerItem.Id]');removeMe(this,[ComparerItem.Id]);return false;"><img class="img-remove" alt="[_Close Window]" src="[File:/images/closev1.png]"/></a>
+				</td>
+				]
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="product-shop-row top first odd">
+				<th></th>
+				[Comparer.Items,4=
+				<td>
+					<a class="product-image" href="[Website.GetUrl,Product,[Product.Id]]"><img src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,205,220]]" alt="[Product.Name]" height="155" width="125"></a>					
+				</td>
+				]
+			</tr>
+			<tr class="product-shop-row bottom even">
+				<th></th>
+				[Comparer.Items,4=
+				<td>
+					<h2 class="product-name"><a href="[Website.GetUrl,Product,[Product.Id]]" class="product-name">[Product.Name]</a></h2>
+					<div class="rating-box default">
+						<div class="rating" style="width:[Product.Ranking]%" title="[Product.Ranking]%"></div>
+					</div>
+					<div class="price-box">
+						[Product.Price]
+					</div>
+					<p>
+						<a class="button btn-cart" title="[_add to cart]"  onclick="IncraShoppingCart.ajaxAddToCart({submit_url : '[Website.GetUrl,IncraShop,AddFromWishlistToCart]',second_url : '[Url.FullUrl]',flag:true,id :'[WishListItem.Id]',post_data:'qty='+jQuery('#qty[WishListItem.Id]').val()}); return false;">[_Add to Cart]</a>
+					</p>
+					<ul class="add-to-links">
+						<li>
+							<a class="link-wishlist" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to Wishlist]" alt="[_Add to Wishlist]" class="link-wishlist"><img class="imgwishlist" src="/Test/designs/Sample6/icons/wishlist.png">[_Add to Wishlist] </a>
+						</li>
+					</ul>
+				</td>
+				]
+			</tr>
+		</tbody>
+		<tbody>
+			<tr class="odd">
+				<th><span class="nobr">[_Description]</span></th>
+				[Comparer.Items,4=
+				<td>
+					<div class="std">
+						<p>[Product.Description]</p>
+					</div>
+				</td>
+				]
+			</tr>
+			<tr class="even">
+				<th><span class="nobr">[_Short Description]</span></th>
+				[Comparer.Items,4=
+				<td>
+					<div class="std">
+						<p>[Product.ShortDescription]</p>
+					</div>
+				</td>
+				]
+			</tr>
+			<tr class="even">
+				<th> <span class="nobr">[_SKU]</span></th>
+				[Comparer.Items,4=
+				<td>
+					<div class="std">
+						<p>[Product.SKU]</p>
+					</div>
+				</td>
+				]
+			</tr>
+		</tbody>
+		<tbody>
+			<tr class="add-to-row last even">
+				<th></th>
+				[Comparer.Items,4=
+				<td>
+					<div class="price-box">
+						[Product.Price]
+					</div>
+					<p>
+						<a class="button btn-cart" title="[_add to cart]"  onclick="IncraShoppingCart.ajaxAddToCart({submit_url : '[Website.GetUrl,IncraShop,AddFromWishlistToCart]',second_url : '[Url.FullUrl]',flag:true,id :'[WishListItem.Id]',post_data:'qty='+jQuery('#qty[WishListItem.Id]').val()}); return false;">[_Add to Cart]</a>
+					</p>
+					<ul class="add-to-links">
+						<li>
+							<a class="link-wishlist" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;" title="[_Add to Wishlist]" alt="[_Add to Wishlist]" class="link-wishlist"><img class="imgwishlist" src="/Test/designs/Sample6/icons/wishlist.png">[_Add to Wishlist] </a>
+						</li>
+					</ul>
+				</td>
+				]
+			</tr>
+		</tbody>
+	</table>
+	|No=
+		<p>[_There are no compared items.]</p>
+	]
+
+	<script type="text/javascript">
+		var compare_labels = [];
+		[Comparer.IterateAttributesForCompare=
+		   	compare_labels.push("[Attribute.Title]");
+		]
+		[?Comparer.HasItems|Yes=
+			[Comparer.Items,4=
+
+			]
+		]
+	</script>
+</div>
+<script type="text/javascript">
+	var items = [];
+	var temp  = [];
+	var prod  = [];
+	var visible_attribute = []
+	visible_attribute.push("Short Description");
+	visible_attribute.push("SKU");
+	visible_attribute.push("Brand selction box");
+	visible_attribute.push("Weight");
+	visible_attribute.push("Includes warranty");
+	
+		[Comparer.IterateAttributesForCompare=
+			temp = [];
+			[Comparer.Items,4=
+
+				temp.push({
+						id 		  : [Product.Id],
+						attribute_value : "[Attribute.ProductValueFull]",
+					});
+			]
+			items.push({
+				attribute : '[Attribute.Title]',
+				products  : temp,
+			})
+		]
+		var x = 0;
+		var attr = [];
+
+		[Comparer.Items,4=
+			items.forEach(function(data){
+				attr[data.attribute] = data.products\[x\].attribute_value;
+			});
+			prod.push({
+				id 		   : [Product.Id],
+				attributes : attr,
+				minQty 	   : [Product.MinInShoppingCart]
+			});
+			attr = [];
+			x=x+1;
+		]
+		prod.forEach(function(data){
+			var content = document.getElementById('product_'+data.id);
+			var i = "";
+			visible_attribute.forEach(function(label){
+				
+				content.innerHTML += '<li class="bullet-item '+label.toLowerCase().replace(" ","_")+'">'+ data.attributes[label] +'</li>';
+			});
+			content.innerHTML += '<li class="price">'+data.attributes["Price"]+'</li>';
+			content.innerHTML += '<li class="cta-button"><a class="button" href="#" onclick="addCompareItemToCart('+data.id+','+data.minQty+'); return false;">Buy Now</a></li>';
+		});
+		visible_attribute.forEach(function(label){
+			var compare_label = document.getElementById("compare-items-label");
+			compare_label.innerHTML += '<li class="bullet-item text-left '+label.toLowerCase().replace(" ","_")+'">'+ label +'</li>';
+		});
+		var wi = (100-12) / prod.length;
+		jQuery(".compared-items .item").css('width',wi+'%');
+		jQuery("#compare-items-label-container").css('width','12%');
+		var max = 0;
+		jQuery(".pricing-table .title").each(function(e,d){ 
+			if(max < jQuery(d).outerHeight()){
+				max = jQuery(d).outerHeight();
+			}
+		});
+		jQuery("#compare-items-label-container .product_name").css('height',max+'px');
+</script>

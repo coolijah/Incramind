@@ -1,0 +1,20 @@
+<div class="block form-currency Elegant">
+	<div class="title">
+		<h6>[_CHOOSE CURRENCY]</h6> 
+	</div>
+	<div class="block-content">
+		<select id="side_currency_switcher" title="[_Your Currency]" onchange="changeCurrency(this.value)">
+			[Website.Currencies=
+			<option value="[Currency.Id]">[Currency.Name]</option>
+			]
+		</select>
+	</div>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			changeCurrency = function(value,url_redirect){
+				window.location ='[Website.GetUrl,Currency,'+value+']';
+			}
+			jQuery("#side_currency_switcher option\[value=[CurrentCurrencyUsed.Id]\]").attr("selected","selected");
+		});
+	</script>
+</div>

@@ -1,0 +1,32 @@
+/*
+*		Renders a block that cotains products to be compared.
+*
+*/
+
+<div class="block comparedproducts Classic">
+	<div class="title">
+		<h6>[_COMPARE PRODUCTS]</h6>
+	</div>
+	<div class="block-content">
+		
+		[?Comparer.HasItems|yes=
+			<ol id="compare-items">
+			[Comparer.Items= 
+				<li class="clearfix">
+					<span class="product-title"><a href="[Website.GetUrl,Product,[ComparerItem.ProductId]]">[Product.Name]</a></span>
+					<span class="right fa fa-times-circle-o remove" onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,RemoveFromCompare]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[ComparerItem.Id]');"></span>
+				</li>
+			]
+			<li class="a-right"><a href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,ClearCompare]',IncraWindow.formatUrl('[Url.FullUrl]'),'true');">[_Clear All] </a></li>
+			</ol>
+			<div class="action">
+				
+				<button type="button" title="[_Compare]" class="button btn-secondaryClassic" onclick="IncraWindow.popupWindow('[Website.GetUrl,Test]','compare','width=820,height=560,toolbar=no,menubar=yes,location=0,status=1,scrollbars=0,resizable=1,left=0,top=0');"><span><span>[_Compare]</span></span></button>				
+			</div>
+		|No=
+			<p>[_You have no item/s to compare]</p>
+		]
+	</div>
+</div>
+
+

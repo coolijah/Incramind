@@ -1,0 +1,263 @@
+/*
+*		Renders a toolbar block in listings of products, search results and others
+* 
+*/
+/* toolbar js to be changed to object */
+
+/*<div class="toolbar Default">
+	[?DesignLayout.Layout|3Columns=
+		<div class="small-12 toolbar-wrapper clearfix">
+			<div class="small-5 columns view-mode">
+				<span class="">
+					<label>[_View as] :</label>
+					[?Configuration.CatalogListMode
+					|ListOnly=
+						<strong><img src="/Test/designs/Sample6/icons/list.png"></strong>
+					|GridOnly=
+						<strong><img src="/Test/designs/Sample6/icons/grid.png"></strong>
+					|ListDefault=
+						 [?UserInput.CatalogMode
+						 |Grid=
+							<strong>[_Grid]</strong>
+							<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('List')">[_List]</span>&nbsp;
+							
+						 |List=
+						 	<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('Grid')">[_Grid]</span>
+							<strong>[_List]</strong>
+						 ]
+					|GridDefault=
+						 [?UserInput.CatalogMode
+						 |Grid=
+							<strong>[_Grid]</strong>
+							<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('List')">[_List]</span>&nbsp;
+							
+						 |List=
+						 	<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('Grid')">[_Grid]</span>
+							<strong>[_List]</strong>
+						 ]
+					]
+				</span>
+			</div>
+			<div class="small-6 columns text-right limiter">
+				[:ToolbarSortby] &nbsp; [:ToolbarLimiter]
+			</div>
+		</div>
+		<div class="small-12 items-count clearfix">
+			<div class="small-2 columns text-left">
+				<span class="in-block">
+					[Filter.Count] [_Items]
+				</span>
+			</div>
+			<div class="small-10 columns pager">
+				<div class="text-right">
+					<div class="product-pagination in-block">
+						[?Filter.PageCount|1=
+							|=
+								[:ToolbarPaging]
+						]
+					</div>
+				</div>
+			</div>
+		</div>
+		|=
+		<div class="small-12 toolbar-wrapper clearfix">
+			<div class="small-4 columns sorter">
+				<p class="small-4 columns view-mode">
+					<span class="">
+						<label>[_View as] :</label>
+						[?Configuration.CatalogListMode
+						|ListOnly=
+							<strong class="list">[_List]</strong>
+						|GridOnly=
+							<strong class="grid">[_Grid]</strong>
+						|ListDefault=
+							 [?UserInput.CatalogMode
+							 |Grid=
+								<strong class="grid">[_Grid]</strong>
+								<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('List')">[_List]</span>&nbsp;
+								
+							 |List=
+							 	<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('Grid')">[_Grid]</span>
+								<strong>[_List]</strong>
+							 ]
+						|GridDefault=
+							 [?UserInput.CatalogMode
+							 |Grid=
+								<strong>[_Grid]</strong>
+								<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('List')">[_List]</span>&nbsp;
+							 |List=
+							 	<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('Grid')">[_Grid]</span>
+								<strong>[_List]</strong>
+							 ]
+						]
+					</span>
+				</p>
+				<p class="small-8 columns text-right limiter">
+					[:ToolbarSortby] &nbsp; [:ToolbarLimiter]
+				</p>
+			</div>
+			<div class="small-2 items-count">
+				<div class="text-left">
+					<span class="amount">
+						[Filter.Count] [_Items]
+					</span>
+				</div>
+			</div>
+			<div class="small-3 columns pager">
+				<div class="text-center  ">
+					<div class="product-pagination in-block">
+						[?Filter.PageCount|1=
+							|=
+								[:ToolbarPaging]
+						]
+					</div>					
+				</div>
+			</div>
+			
+		</div>
+		
+	]
+	<script type="text/javascript">
+		IncraToolbar.init({
+			update_url : "[Website.GetUrl,Ajax,Update]",
+			current_url :"[Url.FullUrl]",
+			default_url:"[UserInput.DefaultUrlPart]",
+			filter_url:"/[UserInput.FilterUrl]",
+			sort_value:"/[UserInput.PageAscending]",
+			sort_by_value:"/[UserInput.PageSort]",
+			pagination_url:"/[UserInput.PaginationUrl]",
+			page_from :"[UserInput.PageFrom]",
+			page_nr_on: "[UserInput.PageNrOn]"
+		});
+		
+	</script>
+</div>*/
+
+<div class="toolbar Default">
+	[?DesignLayout.Layout|3Columns=
+		<div class="small-12 toolbar-wrapper clearfix">
+			<div class="small-5 columns view-mode">
+				<span class="">
+					<label>[_View as] :</label>
+					[?Configuration.CatalogListMode
+					|ListOnly=
+						<strong><img src="/Test/designs/Sample6/icons/list.png"></strong>
+					|GridOnly=
+						<strong><img src="/Test/designs/Sample6/icons/grid.png"></strong>
+					|ListDefault=
+						 [?UserInput.CatalogMode
+						 |Grid=
+							<strong>[_Grid]</strong>
+							<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('List')">[_List]</span>&nbsp;
+							
+						 |List=
+						 	<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('Grid')">[_Grid]</span>
+							<strong>[_List]</strong>
+						 ]
+					|GridDefault=
+						 [?UserInput.CatalogMode
+						 |Grid=
+							<strong>[_Grid]</strong>
+							<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('List')">[_List]</span>&nbsp;
+							
+						 |List=
+						 	<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('Grid')">[_Grid]</span>
+							<strong>[_List]</strong>
+						 ]
+					]
+				</span>
+			</div>
+			<div class="small-6 columns text-right limiter">
+				[:ToolbarSortby] &nbsp; [:ToolbarLimiter]
+			</div>
+		</div>
+		<div class="small-12 items-count clearfix">
+			<div class="small-2 columns text-left">
+				<span class="amount">
+					[Filter.Count] [_Items]
+				</span>
+			</div>
+			<div class="small-10 columns pager">
+				<div class="text-right">
+					<div class="product-pagination in-block">
+						[?Filter.PageCount|1=
+							|=
+								[:ToolbarPaging]
+						]
+					</div>
+				</div>
+			</div>
+		</div>
+		|=
+		<div class="small-12 toolbar-wrapper clearfix">
+			<div class="small-7 columns view-mode">
+					/*<label>[_View as] :</label>*/
+					[?Configuration.CatalogListMode
+					|ListOnly=
+						<strong><img src="/Test/designs/Sample6/icons/list.png"></strong>
+					|GridOnly=
+						<strong><img src="/Test/designs/Sample6/icons/grid.png"></strong>
+					|ListDefault=
+						 [?UserInput.CatalogMode
+						 |Grid=
+							<strong><img src="/Test/designs/Sample6/icons/grid.png"></strong>
+							<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('List')"><img src="/Test/designs/Sample6/icons/list.png"></span>&nbsp;
+							
+						 |List=
+						 	<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('Grid')"><img src="/Test/designs/Sample6/icons/grid.png"></span>
+							<strong><img src="/Test/designs/Sample6/icons/list.png"></strong>
+						 ]
+					|GridDefault=
+						 [?UserInput.CatalogMode
+						 |Grid=
+							<strong><img src="/Test/designs/Sample6/icons/grid.png"></strong>
+							<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('List')"><img src="/Test/designs/Sample6/icons/list.png"></span>&nbsp;
+						 |List=
+						 	<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('Grid')"><img src="/Test/designs/Sample6/icons/grid.png"></span>
+							<strong><img src="/Test/designs/Sample6/icons/list.png"></strong>
+						 ]
+					]
+				<span class="text-right limiter">
+					[:ToolbarSortby]
+				</span>
+			</div>			
+			<div class="small-5 columns countpage">
+				<span class="items-count">
+					<span class="amount">
+						[Filter.Count] [_Items]
+					</span>
+				</span>
+				<span class="imiter">
+					[:ToolbarLimiter]
+				</span>
+				/*<span class="pager">
+					<div class="text-left">
+						<div class="product-pagination in-block">
+							[?Filter.PageCount|1=
+								|=
+									[:ToolbarPaging]
+							]
+						</div>
+						
+					</div>
+				</span>*/
+			</div>
+			
+		</div>
+		
+	]
+	<script type="text/javascript">
+		IncraToolbar.init({
+			update_url : "[Website.GetUrl,Ajax,Update]",
+			current_url :"[Url.FullUrl]",
+			default_url:"[UserInput.DefaultUrlPart]",
+			filter_url:"/[UserInput.FilterUrl]",
+			sort_value:"/[UserInput.PageAscending]",
+			sort_by_value:"/[UserInput.PageSort]",
+			pagination_url:"/[UserInput.PaginationUrl]",
+			page_from :"[UserInput.PageFrom]",
+			page_nr_on: "[UserInput.PageNrOn]"
+		});
+		
+	</script>
+</div>

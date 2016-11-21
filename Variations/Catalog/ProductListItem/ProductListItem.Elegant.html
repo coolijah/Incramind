@@ -1,0 +1,202 @@
+/*
+*		Renders the listings of products of the current category.  
+*		Can be list as Grid type or List type.
+*
+*/
+[?UserInput.CatalogMode|List=
+	<li class="product-item Elegant large-6 columns">
+		<div class="item-wrapper"  id="prd[Product.Id]">
+			[?Product.Sale|sale=<div class="product-ribbon sale"></div>]
+			<div class="product-title">
+				<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]" alt="[Product.Name]">
+					<h6>[Product.Name]</h6>
+				</a>
+			</div>
+			<div id="product-image-[Product.Id]" class="product-image">
+			   <a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+			   	<!-- 	<img id="image-[Product.Id]" data-orig-thumbnail="true" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl]]" alt="[Product.Name]" /> -->
+			   		<img class="media-gallery-item" style="" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl]]" alt="[Product.Name]" width="100%"/>
+			   </a>
+			</div>
+		</div>
+	</li>
+|Grid=
+	<li class="product-item Elegant">
+		<div class="item-wrapper"  id="prd[Product.Id]">
+			[?Product.Sale|sale=<div class="product-ribbon sale"></div>]
+			<div class="product-title">
+				<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]" alt="[Product.Name]">
+					<h6>[Product.Name]</h6>
+				</a>
+			</div>
+			<div id="product-image-[Product.Id]" class="product-image">
+			   <a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+			   	<!-- 	<img id="image-[Product.Id]" data-orig-thumbnail="true" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl]]" alt="[Product.Name]" /> -->
+			   		<img class="media-gallery-item" style="" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl]]" alt="[Product.Name]" width="100%"/>
+			   </a>
+			</div>
+			<script type="text/javascript">
+				/*jQuery(document).ready(function(){
+					jQuery("#image-[Product.Id]").ScaleRatio({
+						'parentContainer'	: 	'product-image'
+					});
+				});*/
+			</script>
+			<div class="product-image-gallery-button">
+				<ul class="">
+					<li onmouseover="showThumbnail([Product.Id],'/[Product.ThumbnailImage=[ProductImage.ImageUrl]]',this)" class="image-gallery-buttons active" >
+					</li>
+					[Product.Images,4=
+						<li onmouseover="showThumbnail([Product.Id],'/[ProductImage.ImageUrl,140,150]',this)" class="image-gallery-buttons" >
+						</li>
+					]
+				</ul>
+			</div>
+			<div class="product-details clearfix">
+				<div class="price-block clearfix">
+					<div class="text-center">
+						[?Product.ProductType|Simple=
+							[?Product.Sale|sale=
+								 	<span class="price special"><span class="price-label">Price :</span><s>[Product.Price] </s>[Product.SpecialPrice]</span>
+								|=
+									<span class="price"><span class="price-label">Price : </span>[Product.Price]</span>
+								]
+							|Configurable=
+								[?SimpleProduct.Sale|sale=
+									<span class="price special"><span class="price-label">Price : </span><s>[SimpleProduct.Price] </s>[SimpleProduct.SpecialPrice]</span>
+								|=
+									<span class="price"><span class="price-label">Price : </span>[SimpleProduct.Price]</span>
+								]
+						]
+					</div>
+				</div>
+				<div class="add-to clearfix">
+					<div class="large-6 columns">
+						<a onclick="showQuickview([Product.Id]);return false;" href="#" title="Quickview" class="quickview-button">
+							<i class="fa fa-search fa-lg"></i> Quickview
+						</a>
+					</div>
+					<div class="large-6 columns text-right">
+						<a title="add to compare" class="compare-button"
+						   href="#" onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;"
+						>
+							<i class="fa fa-check-square-o fa-lg"></i>
+						</a>&nbsp;
+						[?WebsiteFeatures.WishList|Yes=
+						<a href="#" title="add to wishlist" class="wishlist-button"
+						   onclick="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[UserInput.DefaultUrlPart]'),'true/[Product.Id]',jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]','POST'); return false;"
+						>
+							<i class="fa fa-heart fa-lg"></i>
+						</a>
+						]
+					</div>
+				</div>
+				[?WebsiteFeatures.Checkout|Yes=
+				<div class="add-to-cart large-12">
+					<div class="add-to-cart-button large-9 columns large-centered text-center">
+						<button  class="button btn[Design.DesignSelectionName,ButtonStyle]"
+							onclick="IncraShoppingCart.ajaxAddToCart({
+						  				submit_url 	: 	'[Website.GetUrl,IncraShop,AddToCart]',
+						  				second_url 	: 	'[UserInput.DefaultUrlPart]/',
+						  				flag 		:	true,
+						  				id 			: 	[Product.Id],
+						  				cart_url 	: 	'[Website.GetUrl,Cart]',
+						  				post_data 	: 	jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]'
+						  			}); return false;
+						  		"
+						><span><span>[_ADD TO CART]</span></span>
+						</button>
+					</div>
+				</div>
+				]
+			</div>
+		</div>
+		<div id="quickview-[Product.Id]" class="reveal-modal" data-reveal style="">
+			<div class="large-5 columns">
+				<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+					<img data-orig-thumbnail="true" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl]]" alt="[Product.Name]" width="100%"/>
+				</a>
+				<div class="quickview-product-gallery">
+					<div class="quickview-image-thumbnail">
+						[Product.Images,4=
+							<div>
+								<a class="fancybox-buttons" data-fancybox-group="button" href="#" onclick="window.open('/[ProductImage.ImageUrl]', 'width=300,height=300,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;"  title="[ProductImage.Label]">
+									<img class="" width="80" src="/[ProductImage.ImageUrl,100,125]" title="[ProductImage.Label]" class="" />
+								</a>
+							</div>
+						]
+					</div>
+				</div>
+			</div>
+			<div class="large-7 columns">
+				<h3>[Product.Name]</h3>
+				<p class="lead">[Product.Description]</p>
+				<p class="availability in-stock">[_Availability:] 
+					<span>[?Product.InStock|Yes=[_In Stock] | =[_Out of Stock]]</span>
+				</p>
+				
+				[?Product.HasBrand|Yes=
+					[Product.Brand=
+						<p>
+							<span>[_Brand]: <a href="[Brand.WwwLink]" target="_blank"><img src="/[Brand.LogoSmall]" alt="[Brand.Name]" width="150px"></a>
+						</p>
+					]
+				]
+				
+				<div class="large-12 text-right columns clearfix">
+					<div class="price-box in-block">
+							<div class="price-block">
+								
+								[?Product.ProductType|Simple=
+									[?Product.Sale|sale=
+										<span class="price special"><s>[Product.Price] </s>[Product.SpecialPrice]</span>
+										|=
+										<span class="price">
+											[Product.Price]
+										</span>
+										]
+									|Configurable=
+										[?SimpleProduct.Sale|sale=
+										<span class="price special"><s>[SimpleProduct.Price] </s>[SimpleProduct.SpecialPrice]</span>
+										|=
+										<span class="price">
+											[SimpleProduct.Price]
+										</span>
+										]
+								]
+							</div>
+						</div>
+				</div>
+				[?WebsiteFeatures.Checkout|Yes=
+				<div class="quickview-add-to-cart large-12 incra-padd clearfix">
+					<div class="large-7 columns text-right">
+						[:ProductQuantityBlock]
+					</div>
+					<div class="large-5 columns text-right add-to-cart-button clearfix">
+						<a href="#" onclick="IncraShoppingCart.ajaxAddToCart({submit_url : '[Website.GetUrl,IncraShop,AddToCart]',second_url : '[UserInput.DefaultUrlPart]',flag:true,id :'[Product.Id]',post_data: jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]'}); return false;" class="button expand">ADD TO CART 2
+						</a>
+					</div>
+				</div>
+				]
+			</div>
+	  		<a onclick="closeQuickView([Product.Id]);return false;" class="close-reveal-modal">&#215;</a>
+		</div>
+		<script type="text/javascript">
+			function showThumbnail(id,img,obj){
+				var product_image = jQuery("#product-image-"+id+" a img.media-gallery-item");
+				product_image.attr("src",img);
+				jQuery("#product-image-"+id+" a img").css("display","none");
+				product_image.css("display","block");
+
+				jQuery(obj).parent().find('li').removeClass("active");
+				jQuery(obj).addClass("active");
+
+			}
+
+			jQuery(document).ready(function(){
+				jQuery(".product-list .product-item .product-name").substring({ max_char:20 });
+			});
+		</script>
+	</li>
+]
+

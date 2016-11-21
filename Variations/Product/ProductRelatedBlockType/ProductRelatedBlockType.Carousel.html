@@ -1,0 +1,42 @@
+/****
+[Design.DesignSelectionName,ProductRelatedBlock] - this returns the variation of the ProductRelatedBlock (style, could be Elegant, Corporate, Classic , etc - this would only affect the skin and typography of the title and content)
+**/
+<div class="product-related-block-type [Design.DesignSelectionName,ProductRelatedBlock] Carousel large-12 columns">
+	[?Product.HasRelatedProducts|yes=
+	<div class="block-related">
+		<div class="block-title">
+			<h6>[_Related Products]</h6>
+		</div>
+			/*<p class="block-subtitle">[_Check items to add to the cart or]&nbsp;<a href="#" onclick="selectAllRelated(this);return false;">[_Select all]</a>*/
+		</p>
+		<ul id="block-related-list" class="list-inline-block">
+			[Product.RelatedProducts= 
+			<li class="item ">
+				[:ProductMiniListItem,No,No]
+			</li>
+			]
+		</ul>
+		<div class="navigation">
+			<a class="prev" id="related_carousel_prev" href="#"><span class="fa fa-angle-left"></span></a>
+			<a class="next" id="related_carousel_next" href="#"><span class="fa fa-angle-right"></span></a>
+		</div>
+	</div>
+	<script type="text/javascript">
+	var container_width=jQuery('#block-related-list').parents('.block-related').width();
+		//jQuery(function() {
+			var related_carousel = new ProductCarousel({
+				carousel_id : '#block-related-list',
+				prevbtn: '#related_carousel_prev',
+				nextbtn:'#related_carousel_next',
+				width:'100%',
+				height:300,
+				items:4
+			});
+			jQuery(document).ready(function(){
+				jQuery('#block-related-list li').width((container_width-100)/4);
+				related_carousel.carousel();
+			})
+		//});
+	</script>
+	]
+</div>

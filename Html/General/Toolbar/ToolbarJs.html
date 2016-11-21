@@ -1,0 +1,70 @@
+<script type="text/javascript">
+/** to be removed **/
+	var defaulturl="[UserInput.DefaultUrlPart]";
+	var filterurl="/[UserInput.FilterUrl]";
+	var sortvalue="/[UserInput.PageAscending]";
+	var sortbyvalue="/[UserInput.PageSort]";
+	var paginationurl="/[UserInput.PaginationUrl]";
+	/* check if the page is advanced search, this will list the entered values in the advanced search */
+	var advancedsearchvalues="";
+	[?Url.Model|AdvancedSearch=
+		var str=Array();
+		[Website.IterateAttributesForAdvancedSearch=
+			[?UserInput.AdvancedSearchValueAvailable,[Attribute.AttributeCode]|Yes=	str.push("[Attribute.Title]/[UserInput.AdvancedSearchValue,[Attribute.AttributeCode]]");]
+		]
+		advancedsearchvalues= "/"+str.join("/");
+		defaulturl=defaulturl+advancedsearchvalues;
+	]
+
+	var setSort=function(){
+		if ('[UserInput.PageAscending]'=='Ascending'){
+			jQuery(".asc-direction").css('display','none');
+			jQuery(".desc-direction").css('display','block');
+		}else{
+			jQuery(".desc-direction").css('display','none');
+			jQuery(".asc-direction").css('display','block');
+		}
+	};
+
+	var setLimit=function(tmpval){
+		var total=[Filter.Count];
+		if (tmpval>=total){
+			var p_from=1;
+		}else{
+			var res=Math.floor(total/tmpval);
+			if ([UserInput.PageFrom]>res) var p_from=res; else var p_from=[UserInput.PageFrom];
+		}
+		IncraAjaxUpdater.submitAjax('[Website.GetUrl,Ajax,Update]',IncraWindow.formatUrl('[Url.FullUrl]'),IncraWindow.formatUrl(defaulturl+'/Page/'+p_from+'/'+tmpval+sortbyvalue+sortvalue+filterurl));
+		
+		jQuery("#limiter option").each(function(i) {
+			var optval=jQuery(this).val();
+		
+			if (optval=='[UserInput.PageNrOn]'){
+				jQuery(this).attr('selected','selected');
+			}
+		});
+	};	
+
+	var setPage =function(pagenr){
+		IncraAjaxUpdater.submitAjax('[Website.GetUrl,Ajax,Update]',IncraWindow.formatUrl('[Url.FullUrl]'),IncraWindow.formatUrl(defaulturl+'/Page/'+pagenr+'/[UserInput.PageNrOn]'+sortbyvalue+sortvalue+filterurl));
+		setSort();
+	};
+	
+	var setCatalogMode= function(mode){
+		IncraAjaxUpdater.submitAjax('[Website.GetUrl,Ajax,Update]',IncraWindow.formatUrl('[Url.FullUrl]'),IncraWindow.formatUrl(defaulturl+'/Page/[UserInput.PageFrom]/[UserInput.PageNrOn]'+sortbyvalue+sortvalue+'/'+mode+filterurl));
+	}
+	var setSortBy = function(sortbyvalue){
+		
+		IncraAjaxUpdater.submitAjax('[Website.GetUrl,Ajax,Update]',IncraWindow.formatUrl('[Url.FullUrl]'),IncraWindow.formatUrl(defaulturl+'/Page/[UserInput.PageFrom]/[UserInput.PageNrOn]/'+sortbyvalue+sortvalue+filterurl));
+	}
+	setSort();
+	var setSorting =function(sortvalue){
+
+		IncraAjaxUpdater.submitAjax('[Website.GetUrl,Ajax,Update]',IncraWindow.formatUrl('[Url.FullUrl]'),IncraWindow.formatUrl(defaulturl+'/Page/[UserInput.PageFrom]/[UserInput.PageNrOn]'+sortbyvalue+'/'+sortvalue+filterurl));
+	}
+	jQuery(document).ready(function(){
+		//setLimit("[UserInput.PageNrOn]");
+	})
+</script>
+
+

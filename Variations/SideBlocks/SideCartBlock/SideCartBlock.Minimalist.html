@@ -1,0 +1,45 @@
+/*
+*		Renders a mini side cart of the current customer.
+*
+*/
+
+<div class="block cart Minimalist">
+	<div class="title">
+		<h2>[_My Cart]</h2>
+	</div>
+	<div class="block-content">
+		[?ShoppingCart.Empty
+		|CartFilled=
+			<div class="cart-items">
+				<h3>[_Recently Added Item(s)]</h3>
+				<div>
+					<table>
+						<thead>	
+							<th>[_Items]</th>
+							<th>[_Price]</th>
+							<th></th>
+						</thead>
+						<tbody>
+							[ShoppingCart.RecentlyAddedItems,5=
+							<tr>
+								<td>[ShoppingCartItem.ProductName] ([ShoppingCartItem.Quantity])</td>
+								<td>[ShoppingCartItem.PriceEach]</td>
+								<td><span onclick="IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,RemoveFromCart]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[ShoppingCartItem.Id]');" class="remove fa fa-times-circle"></span></td>
+							</tr>
+							]
+						</tbody>
+					</table>
+				</div>
+				<div class="summary clearfix">
+					<div class="subtotal f-left">[_Total:] <strong>[ShoppingCart.TotalExclTax]</strong></div>
+					<div class="action f-right">
+						<button type="button" title="[_Checkout]" class="button btn[Design.DesignSelectionName, ButtonStyle]" onclick="IncraWindow.setLocation('[Website.GetUrl,CheckOut,OnePage]')"><span><span>[_Checkout]</span></span></button>
+					</div>
+				</div>
+				
+			</div>
+		|CartEmpty=<p>[_You have no item/s in your cart]</p>
+		]
+		
+	</div>
+</div>

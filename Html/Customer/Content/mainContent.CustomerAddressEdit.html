@@ -1,0 +1,142 @@
+/*
+*	
+*		Renders the main content information of the CustomerAddressEditPage.
+*							
+*/
+
+<div class="my-account">
+	<div class="page-title">
+		<h1>[_Edit Address]</h1>
+	</div>
+	<form id="form-editaddress" method="post" action="">
+	<div class="fieldset">
+		<h2 class="legend">[_Contact Information]</h2>
+		<p class="required">[_* Required Fields]</p>
+		<ul class="form-list">
+			<li class="fields"></li>
+			<li class="fields">
+				<div class="field name-firstname">
+					<label class="required" for="firstname">[_First Name]<em>*</em></label>
+					<div class="input-box">
+						<input type="text" class="input-text required" title="[_First Name]" value="[Customer.FirstName]" name="firstname" id="firstname" maxlength="255">
+					</div>
+				</div>
+			</li>
+			<li class="fields">
+				<div class="field name-lastname">
+					<label class="required" for="lastname">[_Last Name]<em>*</em></label>
+					<div class="input-box">
+						<input type="text" class="input-text required" title="[_Last Name]" value="[Customer.LastName]" name="lastname" id="lastname" maxlength="255">
+					</div>
+				</div>
+				<div class="field">
+					<div class="field name-middlename">
+						<label for="middlename">[_Middle Name]</label>
+						<div class="input-box">
+							<input type="text" class="input-text" title="[Middle Name]" value="[Customer.MiddleName]" name="middlename" id="middlename" maxlength="255">
+						</div>
+					</div>
+				</div>
+			</li>
+			<li class="fields">
+				<label for="company">[_Company]</label>
+					<div class="input-box">
+					    <input type="text" class="input-text" value="[Address.CompanyName]" title="[_Company]" id="company" name="company" maxlength="255">
+					</div>
+			</li>
+			<li class="fields">
+				<div class="field">
+					<label class="required" for="telephone"><em>*</em>[_Telephone]</label>
+				    <div class="input-box">
+						<input type="text" id="telephone" class="input-text required" title="[_Telephone]" value="[Address.TelNumber]" name="telephone" >
+				    </div>
+				</div>
+				/*<div class="field">
+					<label for="fax">[_FAX]</label>
+					<div class="input-box">
+						<input type="text" class="input-text" title="[_Fax]" value="[Address.Fax]" id="fax" name="fax" maxlength="255">
+					</div>
+				</div>*/
+			</li>
+		</ul>
+	</div>
+	<div class="fieldset">
+		<h2 class="legend">[_Address]</h2>
+		<p class="required">[_* Required Fields]</p>
+		<ul class="form-list">
+			<li class="fields">
+				<label class="required address" for="street1">[_Street Address]<em>*</em></label>
+				<div class="input-box">
+					<input type="text" class="input-text required" id="street1" title="[_Street Address]" value="[Address.StreetName]" name="street1">
+				</div>
+			</li>
+			<li class="fields">
+				<label class="" for="street1">[_Street Address 2] </label>
+				<div class="input-box">
+					<input type="text" class="input-text" id="street2" title="[_Street Address]" value="[Address.AddressLine2]" name="street2">
+				</div>
+			</li>
+			<li class="fields">
+				<div class="field">
+					<label class="required" for="city">[_City]<em>*</em></label>
+					<div class="input-box">
+						<input type="text" id="city" class="input-text required" title="[_City]" value="[Address.City]" name="city">
+					</div>
+				</div>
+				<div class="field">
+					<label class="required" for="region_id"><em>*</em>[_State/Province]</label>
+					<div class="input-box">
+						<select style="" class="validate-select" title="[_State/Province]" name="region_id" id="region_id" defaultvalue="0">
+							<option value="">[_Please select region, state or province]</option>
+						</select>
+					</div>
+				</div>
+			</li>
+			<li class="fields">
+				<div class="field">
+					<label class="required" for="postcode">[_Zip/Postal Code]<em>*</em></label>
+					<div class="input-box">
+						<input type="text" class="input-text validate-zip-international required" id="postcode" title="[_Zip/Postal Code]" value="[Address.PostalCode]" name="postcode">
+					</div>
+				</div>
+				<div class="field">
+					<label class="required" for="country">[_Country]<em>*</em></label>
+					<div class="input-box">
+						<select title="[_Country]" class="required" id="country-address" name="country_id" onchange=addressByCountry(this.value);>
+							[Website.AvailableCountries=
+								[CountryGroup.Countries=
+								<option value="[Country.Id]">[Country.Name]</option>
+								]
+							]
+						</select>
+						<script type="text/javascript">
+							jQuery("#country-address option\[value=[Address.CountryId]\]").attr("selected","selected");
+						</script>
+					</div>
+				</div>
+			</li>
+			/*<li>
+				<strong>[_Default Billing Address]</strong>
+			</li>*/
+			<li class="control">
+				<input type="checkbox" class="checkbox in-block" title="[_Use as My Default Billing Address]" value="1" [?Address.DefaultInvoiceAddress|Yes=checked] name="default_billing" id="primary_billing"><label for="primary_billing" class="in-block">[_Use as my default billing address]</label>
+			</li>
+		    	<li class="fields control">
+				<input type="checkbox" class="checkbox in-block" title="[_Use as My Default Shipping Address]" value="1" [?Address.DefaultShippingAddress|yes=checked] name="default_shipping" id="primary_shipping"><label for="primary_shipping" class="in-block">[_Use as my default shipping address]</label>
+		 	</li>
+		</ul>
+	</div>
+	<div class="buttons-set">		
+		<p class="back-link"><a href="[Website.GetUrl,Customer,Address]"><small><<</small>[_Back]</a></p>
+		<button class="button" title="[_Save Address]" type="submit"><span><span>[_Save Address]</span></span></button>
+   	</div>	
+</form>
+<script type="text/javascript">
+jQuery("#form-editaddress").validate({
+	submitHandler: function(form) {
+		IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,ModifyAddress]',IncraWindow.formatUrl('[Url.FullUrl]'),'true/[Address.Id]',jQuery('#form-editaddress').serialize(),'POST');
+	 }	
+});
+</script>
+[:CustomerAddressJs]
+</div>

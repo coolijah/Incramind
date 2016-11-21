@@ -1,0 +1,9 @@
+[?MenuOption.HasChildren|Yes=
+	<ul class="dropdown sub-menu">
+		[MenuOption.TopMenuChildrenSorted=
+			<li class="[?MenuOption.HasChildren|Yes=has-dropdown|No=[?MenuOption.MenuOptionType|Category=has-dropdown]] ">
+				<a href="[MenuOption.FullUrl]"><i class="fa fa-angle-right"></i>  [MenuOption.Name]</a>
+			</li>
+		]
+	</ul>
+]

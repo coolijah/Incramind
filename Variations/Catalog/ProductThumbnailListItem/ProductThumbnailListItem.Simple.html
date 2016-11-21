@@ -1,0 +1,18 @@
+<div class="thumbnail-list-item-wrapper Simple clearfix">
+	<div class="item-content">
+		<div class="product-image">
+			<a title="[Product.Name]" href="[Website.GetUrl,Product,[Product.Id]]">
+				<img class="" width="120px" data-src="holder.js/300x200" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,205,220]]" alt="">
+			</a>
+		</div>
+		<div class="product-details">
+			<a title="[Product.Name]" class="product-name f-left" href="[Website.GetUrl,Product,[Product.Id]]">
+				<h4 class="product-name">[Product.Name]</h4>
+			</a>
+			<div class="product_price-container f-right">
+				<div class="price-box">[:PriceBlock?Product.Sale]</div>
+			</div>
+
+		</div>
+	</div>
+</div>

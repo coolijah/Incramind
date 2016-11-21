@@ -1,0 +1,155 @@
+<form id="osc-billing-form" method="post">
+	<div class="step-title ">
+		<h6 class=""><span class="number in-block">[General.Param1]</span> [_Billing Information]</h6>
+	</div>
+	<div class="checkout-onestep-content clearfix">
+		<ul >
+			[?Customer.NumberOfAddresses|more=
+				<li class="large-12 clearfix">
+			    	<label for="billing-address-select">[_Select a billing address from your address book or enter a new address.]</label>
+						<select onchange="billing.newAddress(this.value); billing.save();" title="" class="large-12 columns" id="billing-address-select" name="billing_address_id">
+							<option>--Select Address--</option>
+							[Customer.Addresses=
+								<option  value="[Address.Id]">[Address.FirstName] [Address.LastName] [Address.StreetName], [Address.City],  [Address.PostalCode]  [Address.State],  [Address.Country=[Country.Name]]</option>
+							]
+								<option value="0">[_New Address]</option>
+						</select>					
+				</li>
+		    ]
+		    <li id="billing-new-address-form"  [?Customer.NumberOfAddresses|more=style=display:none] class="large-12 clearfix">
+				<input type="hidden" id="billing:address_id" value="" name="address_id">
+				<div class="large-12 clearfix">
+					<label class="required" for="billing:country_id">[_Country] <em>*</em></label>
+					<select class="validate-select required " id="billing:country_id" name="country_id" onchange="addressByCountry(this.value);billing.save()"><option value="">[_Please select country]</option>
+						<option value="">[_Please select country]</option>
+						[Website.AvailableCountries=
+							[CountryGroup.Countries=<option value="[Country.Id]">[Country.Name]</option>]
+						]
+					</select>
+					<script type="text/javascript">
+						jQuery("#billing_country_id option\\[value=[Configuration.DefaultCountryId]\\]").attr("selected","selected");
+					</script>
+				</div>
+				<div class="row clearfix">
+					<div class="large-6 columns">
+						<label class="required" for="billing:firstname">[_First Name]<em>*</em></label>
+						<div class="input-box2">
+							<input type="text" class="input-text required" title="[_firstname]" name="firstname" id="billing:firstname">
+						</div>
+		    		</div>
+					<div class="large-6 columns">
+						<label class="required" for="billing:lastname">[_Last Name]<em>*</em></label>
+						<div class="input-box2">
+						    <input type="text" class="input-text required" name="lastname" title="[_lastname]" id="billing:lastname"> 
+						</div>
+					</div>
+				</div>
+				<div class="row clearfix">
+					<div class="large-6 columns">
+						<label for="billing:company">[_Company]</label>
+						<div class="input-box">
+						    <input type="text" id="billing:company" name="company" value="" title="[_Company]" class="input-text" />
+						</div>
+				    </div>
+						
+				</div>
+				<div class="row clearfix">
+					<div class="large-6 columns">
+						<label for="billing:company">[_Address]</label>
+						<div class="input-box">
+						    <input type="text" class="input-text address-field required"  value="" id="billing_address1" title="[_address]" name="street">
+						</div>
+				    </div>
+						<div class="large-6 columns">
+							<label for="billing:company">[_Address 2]</label>
+						<div class="input-box">
+						    <input type="text" class="input-text address-field"  value="" id="billing_address2" title="[_address2]" name="street2">
+						</div>
+				    </div>
+				</div>
+				<div class="row clearfix">
+					<div class="large-6 columns city">
+	                    <label class="required" for="billing_city">[_City] <em>*</em></label>
+	                    <div class="input-box">
+	                        <input type="text" class="input-text required"  value="" id="billing_city" title="[_address]" name="city">
+	                    </div>
+	                </div>
+					<div class="large-6 columns telephone">
+	                    <label class="required" for="billing_province_id">[_State/Province] <em>*</em></label>
+						<select class="validate-select" id="billing_province_id" name="region_id" >
+							<option value="">[_Please select state]</option>
+							/*[Website.AvailableCountries=
+								<option value="[Country.Id]">[Country.Name]</option>
+							]*/
+						</select>
+	                </div>
+	            </div>
+	            <div class="row clearfix">
+	            	<div class="large-6 columns telephone">
+	                    <label class="required" for="billing_postal_code">[_Zip/Postal Code] <em>*</em></label>
+	                    <div class="input-box">
+	                        <input type="text" class="input-text required"  value="" id="billing_postal_code" title="[_zip/postal code]" name="postcode">
+	                    </div>
+	                </div>
+		            <div class="large-6 columns telephone">
+	                    <label class="required" for="billing:telephone">[_Telephone] <em>*</em></label>
+	                    <div class="input-box">
+	                        <input type="text" id="billing:telephone" class="input-text required" value="" name="telephone" title="[_telephone]">
+	                    </div>
+	                </div>
+
+	            </div>
+				[?Customer.LoggedIn|No=
+					<div class="row clearfix">
+						<hr/>
+						<div class="large-12 columns email-add">
+						    <label class="required " for="billing:email">[_Email]<em>*</em></label>
+						    <div class="input-box">
+							<input type="text" class="input-text email required"  value="" id="billing:email" title="[_email]" name="email">
+						    </div>
+						</div>
+						<div class="large-6 columns">
+		                    <label class="required" for="billing:customer_password">[_Password] <em>*</em></label>
+		                    <div class="input-box">
+		                        <input type="password" class="input-text required password" id="billing:customer_password" name="customer_password" title="[_customer_password]">
+		                    </div>
+		                </div>
+		                <div id="register-customer-password" class="large-6 columns">
+		                    <label class="required" for="billing:confirm_password">[_Confirm Password] <em>*</em></label>
+		                    <div class="input-box">
+		                        <input type="password" class="input-text required cpassword" id="billing:confirm_password"  name="confirm_password" title="[_confirm_password]">
+		                    </div>
+		                </div>
+		                <hr/>
+		            </div>
+				]
+				<div class="row clearfix">
+					<input type="hidden" value="0" name="save_in_address_book">
+				</div>
+				<div class="large-12 columns option-shipping-options">
+		            <span>
+		                <input type="radio" class="radio "  onclick="jQuery('#shipping:same_as_billing').checked = true;jQuery('#shipping-con').hide();" class="radio" value="1" id="billing:use_for_shipping_yes" name="use_for_shipping">
+		                <label for="billing:use_for_shipping_yes">[_Ship to this address]</label>
+		            </span>
+		            <br>
+		            <span id="last">
+		                <input type="radio" class="radio" value="0" id="billing:use_for_shipping_no"  onclick="jQuery('#shipping:same_as_billing').checked = false;jQuery('#shipping-con').show()" class="radio" name="use_for_shipping">
+		                <label for="billing:use_for_shipping_no">[_Ship to different address]</label>
+		            </span>
+		        </div>
+		 	</li>
+	    </ul>
+	     <span class="please-wait" id="billing-please-wait" style="display:none;float:left;">
+			<img src="[File:/images/zoomloader.gif]" alt="Loading next step..." title="[_Loading]..." class="v-middle"> [_Loading]...        
+		</span>
+	</div>
+</form>
+<script type="text/javascript">
+	var billing = new Billing('osc-billing-form','[Website.GetUrl,CheckOut,selectBillingAddress]','[Website.GetUrl,CheckOut,SaveBillingAddress]');
+
+	jQuery(document).ready(function(){
+		var value = jQuery("#billing_country_id").val();
+		INCRACOUNTRYCONFIG.populateToCombo(value,'billing_province_id');
+	});
+</script>
+

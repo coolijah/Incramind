@@ -1,0 +1,26 @@
+/*
+*	Renders a block containing list of featured products.
+*/
+[?Website.LoopProductsCount,RecentlyViewed|0=|=
+<div class="recently-viewed-block home-block two-items-slider large-6 columns">
+	<div class="block-title"><h3>[_Recently Viewed Products] </h3></div>
+	<ul class="products-grid inline-list" id="recentlyviewed_twoitems_carousel">
+		[Website.LoopProducts,RecentlyViewed,1,,'Name'=
+			<li class="item">
+				[:ProductMiniListItem]
+			</li>
+		]
+	</ul>
+	<script type="text/javascript">
+	jQuery(function() {
+		var rti = new ProductCarousel({
+			carousel_id : '#recentlyviewed_twoitems_carousel',
+			effect	: 'crossfade',
+			items: 2,
+			width:'100%',
+		});
+		rti.slideshow();
+	});
+	</script>
+</div>
+]

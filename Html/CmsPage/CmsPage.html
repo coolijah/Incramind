@@ -1,0 +1,10 @@
+/*
+*		Renders the cms page base on backend settings.
+*	
+*/
+
+[?CmsPage.FullPage|Yes=
+	[:[CmsPage.BlockName]]
+|No=
+	[:CmsPageContent]
+]

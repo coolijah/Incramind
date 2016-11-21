@@ -1,0 +1,48 @@
+/*
+*		Renders a three columns page containing left, right column and main content.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              3Columns.Customer
+Location:          /Html/Customer/Layout/3Columns.Customer.html
+Created By:        Leslie Canete
+Created At:        06-Okt-2014 18:55 (relocation first 15 models)
+Last modified By:  Seth Malaki
+Last modified At:  21-Okt-2014 18:53 (myupdates in addingComments)
+Calling blocks:    breadcrumb 	footer 	header 	leftColumn 	notification 	rightColumn 	
+Calling unknown:   mainContent.Customer[Url.View] 	
+--------------------------------------------------------------------**/
+<div class="page">
+	[:header]
+	<div class="three-columns">
+		<div class="row">
+			[:breadcrumb]
+			<div class="off-canvas-wrap">
+				<div class="inner-wrap">
+					<nav class="tab-bar show-for-small-only">
+				      <section class="left-small">
+				        <a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+				      </section>
+				    </nav>
+					<aside class="left-off-canvas-menu">
+						[:design_selection_tool]
+					</aside>
+					<section class="main-section">
+						<div layout-block-name="left_column" class="left-content medium-3 large-3 columns grid-col3-sidebar no-gutter hide-for-small">
+							[:leftColumn]
+						</div>
+						<div layout-block-name="main_column" class="main-content small-12 medium-6 large-6 columns grid-col3-main no-gutter">
+							[:notification]
+							[:mainContent.Customer[Url.View]]
+						</div>
+						<div layout-block-name="right_column" class="right-content medium-3 large-3 columns grid-col3-sidebar no-gutter hide-for-small">
+							[:rightColumn]
+						</div>
+					</section>
+					<a class="exit-off-canvas"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	[:Footer]
+</div>

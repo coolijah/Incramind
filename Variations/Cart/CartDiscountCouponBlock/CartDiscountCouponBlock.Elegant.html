@@ -1,0 +1,40 @@
+<div class="block discount-coupon-box Elegant clearfix">
+	<!--<form id="discount-coupon-form" method="post" action="">-->
+		<div class="title">
+			<h6>[_Discount Codes]</h3>
+		</div>
+		<div class="discount large-12 columns clearfix">
+			<div class="row collapse">
+		        <div class="small-8 columns">
+		          <input id="remove-coupon" type="hidden" value="0" name="remove">
+		          <input type="text" placeholder="[_Enter your coupon here...]" class="required" id="coupon_code" name="coupon_code">
+		        </div>
+		        <div class="small-4 columns action">
+		          <a href="#" onclick="discountForm(false);return false;" class="button btnElegant">[_Apply]</a>
+		        </div>
+	        </div>
+		</div>
+	<!--</form>-->
+</div>
+
+<script type="text/javascript">
+	var discountForm = function (isRemove) {
+		
+	    if (isRemove) {
+			jQuery('#coupon_code').removeClass('required');
+			jQuery('#remove-coupon').val("1");
+	    } else {
+			jQuery('#coupon_code').addClass('required');
+			jQuery('#remove-coupon').val("0");
+	    }
+	    IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,ProcessDiscountCoupon]',IncraWindow.formatUrl('[Url.FullUrl]'),true,'coupon_code='+jQuery('#coupon_code').val(),'GET');
+	   
+	}
+	[?DesignLayout.Layout|3Columns=
+		jQuery(document).ready(function(){
+			jQuery(".discount-coupon-box .discount").css("padding","10px 5px");
+
+		})
+	]
+
+</script>

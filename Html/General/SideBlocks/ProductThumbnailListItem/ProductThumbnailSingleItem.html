@@ -1,0 +1,14 @@
+<div class="single-item-wrapper [Design.DesignSelectionName,ProductThumbnailListItem]">
+	<div class="product-image">
+		<a title="[Product.Name]" href="[Website.GetUrl,Product,[Product.Id]]">
+		  <img src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,205,220]]">
+		</a>
+	</div>
+	<div class="product-details">
+		<a title="[Product.Name]" href="[Website.GetUrl,Product,[Product.Id]]">
+			<h6>[Product.Name]</h6>
+		</a>
+		<div class="price-box">[:PriceBlock?Product.Sale]</div>
+
+	</div>
+</div>

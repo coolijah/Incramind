@@ -1,0 +1,27 @@
+/*
+*	Renders a block product rating and a  link to add new product review.
+*	Param 1 : parameter from which block is called
+*/
+<div class="prod-rating Default">
+[?General.Param1
+|CategoryGrid=
+	<div class="rating-box left">
+		<div class="rating" style="width:[Product.Ranking]%" title="[Product.Ranking]%"></div>
+	</div>
+	<span class="list-rating-links right">
+		<a href="[Website.GetUrl,Product,0,Review/List/[Product.Id]/ListReview]">[_%1 Reviews, [Product.NumberOfReviews]]</a>
+	</span>
+|Thumbnail=
+	<div class="rating-box">
+		<div class="rating" style="width:[Product.Ranking]%" title="[Product.Ranking]%"></div>
+	</div>
+|=
+	<div class="rating-box f-right">
+		<div class="rating" style="width:[Product.Ranking]%" title="[Product.Ranking]%"></div>
+	</div>
+	<div class="rating-links">
+		<a id="read" href="[Website.GetUrl,Product,0,Review/List/[Product.Id]/ListReview/#read_review]">[_%1 Review(s),[Product.NumberOfReviews]]</a>
+		<a  class="write" href="[Website.GetUrl,Product,0,Review/List/[Product.Id]/AddReview/#write_review]">[_Add Review]</a>
+	</div>
+]
+</div>

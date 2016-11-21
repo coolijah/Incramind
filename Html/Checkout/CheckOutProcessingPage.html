@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	[:MetaData,[Website.Name] | [_Checkout Processing]]
+	[:head]
+	
+</head>
+<body>
+<div class="page pagenotfound">
+	[:header]
+	<div class="main-container one-column">
+		<div class="main-content row">
+			<div class="col-main">
+				<h3>[_CheckOut Processing.]</h3>
+			</div>
+			
+			[?ShoppingCart.StoreLocationId|0=
+			|=
+				[ShoppingCart.StoreLocation=
+				<div id="store_location_details_[StoreLocation.Id]">
+					<div class="large-12 large-centered columns">
+						<div class="">
+							<div class="large-6 columns">
+								<div class="a-center">
+									<h3>[StoreLocation.name]</h3>
+									[?StoreLocation.DescriptionAvailable|Yes=[StoreLocation.Description]]<br>
+									[?StoreLocation.AdditionalInformationAvailable|Yes=
+										[StoreLocation.AdditionalInformation]
+									]	
+									<hr>
+								</div>
+								<div class="large-12">
+									<div class="large-6 columns">
+										<strong>[_Address : ]</strong> <br>
+										<div>[StoreLocation.AddressSummary]</div>	
+									</div>
+									<div class="large-6 columns">
+										<strong>[_Contact : ]</strong><br>
+										<div>[StoreLocation.TelNumber]</div>		
+										<div>[StoreLocation.EMail]</div>
+									</div>
+									
+								</div>	
+								
+								[?StoreLocation.OpeningTimesAvailable|Yes=	
+								<div class="large-12 columns">
+									<strong>[_Store Hours :]</strong><div>[StoreLocation.OpeningTimes]</div>
+								</div>
+								]
+							</div>
+							<div class="large-6 columns">
+								<div class="large-12 columns" >
+									[?StoreLocation.ImageAvailable|Yes=<img src="/[StoreLocation.Image]">]
+								</div>
+								[?StoreLocation.RouteDescriptionAvailable|Yes=	
+								<div class="large-12 columns">
+									<strong>[_Route Description :]</strong><div>[StoreLocation.RouteDescription]</div>	
+								</div>
+								]
+								
+								/*<div class="large-12 columns"><span class="view-store-location" onclick="jQuery('#gmap_canvas[StoreLocation.Id]').toggle(); jQuery('#store_location_store[StoreLocation.Id]').toggle(); showStoreMap('[StoreLocation.Addresssummary]','[StoreLocation.Latitude]','[StoreLocation.Longitude]','gmap_canvas[StoreLocation.Id]');"><strong>[_Show Map]</strong></span></div>*/
+							</div>
+						</div>
+					</div>
+				</div>
+				]
+			]
+		</div>
+	</div>
+	[:footer]
+</div>

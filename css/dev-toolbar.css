@@ -1,0 +1,23 @@
+.incra-toolbar{
+	padding: 10px;
+	position: fixed;
+	z-index: 999;
+	bottom: 10px;
+	height: 80px;
+	background: #fafafa;
+	max-width: 900px;
+	opacity: .9;
+	overflow: hidden;
+	-webtoolkit-transition:all .1s linear;
+	
+}
+.incra-toolbar .info{
+	
+}
+.incra-toolbar .info.minimize{
+	width: 50px;
+	left:0px;
+}
+.incra-toolbar.minimize{
+	width: 50px;
+}

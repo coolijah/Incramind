@@ -1,0 +1,49 @@
+/*
+*	Renders a block of product tier prices.
+*
+*/
+<div class="tier-price-container SimpleTable clearfix large-12 columns">
+	[?Product.ProductType|Simple=
+		[?Product.TierPricesExist|Yes=
+			<table class="[?DesignLayout.Layout|1Column=large-6|=large-10]">
+				<colgroup>
+					<col width="1">
+					<col>
+				</colgroup>
+				<thead>
+					<td class="text-right">[_Qty]</td>
+					<td class="text-right">[_Price]</td>
+				</thead>
+				<tbody>
+					[Product.TierPrices=
+						<tr>
+							<td class="text-right">[TierPrice.Number]</td>
+							<td class="text-right">[TierPrice.ActualPriceEach]</td>	
+						</tr>
+					]
+				</tbody>
+			</table>
+		]
+	|Configurable=
+		[?SimpleProduct.TierPricesExist|Yes=
+			<table class="[?DesignLayout.Layout|1Column=large-6|=large-10]">
+				<colgroup>
+					<col width="1">
+					<col>
+				</colgroup>
+				<thead>
+					<td class="text-right">[_Qty]</td>
+					<td class="text-right">[_Price]</td>
+				</thead>
+				<tbody>
+					[Product.TierPrices=
+						<tr>
+							<td class="text-right">[TierPrice.Number]</td>
+							<td class="text-right">[TierPrice.ActualPriceEach]</td>	
+						</tr>
+					]
+				</tbody>
+			</table>
+		]
+	]
+</div>

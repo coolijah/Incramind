@@ -1,0 +1,34 @@
+/*
+*		Renders a block that contains a list of new product.
+*
+*/
+
+/*[Website.RecentlyViewed,1,,'Name',Ascending]*/
+[?Website.LoopProductsCount,RecentlyViewed|0=|=
+<div class="block products-block recentlyviewed Thumbnail ScrollingUp">
+	<div class="title">
+		<h2>[_RECENTLY VIEWED]</h2>
+	</div>
+	<div class="block-content">
+		<div class="products-grid scroll-up-carousel" id="side_recently_carousel">
+		[Website.LoopProducts,RecentlyViewed=
+			[:ProductThumbnailListItem]
+		]
+		</div>
+	</div>
+	<script type="text/javascript">
+	jQuery(function() {
+		var side_recently=new ProductCarousel({
+			carousel_id: '#side_recently_carousel',
+			items:	2,
+			direction:'up',
+			duration:5000
+		});
+		[?Filter.Count|1=
+		|=
+		side_recently.continuouslyscrolling();
+		]
+	});
+	</script>
+</div>
+]

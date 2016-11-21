@@ -1,0 +1,15 @@
+/*
+*		Renders the default blocks that is placed in the right column.  This can be enherited on per model basis.
+*
+*/
+<div class="side-block-wrapper [Design.DesignSelectionName,SideBlockStyle]">
+[?DesignLayout.RightColumnUseGeneral
+|Yes=
+	[DesignLayout.RightColumn,General=[:[DesignSelection.Name]]]
+	[:SidePollBlock]
+|No=
+	[DesignLayout.RightColumn,[Url.Model]=
+		[:[DesignSelection.Name]]
+	]
+]
+</div>

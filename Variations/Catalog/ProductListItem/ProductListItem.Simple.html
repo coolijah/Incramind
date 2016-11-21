@@ -1,0 +1,195 @@
+/*
+*		Renders the listings of products of the current category.  
+*		Can be list as Grid type or List type.
+*
+*/
+<li class="product-item Simple clearfix">
+[?UserInput.CatalogMode|List=
+		<div class="add-to clearfix large-6">
+			[?General.Param1
+				|CategoryList=
+				<ul class="add-to-links row">
+					[?WebsiteFeatures.WishList|Yes=
+					<li class="large-6 columns text-center">
+						<a  href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST'); " class="link-wishlist">[_Add to WishList]</a>
+					</li>]
+					<li class="large-6 columns text-center">
+						<a href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST');" class="link-compare">[_Add to Compare]</a>
+					</li>
+				</ul>
+				|CategoryGrid=
+				<ul class="add-to-links row">
+					[?WebsiteFeatures.WishList|Yes=
+					<li class="large-6 columns text-center">
+						<a  href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST'); " class="link-wishlist">[_Add to WishList]</a>
+					</li>]
+					<li class="large-6 columns text-center">
+						<a href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST');" class="link-compare">[_Add to Compare]</a>
+					</li>
+				</ul>
+				|=
+				<ul class="add-to-links row">
+					[?WebsiteFeatures.WishList|Yes=
+					<li class="large-6 columns text-center">
+						<a  href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST'); " class="link-wishlist">[_Add to WishList]</a>
+					</li>]
+					<li class="large-6 columns text-center">
+						<a href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST');" class="link-compare">[_Add to Compare]</a>
+					</li>
+				</ul>
+			]
+		</div>
+		<div class="item-wrapper large-12 columns clearfix"  id="prd[Product.Id]">
+			[?Product.Sale|sale=<div class="product-ribbon sale"></div>]
+				<div class="product-image large-4 columns text-center">
+				   	<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+						<img id="image-[Product.Id]" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,205,220]]" alt="[Product.Name]"/>
+					</a>
+				</div>
+				<div class="large-8 columns">
+					<div class="product-desc">
+						<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]" alt="[Product.Name]">
+							<h6 class="product-name">[Product.Name]</h6>
+						</a>
+						<p>[Product.Description]</p>
+					</div>
+					<div class="product-details clearfix">
+					 	<div class="price-block large-12 columns text-left">
+					 		[?Product.ProductType
+								|Configurable=
+									[?SimpleProduct.ActualPriceTakenFrom
+									|Standard=<span class="price standard">[SimpleProduct.ActualPrice]</span>
+									|=<span class="price [SimpleProduct.ActualPriceTakenFrom]">[SimpleProduct.ActualPrice]<span class="old-price"><s>[SimpleProduct.Price]</s></span></span>
+									]
+								|Simple=
+									[?Product.ActualPriceTakenFrom
+									|Standard=<span class="price standard">[Product.ActualPrice]</span>
+									|=<span class="price [Product.ActualPriceTakenFrom]">[Product.ActualPrice]</span><span class="old-price"><s>[Product.Price]</s></span>
+									]
+							]
+					 	</div>
+						<div class="add-to-cart large-12 columns text-left">
+							[?WebsiteFeatures.Checkout|Yes=
+								[?Product.ProductType|Configurable=
+									<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+										<span><span>[_Configure]</span></span>
+									</button>
+								|=
+									[?Product.HasRequiredOptions|Yes=
+										<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+											<span><span>[_Configure]</span></span>
+										</button>
+									|=
+
+
+								  	<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="IncraShoppingCart.ajaxAddToCart({submit_url : '[Website.GetUrl,IncraShop,AddToCart]',second_url : '[UserInput.DefaultUrlPart]',flag:true,id :'[Product.Id]',post_data: jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]'}); return false;" class="button btn-cart" title="[_Add to Cart]" type="button"><span><span>[_Add to Cart]</span></span></button>
+									]
+								]
+							]
+						</div>
+					</div>
+				</div>
+				
+		</div>
+|Grid=
+	
+		<div class="add-to clearfix">
+			[?General.Param1
+				|CategoryList=
+				<ul class="add-to-links row">
+					[?WebsiteFeatures.WishList|Yes=
+					<li class="large-6 columns text-center">
+						<a  href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST'); " class="link-wishlist">[_Add to WishList]</a>
+					</li>]
+					<li class="large-6 columns text-center">
+						<a href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST');" class="link-compare">[_Add to Compare]</a>
+					</li>
+				</ul>
+				|CategoryGrid=
+				<ul class="add-to-links row">
+					[?WebsiteFeatures.WishList|Yes=
+					<li class="large-6 columns text-center">
+						<a  href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST'); " class="link-wishlist">[_Add to WishList]</a>
+					</li>]
+					<li class="large-6 columns text-center">
+						<a href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST');" class="link-compare">[_Add to Compare]</a>
+					</li>
+				</ul>
+				|=
+				<ul class="add-to-links row">
+					[?WebsiteFeatures.WishList|Yes=
+					<li class="large-6 columns text-center">
+						<a  href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToWishlist]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST'); " class="link-wishlist">[_Add to WishList]</a>
+					</li>]
+					<li class="large-6 columns text-center">
+						<a href="javascript:IncraAjaxUpdater.submitAjax('[Website.GetUrl,IncraShop,AddToCompare]',IncraWindow.formatUrl('[Website.GetUrl,Product,[Product.Id]]'),'true/[SimpleProduct.Id]',jQuery('#product_addtocart_form').serialize(),'POST');" class="link-compare">[_Add to Compare]</a>
+					</li>
+				</ul>
+			]
+		</div>
+		<div class="item-wrapper"  id="prd[Product.Id]">
+
+			[?Product.Sale|sale=<div class="product-ribbon sale"></div>]
+			
+				<div class="product-title">
+					<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]" alt="[Product.Name]">
+						<span class="product-name">[Product.Name] [SimpleProduct.Id]</span>
+					</a>
+				</div>
+			
+			<div class="product-image text-center">
+			   	<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]">
+					<img id="image-[Product.Id]" src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,205,220]]" alt="[Product.Name]"/>
+				</a>
+			</div>
+			[?UserInput.CatalogMode|Grid=
+				<div class="product-desc">
+					<a href="[Website.GetUrl,Product,[Product.Id]]" title="[Product.Name]" alt="[Product.Name]"><h6 class="product-name">[Product.Name]</h6></a>
+					<p>[Product.Description]</p>
+				</div>
+			]
+			 <div class="product-details clearfix">
+			 	<div class="price-block large-6 columns">
+			 		[?Product.ProductType
+						|Configurable=
+							[?SimpleProduct.ActualPriceTakenFrom
+							|Standard=<span class="price standard">[SimpleProduct.ActualPrice]</span>
+							|=<span class="price [SimpleProduct.ActualPriceTakenFrom]">[SimpleProduct.ActualPrice]<span class="old-price"><s>[SimpleProduct.Price]</s></span></span>
+							]
+						|Simple=
+							[?Product.ActualPriceTakenFrom
+							|Standard=<span class="price standard">[Product.ActualPrice]</span>
+							|=<span class="price [Product.ActualPriceTakenFrom]">[Product.ActualPrice]</span><span class="old-price"><s>[Product.Price]</s></span>
+							]
+					]
+			 	</div>
+				<div class="add-to-cart large-6 columns">
+				[?WebsiteFeatures.Checkout|Yes=
+					[?Product.ProductType|Configurable=
+						<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+							<span><span>[_Configure]</span></span>
+						</button>
+					|=
+						[?Product.HasRequiredOptions|Yes=
+							<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+								<span><span>[_Configure]</span></span>
+							</button>
+						|=
+
+
+					  	<button  class="button btn[Design.DesignSelectionName,ButtonStyle]" onclick="IncraShoppingCart.ajaxAddToCart({submit_url : '[Website.GetUrl,IncraShop,AddToCart]',second_url : '[UserInput.DefaultUrlPart]',flag:true,id :'[Product.Id]',post_data: jQuery('#conf-attributes[Product.Id]').find('select').serialize()+'&qty=[Product.MinInShoppingCart]'}); return false;" class="button btn-cart" title="[_Add to Cart]" type="button"><span><span>[_Add to Cart]</span></span></button>
+						]
+					]
+				]
+				</div>
+			</div>
+		</div>
+
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery(".product-list .product-item .product-desc .product-name").substring({ max_char:20 });
+			jQuery(".product-list .product-item .product-desc p").substring({ max_char:90 });
+		});
+	</script>
+]
+</li>

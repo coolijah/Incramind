@@ -1,0 +1,27 @@
+/*
+*	Renders a block containing list of featured products.
+*/
+[?Website.LoopProductsCount,Featured|0=|=
+	<div class="featured-products-block home-block two-items-slider large-6 columns">
+		<div class="block-title"><h3>[_Featured Products] </h3></div>
+		<div class="block-content"><ul class="products-grid inline-list" id="featured_twoitems_carousel">
+				[Website.LoopProducts,Featured,8,,'Name'=
+					<li class="item">
+						[:ProductMiniListItem]
+					</li>
+				]
+			</ul>
+		</div>
+		<script type="text/javascript">
+		jQuery(function() {
+			var fti = new ProductCarousel({
+				carousel_id : '#featured_twoitems_carousel',
+				effect	: 'crossfade',
+				items: 2,
+				width:'100%',
+			});
+			fti.slideshow();
+		});
+		</script>
+	</div>
+]

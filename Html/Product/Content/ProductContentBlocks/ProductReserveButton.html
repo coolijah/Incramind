@@ -1,0 +1,10 @@
+<!-- used simple product so that it can be both applicable to configurable and simple-->
+[?WebsiteFeatures.Reservations|Yes=
+	[?Product.CanReserveThisProduct|Yes=
+
+		[?Product.IsReserved,[Customer.Id]|Yes=<strong>[_You reserved this product] </strong>  <br>]
+		<a href="javascript:INCRA_MODAL.show('[Website.GetUrl,product,ShowReserveProduct]/[SimpleProduct.Id]')" class="">[_Reserve this Product]
+		</a>
+	
+	]
+]

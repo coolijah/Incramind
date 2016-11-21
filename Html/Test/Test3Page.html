@@ -1,0 +1,69 @@
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Incra Test Reserve For Guest</title>
+	<script src="[File:/Js/jquery-1.11.3.js]"></script>
+	<script src="[File:/Js/jQuery/jquery.class.js]"></script>
+	<script type="text/javascript" src="[File:/Js/IncraTestApi.js]"></script>
+
+	<script src="[File:/Js/angular.min.js]"></script>
+	<link href="[File:/css/styles.css]" rel="stylesheet" type="text/css"/>
+	<link href="[File:/css/foundation5/css/foundation.css]" rel="stylesheet" type="text/css"/>
+	<style>
+		body{ font-family :arial; }
+		ul { margin-bottom: 10px;}
+		ul li { list-style: none; }
+		tr.error{
+			background: red !important
+		}
+		table tr td { padding : 5px; font-size:12px; !important; word-wrap: break-word }
+		table {border-collapse:collapse; table-layout:fixed; width:310px;}
+		table td {border:solid 1px #fab; width:100px; word-wrap:break-word;}
+	</style>
+</head>
+<body>
+[:DisplayResultsBlock]
+<script>
+	
+		var api_test= new IncraTestApi({});
+		
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/Logout");
+
+	
+		api_test.displayData("\[Locate: Configuration,3\] \[Set : Configuration.ReservationGuestCanReserve, Yes\]","[Locate: Configuration,3] [Set : Configuration.ReservationGuestCanReserve, Yes][Configuration.ReservationGuestCanReserve]")
+
+		api_test.displayData("Number in Stock for Product 3","[Locate: Product,3] [Product.NumberInStock]")
+		api_test.displayData("Reserved Qty for Product 3","[Locate: Product,3] [Product.ReservedQty]")
+
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/Reserve/3/2/1/lesliepcanete@gmail.com/ako ra ni balikon");
+		
+		api_test.displayData("Number in Stock for Product 3","[Locate: Product,3] [Product.NumberInStock]")
+		api_test.displayData("Reserved Qty for Product 3","[Locate: Product,3] [Product.ReservedQty]")
+
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/Unreserve/3/2");
+	
+		//api_test.processUrl("[Website.GetUrl,RestApi]/call/Reserve/3/2/2/lesliepcanete@gmail.com/ako ra ni balikon");
+		
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ReservationToCart/"+api_test.applicable_id);
+		
+		//api_test.processUrl("[Website.GetUrl,RestApi]/call/Reserve/3/2/2/lesliepcanete@gmail.com/ako ra ni balikon");
+
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/AllReservationsToCart");
+		
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/Reserve/3/2/2/lesliepcanete@gmail.com/ako ra ni balikon");
+
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ClearReservations");
+
+		
+		var data=api_test.temp_array;
+		
+		var myApp = angular.module("myApp", []);
+
+		myApp.controller("myController", function($scope){
+		   $scope.logs = data; 
+		});
+
+
+</script>
+</body>
+</html>

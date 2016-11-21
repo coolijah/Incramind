@@ -1,0 +1,23 @@
+[?Category.HasChildren|yes=
+	<div class="subcategory-block large-12 SimpleLargeTiles">
+		<ul class="category-grid large-block-grid-3 medium-block-grid-2 small-block-grid-1">
+			[Category.ChildCategories=
+				<li>
+					<div class="sub-cat-container large-12 columns">
+						<div class="large-12 columns text-center">
+							<a href="[Website.GetUrl,Category,[Category.Id]]" alt="[Category.Name]">
+								<img height="100%" class="prod-list" src="/[Category.Image]" alt="[Category.Name]" />
+							</a>
+						</div>
+						<div class="large-12 columns text-center">
+							<a class="cat-name" href="[Website.GetUrl,Category,[Category.Id]]" alt="[Category.Name]">[Category.Name]</a>
+							<!-- <div class="description">
+								[Category.Description]
+							</div> -->
+						</div>
+					</div>
+				</li>
+			]
+		</ul>
+	</div>
+]

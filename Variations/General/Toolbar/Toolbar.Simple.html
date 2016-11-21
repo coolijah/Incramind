@@ -1,0 +1,106 @@
+/*
+*		Renders a variation of toolbar block in listings of products, search results and others
+*
+*/
+
+<div class="toolbar Simple">
+	<div class="pager row clearfix">
+		<div class="result-count large-2 columns">
+			<label class="">
+				<strong> [_%1 items, [Filter.Count]]</strong>
+			</label>
+		</div>
+		<div class="view-mode large-4 columns">
+			<label class="large-4 columns">[_View as]</label>
+			[?Configuration.CatalogListMode
+			|ListOnly=
+				<strong>[_List]</strong>
+			|GridOnly=
+				<strong>[_Grid]</strong>
+			|ListDefault=
+				[?UserInput.CatalogMode
+				|Grid=
+				<div class="large-4 columns end" style="padding-top: 4px;">
+					<div class="large-6 columns"><span class="selected"><strong>[_Grid]</strong></span></div>
+					<div class="large-6 columns"><span class="opt-mode" onclick="IncraToolbar.setCatalogMode('List')">[_List]</span></div>
+				</div>
+				|List=
+					<div class="large-4 columns end" style="padding-top: 4px;">
+						<div class="large-6 columns">
+							<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('Grid')">[_Grid]</span>
+						</div>
+						<div class="large-6 columns">
+							<span class="selected"><strong>[_List]</strong></span>
+						</div>
+					</div>
+				]
+			|GridDefault=
+				[?UserInput.CatalogMode
+			 	|Grid=
+					<div class="large-4 columns end" style="padding-top: 4px;">
+						<div class="large-6 columns">
+							<span class="selected"><strong>[_Grid]</strong></span>
+						</div>
+						<div class="large-6 columns">
+							<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('List')">[_List]</span>&nbsp;
+						</div>
+					</div>
+				|List=
+					<div class="large-4 columns end" style="padding-top: 4px;">
+						<div class="large-6 columns">
+			 				<span class="opt-mode" onclick="IncraToolbar.setCatalogMode('Grid')">[_Grid]</span>
+						</div>
+						<div class="large-6 columns">
+							<span class="selected"><strong>[_List]</strong></span>
+						</div>
+					</div>
+				]
+			]
+		</div>
+		<div class="sort-by large-6 columns text-right">
+			[:ToolbarSortby]
+		</div>
+	</div>
+	<div class="sorter-container clearfix">
+		<div class="product-pagination large-9 columns">
+			<div class="product-pagination large-10 columns">
+				<ul>
+					[?Filter.IsFirstPage|No=
+						<li><a style="line-height: 35px;" href="#" onclick="IncraToolbar.setPage('[Filter.PrevPage]'); return false;"><strong>[_Prev]</strong></a></li>
+						|Yes=
+						<li><label style="padding-top: 5px;">[_Prev]</label></li>
+					]
+					[Filter.PagesSmart=
+						<li>[?Filter.LoopPageIsCurrent
+						|yes=<span class="current">[Filter.LoopPageNr]</span>
+						|no=<span onclick="IncraToolbar.setPage('[Filter.LoopPageNr]')">[Filter.LoopPageNr]</span>]</li>
+						<li class="elipses">[Filter.NextElipsis]</li>
+					]
+					[?Filter.IsLastPage|No=
+						<li><a style="line-height: 35px;" href="#" onclick="IncraToolbar.setPage('[Filter.NextPage]'); return false;"><strong>[_Next]</strong></a></li>
+						|Yes=
+						<li><label style="padding-top: 5px;">[_Next]</label></li>
+					]
+				</ul>
+			</div>
+		</div>
+		<div class="limiter large-3 columns text-right">
+			[:ToolbarLimiter]
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+	IncraToolbar.init({
+		update_url : "[Website.GetUrl,Ajax,Update]",
+		current_url :"[Url.FullUrl]",
+		default_url:"[UserInput.DefaultUrlPart]",
+		filter_url:"/[UserInput.FilterUrl]",
+		sort_value:"/[UserInput.PageAscending]",
+		sort_by_value:"/[UserInput.PageSort]",
+		pagination_url:"/[UserInput.PaginationUrl]",
+		page_from :"[UserInput.PageFrom]",
+		page_nr_on: "[UserInput.PageNrOn]"
+	});
+	
+</script>

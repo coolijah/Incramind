@@ -1,0 +1,75 @@
+<div id="opc-shipping-method" class="checkout-block shipping-method" step="shipping_method" onclick="openCheckoutStep(this);">
+	<div class="title">
+		<div class="circle-number in-block">[General.Param1]</div>
+		<div class="in-block">
+			<h6>[_Shipping Method]</h6>
+		</div>
+	</div>
+	<div class="content ">
+		<div class="shipping-method-form">
+			<form id="co-shipping-method-form" action="" name="co-shipping-method-form">
+				<input type="hidden" value="[Website.CurrentStoreView=[StoreView.Id]]" name="storeViewId">
+				[?ShoppingCart.AreThereAnyAvailableShippingMethods|Yes=
+				<ul class="shipping-method-list control">
+					[ShoppingCart.AvailableShippingMethods=
+					<li>
+						<label style="color: rgb(241, 85, 104); font-size: 14px; font-weight: bold; padding: 5px 0">[ShippingMethod.Name]</label>
+						<input style="padding-top: 5px;" type="radio" name="method" class="radio validateOneRequiredByName" value="[ShippingMethod.Id]" id="s_method_[ShippingMethod.Code]" onclick="showExtrInfo('[ShippingMethod.Code]');"/> <label style="text-transform: none;" for="s_method_[ShippingMethod.Code]" class="in-block"><span> [ShippingMethod.ShippingProcessorName] [ShoppingCart.ShippingCostsForCertainMethod,[ShippingMethod.Id]]</span> </label>
+						<div style="padding-left: 40px;" class="shipping-additional-info hide" id="[ShippingMethod.Code]-extra-info">
+							<ul class="checkout-extrafields">
+								[ShippingProcessor.ExtraFields=
+									[:ExtraField,shipping_method]
+								]
+							</ul>
+							<ul class="checkout-extrafields">
+								[ShippingMethod.ExtraFields=
+									[:ExtraField,shipping_method]
+								]
+							</ul>
+							[:ShippingMethodStoreLocations,[ShippingMethod.Id]]
+						</div>
+					</li>
+					]
+				
+				</ul>
+				|=
+					<p>[ShoppingCart.AvailabilityShippingMethodsDescription]</p>
+				]
+				<div class="buttons-set">
+					<a class="step-back right" href="#" onclick="checkout.stepBack();return false;">
+						<small><< </small> [_Back]</a>
+					<span class="please-wait" id="shipping_method-please-wait" style="display:none;">
+						<img src="[File:/images/opc-ajax-loader.gif]" alt="Loading next step..." title="[_Loading next step...]" class="v-middle">[_Loading next step...]
+					</span>
+					<button type="button" title="Continue" class="button" onclick="shippingMethod.save()"><span><span>[_Continue]</span></span></button>
+				</div>
+				<br>
+			</form>
+		</div>
+		/*[ShoppingCart.AvailableShippingMethods=
+		<div id="shipping-storelocations-container-[ShippingMethod.Code]" style="display:none">
+			[:ShippingMethodStoreLocations]
+		</div>
+		]*/
+	</div>
+	<script type="text/javascript">
+
+		var shippingMethod = new ShippingMethod('co-shipping-method-form', "[Website.GetUrl,CheckOut,SaveShippingMethod]");
+		
+		[?CheckOut.ShippingMethodSelected|Yes=
+			[CheckOut.SelectedShippingMethod=
+				jQuery('#s_method_[ShippingMethod.Code]').attr('checked','checked');
+			]
+		]
+
+		function showExtrInfo(code){
+			jQuery(".shipping-additional-info").addClass("hide");
+			jQuery("#"+code+"-extra-info").removeClass("hide");
+
+			/*if(!jQuery("#"+code+"-extra-info").find("#shipping_storelocations_content_"+code).length) {
+				jQuery('.shipping-additional-info').children(".shipping-storelocations-content").remove();
+				jQuery("#"+code+"-extra-info").append(jQuery('#shipping-storelocations-container-'+code).html());
+			}*/
+		}
+	</script>
+</div>

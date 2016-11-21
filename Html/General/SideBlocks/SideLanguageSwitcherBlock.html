@@ -1,0 +1,27 @@
+/*
+*		Renders a block that contains language switcher.
+*
+*/
+
+<div class="block languageswitcher Default-style">
+	<div class="title">
+		<h6 for="side_select_language">[_Your Language] :</h6>
+	</div>
+	<div class="block-content">
+		<select id="side_select_language" title="[_Your Language]" onchange="changeStoreView(this.value)">
+			[Website.StoreViews=
+				<option value="[StoreView.Id]">[StoreView.Name]</option>
+			]
+		</select>
+	</div>
+	<script type="text/javascript">
+
+		changeStoreView = function(value,url_redirect){
+			window.location ='[Website.GetUrl,Storeview,'+value+']';
+		}
+		jQuery("#side_select_language option\[value=[Website.CurrentStoreView=[StoreView.Id]]\]").attr("selected","selected");
+	
+	</script>
+	<hr>
+</div>
+

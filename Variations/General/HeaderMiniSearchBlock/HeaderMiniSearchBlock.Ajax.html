@@ -1,0 +1,68 @@
+/*
+*		Renders the ajax mini search block in the header.
+*
+*/
+<div class="searchbar-block Ajax">
+	<div class="searchbar-content clearfix">
+		<form id="search_mini_form"  method="post">
+			<label for="search">[_Search:]</label>
+			<div class="search-input">
+				<input id="product-search" type="text" name="q" value="" class="input-text" maxlength="128" autocomplete="off">
+				<div id="search_autocomplete" class="search-autocomplete"></div>
+			</div>
+			<button id="mini-search-button" type="button" class="small btn-blue"><span><span>[_Search]</span></span></button>
+			
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+	var closeSearch=function(){
+		jQuery('#product-search').val("");
+		jQuery("#search_autocomplete").css("display","none");
+		jQuery("#search_autocomplete .search-ajax-container").css("display","none");
+	}
+	jQuery(document).ready(function(){
+		
+		jQuery("#close-search").click(function(){
+			jQuery("#search_autocomplete").css("display","none");
+			jQuery("#search_autocomplete .search-ajax-container").css("display","none");
+			return false;
+		});
+		jQuery("#mini-search-button").click(function(){
+			var str = jQuery('#product-search').val();
+			if (str.length==0){event.preventDefault(); return;}
+			jQuery('#search_mini_form').attr('action','[Website.GetUrl,Search,Text/]'+str);
+			jQuery('#search_mini_form').submit();
+		});
+		
+		jQuery("#product-search").keydown(function(event){
+			if(event.keyCode == 13) {
+				jQuery("#mini-search-button").click();
+			}
+		});
+
+		jQuery("#product-search").keyup(function(event){
+			var str = jQuery('#product-search').val();
+			if (str.length==0)
+			{ 
+				jQuery("#search_autocomplete").html("");
+				jQuery("#search_autocomplete").css('display','none');
+				return;
+			}
+			
+			var url="[Website.GetUrl,Search,Ajax/]"+str;
+			
+			jQuery.ajax(url,{	
+			  type: "GET",  
+			  dataType: "html",
+			  cache: true, 
+			  success: function(data, textStatus, jqXHR){
+					jQuery("#search_autocomplete").html(data);
+					jQuery("#search_autocomplete").css('display','block');
+					
+				}
+			});
+		});
+	});
+</script>
+	

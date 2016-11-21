@@ -1,0 +1,47 @@
+/*
+*		Renders the checkout page.
+*
+*/
+/** -------------------------------------------------------------------
+Name:              CheckoutPage
+Location:          /Html/Checkout/CheckoutPage.html
+Created By:        Leslie Canete
+Created At:        06-Okt-2014 18:55 (relocation first 15 models)
+Last modified By:  Seth Malaki
+Last modified At:  21-Okt-2014 17:09 (myupdates on addingComments)
+Calling blocks:    head 	
+Calling unknown:   [DesignLayout.Layout] 	
+--------------------------------------------------------------------**/
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>[Website.Name] | [_Check Out]</title>
+		[:head]
+		<link href="[File:/css/variationCss/CheckoutVariations/CheckoutVariations.css]" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div class="wrapper"> 
+			<div class="page">	
+				[:header]
+				<div class="two-columns-left">		
+					<div class="row">					
+						<div layout-block-name="left_column" class="left-content large-3 medium-3 small-12 columns grid-col2-sidebar no-gutter">
+							[:leftColumn]
+						</div>
+						<div layout-block-name="main_column" class="main-content large-9 medium-9 small-12 columns grid-col2-main no-gutter">					
+							[:notification]
+							[:mainContent.Checkout]
+							[:Footer]
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</body>
+</html>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="[File:/Js/google-map.js]"></script>
+<script type="text/javascript">jQuery('.datepicker').datepicker();</script>

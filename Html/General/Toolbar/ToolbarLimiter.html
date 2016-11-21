@@ -1,0 +1,69 @@
+/*
+*		Renders Toolbar dropdown limiter.  This limit how many products to be displayed in a page.
+*
+*/
+<label for="limiter">[_Show]</label>
+	<select id="limiter" class="dropdown1" onchange="IncraToolbar.setLimit(this.value,[Filter.Count])">
+		[?Configuration.CatalogListMode
+		|ListOnly=
+			[?Configuration.CatalogListAllowAll|Yes=<option class="selected1" value="All">[_All]</option>]
+			[Configuration.CatalogListPerPageIterator=<option class="selected1" value="[Configuration.CatalogPerPageCurrentValue]">[Configuration.CatalogPerPageCurrentValue]</option>]
+		|GridOnly=
+			[?Configuration.CatalogGridAllowAll|Yes=<option class="selected1" value="All">[_All]</option>]
+			[Configuration.CatalogGridPerPageIterator=<option class="selected1" value="[Configuration.CatalogPerPageCurrentValue]">[Configuration.CatalogPerPageCurrentValue]</option>]
+		|ListDefault=
+			[?Configuration.CatalogListAllowAll|Yes=<option class="selected1" value="All">[_All]</option>]
+			[Configuration.CatalogListPerPageIterator=<option class="selected1" value="[Configuration.CatalogPerPageCurrentValue]">[Configuration.CatalogPerPageCurrentValue]</option>]
+		|GridDefault=
+			[?Configuration.CatalogGridAllowAll|Yes=<option class="selected1" value="All">[_All]</option>]
+			[Configuration.CatalogGridPerPageIterator=<option class="selected1" value="[Configuration.CatalogPerPageCurrentValue]">[Configuration.CatalogPerPageCurrentValue]</option>]
+		]
+	</select>
+<!-- <label class="in-block">[_per page]</label> -->
+<script type="text/javascript">
+	jQuery(".limiter").val('[UserInput.PageNrOn]');
+</script>
+
+
+/*
+*	(StyleC variation) renders the product list item attribute color.
+*/
+
+<div id="conf-attributes[Product.Id]" class="productlist-attributes SimpleRounded">
+	[Product.ConfigurableAttributes=
+	
+		[?LayeredAttribute.CurrentType
+		|ColorsAndText=
+			<div style="display:none">
+				<label>[Attribute.Title]:</label>
+				<select class="product-list-attrib-[Product.Id] pull-right select-small span2" name="[Attribute.AttributeCode]" id="attribute[Attribute.Id][Product.Id]"  onchange="jQuery(this).initProductAttributes({'product_url':'[Website.GetUrl,Product,0,UpdateConfigurableInList/][Product.Id]','attribute_class':'product-list-attrib-[Product.Id]'}); jQuery(this).updateConfigurableProduct('#prd[Product.Id]')">
+					<option value="">[_Please select]</option>
+					[Product.ConfigurableChildProducts,[Attribute.AdminTitle]=
+						<option admin="[AttributeOption.Admin]" value="[AttributeOption.Admin]" [?UserInput.ConfigurableAttributeValueValid,[Attribute.AdminTitle],[AttributeOption.Admin]|yes=selected]>[AttributeOption.Admin]</option>
+					]
+				</select>
+			</div>
+			<div class="attr-list clearfix">
+			[:ProductListItemAttributeType.ColorsAndText]
+			</div>
+		]
+	]
+</div>
+
+/*<label>[_Show]</label>
+	<select id="limiter" class="dropdown" onchange="IncraToolbar.setLimit(this.value,[Filter.Count])">
+		[?Configuration.CatalogListMode
+		|ListOnly=
+			[?Configuration.CatalogListAllowAll|Yes=<option class="selected1" value="All">[_All]</option>]
+			[Configuration.CatalogListPerPageIterator=<option class="selected1" value="[Configuration.CatalogPerPageCurrentValue]">[Configuration.CatalogPerPageCurrentValue]</option>]
+		|GridOnly=
+			[?Configuration.CatalogGridAllowAll|Yes=<option class="selected1" value="All">[_All]</option>]
+			[Configuration.CatalogGridPerPageIterator=<option class="selected1" value="[Configuration.CatalogPerPageCurrentValue]">[Configuration.CatalogPerPageCurrentValue]</option>]
+		|ListDefault=
+			[?Configuration.CatalogListAllowAll|Yes=<option class="selected1" value="All">[_All]</option>]
+			[Configuration.CatalogListPerPageIterator=<option class="selected1" value="[Configuration.CatalogPerPageCurrentValue]">[Configuration.CatalogPerPageCurrentValue]</option>]
+		|GridDefault=
+			[?Configuration.CatalogGridAllowAll|Yes=<option class="selected1" value="All">[_All]</option>]
+			[Configuration.CatalogGridPerPageIterator=<option class="selected1" value="[Configuration.CatalogPerPageCurrentValue]">[Configuration.CatalogPerPageCurrentValue]</option>]
+		]
+	</select>*/

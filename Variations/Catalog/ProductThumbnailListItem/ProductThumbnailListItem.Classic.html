@@ -1,0 +1,31 @@
+<div class="thumbnail-list-item-wrapper Classic clearfix">
+	<div class="item-content small-12 columns">
+		<div class="small-12"><h6 class="product-name">[Product.Name]</h6></div>
+		<div class="product-image small-4 columns">
+			<a title="[Product.Name]" href="[Website.GetUrl,Product,[Product.Id]]">
+				<img src="/[Product.ThumbnailImage=[ProductImage.ImageUrl,100,125]]" width="70px">
+			</a>
+		</div>
+		<div class="product-details small-8 columns">
+			<div class="product-description">
+				<span class="desc">[Product.ShortDescription]</span>
+			</div>
+			<div class="over">
+				<div class="small-6 columns price-box">
+					<span class="price">[:PriceBlock?Product.Sale]</span>
+				</div>
+				<div class="small-6 columns action text-right">
+					<button  class="button view-button btn-secondaryClassic" onclick="window.location.href='[Website.GetUrl,Product,[Product.Id]]'" class="button btn-cart" title="[_Configure]" type="button">
+						<span><span>[_View]</span></span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery(".thumbnail-list-item-wrapper.Classic .product-description").substring({ max_char: 70});
+	})
+</script>

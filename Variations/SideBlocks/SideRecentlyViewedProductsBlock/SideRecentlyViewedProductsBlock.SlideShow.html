@@ -1,0 +1,40 @@
+/*
+*	Renders a block that contains a list of products that is sale.
+*
+*/
+
+/*[Website.RecentlyViewed,1,,'Name',Ascending]*/
+[?Website.LoopProductsCount,RecentlyViewed|0=|=
+<div class="block products-block recentlyviewed SlideShow">
+	<div class="title">
+		<h2>[_RECENTLY VIEWED]</h2>
+	</div>
+	<div class="slide-container">
+		<div id="side_recentlyviewed_slideshow">
+			[Website.LoopProducts,RecentlyViewed=
+			<div class="slide-wrapper">
+				[:SideBlockItemSlideShowContent]
+			</div>
+			]
+		</div>
+		<a id="play" href="#"></a>
+	</div>
+	<script type="text/javascript">
+	jQuery(function() {
+		jQuery('#side_recentlyviewed_slideshow').carouFredSel({
+			width: '100%',
+			height: 225,
+			auto: {
+				pauseOnEvent: 'resume',
+				button: '#play'
+			},
+			scroll: {
+				fx: 'crossfade',
+				duration: 300,
+				timeoutDuration: 3000
+			}
+		});
+	});
+	</script>
+</div>
+]

@@ -1,0 +1,136 @@
+<h4 class="text-left">[_Type]	: [Man.TypeName]</h4>
+<p class="scope-description  text-left">[Man.TypeShortDescription]
+	<br/> [Man.TypeLongDescription]
+</p>
+<div id="main_content" class="large-12">
+	<div class="large-9 columns content-list" style="padding:0px 10px 0px 0px;">
+		
+		<a name="usedby"></a>
+		<div data-referencedto="usedby">
+			<section>
+				<h2>[_Used By] </h2>
+				<ul>
+					[Man.TypeUsedBy=
+					<li>
+						<a href="[Website.GetUrl,Man,Replacer]/[Man.ReplacerName]">[Man.ReplacerName]</a>
+					</li>
+					]
+				</ul>
+			</section>
+		</div>
+		<a name="listtypevalue"></a>
+		<div data-referencedto="listtypevalue">
+			<section>
+				<h2>[_List of type value] </h2>
+				<table >
+					<thead>
+						<tr>
+							<th width="200">[_Type value]</th>
+							<th>[_Description]</th>
+						</tr>
+					</thead>
+					<tbody>
+						[Man.TypeValues=
+						<tr>
+							<td><a  data="">[Man.typevaluename]</a></td>
+							<td>[Man.typevaluedescription]</td>
+						</tr>
+						]
+					</tbody>
+				</table>
+			</section>
+		</div>
+	</div>
+	<div class="large-3 columns replacer-details" id="sidebar">
+		<div class="m1 menu">
+			<div id="nav-anchor"></div>
+			<nav>
+			<h5>[_On this page]</h5>
+				 <div id="menu-center">
+					<ul>
+						
+						<li><a href="#usedby" data-reference="usedby">[_Used by]</a>
+						</li>
+						<li><a href="#listtypevalue" data-reference="listtypevalue">[_List of Type Value]</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	
+	jQuery(document).ready(function(){
+		jQuery(".replacer-link").bind("click",function(){
+		   var me = jQuery(this);
+		   var data = me.attr("data");
+		   var title = me.attr("data_title");
+		   jQuery(".replacer-link").removeClass("active");
+		   me.addClass("active");
+		   jQuery.ajax({
+		     url   : "[Website.GetUrl,Man,]/"+data,
+		     success : function(response){
+		       jQuery(".replacer-details").html(response);
+		     }
+		   });
+		});
+	});
+						
+
+jQuery(document).ready(function(){
+    jQuery(window).scroll(function(){
+        var window_top = jQuery(window).scrollTop() + 12; // the "12" should equal the margin-top value for nav.stick
+        var div_top = jQuery('#nav-anchor').offset().top;
+
+            if (window_top > div_top) {
+                jQuery('#sidebar nav').addClass('stick');
+            	jQuery('#sidebar nav.stick').height(jQuery(window).height()-jQuery('#footer').height());
+            } else {
+                jQuery('#sidebar nav').removeClass('stick');
+             //   jQuery('nav').height(jQuery(window).height());
+            }
+    });
+
+    var aChildren = jQuery("#sidebar nav li").children(); // find the a children of the list items
+    var aArray = \[\]; // create the empty aArray
+    for (var i=0; i < aChildren.length; i++) {    
+        var aChild = aChildren\[i\];
+        var ahref = jQuery(aChild).data("reference"); //.attr('href');
+		
+        aArray.push(ahref);
+    } // this for loop fills the aArray with attribute href values
+
+    jQuery(window).scroll(function(){
+        var windowPos = jQuery(window).scrollTop(); // get the offset of the window from the top of page
+        var windowHeight = jQuery(window).height(); // get the height of the window
+        var docHeight = jQuery(document).height();
+
+        for (var i=0; i < aArray.length; i++) {
+            var theID = aArray\[i\];
+          
+
+			refElement=jQuery("div\[data-referencedto='"+theID+"'\]");
+			
+            var divPos = refElement.offset().top; // get the offset of the div from the top of page
+            var divHeight = refElement.height(); // get the height of the div in question
+            	console.log(theID);
+            if (windowPos >= divPos && windowPos < (divPos + divHeight)) {
+                jQuery("a\[data-reference='" + theID + "'\]").addClass("nav-active");
+            } else {
+                jQuery("a\[data-reference='" + theID + "'\]").removeClass("nav-active");
+                console.log("dfdf");
+
+            }
+        }
+
+        if(windowPos + windowHeight == docHeight) {
+            if (!jQuery("#sidebar nav li:last-child a").hasClass("nav-active")) {
+                var navActiveCurrent = jQuery(".nav-active").attr("href");
+                jQuery("a\[data-reference='" + navActiveCurrent + "'\]").removeClass("nav-active");
+                jQuery("#sidebar nav li:last-child a").addClass("nav-active");
+            }
+        }
+    });
+});
+</script>

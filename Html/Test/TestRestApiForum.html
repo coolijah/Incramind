@@ -1,0 +1,62 @@
+<script>
+		var api_test= new IncraTestApi({});
+		
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumAddThread/3/New Thread/Thread Description/Char Char Lang Ni/new, char");
+		
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumDeleteThread/"+api_test.applicable_id);
+		
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumAddThread/3/New Thread/Thread Description/Char Char Lang Ni/new, char");
+
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumEnableThread/"+api_test.applicable_id);
+	
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumPinThread/"+api_test.applicable_id);
+		
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumPinThread/"+api_test.applicable_id);
+		
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumPrioThread/"+api_test.applicable_id);
+		
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumBlockThread/"+api_test.applicable_id);
+
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumSetThreadDisplayExtra/"+api_test.applicable_id+"/3/2/3/3/1");
+
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumSetThreadPoll/"+api_test.applicable_id+"/What is your favorite food?/Pork Chop/Ramen Noodles/Spaghetti/Chopsuey");
+			
+			
+		
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumAddThread/3/New Thread/Thread Description/Loose Thread/new, loose");
+
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumAddComment/"+api_test.applicable_id+"/This is my comment");
+		
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumBlockComment/"+api_test.applicable_id);
+
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumEnableComment/"+api_test.applicable_id);
+
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumEditComment/"+api_test.applicable_id+"/updated comment");
+
+		//api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumLikeComment/"+api_test.applicable_id);
+
+		//api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumDislikeComment/"+api_test.applicable_id);
+
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumPinComment/"+api_test.applicable_id);
+
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumPrioComment/"+api_test.applicable_id);
+
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumSetCommentReadOnly/"+api_test.applicable_id);
+
+		api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumDeleteComment/"+api_test.applicable_id);
+		
+		//api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumReply/"+api_test.applicable_id+"/this is my reply");
+		//api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumReportComment/"+api_test.applicable_id+"/Stupidity");
+
+		//api_test.processUrl("[Website.GetUrl,RestApi]/call/ForumPromoteComment/"+api_test.applicable_id);
+
+		var data=api_test.temp_array;
+		
+		var myApp = angular.module("myApp", []);
+
+		myApp.controller("myController", function($scope){
+		   $scope.logs = data; 
+		});
+
+
+</script>

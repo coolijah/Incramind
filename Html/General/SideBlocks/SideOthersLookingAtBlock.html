@@ -1,0 +1,31 @@
+/*
+*	Renders a block that contains a list of products that others are looking at.
+*
+*/
+/*
+[Website.OthersLookingAt,1,2,'Name',Ascending]
+[?Filter.Empty|no=
+<div class="block products-block otherslookingat Default">
+	<div class="title">
+		<h2>[_Others Are Looking At]</h2>
+	</div>
+	<div class="block-content">
+		[Filter.Products=
+			[:ProductThumbnailListItem]
+		]
+	</div>
+</div>
+]
+*/
+[?Website.LoopProductsCount,OtherLookingAt|0=|=
+	<div class="block products-block otherslookingat Default">
+		<div class="title">
+			<h2>[_Others Are Looking At]</h2>
+		</div>
+		<div class="block-content">
+			[Website.LoopProducts, OtherLookingAt,2,, 'Name'=
+				[:ProductThumbnailListItem]
+			]
+		</div>
+	</div>
+]
